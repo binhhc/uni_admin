@@ -1,8 +1,5 @@
 <?php
 
-App::uses('Folder', 'Utility');
-App::uses('File', 'Utility');
-
 class ImportCSVtoDBShell extends AppShell {
 
     public $uses = array('UserInfo', 'Quanlification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
@@ -20,11 +17,11 @@ class ImportCSVtoDBShell extends AppShell {
         }
         if (!empty($path) && file_exists($directory_month)) {
             $this->importUserInfo($path, $directory_month);
-            $this->importQualitification($path, $directory_month);
-            $this->importUnitPrice($path, $directory_month);
-            $this->importSchoolEducation($path, $directory_month);
-            $this->importWorkExperience($path, $directory_month);
-            $this->importAnnualIncome($path, $directory_month);
+//            $this->importQualitification($path, $directory_month);
+//            $this->importUnitPrice($path, $directory_month);
+//            $this->importSchoolEducation($path, $directory_month);
+//            $this->importWorkExperience($path, $directory_month);
+//            $this->importAnnualIncome($path, $directory_month);
         } else {
             $this->out('Please input path file csv!');
         }
@@ -38,6 +35,7 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '01_USERINFO_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($userInfo);
+            $input_id = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($userInfo[$i]);
                 if (!empty($line)) {
@@ -89,9 +87,22 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['rating_job'] = $db[42];
                         $data['UserInfo']['rating_grade_cd'] = $db[43];
                         $data['UserInfo']['rating_grade'] = $db[44];
-                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');
-                        $this->UserInfo->create();
-                        $this->UserInfo->save($data);
+                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');  
+                        
+                        if (in_array($data['UserInfo']['employee_id'], $input_id)) {
+                           $this->log('employee_id: ' . $data['UserInfo']['employee_id'] . ' unique!', 'uniqueID');
+                        } else {
+                            $input_id[] = $data['UserInfo']['employee_id'];
+                            $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
+                            if ($id) {
+                                $this->UserInfo->id = $id;
+                                $this->UserInfo->save($data);
+                            } else {
+
+                                $this->UserInfo->create();
+                                $this->UserInfo->save($data);
+                            }
+                        }
                     }
                 }
             }
@@ -99,6 +110,22 @@ class ImportCSVtoDBShell extends AppShell {
         } else {
             $this->out('Can not open file 01_USERINFO.csv!');
         }
+    }
+
+    public function uniqueEmployeeId($emp_id) {
+        if (empty($emp_id)) {
+            return false;
+        }
+        $user = $this->UserInfo->find('first', array(
+            'conditions' => array(
+                'employee_id' => $emp_id,
+            ),
+            'fields' => array('id')
+        ));
+        if (empty($user)) {
+            return false;
+        }
+        return $user['UserInfo']['id'];
     }
 
     public function importQualitification($path, $directory_month) {
