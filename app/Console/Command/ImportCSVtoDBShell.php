@@ -1,121 +1,311 @@
 <?php
 
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
+
 class ImportCSVtoDBShell extends AppShell {
-    public $uses = array('UserInfo');
+
+    public $uses = array('UserInfo', 'Quanlification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
+
     public function main() {
         $path = !empty($this->args[0]) ? $this->args[0] : null;
+        $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
+        $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 
-        $arr_filename = array(
-            '01_USERINFO.csv',
-            '02_QUALIFICATION.csv',
-            '03_UNIT_PRICE.csv',
-            '04_ANNUAL_INCOME.csv',
-            '05_SCHOOL_EDUCATION.csv',
-            '06_WORK_EXPERIENCE.csv'
-        );
-
-        switch ($arr_filename) {
-            case '01_USERINFO.csv':
-                $this->out('sdfsdfsdfdsfsdf');
+        if (!file_exists($directory_year)) {
+            mkdir($directory_year, 0777, true);
         }
-        $this->importUserInfo($path);
+        if (!file_exists($directory_month)) {
+            mkdir($directory_month, 0777, true);
+        }
+        if (!empty($path) && file_exists($directory_month)) {
+            $this->importUserInfo($path, $directory_month);
+            $this->importQualitification($path, $directory_month);
+            $this->importUnitPrice($path, $directory_month);
+            $this->importSchoolEducation($path, $directory_month);
+            $this->importWorkExperience($path, $directory_month);
+            $this->importAnnualIncome($path, $directory_month);
+        } else {
+            $this->out('Please input path file csv!');
+        }
     }
 
-    public function importUserInfo($path = null) {
-
-        $userInfo = file($path . DS . '01_USERINFO.csv');
-        $filename = WWW_ROOT . 'backup' . DS . strtotime(date('Y-m-d H:i:s')).'_01_USERINFO' . '.csv';
-
-        $outstream = fopen($filename, 'w');
-        $n = count($userInfo);        
-        for ($i = 0; $i < $n; ++$i) {
-            $line = trim($userInfo[$i]);
-            if (!empty($line)) {
-                $db = explode(',', $line);
-                fputcsv($outstream, $db);
-                if($i > 0){                   
-                    $data['UserInfo']['employee_number'] = $db[0];
-                    $data['UserInfo']['employee_name'] = mb_convert_encoding(trim($db[1]), "UTF-8", "SJIS-win");
-                    $data['UserInfo']['employee_name_phonetic'] = $db[2];
-                    $data['UserInfo']['employee_name_letter'] = $db[3];
-                    $data['UserInfo']['email1'] = $db[4];
-                    $data['UserInfo']['start_date'] = $db[5];
-                    $data['UserInfo']['gender_code'] = $db[6];
-                    $data['UserInfo']['sex'] = $db[7];
-                    $data['UserInfo']['date_of_birth'] = $db[8];
-                    $data['UserInfo']['working_years'] = $db[9];
-                    $data['UserInfo']['age'] = $db[10];
-                    $data['UserInfo']['employment_type_code'] = $db[11];
-                    $data['UserInfo']['employment_type_name'] = $db[12];
-                    $data['UserInfo']['zip_code'] = $db[13];
-                    $data['UserInfo']['state'] = $db[14];
-                    $data['UserInfo']['city'] = $db[15];
-                    $data['UserInfo']['address'] = $db[16];
-                    $data['UserInfo']['building'] = $db[17];
-                    $data['UserInfo']['job_code'] = $db[18];
-                    $data['UserInfo']['job_category'] = $db[19];
-                    $data['UserInfo']['position_code'] = $db[20];
-                    $data['UserInfo']['position_name'] = $db[21];
-                    $data['UserInfo']['location_code'] = $db[22];
-                    $data['UserInfo']['work_location'] = $db[23];
-                    $data['UserInfo']['department_code'] = $db[24];
-                    $data['UserInfo']['department_name'] = $db[25];
-                    $data['UserInfo']['problem_type_code'] = $db[26];
-                    $data['UserInfo']['problem_type_name'] = $db[27];
-                    $data['UserInfo']['problem_grade'] = $db[28];
-                    $data['UserInfo']['problem_content'] = $db[29];
-                    $data['UserInfo']['recruit_type_code'] = $db[30];
-                    $data['UserInfo']['recruit_type_name'] = $db[31];
-                    $data['UserInfo']['recruit_place_code'] = $db[32];
-                    $data['UserInfo']['recruit_place_name'] = $db[33];
-                    $data['UserInfo']['introduction_type_code'] = $db[34];
-                    $data['UserInfo']['introduction_type_name'] = $db[35];
-                    $data['UserInfo']['introduction_person'] = $db[36];
-                    $data['UserInfo']['introduction_related_code'] = $db[37];
-                    $data['UserInfo']['introduction_related_name'] = $db[38];
-                    $data['UserInfo']['face_auth_code'] = $db[39];
-                    $data['UserInfo']['face_auth_name'] = $db[40];
-                    $data['UserInfo']['rating_grade_code'] = $db[41];
-                    $data['UserInfo']['rating_grade_name'] = $db[42];
-                    
-                    $this->out($data['UserInfo']['employee_name']);
-                    
-                    $this->UserInfo->create();
-                    $this->UserInfo->save($data);
-                }                
-               
+    public function importUserInfo($path, $directory_month) {
+        $base = $path . DS . '01_USERINFO.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $userInfo = file($base);
+            $filename = $directory_month . DS . '01_USERINFO_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($userInfo);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($userInfo[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['UserInfo']['employee_id'] = $db[0];
+                        $data['UserInfo']['employee_name'] = $db[1];
+                        $data['UserInfo']['employee_name_furigana'] = $db[2];
+                        $data['UserInfo']['employee_name_allphabet'] = $db[3];
+                        $data['UserInfo']['office_email'] = $db[4];
+                        $data['UserInfo']['company_join_date'] = $db[5];
+                        $data['UserInfo']['gender_code'] = $db[6];
+                        $data['UserInfo']['sex'] = $db[7];
+                        $data['UserInfo']['birthday'] = $db[8];
+                        $data['UserInfo']['work_year'] = $db[9];
+                        $data['UserInfo']['age'] = $db[10];
+                        $data['UserInfo']['employment_type_cd'] = $db[11];
+                        $data['UserInfo']['employment_type'] = $db[12];
+                        $data['UserInfo']['zip_code'] = $db[13];
+                        $data['UserInfo']['prefecture'] = $db[14];
+                        $data['UserInfo']['ward'] = $db[15];
+                        $data['UserInfo']['address'] = $db[16];
+                        $data['UserInfo']['building'] = $db[17];
+                        $data['UserInfo']['job_cd'] = $db[18];
+                        $data['UserInfo']['job'] = $db[19];
+                        $data['UserInfo']['position_cd'] = $db[20];
+                        $data['UserInfo']['position'] = $db[21];
+                        $data['UserInfo']['work_location_cd'] = $db[22];
+                        $data['UserInfo']['work_location'] = $db[23];
+                        $data['UserInfo']['department_cd'] = $db[24];
+                        $data['UserInfo']['department'] = $db[25];
+                        $data['UserInfo']['problem_type_cd'] = $db[26];
+                        $data['UserInfo']['problem_type'] = $db[27];
+                        $data['UserInfo']['problem_grade'] = $db[28];
+                        $data['UserInfo']['problem_content'] = $db[29];
+                        $data['UserInfo']['recruit_type_cd'] = $db[30];
+                        $data['UserInfo']['recruit_type'] = $db[31];
+                        $data['UserInfo']['recruit_place_cd'] = $db[32];
+                        $data['UserInfo']['recruit_place'] = $db[33];
+                        $data['UserInfo']['introduction_type_cd'] = $db[34];
+                        $data['UserInfo']['introduction_type'] = $db[35];
+                        $data['UserInfo']['introduction_person'] = $db[36];
+                        $data['UserInfo']['introduction_related_cd'] = $db[37];
+                        $data['UserInfo']['introduction_related'] = $db[38];
+                        $data['UserInfo']['face_auth_cd'] = $db[39];
+                        $data['UserInfo']['face_auth'] = $db[40];
+                        $data['UserInfo']['rating_job_cd'] = $db[41];
+                        $data['UserInfo']['rating_job'] = $db[42];
+                        $data['UserInfo']['rating_grade_cd'] = $db[43];
+                        $data['UserInfo']['rating_grade'] = $db[44];
+                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');
+                        $this->UserInfo->create();
+                        $this->UserInfo->save($data);
+                    }
+                }
             }
-        }
-        fclose($outstream);
-    }
-
-    public function importQualitification($path = null) {
-        if (file_exists($path)) {
-            
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 01_USERINFO.csv!');
         }
     }
 
-    public function importUnitPrice($path = null) {
-        if (file_exists($path)) {
-            
+    public function importQualitification($path, $directory_month) {
+        $base = $path . DS . '02_QUALIFICATION.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $quanlity = file($base);
+            $filename = $directory_month . DS . '02_QUALIFICATION_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($quanlity);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($quanlity[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, 'UTF-8', 'SJIS-win'));
+                    $db = str_replace('"', '', $db);
+                    if ($i > 0) {
+                        $data['Quanlification']['employee_id'] = $db[0];
+                        $data['Quanlification']['license_type_cd'] = $db[1];
+                        $data['Quanlification']['license_type'] = $db[2];
+                        $data['Quanlification']['issuing_organization'] = $db[3];
+                        $data['Quanlification']['license_name'] = $db[4];
+                        $data['Quanlification']['acquire_date'] = $db[5];
+                        $data['Quanlification']['update_date'] = $db[6];
+                        $data['Quanlification']['expire_date'] = $db[7];
+                        $data['Quanlification']['certification_number'] = $db[8];
+                        $data['Quanlification']['attachment'] = $db[9];
+                        $data['Quanlification']['note'] = $db[10];
+                        $data['Quanlification']['allowance'] = $db[11];
+                        $data['Quanlification']['created'] = date('Y-m-d H:i:s');
+
+                        $this->Quanlification->create();
+                        $this->Quanlification->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 02_QUALIFICATION.csv!');
         }
     }
 
-    public function importSchoolEducation($path = null) {
-        if (file_exists($path)) {
-            
+    public function importUnitPrice($path, $directory_month) {
+        $base = $path . DS . '03_UNIT_PRICE.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $unitPrice = file($base);
+            $filename = $directory_month . DS . '03_UNIT_PRICE_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($unitPrice);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($unitPrice[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['UnitPrice']['employee_id'] = $db[0];
+                        $data['UnitPrice']['revise_date'] = $db[1];
+                        $data['UnitPrice']['salary_type_cd'] = $db[2];
+                        $data['UnitPrice']['salary_type'] = $db[3];
+                        $data['UnitPrice']['note'] = $db[4];
+                        $data['UnitPrice']['bonus'] = $db[5];
+                        $data['UnitPrice']['adjust_salary'] = $db[6];
+                        $data['UnitPrice']['support_allowance'] = $db[7];
+                        $data['UnitPrice']['leader_allowance'] = $db[8];
+                        $data['UnitPrice']['meal_allowance'] = $db[9];
+                        $data['UnitPrice']['address_allowance'] = $db[10];
+                        $data['UnitPrice']['absent_salary_cut'] = $db[11];
+                        $data['UnitPrice']['late_salary_cut'] = $db[12];
+                        $data['UnitPrice']['overtime_normal'] = $db[13];
+                        $data['UnitPrice']['overtime_night'] = $db[14];
+                        $data['UnitPrice']['overtime_holiday'] = $db[15];
+                        $data['UnitPrice']['overtime_1'] = $db[16];
+                        $data['UnitPrice']['overtime_2'] = $db[17];
+                        $data['UnitPrice']['overtime_3'] = $db[18];
+                        $data['UnitPrice']['overtime_4'] = $db[19];
+                        $data['UnitPrice']['overtime_5'] = $db[20];
+                        $data['UnitPrice']['basic_bonus'] = $db[21];
+                        $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
+
+                        $this->UnitPrice->create();
+                        $this->UnitPrice->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 03_UNIT_PRICE.csv!');
         }
     }
 
-    public function importWorkExperience($path = null) {
-        if (file_exists($path)) {
-            
+    public function importSchoolEducation($path, $directory_month) {
+        $base = $path . DS . '05_SCHOOL_EDUCATION.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $schoolEdu = file($base);
+            $filename = $directory_month . DS . '05_SCHOOL_EDUCATION_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($schoolEdu);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($schoolEdu[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['SchoolEducation']['employee_id'] = $db[0];
+                        $data['SchoolEducation']['graduate_year'] = $db[1];
+                        $data['SchoolEducation']['graduate_type_cd'] = $db[2];
+                        $data['SchoolEducation']['graduate_type'] = $db[3];
+                        $data['SchoolEducation']['edu_type_cd'] = $db[4];
+                        $data['SchoolEducation']['edu_type'] = $db[5];
+                        $data['SchoolEducation']['newest_edu_code'] = $db[6];
+                        $data['SchoolEducation']['newest_edu'] = $db[7];
+                        $data['SchoolEducation']['school_type_cd'] = $db[8];
+                        $data['SchoolEducation']['school_type'] = $db[9];
+                        $data['SchoolEducation']['diploma_type_cd'] = $db[10];
+                        $data['SchoolEducation']['diploma_type'] = $db[11];
+                        $data['SchoolEducation']['school'] = $db[12];
+                        $data['SchoolEducation']['faculty'] = $db[13];
+                        $data['SchoolEducation']['subject'] = $db[14];
+                        $data['SchoolEducation']['major'] = $db[15];
+                        $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
+
+                        $this->SchoolEducation->create();
+                        $this->SchoolEducation->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 05_SCHOOL_EDUCATION.csv!');
         }
     }
 
-    public function importAnnualIncome($path = null) {
-        if (file_exists($path)) {
-            
+    public function importWorkExperience($path, $directory_month) {
+        $base = $path . DS . '06_WORK_EXPERIENCE.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $workExpert = file($base);
+            $filename = $directory_month . DS . '06_WORK_EXPERIENCE_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($workExpert);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($workExpert[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['WorkExperience']['employee_id'] = $db[0];
+                        $data['WorkExperience']['join_date'] = $db[1];
+                        $data['WorkExperience']['leave_date'] = $db[2];
+                        $data['WorkExperience']['work_year'] = $db[3];
+                        $data['WorkExperience']['company'] = $db[4];
+                        $data['WorkExperience']['bussiness_type'] = $db[5];
+                        $data['WorkExperience']['company_zip_code'] = $db[6];
+                        $data['WorkExperience']['company_address'] = $db[7];
+                        $data['WorkExperience']['abroad_type_cd'] = $db[8];
+                        $data['WorkExperience']['abroad_type'] = $db[9];
+                        $data['WorkExperience']['position'] = $db[10];
+                        $data['WorkExperience']['retire_reason_cd'] = $db[11];
+                        $data['WorkExperience']['retire_reason'] = $db[12];
+                        $data['WorkExperience']['retire_content'] = $db[13];
+                        $data['WorkExperience']['note'] = $db[14];
+                        $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
+
+                        $this->WorkExperience->create();
+                        $this->WorkExperience->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 06_WORK_EXPERIENCE.csv!');
+        }
+    }
+
+    public function importAnnualIncome($path, $directory_month) {
+        $base = $path . DS . '04_ANNUAL_INCOME.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $annualIncome = file($base);
+            $filename = $directory_month . DS . '04_ANNUAL_INCOME_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($annualIncome);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($annualIncome[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['AnnualIncome']['employee_id'] = $db[0];
+                        $data['AnnualIncome']['yearly_amount'] = $db[1];
+                        $data['AnnualIncome']['income_gross'] = $db[2];
+                        $data['AnnualIncome']['income_net'] = $db[3];
+                        $data['AnnualIncome']['total_cut'] = $db[4];
+                        $data['AnnualIncome']['total_tax'] = $db[5];
+                        $data['AnnualIncome']['note'] = $db[6];
+                        $data['AnnualIncome'][''] = date('Y-m-d H:i:s');
+
+                        $this->AnnualIncome->create();
+                        $this->AnnualIncome->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+        } else {
+            $this->out('Can not open file 04_ANNUAL_INCOME.csv!');
         }
     }
 
