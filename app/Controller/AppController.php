@@ -32,4 +32,19 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    public $components = array(
+        'Acl',
+        'Auth' => array(
+            'authenticate' => array(
+                'Ldap' => array(
+                    'fields' =>  array('username' => 'email')
+                )
+            ),
+            'authorize' => array(
+                'Actions' => array('actionPath' => 'controllers')
+            )
+        ),
+        'Session',
+        
+    );
 }
