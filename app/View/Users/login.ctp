@@ -10,7 +10,6 @@
     </p>
     <p class="login button"> 
         <button type="submit" class="btn btn-info"><i class="icon-off icon-white"></i> ログイン</button>
-        <?php echo $this->Form->submit('Login', array('class'=>'icon-off icon-white')); ?>
     </p>
     <?php echo $this->Form->end(); ?>
 </div>

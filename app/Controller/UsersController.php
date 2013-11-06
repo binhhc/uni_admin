@@ -8,9 +8,9 @@ class UsersController extends AppController {
     }
     public function login() {
         if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Auth->login()) {
+            if ($this->Auth->login()) {                
                 $this->redirect(array('controller' => 'SchoolEducations', 'action' => 'index'));
-            } else {
+            } else {               
                 $this->Session->setFlash(__('Login failse'), 'error');
             }
         }

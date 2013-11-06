@@ -17,11 +17,11 @@ class ImportCSVtoDBShell extends AppShell {
         }
         if (!empty($path) && file_exists($directory_month)) {
             $this->importUserInfo($path, $directory_month);
-//            $this->importQualitification($path, $directory_month);
-//            $this->importUnitPrice($path, $directory_month);
-//            $this->importSchoolEducation($path, $directory_month);
-//            $this->importWorkExperience($path, $directory_month);
-//            $this->importAnnualIncome($path, $directory_month);
+            $this->importQualitification($path, $directory_month);
+            $this->importUnitPrice($path, $directory_month);
+            $this->importSchoolEducation($path, $directory_month);
+            $this->importWorkExperience($path, $directory_month);
+            $this->importAnnualIncome($path, $directory_month);
         } else {
             $this->out('Please input path file csv!');
         }
@@ -237,7 +237,7 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['SchoolEducation']['graduate_type'] = $db[3];
                         $data['SchoolEducation']['edu_type_cd'] = $db[4];
                         $data['SchoolEducation']['edu_type'] = $db[5];
-                        $data['SchoolEducation']['newest_edu_code'] = $db[6];
+                        $data['SchoolEducation']['newest_edu_cd'] = $db[6];
                         $data['SchoolEducation']['newest_edu'] = $db[7];
                         $data['SchoolEducation']['school_type_cd'] = $db[8];
                         $data['SchoolEducation']['school_type'] = $db[9];
