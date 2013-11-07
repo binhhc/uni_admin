@@ -81,7 +81,7 @@ class UserInfosController extends AppController {
         }
         if (isset($id)) {
             $this->UserInfo->deleteAll(array('UserInfo.id' => $id));
-            $this->Session->setFlash(__('Delete Suceessful!'));
+            $this->Session->setFlash(__('Delete successful!'));
             $this->redirect($this->Session->read('save_latest_link_info'));
         }
         $this->Session->write('flag_link_info', 1);

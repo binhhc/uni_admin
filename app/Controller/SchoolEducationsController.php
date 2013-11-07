@@ -85,7 +85,7 @@ class SchoolEducationsController extends AppController {
         }
         if (isset($id)) {
             $this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id));
-            $this->Session->setFlash(__('Delete Suceessful!'));
+            $this->Session->setFlash(__('Delete successful!'));
             $this->redirect($this->Session->read('save_latest_link_school'));
         }
         $this->Session->write('flag_link_school', 1);

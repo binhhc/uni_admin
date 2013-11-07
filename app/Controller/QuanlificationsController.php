@@ -85,7 +85,7 @@ class QuanlificationsController extends AppController {
         }
         if (isset($id)) {
             $this->Quanlification->deleteAll(array('Quanlification.id' => $id));
-            $this->Session->setFlash(__('Delete Suceessful!'));
+            $this->Session->setFlash(__('Delete successful!'));
             $this->redirect($this->Session->read('save_latest_link_quanlity'));
         }
         $this->Session->write('flag_link_quanlity', 1);

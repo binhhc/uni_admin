@@ -1,7 +1,3 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<div style="text-align: center; height: 60px;  background-color: blue">
+    <?php echo "FOOTER" ?>
+</div>

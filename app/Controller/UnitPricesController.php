@@ -81,7 +81,7 @@ class UnitPricesController extends AppController {
         }
         if (isset($id)) {
             $this->UnitPrice->deleteAll(array('UnitPrice.id' => $id));
-            $this->Session->setFlash(__('Delete Suceessful!'));
+            $this->Session->setFlash(__('Delete successful!'));
             $this->redirect($this->Session->read('save_latest_link_price'));
         }
         $this->Session->write('flag_link_price', 1);

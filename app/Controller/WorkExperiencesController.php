@@ -73,7 +73,7 @@ class WorkExperiencesController extends AppController {
 
     public function delete($id = null) {
         if ($this->Session->read('flag_link_work') == 0) {
-            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
+            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_R;EFERER']);
         }
         $this->WorkExperience->id = $id;
         if (!$this->WorkExperience->exists($id)) {
@@ -81,7 +81,7 @@ class WorkExperiencesController extends AppController {
         }
         if (isset($id)) {
             $this->WorkExperience->deleteAll(array('WorkExperience.id' => $id));
-            $this->Session->setFlash(__('Delete Suceessful!'));
+            $this->Session->setFlash(__('Delete successful!'));
             $this->redirect($this->Session->read('save_latest_link_work'));
         }
         $this->Session->write('flag_link_work', 1);

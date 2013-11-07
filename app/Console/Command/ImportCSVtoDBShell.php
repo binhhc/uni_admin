@@ -4,6 +4,10 @@ class ImportCSVtoDBShell extends AppShell {
 
     public $uses = array('UserInfo', 'Quanlification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function main() {
         $path = !empty($this->args[0]) ? $this->args[0] : null;
         $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
@@ -27,6 +31,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importUserInfo($path, $directory_month) {
         $base = $path . DS . '01_USERINFO.csv';
         $handle = @fopen($base, 'r');
@@ -87,14 +95,14 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['rating_job'] = $db[42];
                         $data['UserInfo']['rating_grade_cd'] = $db[43];
                         $data['UserInfo']['rating_grade'] = $db[44];
-                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');  
-                        
+                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');
+
                         if (in_array($data['UserInfo']['employee_id'], $input_id)) {
-                           $this->log('employee_id: ' . $data['UserInfo']['employee_id'] . ' unique!', 'uniqueID');
+                            $this->log('employee_id: ' . $data['UserInfo']['employee_id'] . ' unique!', 'uniqueID');
                         } else {
                             $input_id[] = $data['UserInfo']['employee_id'];
                             $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
-                            if ($id) {
+                            if ($id) {                                
                                 $this->UserInfo->id = $id;
                                 $this->UserInfo->save($data);
                             } else {
@@ -112,6 +120,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function uniqueEmployeeId($emp_id) {
         if (empty($emp_id)) {
             return false;
@@ -128,6 +140,10 @@ class ImportCSVtoDBShell extends AppShell {
         return $user['UserInfo']['id'];
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importQualitification($path, $directory_month) {
         $base = $path . DS . '02_QUALIFICATION.csv';
         $handle = @fopen($base, 'r');
@@ -168,6 +184,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importUnitPrice($path, $directory_month) {
         $base = $path . DS . '03_UNIT_PRICE.csv';
         $handle = @fopen($base, 'r');
@@ -217,6 +237,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importSchoolEducation($path, $directory_month) {
         $base = $path . DS . '05_SCHOOL_EDUCATION.csv';
         $handle = @fopen($base, 'r');
@@ -260,6 +284,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importWorkExperience($path, $directory_month) {
         $base = $path . DS . '06_WORK_EXPERIENCE.csv';
         $handle = @fopen($base, 'r');
@@ -302,6 +330,10 @@ class ImportCSVtoDBShell extends AppShell {
         }
     }
 
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importAnnualIncome($path, $directory_month) {
         $base = $path . DS . '04_ANNUAL_INCOME.csv';
         $handle = @fopen($base, 'r');
@@ -323,7 +355,7 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['AnnualIncome']['total_cut'] = $db[4];
                         $data['AnnualIncome']['total_tax'] = $db[5];
                         $data['AnnualIncome']['note'] = $db[6];
-                        $data['AnnualIncome'][''] = date('Y-m-d H:i:s');
+                        $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
 
                         $this->AnnualIncome->create();
                         $this->AnnualIncome->save($data);

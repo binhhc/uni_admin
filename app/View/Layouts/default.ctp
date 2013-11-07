@@ -40,15 +40,18 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         echo $this->fetch('css');
         //echo $this->fetch('script');
         ?>
-        <script>$(function(){$(".datepicker").datepicker({
-        dateFormat: "yy-mm-dd",
-        changeMonth: true,
-        changeYear: true
-    });})</script>
+        <script>$(function() {
+                $(".datepicker").datepicker({
+                    dateFormat: "yy-mm-dd",
+                    changeMonth: true,
+                    changeYear: true
+                });
+            })</script>
     </head>
     <body>
         <div id="container">
             <div id="header">
+                <?php echo $this->element('header'); ?>
             </div>
             <div id="content">
 
@@ -57,7 +60,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
-                
+                <?php echo $this->element('footer'); ?>
             </div>
         </div>
         <?php echo $this->element('sql_dump'); ?>
