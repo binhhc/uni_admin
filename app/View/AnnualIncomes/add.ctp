@@ -16,31 +16,31 @@
         <tr>
             <td>Yearly amount</td>
             <td>
-                <?php echo $this->Form->input('yearly_amount', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('yearly_amount', array('class' => 'span6', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
             </td>
         </tr>
         <tr>
             <td>Income gross</td>
             <td>
-                <?php echo $this->Form->input('income_gross', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('income_gross', array('class' => 'span6', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
             </td>
         </tr>           
         <tr>
             <td>Income net</td>
             <td>
-                <?php echo $this->Form->input('income_net', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('income_net', array('class' => 'span6', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
             </td>
         </tr>
         <tr>
             <td>Total cut</td>
             <td>
-                <?php echo $this->Form->input('total_cut', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('total_cut', array('class' => 'span6', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
             </td>
             </div>
         <tr>
             <td>Total tax</td>
             <td>
-                <?php echo $this->Form->input('total_tax', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('total_tax', array('class' => 'span6', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
             </td>
         </tr>
         <tr>
@@ -58,3 +58,4 @@
         </tr>
     </table>
     <?php echo $this->Form->end(); ?>
+ 

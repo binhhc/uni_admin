@@ -3,13 +3,15 @@
 App::uses('Controller', 'Controller');
 
 class AnnualIncomesController extends AppController {
+
     public $uses = array('AnnualIncome');
+
     public function beforeFilter() {
         $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
     }
 
-     public function index() {
-         $this->Session->delete('annual_id');
+    public function index() {
+        $this->Session->delete('annual_id');
         $this->Session->write('flag_link_annual', 0);
         $this->paginate = array(
             'limit' => Configure::read('max_row'),
@@ -19,17 +21,25 @@ class AnnualIncomesController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_annual') == 0) {
+            $this->Session->write('save_latest_link_annual', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['AnnualIncome']['created'] = date('Y-m-d');
-            $this->AnnualIncome->create();
-            if ($this->AnnualIncome->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect(array('action' => 'index'));
+            if ($this->AnnualIncome->customValidate()) {
+                $this->AnnualIncome->create();
+                if ($this->AnnualIncome->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_annual'));
+                } else {
+                    $this->Session->setFlash(__('Save error!'));
+                }
             } else {
-                $this->Session->setFlash(__('Save error!'));
+                $this->Session->setFlash(__('Validate error!'));
             }
         }
+        $this->Session->write('flag_link_annual', 1);
     }
 
     public function edit() {
@@ -45,12 +55,16 @@ class AnnualIncomesController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['SchoolEducation']['modified'] = date('Y-m-d');
-            if ($this->AnnualIncome->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect($this->Session->read('save_latest_link_annual'));
+            $data['AnnualIncome']['modified'] = date('Y-m-d');
+            if ($this->AnnualIncome->customValidate()) {
+                if ($this->AnnualIncome->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_annual'));
+                }
+                else
+                    $this->Session->setFlash(__('Save error!'));
             } else {
-                $this->Session->setFlash(__('Save error!'));
+                $this->Session->setFlash(__('Validate error!'));
             }
         } else {
             $schoolEdu = $this->AnnualIncome->findById($id);

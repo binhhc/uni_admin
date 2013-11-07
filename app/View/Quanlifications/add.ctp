@@ -46,19 +46,19 @@
         <tr>
             <td>Acquire date</td>
             <td>
-                <?php echo $this->Form->input('acquire_date', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('acquire_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text')); ?>
             </td>
         </tr>
         <tr>
             <td>Update date</td>
             <td>
-                <?php echo $this->Form->input('update_date', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('update_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text')); ?>
             </td>
         </tr>
         <tr>
             <td>Expire date</td>
             <td>
-                <?php echo $this->Form->input('expire_date', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('expire_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text')); ?>
             </td>
         </tr>
         <tr>
@@ -76,14 +76,14 @@
         <tr>
             <td>Note</td>
             <td>
-                <?php echo $this->Form->input('note', array('class' => 'span6', 'label' => false, 'type' => 'text')); ?>
+                <?php echo $this->Form->input('note', array('class' => 'span6', 'label' => false, 'type' => 'area', 'cols' => 20, 'rows' => 5)); ?>
             </td>
         </tr>
-        
+
         <tr class="form-actions"> 
             <td colspan="2">
                 <button class="btn btn-primary" type="submit">登録</button>
-                <a class = 'btn margin-left13' href="<?php echo $this->Session->read('save_latest_link_school'); ?>" >キャンセル</a>
+                <a class = 'btn margin-left13' href="<?php echo $this->Session->read('save_latest_link_quanlity'); ?>" >キャンセル</a>
             </td>
         </tr>
     </table>

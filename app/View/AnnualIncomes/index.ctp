@@ -2,13 +2,13 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th class="nowrap center" width="15%">Employee ID</th>
+            <th class="nowrap center" width="8%">Employee ID</th>
             <th>Yearly amount</th>
             <th>Income gross</th>
             <th>Income net</th>
             <th >Total cut</th>
             <th >Total tax</th>
-            <th class="nowrap center">Action</th>
+            <th class="nowrap center" width="12%">Action</th>
         </tr>
     </thead>      
     <tbody>

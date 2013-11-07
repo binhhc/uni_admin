@@ -21,17 +21,25 @@ class SchoolEducationsController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_school') == 0) {
+            $this->Session->write('save_latest_link_school', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['SchoolEducation']['created'] = date('Y-m-d');
-            $this->SchoolEducation->create();
-            if ($this->SchoolEducation->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect(array('action' => 'index'));
+            if ($this->SchoolEducation->customValidate()) {
+                $this->SchoolEducation->create();
+                if ($this->SchoolEducation->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_school'));
+                } else {
+                    $this->Session->setFlash(__('Save error!'));
+                }
             } else {
-                $this->Session->setFlash(__('Save error!'));
+                $this->Session->setFlash(__('Validate error!'));
             }
         }
+        $this->Session->write('flag_link_school', 1);
     }
 
     public function edit() {
@@ -48,11 +56,15 @@ class SchoolEducationsController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['SchoolEducation']['modified'] = date('Y-m-d');
-            if ($this->SchoolEducation->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect($this->Session->read('save_latest_link_school'));
-            } else {
-                $this->Session->setFlash(__('Save error!'));
+            if ($this->SchoolEducation->customValidate()) {
+                if ($this->SchoolEducation->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_school'));
+                }
+                else
+                    $this->Session->setFlash(__('Save error!'));
+            }else {
+                $this->Session->setFlash(__('Validate error!'));
             }
         } else {
             $schoolEdu = $this->SchoolEducation->findById($id);

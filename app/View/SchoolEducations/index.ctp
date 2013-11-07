@@ -1,14 +1,14 @@
-<?php echo $this->Html->link('Add', array('controller' => 'AnnualIncomes', 'action' => 'add')) ?>
+<?php echo $this->Html->link('Add', array('controller' => 'SchoolEducations', 'action' => 'add')) ?>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th class="nowrap center" width="15%">Employee ID</th>
+            <th class="nowrap center" width="8%">Employee ID</th>
             <th>Graduate year</th>
             <th>Education type</th>
             <th>School type</th>
             <th >Diploma type</th>
             <th >School</th>
-            <th class="nowrap center">Action</th>
+            <th class="nowrap center" width="12%">Action</th>
         </tr>
     </thead>      
     <tbody>

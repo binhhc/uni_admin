@@ -21,17 +21,25 @@ class QuanlificationsController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_quanlity') == 0) {
+            $this->Session->write('save_latest_link_quanlity', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['Quanlification']['created'] = date('Y-m-d');
-            $this->Quanlification->create();
-            if ($this->Quanlification->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect(array('action' => 'index'));
+            if ($this->Quanlification->customValidate()) {
+                $this->Quanlification->create();
+                if ($this->Quanlification->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_quanlity'));
+                } else {
+                    $this->Session->setFlash(__('Save error!'));
+                }
             } else {
-                $this->Session->setFlash(__('Save error!'));
+                $this->Session->setFlash(__('Validate error!'));
             }
         }
+        $this->Session->write('flag_link_quanlity', 1);
     }
 
     public function edit() {
@@ -47,12 +55,16 @@ class QuanlificationsController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['SchoolEducation']['modified'] = date('Y-m-d');
-            if ($this->Quanlification->save($data)) {
-                $this->Session->setFlash(__('Save successful!'));
-                $this->redirect($this->Session->read('save_latest_link_quanlity'));
-            } else {
-                $this->Session->setFlash(__('Save error!'));
+            $data['Quanlification']['modified'] = date('Y-m-d');
+            if ($this->Quanlification->customValidate()) {
+                if ($this->Quanlification->save($data)) {
+                    $this->Session->setFlash(__('Save successful!'));
+                    $this->redirect($this->Session->read('save_latest_link_quanlity'));
+                }
+                else
+                    $this->Session->setFlash(__('Save error!'));
+            }else {
+                $this->Session->setFlash(__('Validate error!'));
             }
         } else {
             $quanlitify = $this->Quanlification->findById($id);
