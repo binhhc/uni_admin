@@ -22,28 +22,34 @@ class UsersController extends AppController {
         $this->Session->destroy();
         $this->redirect(array('controller' => 'Users', 'action' => 'login'));
     }
-        /*
-         * Author Binh Hoang
-         */
-    public function runbatch(){
-        if($this->request->is('post') || $this->request->is('put')){
-            if(!empty($this->request->data['Batch']['patch'])){
+
+    /*
+     * Author Binh Hoang
+     */
+
+    public function runbatch() {
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if (!empty($this->request->data['Batch']['patch'])) {
                 $path = substr(APP, 0, strlen(APP) - 1);
                 $cake_path = $path . DS . 'Console' . DS . 'cake.php';
                 $shell = 'ImportCSVtoDB';
                 $command = $this->request->data['Batch']['patch'];
-                $shell = "php \"{$cake_path}\" -app {$path} {$shell} {$command}";
-                if(preg_match('/^win/i', PHP_OS)){
+                $shell = "php \"{$cake_path}\" -app {$path} {$shell} {$command} &";
+                if (preg_match('/^win/i', PHP_OS)) {
                     pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
-                }else{
-                    shell_exec($shell . ' > /dev/null 2>/dev/null &');
+                } else {
+                    $handle = popen($shell, 'r');
+                    while (!feof($handle)) {
+                        $buffer1 = fgets($handle);
+                        if (!empty($buffer1)) {
+                            $buffer = trim(htmlspecialchars($buffer1));
+                        }
+                    }
+                    $this->Session->setFlash($buffer);
                 }
-                $this->Session->setFlash('Run batch ok!');
-                  
-            }else{
+            } else {
                 $this->Session->setFlash('Please input path');
             }
-           
         }
     }
 

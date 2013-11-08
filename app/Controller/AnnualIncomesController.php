@@ -18,6 +18,7 @@ class AnnualIncomesController extends AppController {
             'order' => array('AnnualIncome.employee_id' => 'ASC')
         );
         $this->set('annualIncome', $this->paginate('AnnualIncome'));
+        $this->set('title_for_layout', 'Annual Income');
     }
 
     public function add() {
@@ -60,9 +61,9 @@ class AnnualIncomesController extends AppController {
                 if ($this->AnnualIncome->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_annual'));
-                }
-                else
+                } else {
                     $this->Session->setFlash(__('Save error!'));
+                }
             } else {
                 $this->Session->setFlash(__('Validate error!'));
             }

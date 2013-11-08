@@ -3,7 +3,7 @@
 class ImportCSVtoDBShell extends AppShell {
 
     public $uses = array('UserInfo', 'Quanlification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
-
+    var $success = array();
     /**
      * @author  Binh Hoang
      * @since 11/2013
@@ -26,6 +26,9 @@ class ImportCSVtoDBShell extends AppShell {
             $this->importSchoolEducation($path, $directory_month);
             $this->importWorkExperience($path, $directory_month);
             $this->importAnnualIncome($path, $directory_month);
+            
+            $this->out('Import '.  implode($this->success, ',').' sucessfully');
+            
         } else {
             $this->out('Please input path file csv!');
         }
@@ -115,6 +118,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '01_USERINFO.csv';
         } else {
             $this->out('Can not open file 01_USERINFO.csv!');
         }
@@ -179,6 +183,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '02_QUALIFICATION.csv';
         } else {
             $this->out('Can not open file 02_QUALIFICATION.csv!');
         }
@@ -232,6 +237,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '03_UNIT_PRICE.csv';
         } else {
             $this->out('Can not open file 03_UNIT_PRICE.csv!');
         }
@@ -279,6 +285,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '05_SCHOOL_EDUCATION.csv';
         } else {
             $this->out('Can not open file 05_SCHOOL_EDUCATION.csv!');
         }
@@ -325,6 +332,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '06_WORK_EXPERIENCE.csv';
         } else {
             $this->out('Can not open file 06_WORK_EXPERIENCE.csv!');
         }
@@ -363,6 +371,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
+            $this->success[] = '04_ANNUAL_INCOME.csv';
         } else {
             $this->out('Can not open file 04_ANNUAL_INCOME.csv!');
         }

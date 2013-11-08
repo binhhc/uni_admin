@@ -19,15 +19,10 @@ class UserInfo extends AppModel {
                 ),
             ),
             'employee_name' => array(
-                'alphaNumeric' => array(
-                    'rule' => 'alphaNumeric',
-                    'required' => true,
-                    'message' => 'Employee name must only contain letters and numbers.'
+                'notEmpty' => array(
+                    'rule' => 'notEmpty',
+                    'message' => 'Employee name not empty!'
                 ),
-                'between' => array(
-                    'rule' => array('between', 5, 50),
-                    'message' => 'Between 5 to 15 characters'
-                )
             ),
             'gender_code' => array(
                 'numeric' => array(
