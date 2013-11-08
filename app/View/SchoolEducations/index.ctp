@@ -22,11 +22,11 @@
                 ?>
                 <tr>                             
                     <td class="text-center"><?php echo $school['SchoolEducation']['employee_id']; ?></td>
-                    <td class=""><?php echo $school['SchoolEducation']['graduate_year']; ?></td>
-                    <td class=""><?php echo $school['SchoolEducation']['edu_type']; ?></td>
-                    <td class=""><?php echo $school['SchoolEducation']['school_type']; ?></td>
-                    <td class=""><?php echo $school['SchoolEducation']['diploma_type']; ?></td> 
-                    <td class=""><?php echo $school['SchoolEducation']['school']; ?></td>
+                    <td class=""><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
+                    <td class=""><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
+                    <td class=""><?php echo h($school['SchoolEducation']['school_type']); ?></td>
+                    <td class=""><?php echo h($school['SchoolEducation']['diploma_type']); ?></td> 
+                    <td class=""><?php echo h($school['SchoolEducation']['school']); ?></td>
                     <td class="">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>

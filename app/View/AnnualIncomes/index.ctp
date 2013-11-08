@@ -22,11 +22,11 @@
                 ?>
                 <tr>                             
                     <td class="text-center"><?php echo $annual['AnnualIncome']['employee_id']; ?></td>
-                    <td class=""><?php echo $annual['AnnualIncome']['yearly_amount']; ?></td>
-                    <td class=""><?php echo $annual['AnnualIncome']['income_gross']; ?></td>
-                    <td class=""><?php echo $annual['AnnualIncome']['income_net']; ?></td>
-                    <td class=""><?php echo $annual['AnnualIncome']['total_cut']; ?></td> 
-                    <td class=""><?php echo $annual['AnnualIncome']['total_tax']; ?></td>
+                    <td class=""><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
+                    <td class=""><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
+                    <td class=""><?php echo h($annual['AnnualIncome']['income_net']); ?></td>
+                    <td class=""><?php echo h($annual['AnnualIncome']['total_cut']); ?></td> 
+                    <td class=""><?php echo h($annual['AnnualIncome']['total_tax']); ?></td>
                     <td class="text-center">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $annual['AnnualIncome']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $annual['AnnualIncome']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($annual['AnnualIncome']['employee_id']))); ?>

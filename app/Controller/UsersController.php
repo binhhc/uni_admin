@@ -5,7 +5,7 @@ App::uses('Controller', 'Controller');
 class UsersController extends AppController {
 
     public function beforeFilter() {
-        $this->Auth->allow(array('login', 'logout'));
+        $this->Auth->allow(array('login', 'logout', 'runbatch'));
     }
 
     public function login() {
@@ -21,6 +21,30 @@ class UsersController extends AppController {
     public function logout() {
         $this->Session->destroy();
         $this->redirect(array('controller' => 'Users', 'action' => 'login'));
+    }
+        /*
+         * Author Binh Hoang
+         */
+    public function runbatch(){
+        if($this->request->is('post') || $this->request->is('put')){
+            if(!empty($this->request->data['Batch']['patch'])){
+                $path = substr(APP, 0, strlen(APP) - 1);
+                $cake_path = $path . DS . 'Console' . DS . 'cake.php';
+                $shell = 'ImportCSVtoDB';
+                $command = $this->request->data['Batch']['patch'];
+                $shell = "php \"{$cake_path}\" -app {$path} {$shell} {$command}";
+                if(preg_match('/^win/i', PHP_OS)){
+                    pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
+                }else{
+                    shell_exec($shell . ' > /dev/null 2>/dev/null &');
+                }
+                $this->Session->setFlash('Run batch ok!');
+                  
+            }else{
+                $this->Session->setFlash('Please input path');
+            }
+           
+        }
     }
 
 }

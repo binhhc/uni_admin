@@ -29,10 +29,10 @@ class WorkExperiencesController extends AppController {
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect(array('action' => 'index'));
-                }
-                else
+                } else {
                     $this->Session->setFlash(__('Save error!'));
-            }else {
+                }
+            } else {
                 $this->Session->setFlash(__('Validate error!'));
             }
         }
@@ -56,10 +56,10 @@ class WorkExperiencesController extends AppController {
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_work'));
-                }
-                else
+                } else {
                     $this->Session->setFlash(__('Save error!'));
-            }else {
+                }
+            } else {
                 $this->Session->setFlash(__('Validate error!'));
             }
         } else {
@@ -73,7 +73,7 @@ class WorkExperiencesController extends AppController {
 
     public function delete($id = null) {
         if ($this->Session->read('flag_link_work') == 0) {
-            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_R;EFERER']);
+            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
         }
         $this->WorkExperience->id = $id;
         if (!$this->WorkExperience->exists($id)) {

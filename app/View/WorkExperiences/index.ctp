@@ -22,11 +22,11 @@
                 ?>
                 <tr>                             
                     <td class="text-center"><?php echo $work['WorkExperience']['employee_id']; ?></td>
-                    <td class=""><?php echo $work['WorkExperience']['work_year']; ?></td>
-                    <td class=""><?php echo $work['WorkExperience']['company']; ?></td>
-                    <td class=""><?php echo $work['WorkExperience']['bussiness_type']; ?></td>
-                    <td class=""><?php echo $work['WorkExperience']['position']; ?></td> 
-                    <td class=""><?php echo $work['WorkExperience']['retire_reason']; ?></td>
+                    <td class=""><?php echo h($work['WorkExperience']['work_year']); ?></td>
+                    <td class=""><?php echo h($work['WorkExperience']['company']); ?></td>
+                    <td class=""><?php echo h($work['WorkExperience']['bussiness_type']); ?></td>
+                    <td class=""><?php echo h($work['WorkExperience']['position']); ?></td> 
+                    <td class=""><?php echo h($work['WorkExperience']['retire_reason']); ?></td>
                     <td class="text-center">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $work['WorkExperience']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $work['WorkExperience']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($work['WorkExperience']['employee_id']))); ?>

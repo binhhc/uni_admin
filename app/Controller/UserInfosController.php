@@ -21,6 +21,9 @@ class UserInfosController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_info') == 0) {
+            $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['UserInfo']['created'] = date('Y-m-d');
@@ -28,7 +31,7 @@ class UserInfosController extends AppController {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
-                    $this->redirect(array('action' => 'index'));
+                     $this->redirect($this->Session->read('save_latest_link_info'));
                 } else {
                     $this->Session->setFlash(__('Save error!'));
                 }
@@ -36,6 +39,7 @@ class UserInfosController extends AppController {
                 $this->Session->setFlash(__('Validate error!'));
             }
         }
+         $this->Session->write('flag_link_info', 1);
     }
 
     public function edit() {

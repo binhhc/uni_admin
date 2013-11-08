@@ -22,11 +22,11 @@
                 ?>
                 <tr>                             
                     <td class="text-center"><?php echo $info['UserInfo']['employee_id']; ?></td>
-                    <td class=""><?php echo $info['UserInfo']['employee_name']; ?></td>
-                    <td class=""><?php echo $info['UserInfo']['office_email']; ?></td>
-                    <td class=""><?php echo $info['UserInfo']['company_join_date']; ?></td>
-                    <td class=""><?php echo $info['UserInfo']['sex']; ?></td> 
-                    <td class=""><?php echo $info['UserInfo']['birthday']; ?></td>
+                    <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
+                    <td class=""><?php echo h($info['UserInfo']['office_email']); ?></td>
+                    <td class=""><?php echo h($info['UserInfo']['company_join_date']); ?></td>
+                    <td class=""><?php echo h($info['UserInfo']['sex']); ?></td> 
+                    <td class=""><?php echo h($info['UserInfo']['birthday']); ?></td>
                     <td class="text-center">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $info['UserInfo']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $info['UserInfo']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($info['UserInfo']['employee_id']))); ?>

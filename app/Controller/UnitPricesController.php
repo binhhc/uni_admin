@@ -21,6 +21,9 @@ class UnitPricesController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_price') == 0) {
+            $this->Session->write('save_latest_link_price', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['UnitPrice']['created'] = date('Y-m-d');
@@ -28,7 +31,7 @@ class UnitPricesController extends AppController {
                 $this->UnitPrice->create();
                 if ($this->UnitPrice->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
-                    $this->redirect(array('action' => 'index'));
+                    $this->redirect($this->Session->read('save_latest_link_price'));
                 } else {
                     $this->Session->setFlash(__('Save error!'));
                 }
@@ -56,10 +59,10 @@ class UnitPricesController extends AppController {
                 if ($this->UnitPrice->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_price'));
-                }
-                else
+                } else {
                     $this->Session->setFlash(__('Save error!'));
-            }else {
+                }
+            } else {
                 $this->Session->setFlash(__('Validate error!'));
             }
         } else {

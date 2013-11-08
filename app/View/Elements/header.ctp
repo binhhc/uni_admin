@@ -11,6 +11,8 @@
     echo $this->Html->link('UserInfos', array('controller' => 'UserInfos', 'action' => 'index'));
     echo ' | ';
     echo $this->Html->link('WorkExperiences', array('controller' => 'WorkExperiences', 'action' => 'index'));
+    echo ' | ';
+    echo $this->Html->link('Run Batch', array('controller' => 'Users', 'action' => 'runbatch'));
     ?>
     
 </div>
