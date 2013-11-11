@@ -5,8 +5,7 @@ App::uses('Controller', 'Controller');
 class UsersController extends AppController {
 
     public function beforeFilter() {          
-        $this->Auth->user() ? $this->Auth->allow(array('runbatch')) : null;
-    
+        $this->Auth->user() ? $this->Auth->allow(array('runbatch')) : null;    
         $this->Auth->allow(array('login', 'logout'));
     }
 
@@ -35,9 +34,9 @@ class UsersController extends AppController {
             if (!empty($this->request->data['Batch']['patch'])) {
                 $path = substr(APP, 0, strlen(APP) - 1);
                 $cake_path = $path . DS . 'Console' . DS . 'cake.php';
-                $shell = 'ImportCSVtoDB';
+                $file_shell = 'ImportCSVtoDB';
                 $command = $this->request->data['Batch']['patch'];
-                $shell = "php \"{$cake_path}\" -app {$path} {$shell} {$command} &";
+                $shell = "php \"{$cake_path}\" -app {$path} {$file_shell} {$command} &";
                 if (preg_match('/^win/i', PHP_OS)) {
                     pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
                 } else {

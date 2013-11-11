@@ -44,7 +44,7 @@
                     changeMonth: true,
                     changeYear: true
                 });
-            })</script>
+            });</script>
     </head>
     <body>
         <div id="container">
