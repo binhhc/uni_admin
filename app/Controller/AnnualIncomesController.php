@@ -7,7 +7,7 @@ class AnnualIncomesController extends AppController {
     public $uses = array('AnnualIncome');
 
     public function beforeFilter() {
-        $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {

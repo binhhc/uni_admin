@@ -6,8 +6,8 @@ class UnitPricesController extends AppController {
 
     public $uses = array('UnitPrice');
 
-    public function beforeFilter() {
-        $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
+      public function beforeFilter() {
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {

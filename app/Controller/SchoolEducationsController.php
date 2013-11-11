@@ -6,8 +6,8 @@ class SchoolEducationsController extends AppController {
 
     public $uses = array('SchoolEducation');
 
-    public function beforeFilter() {
-        $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
+        public function beforeFilter() {
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {

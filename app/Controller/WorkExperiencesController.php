@@ -7,7 +7,7 @@ class WorkExperiencesController extends AppController {
     public $uses = array('WorkExperience');
 
     public function beforeFilter() {
-        $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {

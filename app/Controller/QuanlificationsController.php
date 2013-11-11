@@ -7,10 +7,11 @@ class QuanlificationsController extends AppController {
     public $uses = array('Quanlification');
 
     public function beforeFilter() {
-        $this->Auth->allow(array('index', 'add', 'edit', 'delete'));
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {
+
         $this->Session->delete('quanlity_id');
         $this->Session->write('flag_link_quanlity', 0);
         $this->paginate = array(
@@ -22,7 +23,7 @@ class QuanlificationsController extends AppController {
 
     public function add() {
         if ($this->Session->read('flag_link_quanlity') == 0) {
-            $this->Session->write('save_latest_link_quanlity', $_SERVER['HTTP_REFERER']);
+            $this->Session->write('save_latest_link_quanlity', @$_SERVER['HTTP_REFERER']);
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
@@ -60,8 +61,7 @@ class QuanlificationsController extends AppController {
                 if ($this->Quanlification->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
-                }
-                else
+                } else
                     $this->Session->setFlash(__('Save error!'));
             }else {
                 $this->Session->setFlash(__('Validate error!'));
