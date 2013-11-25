@@ -21,6 +21,9 @@ class WorkExperiencesController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_work') == 0) {
+            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['WorkExperience']['created'] = date('Y-m-d');
@@ -36,6 +39,8 @@ class WorkExperiencesController extends AppController {
                 $this->Session->setFlash(__('Validate error!'));
             }
         }
+        $this->Session->write('flag_link_work', 1);
+        $this->render('detail');
     }
 
     public function edit() {
@@ -68,7 +73,7 @@ class WorkExperiencesController extends AppController {
         }
         $this->Session->write('flag_link_work', 1);
         $this->set('readonly', 'readonly="readonly"');
-        $this->render('add');
+        $this->render('detail');
     }
 
     public function delete($id = null) {

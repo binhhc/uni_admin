@@ -6,7 +6,7 @@ class UnitPricesController extends AppController {
 
     public $uses = array('UnitPrice');
 
-      public function beforeFilter() {
+    public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
@@ -21,6 +21,9 @@ class UnitPricesController extends AppController {
     }
 
     public function add() {
+        if ($this->Session->read('flag_link_price') == 0) {
+            $this->Session->write('save_latest_link_price', $_SERVER['HTTP_REFERER']);
+        }
         if ($this->Session->read('flag_link_price') == 0) {
             $this->Session->write('save_latest_link_price', $_SERVER['HTTP_REFERER']);
         }
@@ -39,6 +42,8 @@ class UnitPricesController extends AppController {
                 $this->Session->setFlash(__('Validate error!'));
             }
         }
+        $this->Session->write('flag_link_price', 1);
+        $this->render('detail');
     }
 
     public function edit() {
@@ -71,7 +76,7 @@ class UnitPricesController extends AppController {
         }
         $this->Session->write('flag_link_price', 1);
         $this->set('readonly', 'readonly="readonly"');
-        $this->render('add');
+        $this->render('detail');
     }
 
     public function delete($id = null) {

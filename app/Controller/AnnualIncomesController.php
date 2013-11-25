@@ -41,6 +41,7 @@ class AnnualIncomesController extends AppController {
             }
         }
         $this->Session->write('flag_link_annual', 1);
+        $this->render('detail');
     }
 
     public function edit() {
@@ -73,7 +74,7 @@ class AnnualIncomesController extends AppController {
         }
         $this->Session->write('flag_link_annual', 1);
         $this->set('readonly', 'readonly="readonly"');
-        $this->render('add');
+        $this->render('detail');
     }
 
     public function delete($id = null) {

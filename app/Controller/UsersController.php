@@ -4,20 +4,20 @@ App::uses('Controller', 'Controller');
 
 class UsersController extends AppController {
 
-    public function beforeFilter() {          
-        $this->Auth->user() ? $this->Auth->allow(array('runbatch')) : null;    
+    public function beforeFilter() {
+        $this->Auth->user() ? $this->Auth->allow(array('runbatch')) : null;
         $this->Auth->allow(array('login', 'logout'));
     }
 
     public function login() {
         if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Auth->login()) {                
+            if ($this->Auth->login()) {
                 $this->redirect(array('controller' => 'SchoolEducations', 'action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Wrong username or password!'));
+                $this->Session->setFlash(__('Wrong username or password!', 'error'));
             }
         }
-        
+        $this->layout = 'login';
     }
 
     public function logout() {

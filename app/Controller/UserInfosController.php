@@ -40,6 +40,7 @@ class UserInfosController extends AppController {
             }
         }
         $this->Session->write('flag_link_info', 1);
+        $this->render('detail');
     }
 
     public function edit() {
@@ -72,7 +73,7 @@ class UserInfosController extends AppController {
         }
         $this->Session->write('flag_link_info', 1);
         $this->set('readonly', 'readonly="readonly"');
-        $this->render('add');
+        $this->render('detail');
     }
 
     public function delete($id = null) {
