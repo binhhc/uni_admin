@@ -1,6 +1,7 @@
 <?php echo $this->Form->create('UserInfo', array()) ?>
 <fieldset>
-    <table>
+    <table class="table table-hover">
+        <caption>User information</caption>
         <tr >
             <td style="width: 10%"></td>
             <td style='width: 30%'>                
