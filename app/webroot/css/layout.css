@@ -563,7 +563,8 @@ fieldset textarea:focus {
 }
 
 .navbar-inner {
-    padding: 0 20px !important;    
+    padding: 0 20px !important;
+    
 }
 
 ul.pull-right {
@@ -598,10 +599,6 @@ ul.pull-right {
     padding: 10px 20px;
     color: #fff;
     text-align: center;
-}
-
-ul.nav li {
-    border-bottom: 1px solid #444444;
 }
 
 .dropdown-menu-title {

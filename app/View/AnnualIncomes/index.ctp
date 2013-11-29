@@ -1,4 +1,4 @@
-<div class="pull-right">
+<div class="pull-right"  style="margin-bottom:5px;">
 	<?php echo $this->Html->link('Add', array('controller' => 'AnnualIncomes', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
 

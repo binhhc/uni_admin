@@ -25,13 +25,14 @@
         </title>
         <?php
         echo $this->Html->meta('icon');
-        echo $this->Html->css('cake.generic');
+
         echo $this->Html->css('bootstrap.min');
-        echo $this->Html->css('jquery-ui');
-        echo $this->Html->css('layout');
+        echo $this->Html->css(array('layout', 'jquery-ui'));
+       
         echo $this->Html->script('jquery');
-        echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('jquery-ui');
+        echo $this->Html->script('bootstrap.min');
+       
         
 
         echo $this->fetch('meta');
@@ -77,10 +78,11 @@
             </ul>
           </div>
         </div> 
-        
-        <div id="content">
-            <?php echo $this->Session->flash(); ?>                
-            <?php echo $this->fetch('content'); ?>
+        <div id="main" class="column">
+            <div id="content">
+                <?php echo $this->Session->flash(); ?>                
+                <?php echo $this->fetch('content'); ?>
+            </div>
         </div>
            
             <div class="clear"></div>

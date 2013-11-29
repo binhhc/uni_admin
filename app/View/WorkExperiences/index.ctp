@@ -1,4 +1,7 @@
-<?php echo $this->Html->link('Add', array('controller' => 'WorkExperiences', 'action' => 'add')) ?>
+<div class="pull-right" style="margin-bottom:5px;">
+    <?php echo $this->Html->link('Add', array('controller' => 'WorkExperiences', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
+</div>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
