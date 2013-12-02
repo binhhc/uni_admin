@@ -14,7 +14,7 @@ class UsersController extends AppController {
 			if ($this->Auth->login()) {
 				$this->redirect(array('controller' => 'SchoolEducations', 'action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('Wrong username or password!', 'error'));
+				$this->Session->setFlash('Wrong username or password!', 'error');
 			}
 		}
 		$this->layout = 'login';
@@ -26,6 +26,7 @@ class UsersController extends AppController {
 	}
 
 	/*
+	 * Run batch in layout
 	 * Author Binh Hoang
 	 */
 

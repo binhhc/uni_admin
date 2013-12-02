@@ -34,10 +34,10 @@ class AnnualIncomesController extends AppController {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             } else {
-                $this->Session->setFlash(__('Validate error!'));
+                $this->Session->setFlash(__('Validate error!'), 'error');
             }
         }
         $this->Session->write('flag_link_annual', 1);
@@ -60,17 +60,17 @@ class AnnualIncomesController extends AppController {
             $data['AnnualIncome']['modified'] = date('Y-m-d');
             if ($this->AnnualIncome->customValidate()) {
                 if ($this->AnnualIncome->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             } else {
-                $this->Session->setFlash(__('Validate error!'));
+                $this->Session->setFlash(__('Validate error!'), 'error');
             }
         } else {
-            $schoolEdu = $this->AnnualIncome->findById($id);
-            $this->request->data = $schoolEdu;
+           
+            $this->request->data = $this->AnnualIncome->findById($id);
         }
         $this->Session->write('flag_link_annual', 1);
         $this->set('readonly', 'readonly="readonly"');
@@ -87,7 +87,7 @@ class AnnualIncomesController extends AppController {
         }
         if (isset($id)) {
             $this->AnnualIncome->deleteAll(array('AnnualIncome.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'), 'success');
             $this->redirect($this->Session->read('save_latest_link_annual'));
         }
         $this->Session->write('flag_link_annual', 1);
