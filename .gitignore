@@ -1,4 +1,4 @@
-/app/Config
+#/app/Config
 /app/tmp
 /app/webroot/backupCSV/
 /lib/Cake/Console/Templates/skel/tmp/
