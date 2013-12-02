@@ -33,13 +33,11 @@ class UnitPricesController extends AppController {
             if ($this->UnitPrice->customValidate()) {
                 $this->UnitPrice->create();
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         }
         $this->Session->write('flag_link_price', 1);
@@ -62,13 +60,11 @@ class UnitPricesController extends AppController {
             $data['UnitPrice']['modified'] = date('Y-m-d');
             if ($this->UnitPrice->customValidate()) {
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         } else {
             $quanlitify = $this->UnitPrice->findById($id);
@@ -89,7 +85,7 @@ class UnitPricesController extends AppController {
         }
         if (isset($id)) {
             $this->UnitPrice->deleteAll(array('UnitPrice.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'), 'success');
             $this->redirect($this->Session->read('save_latest_link_price'));
         }
         $this->Session->write('flag_link_price', 1);

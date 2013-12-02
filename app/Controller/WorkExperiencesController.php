@@ -30,13 +30,11 @@ class WorkExperiencesController extends AppController {
             if ($this->WorkExperience->customValidate()) {
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         }
         $this->Session->write('flag_link_work', 1);
@@ -59,13 +57,11 @@ class WorkExperiencesController extends AppController {
             $data['WorkExperience']['modified'] = date('Y-m-d');
             if ($this->WorkExperience->customValidate()) {
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_work'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         } else {
             $quanlitify = $this->WorkExperience->findById($id);
@@ -86,7 +82,7 @@ class WorkExperiencesController extends AppController {
         }
         if (isset($id)) {
             $this->WorkExperience->deleteAll(array('WorkExperience.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'), 'success');
             $this->redirect($this->Session->read('save_latest_link_work'));
         }
         $this->Session->write('flag_link_work', 1);

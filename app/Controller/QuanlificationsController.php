@@ -31,13 +31,11 @@ class QuanlificationsController extends AppController {
             if ($this->Quanlification->customValidate()) {
                 $this->Quanlification->create();
                 if ($this->Quanlification->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         }
         $this->Session->write('flag_link_quanlity', 1);
@@ -60,16 +58,13 @@ class QuanlificationsController extends AppController {
             $data['Quanlification']['modified'] = date('Y-m-d');
             if ($this->Quanlification->customValidate()) {
                 if ($this->Quanlification->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 } else
-                    $this->Session->setFlash(__('Save error!'));
-            }else {
-                $this->Session->setFlash(__('Validate error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
             }
-        } else {
-            $quanlitify = $this->Quanlification->findById($id);
-            $this->request->data = $quanlitify;
+        } else {           
+            $this->request->data = $this->Quanlification->findById($id);
         }
         $this->Session->write('flag_link_quanlity', 1);
         $this->set('readonly', 'readonly="readonly"');
@@ -86,7 +81,7 @@ class QuanlificationsController extends AppController {
         }
         if (isset($id)) {
             $this->Quanlification->deleteAll(array('Quanlification.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'), 'success');
             $this->redirect($this->Session->read('save_latest_link_quanlity'));
         }
         $this->Session->write('flag_link_quanlity', 1);

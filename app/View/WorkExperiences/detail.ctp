@@ -11,7 +11,7 @@
                 <div class="control-group">
                     <label for="typeahead" class="control-label">Employee id</label>
                     <div class="controls">
-                        <?php echo $this->Form->input('employee_id', array('class'=>'span6','label' => false, 'type' => 'text', @$readonly)); ?>
+                        <?php echo $this->Form->input('employee_id', array('class'=>'span6','label' => false, 'required'=>false, 'type' => 'text', @$readonly)); ?>
                     </div>
                 </div>
 

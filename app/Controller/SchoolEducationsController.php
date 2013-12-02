@@ -30,13 +30,11 @@ class SchoolEducationsController extends AppController {
             if ($this->SchoolEducation->customValidate()) {
                 $this->SchoolEducation->create();
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         }
         $this->Session->write('flag_link_school', 1);
@@ -59,17 +57,14 @@ class SchoolEducationsController extends AppController {
             $data['SchoolEducation']['modified'] = date('Y-m-d');
             if ($this->SchoolEducation->customValidate()) {
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
                 else
-                    $this->Session->setFlash(__('Save error!'));
-            }else {
-                $this->Session->setFlash(__('Validate error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
             }
-        } else {
-            $schoolEdu = $this->SchoolEducation->findById($id);
-            $this->request->data = $schoolEdu;
+        } else {           
+            $this->request->data = $this->SchoolEducation->findById($id);
         }
         $this->Session->write('flag_link_school', 1);
         $this->set('readonly', 'readonly="readonly"');
@@ -86,7 +81,7 @@ class SchoolEducationsController extends AppController {
         }
         if (isset($id)) {
             $this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'),'success');
             $this->redirect($this->Session->read('save_latest_link_school'));
         }
         $this->Session->write('flag_link_school', 1);

@@ -36,9 +36,7 @@ class AnnualIncomesController extends AppController {
                 } else {
                     $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'), 'error');
-            }
+            } 
         }
         $this->Session->write('flag_link_annual', 1);
         $this->render('detail');
@@ -65,9 +63,7 @@ class AnnualIncomesController extends AppController {
                 } else {
                     $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'), 'error');
-            }
+            } 
         } else {
            
             $this->request->data = $this->AnnualIncome->findById($id);

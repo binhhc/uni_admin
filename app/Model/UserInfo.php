@@ -11,6 +11,7 @@ class UserInfo extends AppModel {
             'employee_id' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
+                    'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
                 ),
                 'numeric' => array(
@@ -21,6 +22,7 @@ class UserInfo extends AppModel {
             'employee_name' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
+                    'allowEmpty' => true,
                     'message' => 'Employee name not empty!'
                 ),
             ),
@@ -126,7 +128,4 @@ class UserInfo extends AppModel {
         $this->validate = $validate;
         return $this->validates();
     }
-
 }
-
-?>

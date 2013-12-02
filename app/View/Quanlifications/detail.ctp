@@ -11,14 +11,14 @@
             <div class="control-group">
                 <label for="typeahead" class="control-label">Employee id</label>
                 <div class="controls">
-                    <?php echo $this->Form->input('employee_id', array('class'=>'span6','label' => false, 'type' => 'text', @$readonly)); ?>
+                    <?php echo $this->Form->input('employee_id', array('class'=>'span6','label' => false, 'type' => 'text', @$readonly, 'required'=>false)); ?>
                 </div>
             </div>
 
             <div class="control-group">
                 <label for="typeahead" class="control-label">License type code</label>
                 <div class="controls">
-                    <?php echo $this->Form->input('license_type_cd', array('class'=>'span6','label' => false, 'type' => 'text')); ?>
+                    <?php echo $this->Form->input('license_type_cd', array('class'=>'span6','label' => false, 'type' => 'text', 'required'=>false)); ?>
                 </div>
             </div>
 

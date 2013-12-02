@@ -11,6 +11,7 @@ class AnnualIncome extends AppModel {
             'employee_id' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
+                    'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
                 ),
                 'numeric' => array(
@@ -28,28 +29,28 @@ class AnnualIncome extends AppModel {
             'income_gross' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
-                     'allowEmpty' => true,
+                    'allowEmpty' => true,
                     'message' => 'Numbers only'
                 ),
             ),
             'income_net' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
-                     'allowEmpty' => true,
+                    'allowEmpty' => true,
                     'message' => 'Numbers only'
                 ),
             ),
             'total_cut' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
-                     'allowEmpty' => true,
+                    'allowEmpty' => true,
                     'message' => 'Numbers only'
                 ),
             ),
             'total_tax' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
-                     'allowEmpty' => true,
+                    'allowEmpty' => true,
                     'message' => 'Numbers only'
                 ),
             ),

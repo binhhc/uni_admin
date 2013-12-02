@@ -11,6 +11,7 @@ class SchoolEducation extends AppModel {
             'employee_id' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
+                    'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
                 ),
                 'numeric' => array(
@@ -48,7 +49,7 @@ class SchoolEducation extends AppModel {
             ),
             'diploma_type_cd' => array(
                 'numeric' => array(
-                    'rule' => 'numeric',
+                    'required' => false,
                     'allowEmpty' => true,
                     'message' => 'Numbers only'
                 ),

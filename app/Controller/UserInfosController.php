@@ -30,13 +30,11 @@ class UserInfosController extends AppController {
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
             }
         }
         $this->Session->write('flag_link_info', 1);
@@ -59,14 +57,12 @@ class UserInfosController extends AppController {
             $data['UserInfo']['modified'] = date('Y-m-d');
             if ($this->UserInfo->customValidate()) {
                 if ($this->UserInfo->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 } else {
-                    $this->Session->setFlash(__('Save error!'));
+                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
-            } else {
-                $this->Session->setFlash(__('Validate error!'));
-            }
+            } 
         } else {
             $quanlitify = $this->UserInfo->findById($id);
             $this->request->data = $quanlitify;
@@ -86,7 +82,7 @@ class UserInfosController extends AppController {
         }
         if (isset($id)) {
             $this->UserInfo->deleteAll(array('UserInfo.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'));
+            $this->Session->setFlash(__('Delete successful!'), 'success');
             $this->redirect($this->Session->read('save_latest_link_info'));
         }
         $this->Session->write('flag_link_info', 1);

@@ -11,6 +11,7 @@ class UnitPrice extends AppModel {
             'employee_id' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
+                    'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
                 ),
                 'numeric' => array(
