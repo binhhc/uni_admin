@@ -48,7 +48,7 @@
             });</script>
     </head>
     <body>  
-        <div class="navbar">
+        <div class="navbar navbar-inverse" role="navigation">
           <div class="navbar-inner">    
             <ul class="nav">
                 <li class="divider-vertical <?php if(strpos($this->request->url, 'AnnualIncomes') !== false){ echo 'active';} ?>">
