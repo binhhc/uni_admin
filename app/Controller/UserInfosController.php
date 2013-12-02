@@ -32,8 +32,6 @@ class UserInfosController extends AppController {
                 if ($this->UserInfo->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             }
         }
@@ -59,8 +57,6 @@ class UserInfosController extends AppController {
                 if ($this->UserInfo->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             } 
         } else {

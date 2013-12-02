@@ -35,7 +35,7 @@ class WorkExperience extends AppModel {
             ),
         );
         $this->validate = $validate;
-        return $this->validates();
+        return $this->validate;
     }
 
 }

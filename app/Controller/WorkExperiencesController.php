@@ -27,14 +27,12 @@ class WorkExperiencesController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['WorkExperience']['created'] = date('Y-m-d');
-            if ($this->WorkExperience->customValidate()) {
+            if ($this->WorkExperience->customValidate()) {              
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect(array('action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
-                }
+                } 
             }
         }
         $this->Session->write('flag_link_work', 1);
@@ -59,9 +57,7 @@ class WorkExperiencesController extends AppController {
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_work'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
-                }
+                } 
             }
         } else {
             $quanlitify = $this->WorkExperience->findById($id);

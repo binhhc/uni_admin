@@ -33,8 +33,6 @@ class QuanlificationsController extends AppController {
                 if ($this->Quanlification->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             }
         }
@@ -60,8 +58,7 @@ class QuanlificationsController extends AppController {
                 if ($this->Quanlification->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
-                } else
-                    $this->Session->setFlash(__('Save error!'), 'error');
+                }
             }
         } else {           
             $this->request->data = $this->Quanlification->findById($id);

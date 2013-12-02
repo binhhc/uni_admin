@@ -35,8 +35,6 @@ class UnitPricesController extends AppController {
                 if ($this->UnitPrice->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             }
         }
@@ -62,8 +60,6 @@ class UnitPricesController extends AppController {
                 if ($this->UnitPrice->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             }
         } else {

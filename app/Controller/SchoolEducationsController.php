@@ -32,8 +32,6 @@ class SchoolEducationsController extends AppController {
                 if ($this->SchoolEducation->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             }
         }
@@ -60,9 +58,7 @@ class SchoolEducationsController extends AppController {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
-                else
-                    $this->Session->setFlash(__('Save error!'), 'error');
-            }
+            }               
         } else {           
             $this->request->data = $this->SchoolEducation->findById($id);
         }

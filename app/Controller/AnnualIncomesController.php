@@ -33,8 +33,6 @@ class AnnualIncomesController extends AppController {
                 if ($this->AnnualIncome->save($data)) {
                     $this->Session->setFlash(__('Save successful!'));
                     $this->redirect($this->Session->read('save_latest_link_annual'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             } 
         }
@@ -60,8 +58,6 @@ class AnnualIncomesController extends AppController {
                 if ($this->AnnualIncome->save($data)) {
                     $this->Session->setFlash(__('Save successful!'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_annual'));
-                } else {
-                    $this->Session->setFlash(__('Save error!'), 'error');
                 }
             } 
         } else {
