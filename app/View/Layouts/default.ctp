@@ -51,28 +51,28 @@
         <div class="navbar navbar-inverse" role="navigation">
           <div class="navbar-inner">    
             <ul class="nav">
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'AnnualIncomes') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'AnnualIncomes') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('AnnualIncomes', array('controller' => 'AnnualIncomes', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'Quanlifications') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'Quanlifications') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('Quanlifications', array('controller' => 'Quanlifications', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'SchoolEducations') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'SchoolEducations') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('SchoolEducations', array('controller' => 'SchoolEducations', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'UnitPrices') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'UnitPrices') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('UnitPrices', array('controller' => 'UnitPrices', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'UserInfos') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'UserInfos') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('UserInfos', array('controller' => 'UserInfos', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'WorkExperiences') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'WorkExperiences') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('WorkExperiences', array('controller' => 'WorkExperiences', 'action' => 'index')); ?>
                 </li>
-                <li class="divider-vertical <?php if(strpos($this->request->url, 'Users') !== false){ echo 'active';} ?>">
+                <li class="<?php if(strpos($this->request->url, 'Users') !== false){ echo 'active';} ?>">
                     <?php echo $this->Html->link('Run Batch', array('controller' => 'Users', 'action' => 'runbatch')); ?>
                 </li>
-                <li class="divider-vertical">
+                <li>
                     <?php echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout')); ?>
                 </li>
             </ul>
