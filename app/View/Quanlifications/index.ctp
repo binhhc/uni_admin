@@ -11,7 +11,7 @@
             <th>License name</th>
             <th>Acquire date</th>
             <th>Expire date</th>
-            <th class="nowrap center" width="12%">Action</th>
+            <th class="nowrap center" width="14%">Action</th>
         </tr>
     </thead>      
     <tbody>

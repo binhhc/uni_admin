@@ -11,7 +11,7 @@
 			<th>Income net</th>
 			<th >Total cut</th>
 			<th >Total tax</th>
-			<th class="nowrap center" width="12%">Action</th>
+			<th class="nowrap center" width="14%">Action</th>
 		</tr>
 	</thead>      
 	<tbody>

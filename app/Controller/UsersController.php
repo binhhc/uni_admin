@@ -53,13 +53,13 @@ class UsersController extends AppController {
 								$buffer = trim(htmlspecialchars($buffer1));
 							}
 						}
-						$this->Session->setFlash($buffer);
+						$this->Session->setFlash('Input sucessful', 'success');
 					}
 				}else{
-					$this->Session->setFlash('Please input path contain csv file');
+					$this->Session->setFlash('Please input path contain csv file', 'error');
 				}
 			} else {
-				$this->Session->setFlash('Please input path');
+				$this->Session->setFlash('Please input path', 'error');
 			}
 		}
 	}

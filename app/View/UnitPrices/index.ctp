@@ -11,7 +11,7 @@
             <th>Support allowance</th>
             <th>Adjust salary</th>
             <th>Address allowance</th>
-            <th class="nowrap center" width="12%">Action</th>
+            <th class="nowrap center" width="14%">Action</th>
         </tr>
     </thead>      
     <tbody>

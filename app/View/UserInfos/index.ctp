@@ -11,7 +11,7 @@
             <th>Company join date</th>
             <th>Sex</th>
             <th>Birthday</th>
-            <th class="nowrap center" width="12%">Action</th>
+            <th class="nowrap center" width="14%">Action</th>
         </tr>
     </thead>      
     <tbody>

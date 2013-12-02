@@ -11,7 +11,7 @@
             <th>School type</th>
             <th >Diploma type</th>
             <th >School</th>
-            <th class="nowrap center" width="12%">Action</th>
+            <th class="nowrap center" width="14%">Action</th>
         </tr>
     </thead>      
     <tbody>
