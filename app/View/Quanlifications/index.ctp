@@ -30,7 +30,7 @@
                     <td class=""><?php echo h($quanlitify['Quanlification']['license_name']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['acquire_date']); ?></td> 
                     <td class=""><?php echo h($quanlitify['Quanlification']['expire_date']); ?></td>
-                    <td class="">
+                    <td class="center nowrap">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $quanlitify['Quanlification']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $quanlitify['Quanlification']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($quanlitify['Quanlification']['employee_id']))); ?>
                     </td>

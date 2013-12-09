@@ -272,7 +272,7 @@ div#sidebar {
 /* Main Content */
 
 div#main {
-    width: 82%;
+    width: 100%;
     min-height: 650px;
     background: url(../img/sidebar_shadow.png) repeat-y left top;
     float: left;

@@ -30,7 +30,7 @@
                     <td class=""><?php echo h($work['WorkExperience']['bussiness_type']); ?></td>
                     <td class=""><?php echo h($work['WorkExperience']['position']); ?></td> 
                     <td class=""><?php echo h($work['WorkExperience']['retire_reason']); ?></td>
-                    <td class="text-center">
+                    <td class="center nowrap">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $work['WorkExperience']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $work['WorkExperience']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($work['WorkExperience']['employee_id']))); ?>
                     </td>

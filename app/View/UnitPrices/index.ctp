@@ -30,7 +30,7 @@
                     <td class=""><?php echo h($price['UnitPrice']['support_allowance']); ?></td>
                     <td class=""><?php echo h($price['UnitPrice']['adjust_salary']); ?></td> 
                     <td class=""><?php echo h($price['UnitPrice']['address_allowance']); ?></td>
-                    <td class="text-center">
+                    <td class="center nowrap">
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $price['UnitPrice']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $price['UnitPrice']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($price['UnitPrice']['employee_id']))); ?>
                     </td>
