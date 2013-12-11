@@ -33,6 +33,13 @@ class UserInfo extends AppModel {
                     'message' => 'Numbers only'
                 ),
             ),
+            'office_email' => array(
+                'email' => array(
+                    'rule' => 'email',
+                    'allowEmpty' => true,
+                    'message' => 'Not format email'
+                ),
+            ),
             'employment_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',

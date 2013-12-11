@@ -1,47 +1,126 @@
 <div class="pull-right"  style="margin-bottom:5px;">
     <?php echo $this->Html->link('Add', array('controller' => 'UserInfos', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th class="nowrap center" width="8%">Employee ID</th>
-            <th>Employee name</th>
-            <th>Office email</th>
-            <th>Company join date</th>
-            <th>Sex</th>
-            <th>Birthday</th>
-            <th class="nowrap center" width="14%">Action</th>
-        </tr>
-    </thead>      
-    <tbody>
-        <?php if (empty($userInfo)) { ?>
-            <tr>
-                <td colspan="7"><?php echo __("Empty data!"); ?></td>
+<div style="clear:both;"></div>
+    <table class="ui-tinytable" cellpadding="5" cellspacing="5">        
+        <thead>
+            <tr class="nowrap">
+                <th >Employee ID</th>
+                <th>Employee name</th>              
+                <th>Name Furigana</th>
+                <th>Name Alphabet</th>
+                <th>Office email</th>
+                <th>Company join date</th>
+                <th>Gender code</th>
+                <th>Sex</th>
+                <th>Birthday</th>
+                <th>Work year</th>
+                <th>Age</th>
+                <th>Employment type code</th>
+                <th>Employment type</th>
+                <th>Zip code</th>
+                <th>Prefecture</th>
+                <th>Ward</th>
+                <th>Address</th>
+                <th>Building</th>
+                <th>Job code</th>
+                <th>Job</th>
+                <th>Position code</th>
+                <th>Position</th>
+                <th>Work location code</th>
+                <th>Work location</th>
+                <th>Department code</th>
+                <th>Department</th>
+                <th>Problem type code</th>
+                <th>Problem type</th>
+                <th>Problem grade</th>
+                <th>Problem content</th>
+                <th>Recruit type code</th>
+                <th>Recruit type</th>
+                <th>Recruit place code</th>
+                <th>Recruit place</th>
+                <th>Introduction type code</th>
+                <th>Introduction type</th>
+                <th>Introduction person</th>
+                <th>Introduction related code</th>
+                <th>Introduction related</th>
+                <th>Face auth code</th>
+                <th>Face auth</th>
+                <th>Rating job code</th>
+                <th>Rating job</th>
+                <th>Rating grade code</th>
+                <th>Rating grade</th>                    
+                <th>Action</th>
             </tr>
-            <?php
-        } else {
-            foreach ($userInfo as $info):
-                ?>
-                <tr>                             
-                    <td class="text-center"><?php echo $info['UserInfo']['employee_id']; ?></td>
-                    <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
-                    <td class=""><?php echo h($info['UserInfo']['office_email']); ?></td>
-                    <td class=""><?php echo h($info['UserInfo']['company_join_date']); ?></td>
-                    <td class=""><?php echo h($info['UserInfo']['sex']); ?></td> 
-                    <td class=""><?php echo h($info['UserInfo']['birthday']); ?></td>
-                    <td class="center nowrap">
-                        <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $info['UserInfo']['id']))); ?>
-                        <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $info['UserInfo']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($info['UserInfo']['employee_id']))); ?>
-                    </td>
+        </thead>      
+        <tbody>
+            <?php if (empty($userInfo)) { ?>
+                <tr>
+                    <th colspan="7"><?php echo __("Empty data!"); ?></th>
                 </tr>
-
                 <?php
-            endforeach;
-        }
-        ?>
-    </tbody>
-</table>
+            } else {
+                foreach ($userInfo as $info):
+                    ?>
+                    <tr>                             
+                        <td class="text-center"><?php echo $info['UserInfo']['employee_id']; ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['office_email']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['company_join_date']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['gender_code']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['sex']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['birthday']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['work_year']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['age']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['employment_type_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['employment_type']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['zip_code']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['prefecture']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['ward']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['address']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['building']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['job_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['job']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['position_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['position']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['work_location_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['work_location']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['department_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['department']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['problem_type']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['problem_grade']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['problem_content']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['recruit_type_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['recruit_type']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['recruit_place_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['recruit_place']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['introduction_type_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['introduction_type']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['introduction_person']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['introduction_related_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['introduction_related']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['face_auth_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['face_auth']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['rating_job_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['rating_job']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['rating_grade_cd']); ?></td>
+                        <td class=""><?php echo h($info['UserInfo']['rating_grade']); ?></td>                        
+                        <td class="center nowrap">
+                            <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $info['UserInfo']['id']))); ?>
+                            <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $info['UserInfo']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($info['UserInfo']['employee_id']))); ?>
+                        </td>
+                    </tr>
+
+                    <?php
+                endforeach;
+            }
+            ?>
+        </tbody>
+    </table>
+
 <?php if ($this->Paginator->numbers()): ?>
     <div class="pagination">
         <ul>
@@ -51,3 +130,17 @@
         </ul>
     </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.ui-tinytable').tinytbl({
+            direction: 'ltr',      // text-direction (default: 'ltr')
+            thead:     true,       // fixed table thead
+            //tfoot:     false,       // fixed table tfoot
+            cols:      2,          // fixed number of columns
+            width:     'auto',     // table width (default: 'auto')
+            height:    'auto'      // table height (default: 'auto')
+        });
+    });          
+</script>
+<style type="text/css">.ui-tinytbl.ui-tinytable{clear:both;}</style>
