@@ -1,8 +1,8 @@
-<div class="pull-right"  style="margin-bottom:5px; margin-right:40px">
+<div class="pull-right"  style="margin-bottom:5px;">
     <?php echo $this->Html->link('Add', array('controller' => 'Quanlifications', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
 
-<table class="ui-tinytable" cellpadding=5>
+<table class="responsive table table-bordered" cellpadding=5>
     <thead>
         <tr class="nowrap">
             <th class="nowrap center" width="8%">Employee ID</th>
@@ -33,7 +33,7 @@
                     <td class=""><?php echo h($quanlitify['Quanlification']['license_type_cd']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['license_type']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['issuing_organization']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['license_name']); ?></td>
+                    <td class="nowrap"><?php echo h($quanlitify['Quanlification']['license_name']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['acquire_date']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['update_date']); ?></td>
                     <td class=""><?php echo h($quanlitify['Quanlification']['expire_date']); ?></td>
@@ -63,16 +63,70 @@
     </div>
 <?php endif; ?>
 
+
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('.ui-tinytable').tinytbl({
-            direction: 'ltr',      // text-direction (default: 'ltr')
-            thead:     true,       // fixed table thead
-            //tfoot:     false,       // fixed table tfoot
-            cols:      1,          // fixed number of columns
-            width:     'auto',     // table width (default: 'auto')
-            height:    'auto'      // table height (default: 'auto')
+    $(function() {
+        var pinned_columns = 1;
+
+        var updateTables = function() {
+            var tables = $("table.responsive");
+            splitTable(tables, pinned_columns);
+        };
+
+        function splitTable(original, pinned_columns) {
+            if (!pinned_columns) pinned_columns = 1;
+
+            original.css('width', original.width());
+            original.wrap("<div class='table-wrapper' />");
+
+            var copy = original.clone().appendTo(original.closest(".table-wrapper"));
+            copy.removeClass("responsive");
+            copy.wrap("<div class='pinned' />");
+
+            copy.find('form').remove();
+
+            original.wrap("<div class='scrollable' />");
+
+            var scrollable = original.closest('.scrollable'),
+                pinned = copy.closest('.pinned'),
+                wrapper = original.closest('.table-wrapper'),
+                pinned_width = 0;
+
+            copy.find('th:visible:lt(' + pinned_columns + ')').each(function(i, e) {
+                pinned_width += $(e).outerWidth();
+            });
+
+            wrapper.css({
+                'position': 'relative',
+                'display': 'block',
+                'clear': 'both'
+            });
+
+            scrollable.css({
+                'overflow': 'auto'
+            });
+
+            pinned.css({
+                'position': 'absolute',
+                'display': 'block',
+                'top': 0,
+                'width': pinned_width,
+                'overflow': 'hidden'
+            });
+        }
+
+        function unsplitTable(original) {
+            original.closest(".table-wrapper").find(".pinned").remove();
+            original.unwrap();
+            original.unwrap();
+            original.css('width', null);
+        }
+
+        $(window).load(updateTables);
+        $(window).bind('resize', function() {
+            var tables = $("table.responsive");
+            unsplitTable(tables);
+            splitTable(tables, pinned_columns);
         });
-    });          
+    });
 </script>
-<style type="text/css">.ui-tinytbl.ui-tinytable{clear:both;}</style>

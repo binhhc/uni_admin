@@ -18,11 +18,16 @@ class UserInfo extends AppModel {
                     'rule' => 'numeric',
                     'message' => 'Numbers only'
                 ),
+                'unique' => array(
+                    'rule' => array('checkUniqueId'),
+                    'message' => 'Unique employeeId',
+                    'on' => 'create',
+                ),
             ),
             'employee_name' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
-                    'allowEmpty' => true,
+                    'allowEmpty' => false,
                     'message' => 'Employee name not empty!'
                 ),
             ),
@@ -134,5 +139,24 @@ class UserInfo extends AppModel {
         );
         $this->validate = $validate;
         return $this->validates();
+    }
+
+    public function checkUniqueId($id){
+        $arr_id = $this->find('first', array(
+            'conditions' => array(
+                'UserInfo.employee_id' => $id
+            )
+        ));
+        if(!empty($arr_id)){
+            return false;
+        }
+        return true;
+    }
+
+    public function listUser(){
+        $arr_user = $this->find('list', array(
+            'fields' => array('UserInfo.employee_id', 'UserInfo.employee_name'),
+        ));
+        return $arr_user;        
     }
 }

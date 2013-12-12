@@ -10,6 +10,10 @@
                 </a>
                 <ul class="dropdown-menu">                           
                     <li>
+                        <?php echo $this->Html->link('Run Batch', array('controller' => 'Users', 'action' => 'runbatch')); ?>
+                    </li>
+                    <hr>
+                    <li>
                         <a href="<?php echo $this->Html->url(array('controller' => 'Users', 'action' => 'logout'), true); ?>">
                                             <i class="icon-off"></i>
                                             ログアウト</a>
@@ -36,19 +40,7 @@
             </li>                
             <li class="<?php if(strpos($this->request->url, 'WorkExperiences') !== false){ echo 'active';} ?>">
                 <?php echo $this->Html->link('WorkExperiences', array('controller' => 'WorkExperiences', 'action' => 'index')); ?>
-            </li>
-            <li class="<?php if(strpos($this->request->url, 'Users') !== false){ echo 'active';} ?>">
-                <?php echo $this->Html->link('Run Batch', array('controller' => 'Users', 'action' => 'runbatch')); ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout')); ?>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <?php echo ' '; ?>             
-            </li>
+            </li>           
         </ul>
     </div>
 </div>

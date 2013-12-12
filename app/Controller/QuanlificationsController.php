@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class QuanlificationsController extends AppController {
 
-    public $uses = array('Quanlification');
+    public $uses = array('Quanlification', 'UserInfo');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -37,7 +37,8 @@ class QuanlificationsController extends AppController {
             }
         }
         $this->Session->write('flag_link_quanlity', 1);
-        $this->render('detail');
+        $this->set('user_info', $this->UserInfo->listUser());
+        $this->render('detail');        
     }
 
     public function edit() {
@@ -65,6 +66,7 @@ class QuanlificationsController extends AppController {
         }
         $this->Session->write('flag_link_quanlity', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 

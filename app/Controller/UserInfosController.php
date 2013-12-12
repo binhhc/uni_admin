@@ -10,7 +10,7 @@ class UserInfosController extends AppController {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
-    public function index() {
+    public function index() {        
         $this->Session->delete('info_id');
         $this->Session->write('flag_link_info', 0);
         $this->paginate = array(
