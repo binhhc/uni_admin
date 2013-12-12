@@ -92,7 +92,7 @@
             tfoot:     false,       // fixed table tfoot
             cols:      1,          // fixed number of columns
             width:     'auto',     // table width (default: 'auto')
-            height:   'auto'      // table height (default: 'auto')
+            height:    'auto'      // table height (default: 'auto')
         });
     });          
 </script>

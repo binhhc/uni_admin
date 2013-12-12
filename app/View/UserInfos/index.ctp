@@ -62,7 +62,7 @@
             } else {
                 foreach ($userInfo as $info):
                     ?>
-                    <tr>                             
+                    <tr class="nowrap">
                         <td class="text-center"><?php echo $info['UserInfo']['employee_id']; ?></td>
                         <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
                         <td class=""><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>

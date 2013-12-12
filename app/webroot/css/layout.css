@@ -2216,3 +2216,7 @@ ul.department_tree .dept_name {
 .none_background{
     background: white !important;
 }
+
+.ui-widget-content a{
+    color: #FFF !important;
+}

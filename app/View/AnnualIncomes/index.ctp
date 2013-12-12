@@ -2,10 +2,10 @@
 	<?php echo $this->Html->link('Add', array('controller' => 'AnnualIncomes', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="ui-tinytable" cellpadding="5" cellspacing="5">
 	<thead>
-		<tr>
-			<th class="nowrap center" width="8%">Employee ID</th>
+		<tr class="nowrap center">
+			<th>Employee ID</th>
 			<th>Yearly amount</th>
 			<th>Income gross</th>
 			<th>Income net</th>
@@ -51,3 +51,17 @@
 		</ul>
 	</div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.ui-tinytable').tinytbl({
+            direction: 'ltr',      // text-direction (default: 'ltr')
+            thead:     true,       // fixed table thead
+            //tfoot:     false,       // fixed table tfoot
+            cols:      1,          // fixed number of columns
+            width:     'auto',     // table width (default: 'auto')
+            height:    'auto'      // table height (default: 'auto')
+        });
+    });          
+</script>
+<style type="text/css">.ui-tinytbl.ui-tinytable{clear:both;}</style>

@@ -2,16 +2,26 @@
     <?php echo $this->Html->link('Add', array('controller' => 'SchoolEducations', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="ui-tinytable" cellpadding="5" cellspacing="5">
     <thead>
-        <tr>
-            <th class="nowrap center" width="8%">Employee ID</th>
-            <th>Graduate year</th>
+        <tr class="nowrap">
+            <th>Employee ID</th>
+            <th>Graduate year</th>            
+            <th>Graduate type code</th>
+            <th>Graduate type</th>
+            <th>Education type code</th>
             <th>Education type</th>
+            <th>Newest education code</th>
+            <th>Newest education</th>
+            <th>School type code</th>
             <th>School type</th>
-            <th >Diploma type</th>
-            <th >School</th>
-            <th class="nowrap center" width="14%">Action</th>
+            <th>Diploma type code</th>
+            <th>Diploma type</th>
+            <th>School</th>
+            <th>Faculty</th>
+            <th>Subject</th>
+            <th> Major</th>            
+            <th width="14%">Action</th>
         </tr>
     </thead>      
     <tbody>
@@ -23,14 +33,24 @@
         } else {
             foreach ($schoolEdu as $school):
                 ?>
-                <tr>                             
-                    <td class="text-center"><?php echo $school['SchoolEducation']['employee_id']; ?></td>
-                    <td class=""><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
-                    <td class=""><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
-                    <td class=""><?php echo h($school['SchoolEducation']['school_type']); ?></td>
-                    <td class=""><?php echo h($school['SchoolEducation']['diploma_type']); ?></td> 
-                    <td class=""><?php echo h($school['SchoolEducation']['school']); ?></td>
-                    <td class="center nowrap">
+                <tr class="nowrap">
+                    <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['edu_type_cd']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['newest_edu_cd']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['newest_edu']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['school_type_cd']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['school_type']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['diploma_type_cd']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['diploma_type']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['school']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
+                    <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
+                    <td>
                         <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
                         <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
                     </td>
@@ -51,3 +71,17 @@
         </ul>
     </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.ui-tinytable').tinytbl({
+            direction: 'ltr',      // text-direction (default: 'ltr')
+            thead:     true,       // fixed table thead
+            //tfoot:     false,       // fixed table tfoot
+            cols:      1,          // fixed number of columns
+            width:     'auto',     // table width (default: 'auto')
+            height:    'auto'      // table height (default: 'auto')
+        });
+    });          
+</script>
+<style type="text/css">.ui-tinytbl.ui-tinytable{clear:both;}</style>

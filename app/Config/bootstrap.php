@@ -191,5 +191,7 @@ Configure::write('ldap', array(
 ));
 
 //paging
-
 Configure::write('max_row', 10);
+
+// Path contain csv files
+Configure::write('path_csv', 'http://192.168.1.224/csv/');

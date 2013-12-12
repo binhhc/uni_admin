@@ -32,17 +32,16 @@ class UsersController extends AppController {
 
 	public function runbatch() {
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if (!empty($this->request->data['Batch']['patch'])) {
-
-				$real_path = $this->request->data['Batch']['patch'];
-				$csv_file = $real_path . DS . '01_USERINFO.csv';
+			$path_url = Configure::read('path_csv');
+			if (!empty($path_url)) {				
+				$csv_file = $path_url . DS . '01_USERINFO.csv';
 				// check csv files exist
 				if($this->is_url_exist($csv_file)){
 
 					$path = substr(APP, 0, strlen(APP) - 1);
 					$cake_path = $path . DS . 'Console' . DS . 'cake.php';
 					$file_shell = 'ImportCSVtoDB';
-					$command = $this->request->data['Batch']['patch'];
+					$command = $path_url;
 					$shell = "php \"{$cake_path}\" -app {$path} {$file_shell} {$command} &";
 					if (preg_match('/^win/i', PHP_OS)) {
 						pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
@@ -57,7 +56,7 @@ class UsersController extends AppController {
 						$this->Session->setFlash('Input sucessful', 'success');
 					}
 				}else{
-					$this->Session->setFlash('Please input path contain csv file', 'error');
+					$this->Session->setFlash('Path have not contain csv files', 'error');
 				}
 			} else {
 				$this->Session->setFlash('Please input path', 'error');
@@ -67,6 +66,7 @@ class UsersController extends AppController {
 
 	/*
 	 * Check url exist
+	 * @author BinhHoang
 	 */
 	function is_url_exist($url){
 		$ch = curl_init($url);

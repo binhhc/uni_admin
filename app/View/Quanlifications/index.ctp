@@ -71,7 +71,7 @@
             direction: 'ltr',      // text-direction (default: 'ltr')
             thead:     true,       // fixed table thead
             //tfoot:     false,       // fixed table tfoot
-            cols:      0,          // fixed number of columns
+            cols:      1,          // fixed number of columns
             width:     'auto',     // table width (default: 'auto')
             height:    'auto'      // table height (default: 'auto')
         });
