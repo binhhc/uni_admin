@@ -30,7 +30,7 @@ class UsersController extends AppController {
 	 * Author Binh Hoang
 	 */
 
-	public function runbatch() {
+	public function runbatch() {		
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$path_url = Configure::read('path_csv');
 			if (!empty($path_url)) {				

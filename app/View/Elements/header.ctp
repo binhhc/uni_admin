@@ -1,6 +1,6 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
-        <a class="brand" href="<?php echo Router::url('/', true); ?>">UNI ADMIN</a>
+        <a class="brand" href="#">UNI ADMIN</a>
         <ul class="pull-right">
             <li class="dropdown">
                 <a class="btn dropdown-toggle" href="#" data-toggle="dropdown">
@@ -17,6 +17,7 @@
                 </ul>
             </li>
         </ul>
+
         <ul class="nav">
             <li class="<?php if(strpos($this->request->url, 'UserInfos') !== false){ echo 'active';} ?>">
                 <?php echo $this->Html->link('UserInfos', array('controller' => 'UserInfos', 'action' => 'index')); ?>
@@ -43,5 +44,14 @@
                 <?php echo $this->Html->link('Logout', array('controller' => 'Users', 'action' => 'logout')); ?>
             </li>
         </ul>
+
+        <ul>
+            <li>
+                <?php echo ' '; ?>             
+            </li>
+        </ul>
     </div>
+</div>
+<div style="padding-bottom: 50px;">
+
 </div>
