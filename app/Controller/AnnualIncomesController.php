@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class AnnualIncomesController extends AppController {
 
-    public $uses = array('AnnualIncome');
+    public $uses = array('AnnualIncome', 'UserInfo');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -37,6 +37,7 @@ class AnnualIncomesController extends AppController {
             } 
         }
         $this->Session->write('flag_link_annual', 1);
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 
@@ -66,6 +67,7 @@ class AnnualIncomesController extends AppController {
         }
         $this->Session->write('flag_link_annual', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 

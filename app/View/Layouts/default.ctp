@@ -27,13 +27,12 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('bootstrap.min');
-        echo $this->Html->css(array('layout', 'jquery-ui', 'jquery.ui.tinytbl'));
+        echo $this->Html->css(array('layout', 'jquery-ui'));
        
         echo $this->Html->script('jquery');
         echo $this->Html->script('jquery-ui');
         echo $this->Html->script('bootstrap.min');
-        echo $this->Html->script('jquery.ui.tinytbl');
-        echo $this->Html->script('jquery.ui.tinytbl.src');
+      
 
         echo $this->fetch('meta');
         echo $this->fetch('css');

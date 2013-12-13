@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class SchoolEducationsController extends AppController {
 
-    public $uses = array('SchoolEducation');
+    public $uses = array('SchoolEducation', 'UserInfo');
 
         public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -36,6 +36,7 @@ class SchoolEducationsController extends AppController {
             }
         }
         $this->Session->write('flag_link_school', 1);
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 
@@ -64,6 +65,7 @@ class SchoolEducationsController extends AppController {
         }
         $this->Session->write('flag_link_school', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 

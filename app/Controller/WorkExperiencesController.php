@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class WorkExperiencesController extends AppController {
 
-    public $uses = array('WorkExperience');
+    public $uses = array('WorkExperience', 'UserInfo');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -36,6 +36,7 @@ class WorkExperiencesController extends AppController {
             }
         }
         $this->Session->write('flag_link_work', 1);
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 
@@ -65,6 +66,7 @@ class WorkExperiencesController extends AppController {
         }
         $this->Session->write('flag_link_work', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 

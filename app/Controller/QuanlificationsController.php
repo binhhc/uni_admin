@@ -7,7 +7,7 @@ class QuanlificationsController extends AppController {
     public $uses = array('Quanlification', 'UserInfo');
 
     public function beforeFilter() {
-        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete', 'typeahead')) : null;
     }
 
     public function index() {
@@ -21,7 +21,7 @@ class QuanlificationsController extends AppController {
         $this->set('quanlity', $this->paginate('Quanlification'));
     }
 
-    public function add() {
+    public function add() {        
         if ($this->Session->read('flag_link_quanlity') == 0) {
             $this->Session->write('save_latest_link_quanlity', @$_SERVER['HTTP_REFERER']);
         }
@@ -84,6 +84,29 @@ class QuanlificationsController extends AppController {
             $this->redirect($this->Session->read('save_latest_link_quanlity'));
         }
         $this->Session->write('flag_link_quanlity', 1);
+    }
+
+    public function typeahead() {
+        $this->autoRender = false;        
+
+        // get the search term from URL
+        $term = $this->request->query['q'];
+        pr($term);exit;
+        $userInfo = $this->UserInfo->find('all',array(
+            'conditions' => array(
+                'UserInfo.employee_name LIKE' => '%'.$term.'%'
+            )
+        ));
+
+        pr($userInfo);exit;
+
+        // Format the result for select2
+        $result = array();
+        foreach($userInfo as $key => $user) {
+            array_push($result, $userInfo['UserInfo']['employee_name']);
+        }
+        $users = $result;        
+        echo json_encode($users);
     }
 
 }

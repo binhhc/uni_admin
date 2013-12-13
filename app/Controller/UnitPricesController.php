@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UnitPricesController extends AppController {
 
-    public $uses = array('UnitPrice');
+    public $uses = array('UnitPrice', 'UserInfo');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -39,6 +39,7 @@ class UnitPricesController extends AppController {
             }
         }
         $this->Session->write('flag_link_price', 1);
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 
@@ -68,6 +69,7 @@ class UnitPricesController extends AppController {
         }
         $this->Session->write('flag_link_price', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set('user_info', $this->UserInfo->listUser());
         $this->render('detail');
     }
 
