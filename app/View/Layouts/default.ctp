@@ -27,7 +27,7 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css('bootstrap.min');
-        echo $this->Html->css(array('layout', 'jquery-ui'));
+        echo $this->Html->css(array('layout', 'jquery-ui', 'font-awesome'));
        
         echo $this->Html->script('jquery');
         echo $this->Html->script('jquery-ui');
