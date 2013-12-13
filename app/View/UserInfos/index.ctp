@@ -2,7 +2,7 @@
     <?php echo $this->Html->link('Add', array('controller' => 'UserInfos', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
 </div>
 <div style="clear:both;"></div>
-    <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">        
+    <table class="table table-bordered responsive" cellpadding="5" cellspacing="5">        
         <thead>
             <tr class="nowrap">
                 <th >Employee ID</th>
@@ -131,10 +131,9 @@
     </div>
 <?php endif; ?>
 
-
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 2;
+        var pinned_columns = 1;
 
         var updateTables = function() {
             var tables = $("table.responsive");
@@ -167,7 +166,8 @@
             wrapper.css({
                 'position': 'relative',
                 'display': 'block',
-                'clear': 'both'
+                'clear': 'both',
+                'overflow': 'hidden'
             });
 
             scrollable.css({
@@ -179,7 +179,8 @@
                 'display': 'block',
                 'top': 0,
                 'width': pinned_width,
-                'overflow': 'hidden'
+                'overflow': 'hidden',
+                'background': '#fff'
             });
         }
 

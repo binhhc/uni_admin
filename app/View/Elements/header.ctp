@@ -1,5 +1,7 @@
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
+    <div class="container">
         <a class="brand" href="#">UNI ADMIN</a>
         <ul class="pull-right">
             <li class="dropdown">
@@ -42,6 +44,7 @@
                 <?php echo $this->Html->link('WorkExperiences', array('controller' => 'WorkExperiences', 'action' => 'index')); ?>
             </li>           
         </ul>
+    </div>
     </div>
 </div>
 <div style="padding-bottom: 50px;">

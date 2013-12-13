@@ -14,11 +14,16 @@ class QuanlificationsController extends AppController {
 
         $this->Session->delete('quanlity_id');
         $this->Session->write('flag_link_quanlity', 0);
+
         $this->paginate = array(
             'limit' => Configure::read('max_row'),
             'order' => array('Quanlification.employee_id' => 'ASC')
         );
-        $this->set('quanlity', $this->paginate('Quanlification'));
+        try{
+            $this->set('quanlity', $this->paginate('Quanlification'));
+        }catch(exception $e){
+            
+        }
     }
 
     public function add() {        

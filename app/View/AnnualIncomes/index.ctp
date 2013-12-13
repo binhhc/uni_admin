@@ -42,16 +42,16 @@
 		?>
 	</tbody>
 </table>
-<?php if ($this->Paginator->numbers()): ?>
-	<div class="pagination">
-		<ul>
-			<?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
-			<?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-			<?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-		</ul>
-	</div>
-<?php endif; ?>
 
+<?php if ($this->Paginator->numbers()): ?>
+    <div class="pagination">
+        <ul>
+            <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+            <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
+            <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
 <script type="text/javascript">
     $(function() {

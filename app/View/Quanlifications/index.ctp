@@ -99,7 +99,8 @@
             wrapper.css({
                 'position': 'relative',
                 'display': 'block',
-                'clear': 'both'
+                'clear': 'both',
+                'overflow': 'hidden'
             });
 
             scrollable.css({
@@ -111,7 +112,8 @@
                 'display': 'block',
                 'top': 0,
                 'width': pinned_width,
-                'overflow': 'hidden'
+                'overflow': 'hidden',
+                'background': '#fff'
             });
         }
 
