@@ -5,7 +5,8 @@
             <li class="dropdown">
                 <a class="btn dropdown-toggle" href="#" data-toggle="dropdown">
                     <i class="icon-user icon-white"></i>
-                    <span class="identity"><?php echo h($this->Access->user('last_name')) . ' ' . h($this->Access->user('first_name')); ?></span>
+                    <?php $user = $this->Session->read('Auth.User'); ?>
+                    <span class="identity"><?php echo h($user['username']);?></span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">                           

@@ -14,7 +14,7 @@ class AccessHelper extends AppHelper {
      * usage: in view:  $this->Access->isLoggedIn()
      */
     public function isLoggedIn() {
-        $user = $this->Session->read('Auth.User');
+        $user = $this->Session->read('Auth.User');       
         return !empty($user);
     }
 
