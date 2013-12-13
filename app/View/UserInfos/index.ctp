@@ -5,52 +5,52 @@
     <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">        
         <thead>
             <tr class="nowrap">
-                <th >Employee ID</th>
-                <th>Employee name</th>              
-                <th>Name Furigana</th>
-                <th>Name Alphabet</th>
-                <th>Office email</th>
-                <th>Company join date</th>
-                <th>Gender code</th>
-                <th>Sex</th>
-                <th>Birthday</th>
-                <th>Work year</th>
-                <th>Age</th>
-                <th>Employment type code</th>
-                <th>Employment type</th>
-                <th>Zip code</th>
-                <th>Prefecture</th>
-                <th>Ward</th>
-                <th>Address</th>
-                <th>Building</th>
-                <th>Job code</th>
-                <th>Job</th>
-                <th>Position code</th>
-                <th>Position</th>
-                <th>Work location code</th>
-                <th>Work location</th>
-                <th>Department code</th>
-                <th>Department</th>
-                <th>Problem type code</th>
-                <th>Problem type</th>
-                <th>Problem grade</th>
-                <th>Problem content</th>
-                <th>Recruit type code</th>
-                <th>Recruit type</th>
-                <th>Recruit place code</th>
-                <th>Recruit place</th>
-                <th>Introduction type code</th>
-                <th>Introduction type</th>
-                <th>Introduction person</th>
-                <th>Introduction related code</th>
-                <th>Introduction related</th>
-                <th>Face auth code</th>
-                <th>Face auth</th>
-                <th>Rating job code</th>
-                <th>Rating job</th>
-                <th>Rating grade code</th>
-                <th>Rating grade</th>                    
-                <th>Action</th>
+                <th >社員番号</th>
+                <th>氏名</th>              
+                <th>氏名（フリガナ）</th>
+                <th>氏名（漢字）</th>
+                <th>社用e-Mail</th>
+                <th>入社年月日</th>
+                <th>性別コード</th>
+                <th>性別</th>
+                <th>生年月日</th>
+                <th>勤続年数</th>
+                <th>年齢</th>
+                <th>雇用区分コード</th>
+                <th>雇用区分</th>
+                <th>郵便番号</th>
+                <th>都道府県</th>
+                <th>市区町村</th>
+                <th>番地</th>
+                <th>マンション／ビル等</th>
+                <th>職種コード</th>
+                <th>職種</th>
+                <th>役職コード</th>
+                <th>役職</th>
+                <th>勤務地コード</th>
+                <th>勤務地</th>
+                <th>所属コード</th>
+                <th>所属</th>
+                <th>障害手帳区分コード</th>
+                <th>障害手帳区分</th>
+                <th>障害等級</th>
+                <th>障害内容</th>
+                <th>採用区分コード</th>
+                <th>採用区分</th>
+                <th>採用地コード</th>
+                <th>採用地</th>
+                <th>紹介区分コード</th>
+                <th>紹介区分</th>
+                <th>紹介者</th>
+                <th>紹介者関係コード</th>
+                <th>紹介者関係</th>
+                <th>顔ナビ権限コード</th>
+                <th>顔ナビ権限</th>
+                <th>評価職種コード</th>
+                <th>評価職種</th>
+                <th>評価等級コード</th>
+                <th>評価等級</th>
+                <th>アクション</th>
             </tr>
         </thead>      
         <tbody>
