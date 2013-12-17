@@ -1,57 +1,59 @@
-<div class="pull-right"  style="margin-bottom:5px;">
-    <?php echo $this->Html->link('Add', array('controller' => 'Quanlifications', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
-</div>
-
-<table class="responsive table table-bordered" cellpadding=5>
-    <thead>
-        <tr class="nowrap">
-            <th class="nowrap center" width="8%">Employee ID</th>
-            <th>License type code</th>
-            <th>License type</th>
-            <th>Issuing organization</th>
-            <th>License name</th>
-            <th>Acquire date</th>
-            <th>Update date</th>
-            <th>Expire date</th>
-            <th>Certification number</th>
-            <th>Attachment</th>       
-            <th>Allowance</th>            
-            <th width="14%">Action</th>
-        </tr>
-    </thead>      
-    <tbody>
-        <?php if (empty($quanlity)) { ?>
-            <tr class="nowrap">
-                <td colspan="7"><?php echo __("Empty data!"); ?></td>
-            </tr>
-            <?php
-        } else {
-            foreach ($quanlity as $quanlitify):
-                ?>
-                <tr class="nowrap">                             
-                    <td class="text-center"><?php echo $quanlitify['Quanlification']['employee_id']; ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['license_type_cd']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['license_type']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['issuing_organization']); ?></td>
-                    <td class="nowrap"><?php echo h($quanlitify['Quanlification']['license_name']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['acquire_date']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['update_date']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['expire_date']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['certification_number']); ?></td>
-                    <td class=""><?php echo h($quanlitify['Quanlification']['attachment']); ?></td>                   
-                    <td class=""><?php echo h($quanlitify['Quanlification']['allowance']); ?></td>             
-                    <td class="center nowrap">
-                        <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $quanlitify['Quanlification']['id']))); ?>
-                        <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $quanlitify['Quanlification']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($quanlitify['Quanlification']['employee_id']))); ?>
-                    </td>
+<div class="row-fluid">
+    <div class="span2">
+        <?php echo $this->Element("sidemenu");?>
+    </div>
+    <div class="span10">
+        <table class="responsive table table-bordered" cellpadding=5>
+            <thead>
+                <tr class="nowrap">
+                    <th class="nowrap center" width="8%">Employee ID</th>
+                    <th>License type code</th>
+                    <th>License type</th>
+                    <th>Issuing organization</th>
+                    <th>License name</th>
+                    <th>Acquire date</th>
+                    <th>Update date</th>
+                    <th>Expire date</th>
+                    <th>Certification number</th>
+                    <th>Attachment</th>       
+                    <th>Allowance</th>            
+                    <th width="14%">Action</th>
                 </tr>
+            </thead>      
+            <tbody>
+                <?php if (empty($quanlity)) { ?>
+                    <tr class="nowrap">
+                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                    </tr>
+                    <?php
+                } else {
+                    foreach ($quanlity as $quanlitify):
+                        ?>
+                        <tr class="nowrap">                             
+                            <td class="text-center"><?php echo $quanlitify['Quanlification']['employee_id']; ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['license_type_cd']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['license_type']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['issuing_organization']); ?></td>
+                            <td class="nowrap"><?php echo h($quanlitify['Quanlification']['license_name']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['acquire_date']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['update_date']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['expire_date']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['certification_number']); ?></td>
+                            <td class=""><?php echo h($quanlitify['Quanlification']['attachment']); ?></td>                   
+                            <td class=""><?php echo h($quanlitify['Quanlification']['allowance']); ?></td>             
+                            <td class="center nowrap">
+                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $quanlitify['Quanlification']['id']))); ?>
+                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $quanlitify['Quanlification']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($quanlitify['Quanlification']['employee_id']))); ?>
+                            </td>
+                        </tr>
 
-                <?php
-            endforeach;
-        }
-        ?>
-    </tbody>
-</table>
+                        <?php
+                    endforeach;
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
 <?php if ($this->Paginator->numbers()): ?>
     <div class="pagination">

@@ -1,67 +1,70 @@
-<div class="pull-right"  style="margin-bottom:5px;">
-    <?php echo $this->Html->link('Add', array('controller' => 'SchoolEducations', 'action' => 'add'), array('class'=>'btn btn-primary')) ?>
-</div>
-
-<table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
-    <thead>
-        <tr class="nowrap">
-            <th>Employee ID</th>
-            <th>Graduate year</th>            
-            <th>Graduate type code</th>
-            <th>Graduate type</th>
-            <th>Education type code</th>
-            <th>Education type</th>
-            <th>Newest education code</th>
-            <th>Newest education</th>
-            <th>School type code</th>
-            <th>School type</th>
-            <th>Diploma type code</th>
-            <th>Diploma type</th>
-            <th>School</th>
-            <th>Faculty</th>
-            <th>Subject</th>
-            <th> Major</th>            
-            <th width="14%">Action</th>
-        </tr>
-    </thead>      
-    <tbody>
-        <?php if (empty($schoolEdu)) { ?>
-            <tr>
-                <td colspan="7"><?php echo __("Empty data!"); ?></td>
-            </tr>
-            <?php
-        } else {
-            foreach ($schoolEdu as $school):
-                ?>
-                <tr>
-                    <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['edu_type_cd']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['newest_edu_cd']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['newest_edu']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['school_type_cd']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['school_type']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['diploma_type_cd']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['diploma_type']); ?></td>
-                    <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
-                    <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
-                    <td class="nowrap">
-                        <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
-                        <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
-                    </td>
+<div class="row-fluid">
+    <div class="span2">
+        <?php echo $this->Element("sidemenu");?>
+    </div>
+    <div class="span10">
+        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
+            <thead>
+                <tr class="nowrap">
+                    <th>Employee ID</th>
+                    <th>Graduate year</th>            
+                    <th>Graduate type code</th>
+                    <th>Graduate type</th>
+                    <th>Education type code</th>
+                    <th>Education type</th>
+                    <th>Newest education code</th>
+                    <th>Newest education</th>
+                    <th>School type code</th>
+                    <th>School type</th>
+                    <th>Diploma type code</th>
+                    <th>Diploma type</th>
+                    <th>School</th>
+                    <th>Faculty</th>
+                    <th>Subject</th>
+                    <th> Major</th>            
+                    <th width="14%">Action</th>
                 </tr>
+            </thead>      
+            <tbody>
+                <?php if (empty($schoolEdu)) { ?>
+                    <tr>
+                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                    </tr>
+                    <?php
+                } else {
+                    foreach ($schoolEdu as $school):
+                        ?>
+                        <tr>
+                            <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['edu_type_cd']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['newest_edu_cd']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['newest_edu']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['school_type_cd']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['school_type']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['diploma_type_cd']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['diploma_type']); ?></td>
+                            <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
+                            <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
+                            <td class="nowrap">
+                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
+                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
+                            </td>
+                        </tr>
 
-                <?php
-            endforeach;
-        }
-        ?>
-    </tbody>
-</table>
+                        <?php
+                    endforeach;
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 <?php if ($this->Paginator->numbers()): ?>
     <div class="pagination">
         <ul>
