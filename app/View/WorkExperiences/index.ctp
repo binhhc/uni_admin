@@ -1,72 +1,80 @@
-<div class="row-fluid">
-    <div class="span2">
-        <?php echo $this->Element("sidemenu");?>
-    </div>
-    <div class="span10">
-        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
-            <thead>
-                <tr class="nowrap center">
-                    <th><input type='checkbox' id="cb_all"/></th>            
-                    <th>Employee ID</th>
-                    <th>Join date</th>
-                    <th>Leave date</th>
-                    <th>Work year</th>
-                    <th>Company</th>
-                    <th>Bussiness type</th>
-                    <th>Company zip code</th>
-                    <th>Company address</th>
-                    <th>Abroad type code</th>
-                    <th>Abroad type</th>
-                    <th>Position</th>
-                    <th>Retire reason code</th>
-                    <th>Retire reason</th>
-                    <th>Retire content</th>            
-                </tr>
-            </thead>      
-            <tbody>
-                <?php if (empty($workExp)) { ?>
-                    <tr>
-                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
-                    </tr>
-                    <?php
-                } else {
-                    foreach ($workExp as $work):
-                        ?>
-                        <tr class="nowrap">
-                            <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $work['WorkExperience']['id']; ?>' ></td>                    
-                            <td><?php echo $this->Form->postLink($work['WorkExperience']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $work['WorkExperience']['id']))); ?> </td>
-                            <td><?php echo h($work['WorkExperience']['join_date']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['leave_date']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['work_year']); ?></td>
-                            <td class="nowrap"><?php echo h($work['WorkExperience']['company']); ?></td> 
-                            <td><?php echo h($work['WorkExperience']['bussiness_type']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['company_zip_code']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['company_address']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['abroad_type_cd']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['abroad_type']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['position']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['retire_reason_cd']); ?></td>
-                            <td class="nowrap"><?php echo h($work['WorkExperience']['retire_reason']); ?></td>
-                            <td><?php echo h($work['WorkExperience']['retire_content']); ?></td>
-                        </tr>
+<div class="main">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="widget stacked">
+                <div class="widget-content">
+                    <div class="span2">
+                        <?php echo $this->Element("sidemenu");?>
+                    </div>
+                    <div class="span10">
+                        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
+                            <thead>
+                                <tr class="nowrap center">
+                                    <th><input type='checkbox' id="cb_all"/></th>
+                                    <th>社員番号</th>
+                                    <th>入社年月日</th>
+                                    <th>退社年月日</th>
+                                    <th>勤続年数</th>
+                                    <th>会社名</th>
+                                    <th>業種</th>
+                                    <th>郵便番号</th>
+                                    <th>会社住所</th>
+                                    <th>国内外区分コード</th>
+                                    <th>国内外区分</th>
+                                    <th>役職</th>
+                                    <th>退職の事由コード</th>
+                                    <th>退職の事由</th>
+                                    <th>退職理由</th>
+                                </tr>
+                            </thead>      
+                            <tbody>
+                                <?php if (empty($workExp)) { ?>
+                                    <tr>
+                                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                                    </tr>
+                                    <?php
+                                } else {
+                                    foreach ($workExp as $work):
+                                        ?>
+                                        <tr class="nowrap">
+                                            <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $work['WorkExperience']['id']; ?>' ></td>                    
+                                            <td><?php echo $this->Form->postLink($work['WorkExperience']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $work['WorkExperience']['id']))); ?> </td>
+                                            <td><?php echo h($work['WorkExperience']['join_date']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['leave_date']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['work_year']); ?></td>
+                                            <td class="nowrap"><?php echo h($work['WorkExperience']['company']); ?></td> 
+                                            <td><?php echo h($work['WorkExperience']['bussiness_type']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['company_zip_code']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['company_address']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['abroad_type_cd']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['abroad_type']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['position']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['retire_reason_cd']); ?></td>
+                                            <td class="nowrap"><?php echo h($work['WorkExperience']['retire_reason']); ?></td>
+                                            <td><?php echo h($work['WorkExperience']['retire_content']); ?></td>
+                                        </tr>
 
-                        <?php
-                    endforeach;
-                }
-                ?>
-            </tbody>
-        </table>
+                                        <?php
+                                    endforeach;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <?php if ($this->Paginator->numbers()): ?>
+                            <div class="pagination">
+                                <ul>
+                                    <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                    <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
+                                    <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<?php if ($this->Paginator->numbers()): ?>
-    <div class="pagination">
-        <ul>
-            <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
-            <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-            <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-        </ul>
-    </div>
-<?php endif; ?>
 
 <script type="text/javascript">
     $(function() {

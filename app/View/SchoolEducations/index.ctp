@@ -1,79 +1,87 @@
-<div class="row-fluid">
-    <div class="span2">
-        <?php echo $this->Element("sidemenu");?>
-    </div>
-    <div class="span10">
-        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
-            <thead>
-                <tr class="nowrap">
-                    <th>Employee ID</th>
-                    <th>Graduate year</th>            
-                    <th>Graduate type code</th>
-                    <th>Graduate type</th>
-                    <th>Education type code</th>
-                    <th>Education type</th>
-                    <th>Newest education code</th>
-                    <th>Newest education</th>
-                    <th>School type code</th>
-                    <th>School type</th>
-                    <th>Diploma type code</th>
-                    <th>Diploma type</th>
-                    <th>School</th>
-                    <th>Faculty</th>
-                    <th>Subject</th>
-                    <th> Major</th>            
-                    <th width="14%">Action</th>
-                </tr>
-            </thead>      
-            <tbody>
-                <?php if (empty($schoolEdu)) { ?>
-                    <tr>
-                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
-                    </tr>
-                    <?php
-                } else {
-                    foreach ($schoolEdu as $school):
-                        ?>
-                        <tr>
-                            <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['edu_type_cd']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['newest_edu_cd']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['newest_edu']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['school_type_cd']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['school_type']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['diploma_type_cd']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['diploma_type']); ?></td>
-                            <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
-                            <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
-                            <td class="nowrap">
-                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
-                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
-                            </td>
-                        </tr>
+<div class="main">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="widget stacked">
+                <div class="widget-content">
+                    <div class="span2">
+                        <?php echo $this->Element("sidemenu");?>
+                    </div>
+                    <div class="span10">
+                        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
+                            <thead>
+                                <tr class="nowrap">
+                                    <th>社員番号</th>
+                                    <th>入卒年月</th>
+                                    <th>入卒区分コード</th>
+                                    <th>入卒区分</th>
+                                    <th>学歴区分コード</th>
+                                    <th>学歴区分</th>
+                                    <th>最終学歴コード</th>
+                                    <th>最終学歴</th>
+                                    <th>公私区分コード</th>
+                                    <th>公私区分</th>
+                                    <th>文理区分コード</th>
+                                    <th>文理区分</th>
+                                    <th>学校名</th>
+                                    <th>学部名</th>
+                                    <th>学科名</th>
+                                    <th>専攻名</th>
+                                    <th width="14%">Action</th>
+                                </tr>
+                            </thead>      
+                            <tbody>
+                                <?php if (empty($schoolEdu)) { ?>
+                                    <tr>
+                                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                                    </tr>
+                                    <?php
+                                } else {
+                                    foreach ($schoolEdu as $school):
+                                        ?>
+                                        <tr>
+                                            <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['edu_type_cd']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['edu_type']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['newest_edu_cd']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['newest_edu']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['school_type_cd']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['school_type']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['diploma_type_cd']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['diploma_type']); ?></td>
+                                            <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
+                                            <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
+                                            <td class="nowrap">
+                                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
+                                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
+                                            </td>
+                                        </tr>
 
-                        <?php
-                    endforeach;
-                }
-                ?>
-            </tbody>
-        </table>
+                                        <?php
+                                    endforeach;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <?php if ($this->Paginator->numbers()): ?>
+                            <div class="pagination">
+                                <ul>
+                                    <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                    <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
+                                    <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<?php if ($this->Paginator->numbers()): ?>
-    <div class="pagination">
-        <ul>
-            <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
-            <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-            <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-        </ul>
-    </div>
-<?php endif; ?>
 
 <script type="text/javascript">
     $(function() {

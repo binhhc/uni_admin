@@ -1,89 +1,97 @@
-<div class="row-fluid">
-    <div class="span2">
-        <?php echo $this->Element("sidemenu");?>
-    </div>
-    <div class="span10">
-        <table class="responsive table table-bordered" cellpadding=5>
-            <thead>
-                <tr class="nowrap">
-                    <th>Employee ID</th>
-                    <th>Revise date</th>
-                    <th>Salary type code</th>
-                    <th>Salary type</th>   
-                    <th>Bonus</th>
-                    <th>Ajdust salary</th>
-                    <th>Support allowance</th>
-                    <th>Leader allowance</th>
-                    <th>Meal allowance</th>
-                    <th>Address allowance</th>
-                    <th>Absent salary cut</th>
-                    <th>Late salary cut</th>
-                    <th>Overtime normal</th>
-                    <th>Overtime night</th>
-                    <th>Overtime holiday</th>
-                    <th>Overtime 1</th>
-                    <th>Overtime 2</th>
-                    <th>Overtime 3</th>
-                    <th>Overtime 4</th>
-                    <th>Overtime 5</th>
-                    <th>Basic bonus</th>            
-                    <th>Action</th>
-                </tr>
-            </thead>      
-            <tbody>
-                <?php if (empty($unitPrice)) { ?>
-                    <tr>
-                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
-                    </tr>
-                    <?php
-                } else {
-                    foreach ($unitPrice as $price):
-                        ?>
-                        <tr>                             
-                            <td class="text-center"><?php echo $price['UnitPrice']['employee_id']; ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['revise_date']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['salary_type_cd']); ?></td>                    
-                            <td class="nowrap"><?php echo h($price['UnitPrice']['salary_type']); ?></td>
-                            <td class="nowrap"><?php echo h($price['UnitPrice']['bonus']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['adjust_salary']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['support_allowance']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['leader_allowance']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['meal_allowance']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['address_allowance']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['absent_salary_cut']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['late_salary_cut']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_normal']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_night']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_holiday']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_1']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_2']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_3']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_4']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['overtime_5']); ?></td>
-                            <td class=""><?php echo h($price['UnitPrice']['basic_bonus']); ?></td>                
-                            <td class="center nowrap">
-                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $price['UnitPrice']['id']))); ?>
-                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $price['UnitPrice']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($price['UnitPrice']['employee_id']))); ?>
-                            </td>
-                        </tr>
+<div class="main">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="widget stacked">
+                <div class="widget-content">
+                    <div class="span2">
+                        <?php echo $this->Element("sidemenu");?>
+                    </div>
+                    <div class="span10">
+                        <table class="responsive table table-bordered" cellpadding=5>
+                            <thead>
+                                <tr class="nowrap">
+                                    <th>社員番号</th>
+                                    <th>改定年月日</th>
+                                    <th>給与区分コード</th>
+                                    <th>給与区分</th>   
+                                    <th>報酬額</th>
+                                    <th>調整給</th>
+                                    <th>扶養手当</th>
+                                    <th>リーダー手当て</th>
+                                    <th>食事手当て</th>
+                                    <th>ご近所手当</th>
+                                    <th>欠勤控除減額</th>
+                                    <th>遅早控除減額</th>
+                                    <th>普通残業</th>
+                                    <th>深夜残業</th>
+                                    <th>休出残業</th>
+                                    <th>残業予備１</th>
+                                    <th>残業予備２</th>
+                                    <th>残業予備３</th>
+                                    <th>残業予備４</th>
+                                    <th>残業予備５</th>
+                                    <th>基本賞与</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>      
+                            <tbody>
+                                <?php if (empty($unitPrice)) { ?>
+                                    <tr>
+                                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                                    </tr>
+                                    <?php
+                                } else {
+                                    foreach ($unitPrice as $price):
+                                        ?>
+                                        <tr>                             
+                                            <td class="text-center"><?php echo $price['UnitPrice']['employee_id']; ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['revise_date']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['salary_type_cd']); ?></td>                    
+                                            <td class="nowrap"><?php echo h($price['UnitPrice']['salary_type']); ?></td>
+                                            <td class="nowrap"><?php echo h($price['UnitPrice']['bonus']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['adjust_salary']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['support_allowance']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['leader_allowance']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['meal_allowance']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['address_allowance']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['absent_salary_cut']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['late_salary_cut']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_normal']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_night']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_holiday']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_1']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_2']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_3']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_4']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['overtime_5']); ?></td>
+                                            <td class=""><?php echo h($price['UnitPrice']['basic_bonus']); ?></td>                
+                                            <td class="center nowrap">
+                                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $price['UnitPrice']['id']))); ?>
+                                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $price['UnitPrice']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($price['UnitPrice']['employee_id']))); ?>
+                                            </td>
+                                        </tr>
 
-                        <?php
-                    endforeach;
-                }
-                ?>
-            </tbody>
-        </table>
+                                        <?php
+                                    endforeach;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        <?php if ($this->Paginator->numbers()): ?>
+                            <div class="pagination">
+                                <ul>
+                                    <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                    <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
+                                    <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<?php if ($this->Paginator->numbers()): ?>
-    <div class="pagination">
-        <ul>
-            <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
-            <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-            <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-        </ul>
-    </div>
-<?php endif; ?>
 
 <script type="text/javascript">
     $(function() {
