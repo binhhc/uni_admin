@@ -4,7 +4,7 @@
             <div class="widget stacked">
                 <div class="widget-content">
                     <div class="span2">
-                        <?php echo $this->Element("sidemenu");?>
+                        <?php echo $this->Element("sidemenu", array('controller' => $this->name)); ?>
                     </div>
                     <div class="span10">
                         <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">

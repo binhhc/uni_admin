@@ -5,31 +5,30 @@ function deleteAll(page){
     });
     if (count == 0)
     {
-        alert('Bạn chưa chọn tin để xóa');
+        alert('Please choosen item');
         return;
     }
 
-    var r = confirm(" Bạn có chắc chắn xóa không ? ");
+    var r = confirm("Do you sure delete this?");
     if (r == true)
     {
         $.each($("input[name='cbID']:checked"), function() {
-
             // deletecontact($(this).attr('value'));
             id = $(this).attr('value');
 
             var data = "id=" + id;
+
             $.ajax({
-                type: "News",
                 async: false,
                 data: data, // Form variables
                 dataType: "json", // Expected response type
-                url: "news/delete/" + id, // URL to request
+                url: page +"/delete/" + id, // URL to request
                 success: function(response) {
+                    window.location.reload();
                 },
                 error: function() {
                 }
             });
-        });
-        //window.location ="candidates/index/page:" + page;
+        });        
     }
 }

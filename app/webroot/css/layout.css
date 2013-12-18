@@ -25,19 +25,19 @@ legend {
 }
 
 .alert-success {
-    background: url("../img/success.png") no-repeat scroll 10px 50% transparent;
+    background: #fff url("../img/success.png") 10px 50% no-repeat;
     font-weight: bold;
     text-indent: 25px;
 }
 
 .alert-error {
-    background: url("../img/error.png") no-repeat scroll 10px 50% transparent;
+    background: #fff url("../img/error.png") 10px 50% no-repeat;
     font-weight: bold;
     text-indent: 25px;
 }
 
 .alert-warning {
-    background: url("../img/wraning.ico") no-repeat scroll 5px 9px transparent;
+    background: #fff url("../img/wraning.ico") 5px 9px no-repeat;
     font-weight: bold;
     text-indent: 15px;
 }

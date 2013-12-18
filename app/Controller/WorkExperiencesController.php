@@ -75,20 +75,21 @@ class WorkExperiencesController extends AppController {
     }
 
     public function delete($id = null) {
-        
-        // if ($this->Session->read('flag_link_work') == 0) {
-        //     $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
-        // }
-        // $this->WorkExperience->id = $id;
-        // if (!$this->WorkExperience->exists($id)) {
-        //     return $this->redirect(array('action' => 'index'));
-        // }
-        // if (isset($id)) {
-        //     $this->WorkExperience->deleteAll(array('WorkExperience.id' => $id));
-        //     $this->Session->setFlash(__('Delete successful!'), 'success');
-        //     $this->redirect($this->Session->read('save_latest_link_work'));
-        // }
-        // $this->Session->write('flag_link_work', 1);
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        if ($this->Session->read('flag_link_work') == 0) {
+            $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
+        }
+
+        if (!empty($id)) {
+            if (!$this->WorkExperience->deleteAll(array('WorkExperience.id' => $id))) {
+                $this->Session->setFlash(__('Delete error'), 'error');              
+            } else {
+                $this->Session->setFlash(__('Delete successful'), 'success');                
+                
+            }
+        } 
+        $this->Session->write('flag_link_work', 1);
     }
 
 }

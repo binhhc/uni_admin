@@ -3,6 +3,6 @@
     <li class="nav-header">アクション</li>
     <li class="divider"></li>
     <li><?php echo $this->Html->link('<i class="fa fa-plus-square-o"></i> 追加', array('action' => 'add'), array('escape' => false)) ?></li>
-    <li><?php echo $this->Html->link('<i class="fa fa-minus-square-o"></i> 削除', array('action' => 'delete'), array('escape' => false)) ?></li>
+    <li><?php echo $this->Html->link('<i class="fa fa-minus-square-o"></i> 削除',  '#',array('onclick' => "deleteAll('".Router::url('/'.$controller)."');", 'escape' => false)); ?></li>
 </ul>
 </div>

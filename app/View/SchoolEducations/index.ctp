@@ -4,12 +4,13 @@
             <div class="widget stacked">
                 <div class="widget-content">
                     <div class="span2">
-                        <?php echo $this->Element("sidemenu");?>
+                        <?php echo $this->Element("sidemenu", array('controller' => $this->name)); ?>
                     </div>
                     <div class="span10">
                         <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
                             <thead>
                                 <tr class="nowrap">
+                                    <th><input type='checkbox' id="cb_all"/></th>
                                     <th>社員番号</th>
                                     <th>入卒年月</th>
                                     <th>入卒区分コード</th>
@@ -25,8 +26,7 @@
                                     <th>学校名</th>
                                     <th>学部名</th>
                                     <th>学科名</th>
-                                    <th>専攻名</th>
-                                    <th width="14%">Action</th>
+                                    <th>専攻名</th>                                    
                                 </tr>
                             </thead>      
                             <tbody>
@@ -39,7 +39,8 @@
                                     foreach ($schoolEdu as $school):
                                         ?>
                                         <tr>
-                                            <td><?php echo h($school['SchoolEducation']['employee_id']); ?></td>
+                                            <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $school['SchoolEducation']['id']; ?>' ></td>                    
+                                            <td><?php echo $this->Form->postLink($school['SchoolEducation']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $school['SchoolEducation']['id']))); ?> </td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>
@@ -85,7 +86,7 @@
 
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 1;
+        var pinned_columns = 2;
 
         var updateTables = function() {
             var tables = $("table.responsive");
@@ -100,15 +101,19 @@
 
             var copy = original.clone().appendTo(original.closest(".table-wrapper"));
             copy.removeClass("responsive");
-            copy.wrap("<div class='pinned' />");
 
-            copy.find('form').remove();
+            copy.wrap("<div class='scrollable' />");
+            original.wrap("<div class='pinned' />");
 
-            original.wrap("<div class='scrollable' />");
+            original.find('form').each(function(i,e){
+                var form = $(e);
+                form.data('id', form.attr('name'));
+                form.removeAttr('name');
+            })
 
-            var scrollable = original.closest('.scrollable'),
-                pinned = copy.closest('.pinned'),
-                wrapper = original.closest('.table-wrapper'),
+            var wrapper = original.closest('.table-wrapper'),
+                scrollable = wrapper.find('.scrollable'),
+                pinned = wrapper.find('.pinned'),
                 pinned_width = 0;
 
             copy.find('th:visible:lt(' + pinned_columns + ')').each(function(i, e) {
@@ -137,10 +142,15 @@
         }
 
         function unsplitTable(original) {
-            original.closest(".table-wrapper").find(".pinned").remove();
+            original.closest(".table-wrapper").find(".scrollable").remove();
             original.unwrap();
             original.unwrap();
             original.css('width', null);
+
+            original.find('form').each(function(i,e){
+                var form = $(e);
+                form.attr('name', form.data('id'));
+            })
         }
 
         $(window).load(updateTables);
@@ -148,6 +158,6 @@
             var tables = $("table.responsive");
             unsplitTable(tables);
             splitTable(tables, pinned_columns);
-        });
+        });        
     });
 </script>

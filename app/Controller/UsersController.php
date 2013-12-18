@@ -29,34 +29,42 @@ class UsersController extends AppController {
      * Run batch in layout
      * Author Binh Hoang
      */
-
-    public function runbatch() {		
+    public function runbatch() {        
         if ($this->request->is('post') || $this->request->is('put')) {
-            $path_url = Configure::read('path_csv');
-            if (!empty($path_url)) {				
-                $csv_file = $path_url . DS . '01_USERINFO.csv';
+            $real_path = Configure::read('path_csv');
+            if (!empty($real_path)) {   
+                $csv_file_userinfo = $real_path . DS . '01_USERINFO.csv';
+                $csv_file_qualification = $real_path . DS . '02_QUALIFICATION.csv';
+                $csv_file_unitprice = $real_path . DS . '03_UNIT_PRICE.csv';
+                $csv_file_unique_income = $real_path . DS . '04_ANNUAL_INCOME.csv';
+                $csv_file_school_education = $real_path . DS . '05_SCHOOL_EDUCATION.csv';
+                $csv_file_work_experience = $real_path . DS . '06_WORK_EXPERIENCE.csv';
                 // check csv files exist
-                if($this->is_url_exist($csv_file)){
-
-                    $path = substr(APP, 0, strlen(APP) - 1);
-                    $cake_path = $path . DS . 'Console' . DS . 'cake.php';
-                    $file_shell = 'ImportCSVtoDB';
-                    $command = $path_url;
-                    $shell = "php \"{$cake_path}\" -app {$path} {$file_shell} {$command} &";
-                    if (preg_match('/^win/i', PHP_OS)) {
-                        pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
-                    } else {
-                        $handle = popen($shell, 'r');
-                        while (!feof($handle)) {
-                            $buffer1 = fgets($handle);
-                            if (!empty($buffer1)) {
-                                $buffer = trim(htmlspecialchars($buffer1));
+                if($this->is_url_exist($csv_file_userinfo) && 
+                    $this->is_url_exist($csv_file_qualification) &&
+                    $this->is_url_exist($csv_file_unitprice) &&
+                    $this->is_url_exist($csv_file_unique_income) &&
+                    $this->is_url_exist($csv_file_school_education) &&
+                    $this->is_url_exist($csv_file_work_experience)){
+                        $path = substr(APP, 0, strlen(APP) - 1);
+                        $cake_path = $path . DS . 'Console' . DS . 'cake.php';
+                        $file_shell = 'ImportCSVtoDB';                  
+                        $shell = "php \"{$cake_path}\" -app {$path} {$file_shell} {$real_path} &";
+                        
+                        if (preg_match('/^win/i', PHP_OS)) {
+                            pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
+                        } else {
+                            $handle = popen($shell, 'r');
+                            while (!feof($handle)) {
+                                $buffer1 = fgets($handle);
+                                if (!empty($buffer1)) {
+                                    $buffer = trim(htmlspecialchars($buffer1));
+                                }
                             }
+                            $this->Session->setFlash('Input sucessful', 'success');
                         }
-                        $this->Session->setFlash('Input sucessful', 'success');
-                    }
                 }else{
-                    $this->Session->setFlash('Path have not contain csv files', 'error');
+                    $this->Session->setFlash('Please input path contain csv file', 'error');
                 }
             } else {
                 $this->Session->setFlash('Please input path', 'error');

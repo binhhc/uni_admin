@@ -74,18 +74,19 @@ class SchoolEducationsController extends AppController {
     }
 
     public function delete($id = null) {
+        $this->autoLayout = false;
+        $this->autoRender = false;
         if ($this->Session->read('flag_link_school') == 0) {
             $this->Session->write('save_latest_link_school', $_SERVER['HTTP_REFERER']);
         }
-        $this->SchoolEducation->id = $id;
-        if (!$this->SchoolEducation->exists($id)) {
-            return $this->redirect(array('action' => 'index'));
-        }
-        if (isset($id)) {
-            $this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'),'success');
-            $this->redirect($this->Session->read('save_latest_link_school'));
-        }
+
+        if (!empty($id)) {
+            if (!$this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id))) {
+                $this->Session->setFlash(__('Delete error'), 'error');              
+            } else {
+                $this->Session->setFlash(__('Delete successful'), 'success');                
+            }
+        } 
         $this->Session->write('flag_link_school', 1);
     }
 
