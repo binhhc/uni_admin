@@ -24,6 +24,11 @@ class QuanlificationsController extends AppController {
         }catch(exception $e){
             
         }
+        
+        $this->set(array(
+            'title_for_layout' => '免許資格',
+            'page_title' => '免許資格',
+        ));
     }
 
     public function add() {        

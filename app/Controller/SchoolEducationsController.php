@@ -18,6 +18,10 @@ class SchoolEducationsController extends AppController {
             'order' => array('SchoolEducation.employee_id' => 'ASC')
         );
         $this->set('schoolEdu', $this->paginate('SchoolEducation'));
+        $this->set(array(
+            'title_for_layout' => '教育履歴',
+            'page_title' => '教育履歴',
+        ));
     }
 
     public function add() {

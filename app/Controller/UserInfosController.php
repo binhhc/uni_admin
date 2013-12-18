@@ -18,6 +18,10 @@ class UserInfosController extends AppController {
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
         $this->set('userInfo', $this->paginate('UserInfo'));
+        $this->set(array(
+            'title_for_layout' => '社員情報',
+            'page_title' => '社員情報',
+        ));
     }
 
     public function add() {

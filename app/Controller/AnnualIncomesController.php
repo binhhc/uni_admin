@@ -18,7 +18,10 @@ class AnnualIncomesController extends AppController {
             'order' => array('AnnualIncome.employee_id' => 'ASC')
         );
         $this->set('annualIncome', $this->paginate('AnnualIncome'));
-        $this->set('title_for_layout', 'Annual Income');
+        $this->set(array(
+            'title_for_layout' => '年収計算',
+            'page_title' => '年収計算',
+        ));
     }
 
     public function add() {

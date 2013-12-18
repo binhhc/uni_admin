@@ -18,6 +18,10 @@ class WorkExperiencesController extends AppController {
             'order' => array('WorkExperience.employee_id' => 'ASC')
         );
         $this->set('workExp', $this->paginate('WorkExperience'));
+        $this->set(array(
+            'title_for_layout' => '職種履歴',
+            'page_title' => '職種履歴',
+        ));
     }
 
     public function add() {
