@@ -55,11 +55,7 @@
                                             <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
-                                            <td><?php echo h($school['SchoolEducation']['major']); ?></td> 
-                                            <td class="nowrap">
-                                                <?php echo $this->Form->postLink('Edit', array('action' => 'edit'), array('escape' => false, 'class' => 'btn btn-info', 'data' => array('id' => $school['SchoolEducation']['id']))); ?>
-                                                <?php echo $this->Form->postLink('Delete', array('action' => 'delete', $school['SchoolEducation']['id']), array('escape' => false, 'class' => 'btn btn-danger'), __('%s ' . __('Do you sure delete'), h($school['SchoolEducation']['employee_id']))); ?>
-                                            </td>
+                                            <td><?php echo h($school['SchoolEducation']['major']); ?></td>                             
                                         </tr>
 
                                         <?php

@@ -55,8 +55,7 @@
                                     <th>評価職種コード</th>
                                     <th>評価職種</th>
                                     <th>評価等級コード</th>
-                                    <th>評価等級</th>
-                                    <th>アクション</th>
+                                    <th>評価等級</th>                                    
                                 </tr>
                             </thead>      
                             <tbody>
@@ -141,7 +140,7 @@
 
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 2;
+        var pinned_columns = 3;
 
         var updateTables = function() {
             var tables = $("table.responsive");
