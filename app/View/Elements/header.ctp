@@ -31,8 +31,8 @@
                         <li class="<?php if(strpos($this->request->url, 'UserInfos') !== false){ echo 'active';} ?>">
                             <?php echo $this->Html->link('<i class="fa fa-male"></i> <span>社員情報</span>', array('controller' => 'UserInfos', 'action' => 'index'),array('escape' => false)); ?>
                         </li>
-                        <li class="<?php if(strpos($this->request->url, 'Quanlifications') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-certificate"></i> <span>免許資格</span>', array('controller' => 'Quanlifications', 'action' => 'index'),array('escape' => false)); ?>
+                        <li class="<?php if(strpos($this->request->url, 'Qualifications') !== false){ echo 'active';} ?>">
+                            <?php echo $this->Html->link('<i class="fa fa-certificate"></i> <span>免許資格</span>', array('controller' => 'Qualifications', 'action' => 'index'),array('escape' => false)); ?>
                         </li>
                         <li class="<?php if(strpos($this->request->url, 'UnitPrices') !== false){ echo 'active';} ?>">
                             <?php echo $this->Html->link('<i class="fa fa-jpy"></i> <span>給与精算</span>', array('controller' => 'UnitPrices', 'action' => 'index'), array('escape' => false)); ?>

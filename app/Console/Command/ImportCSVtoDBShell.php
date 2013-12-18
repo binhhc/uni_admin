@@ -2,7 +2,7 @@
 
 class ImportCSVtoDBShell extends AppShell {
 
-    public $uses = array('UserInfo', 'Quanlification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
+    public $uses = array('UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
     var $success = array();
     /**
      * @author  Binh Hoang
@@ -163,22 +163,22 @@ class ImportCSVtoDBShell extends AppShell {
                     $db = explode(',', mb_convert_encoding($line, 'UTF-8', 'SJIS-win'));
                     $db = str_replace('"', '', $db);
                     if ($i > 0) {
-                        $data['Quanlification']['employee_id'] = $db[0];
-                        $data['Quanlification']['license_type_cd'] = $db[1];
-                        $data['Quanlification']['license_type'] = $db[2];
-                        $data['Quanlification']['issuing_organization'] = $db[3];
-                        $data['Quanlification']['license_name'] = $db[4];
-                        $data['Quanlification']['acquire_date'] = $db[5];
-                        $data['Quanlification']['update_date'] = $db[6];
-                        $data['Quanlification']['expire_date'] = $db[7];
-                        $data['Quanlification']['certification_number'] = $db[8];
-                        $data['Quanlification']['attachment'] = $db[9];
-                        $data['Quanlification']['note'] = $db[10];
-                        $data['Quanlification']['allowance'] = $db[11];
-                        $data['Quanlification']['created'] = date('Y-m-d H:i:s');
+                        $data['Qualification']['employee_id'] = $db[0];
+                        $data['Qualification']['license_type_cd'] = $db[1];
+                        $data['Qualification']['license_type'] = $db[2];
+                        $data['Qualification']['issuing_organization'] = $db[3];
+                        $data['Qualification']['license_name'] = $db[4];
+                        $data['Qualification']['acquire_date'] = $db[5];
+                        $data['Qualification']['update_date'] = $db[6];
+                        $data['Qualification']['expire_date'] = $db[7];
+                        $data['Qualification']['certification_number'] = $db[8];
+                        $data['Qualification']['attachment'] = $db[9];
+                        $data['Qualification']['note'] = $db[10];
+                        $data['Qualification']['allowance'] = $db[11];
+                        $data['Qualification']['created'] = date('Y-m-d H:i:s');
 
-                        $this->Quanlification->create();
-                        $this->Quanlification->save($data);
+                        $this->Qualification->create();
+                        $this->Qualification->save($data);
                     }
                 }
             }

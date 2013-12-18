@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UserInfosController extends AppController {
 
-    public $uses = array('UserInfo');
+    public $uses = array('UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -40,6 +40,10 @@ class UserInfosController extends AppController {
             }
         }
         $this->Session->write('flag_link_info', 1);
+        $this->set(array(
+            'title_for_layout' => '社員情報',
+            'page_title' => '社員情報',
+        ));
         $this->render('detail');
     }
 
@@ -69,22 +73,37 @@ class UserInfosController extends AppController {
         }
         $this->Session->write('flag_link_info', 1);
         $this->set('readonly', 'readonly="readonly"');
+        $this->set(array(
+            'title_for_layout' => '社員情報',
+            'page_title' => '社員情報',
+        ));
         $this->render('detail');
     }
 
-    public function delete($id = null) {
+    public function delete($id = null) {  
+        $this->autoLayout = false;
+        $this->autoRender = false;
         if ($this->Session->read('flag_link_info') == 0) {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
-        $this->UserInfo->id = $id;
-        if (!$this->UserInfo->exists($id)) {
-            return $this->redirect(array('action' => 'index'));
-        }
-        if (isset($id)) {
-            $this->UserInfo->deleteAll(array('UserInfo.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'), 'success');
-            $this->redirect($this->Session->read('save_latest_link_info'));
-        }
+        $this->UserInfo->begin();
+
+        if (!empty($id)) {
+            if ($this->UserInfo->deleteAll(array('UserInfo.employee_id' => $id))) {                
+                if($this->AnnualIncome->deleteAll(array('AnnualIncome.employee_id' => $id)) &&
+                    $this->Qualification->deleteAll(array('Qualification.id' => $id)) &&
+                    $this->SchoolEducation->deleteAll(array('SchoolEducation.employee_id' => $id)) &&
+                    $this->UnitPrice->deleteAll(array('UnitPrice.employee_id' => $id)) &&
+                    $this->WorkExperience->deleteAll(array('WorkExperience.employee_id' => $id))
+                ){
+                    $this->UserInfo->commit();
+                    $this->Session->setFlash(__('Delete successful'), 'success');  
+                }                           
+            } else {
+                $this->UserInfo->rollback();
+                $this->Session->setFlash(__('Delete error'), 'error');   
+            }
+        } 
         $this->Session->write('flag_link_info', 1);
     }
 

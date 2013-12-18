@@ -41,6 +41,10 @@ class AnnualIncomesController extends AppController {
         }
         $this->Session->write('flag_link_annual', 1);
         $this->set('user_info', $this->UserInfo->listUser());
+        $this->set(array(
+            'title_for_layout' => '年収計算',
+            'page_title' => '年収計算',
+        ));
         $this->render('detail');
     }
 
@@ -71,6 +75,10 @@ class AnnualIncomesController extends AppController {
         $this->Session->write('flag_link_annual', 1);
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());
+        $this->set(array(
+            'title_for_layout' => '年収計算',
+            'page_title' => '年収計算',
+        ));
         $this->render('detail');
     }
 

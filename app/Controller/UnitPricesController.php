@@ -44,6 +44,10 @@ class UnitPricesController extends AppController {
         }
         $this->Session->write('flag_link_price', 1);
         $this->set('user_info', $this->UserInfo->listUser());
+        $this->set(array(
+            'title_for_layout' => '給与計算',
+            'page_title' => '給与計算',
+        ));
         $this->render('detail');
     }
 
@@ -74,22 +78,28 @@ class UnitPricesController extends AppController {
         $this->Session->write('flag_link_price', 1);
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());
+        $this->set(array(
+            'title_for_layout' => '給与計算',
+            'page_title' => '給与計算',
+        ));
         $this->render('detail');
     }
 
     public function delete($id = null) {
+        $this->autoLayout = false;
+        $this->autoRender = false;
         if ($this->Session->read('flag_link_price') == 0) {
             $this->Session->write('save_latest_link_price', $_SERVER['HTTP_REFERER']);
         }
-        $this->UnitPrice->id = $id;
-        if (!$this->UnitPrice->exists($id)) {
-            return $this->redirect(array('action' => 'index'));
-        }
-        if (isset($id)) {
-            $this->UnitPrice->deleteAll(array('UnitPrice.id' => $id));
-            $this->Session->setFlash(__('Delete successful!'), 'success');
-            $this->redirect($this->Session->read('save_latest_link_price'));
-        }
+
+        if (!empty($id)) {
+            if (!$this->UnitPrice->deleteAll(array('UnitPrice.id' => $id))) {
+                $this->Session->setFlash(__('Delete error'), 'error');              
+            } else {
+                $this->Session->setFlash(__('Delete successful'), 'success');                
+                
+            }
+        } 
         $this->Session->write('flag_link_price', 1);
     }
 
