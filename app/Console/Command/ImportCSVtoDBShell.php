@@ -20,17 +20,25 @@ class ImportCSVtoDBShell extends AppShell {
             mkdir($directory_month, 0777, true);
         }
         if (!empty($path) && file_exists($directory_month)) {
+            $this->logme('Start import');
             $this->importUserInfo($path, $directory_month);
+            sleep(1);
             $this->importQualitification($path, $directory_month);
+            sleep(1);
             $this->importUnitPrice($path, $directory_month);
+            sleep(1);
             $this->importSchoolEducation($path, $directory_month);
+            sleep(1);
             $this->importWorkExperience($path, $directory_month);
+            sleep(1);
             $this->importAnnualIncome($path, $directory_month);
-            
-            $this->out('Import '.  implode($this->success, ',').' sucessfully');
-            
+            sleep(1);
+            $this->out('Import '.  implode($this->success, ',').' successfully');
+            $this->logme('Done');
+            sleep(1);
+            $this->unlinkBatch();
         } else {
-            $this->out('Please input path file csv!');
+            $this->logme('Please input path file csv!');
         }
     }
 
@@ -119,8 +127,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '01_USERINFO.csv';
+            $this->logme('Import 1.UserInfo csv done !!!');
         } else {
-            $this->out('Can not open file 01_USERINFO.csv!');
+            $this->logme('Can not open file 01_USERINFO.csv!');
         }
     }
 
@@ -184,8 +193,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '02_QUALIFICATION.csv';
+            $this->logme('Import 2.Qualification csv done !!!');
         } else {
-            $this->out('Can not open file 02_QUALIFICATION.csv!');
+            $this->logme('Can not open file 02_QUALIFICATION.csv!');
         }
     }
 
@@ -238,8 +248,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '03_UNIT_PRICE.csv';
+            $this->logme('Import 3.UnitPrice csv done !!!');
         } else {
-            $this->out('Can not open file 03_UNIT_PRICE.csv!');
+            $this->logme('Can not open file 03_UNIT_PRICE.csv!');
         }
     }
 
@@ -286,8 +297,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '05_SCHOOL_EDUCATION.csv';
+            $this->logme('Import 5.SchoolEducation csv done !!!');
         } else {
-            $this->out('Can not open file 05_SCHOOL_EDUCATION.csv!');
+            $this->logme('Can not open file 05_SCHOOL_EDUCATION.csv!');
         }
     }
 
@@ -333,8 +345,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '06_WORK_EXPERIENCE.csv';
+            $this->logme('Import 6.WorkExperience csv done !!!');
         } else {
-            $this->out('Can not open file 06_WORK_EXPERIENCE.csv!');
+            $this->logme('Can not open file 06_WORK_EXPERIENCE.csv!');
         }
     }
 
@@ -372,11 +385,16 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '04_ANNUAL_INCOME.csv';
+            $this->logme('Import 4.AnnualIncome csv done !!!');
         } else {
-            $this->out('Can not open file 04_ANNUAL_INCOME.csv!');
+            $this->logme('Can not open file 04_ANNUAL_INCOME.csv!');
         }
     }
 
+    public function unlinkBatch(){
+        unlink(BATCH_LOCK);
+        @unlink(BATCH_ENGINE_ALL);
+    }
 }
 
 ?>

@@ -10,7 +10,7 @@
                         </a>
                         <ul class="dropdown-menu">                           
                             <li>
-                                <?php echo $this->Html->link('<i class="fa fa-code"></i> バッチ実行', array('controller' => 'Users', 'action' => 'runbatch'),array('escape' => false)); ?>
+                                <?php echo $this->Html->link('<i class="fa fa-code"></i> バッチ実行', array('controller' => 'Users', 'action' => 'status'),array('escape' => false)); ?>
                             </li>
                             <li class="divider"></li>
                             <li>

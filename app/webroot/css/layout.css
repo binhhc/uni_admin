@@ -119,7 +119,7 @@ legend {
     }
 
     .table-bordered thead tr th:last-child {
-        border-right: none
+        *border-right: none
     }
 
 .table-bordered tbody tr:first-child td {
@@ -136,7 +136,7 @@ legend {
 }
 
 .table-bordered tbody tr td:last-child {
-    border-right: none
+    *border-right: none
 }
 
 .table-bordered thead tr {
@@ -175,7 +175,7 @@ legend {
 }
 
 .table-bordered thead th:last-child {
-    border-right: none
+    *border-right: none
 }
 
 .table-bordered tbody td {
@@ -188,7 +188,7 @@ legend {
 }
 
 .table-bordered tbody tr td:last-child {
-    border-right: none
+    *border-right: none
 }
 
 .table-highlight.table-bordered thead tr {
@@ -679,4 +679,7 @@ body:not(:-moz-handler-blocked) .dropdown-submenu > a:after {
 
 body {
     background: #e8e8e8;
+}
+textarea {
+    resize: vertical;
 }
