@@ -678,7 +678,7 @@ body:not(:-moz-handler-blocked) .dropdown-submenu > a:after {
 }
 
 body {
-    background: #e8e8e8;
+    background: #222222 url("/img/login/login-background.png");
 }
 textarea {
     resize: vertical;
@@ -686,7 +686,6 @@ textarea {
 
 /*========== Login ==========*/
 body.login {
-    background: #222222 url("/img/login/login-background.png");
     color: white;
     margin-top: 100px;
 }
@@ -699,8 +698,6 @@ input[type=password] {
     -ms-transition: background 0.2s ease-in;
     -o-transition: background 0.2s ease-in;
     transition: background 0.2s ease-in;
-    padding: 8px;
-    width: 280px;
     font-size: 14px;
     border: 1px solid #69a234;
     background: #dcdcdc;
@@ -766,4 +763,38 @@ body.login .btn-large{
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+
+body.login .form-horizontal .control-label {
+    width: 120px;
+}
+
+body.login .form-horizontal .controls {
+    margin-left: 140px;
+}
+
+body.login .input-large {
+    padding:8px;
+    width: auto;
+}
+
+
+body.login .input-block-level {
+    height:38px;
+    display: block;
+    width: 100%;
+}
+
+body.login form{
+    background: rgba(255,255,255,.2);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+body.login form fieldset{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 }

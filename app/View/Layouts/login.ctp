@@ -3,7 +3,7 @@
 
     <head>
         <?php echo $this->Html->charset(); ?>
-        <title>Login - Uni Admin</title>
+        <title><?php echo $title_for_layout ?></title>
 
 
         <?php
