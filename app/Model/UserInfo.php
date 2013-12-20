@@ -13,11 +13,7 @@ class UserInfo extends AppModel {
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
-                ),
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'message' => 'Numbers only'
-                ),
+                ),                
                 'unique' => array(
                     'rule' => array('checkUniqueId'),
                     'message' => 'Unique employeeId',

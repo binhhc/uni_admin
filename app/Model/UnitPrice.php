@@ -13,11 +13,7 @@ class UnitPrice extends AppModel {
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
                     'message' => 'Employee id not empty!'
-                ),
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'message' => 'Numbers only'
-                ),
+                ),                
             ),
             'salary_type_cd' => array(
                 'numeric' => array(
