@@ -19,6 +19,10 @@ class UsersController extends AppController {
             }
         }
         $this->layout = 'login';
+        $this->set(array(
+            'title_for_layout' => 'ログイン',
+            'page_title' => '社員情報',
+        ));
     }
 
     public function logout() {
