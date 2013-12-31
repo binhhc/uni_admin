@@ -19,14 +19,14 @@
             <div class="control-group">
                 <label for="typeahead" class="control-label">Join date</label>
                 <div class="controls">
-                    <?php echo $this->Form->input('join_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text')); ?>
+                    <?php echo $this->Form->input('join_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                 </div>
             </div>
 
             <div class="control-group">
                 <label for="typeahead" class="control-label">Leave date</label>
                 <div class="controls">
-                    <?php echo $this->Form->input('leave_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text')); ?>
+                    <?php echo $this->Form->input('leave_date', array('class' => 'datepicker span4', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                 </div>
             </div>
 
