@@ -46,7 +46,7 @@
                         <div class="control-group">
                             <label class="control-label">Company Join date</label>
                             <div class="controls">
-                                <?php echo $this->Form->input('company_join_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                <?php echo $this->Form->input('company_join_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                             </div>
                         </div>
 
@@ -69,7 +69,7 @@
                         <div class="control-group">
                             <label class="control-label">Birthday</label>
                             <div class="controls">
-                                <?php echo $this->Form->input('birthday', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                <?php echo $this->Form->input('birthday', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                             </div>
                         </div>
 
