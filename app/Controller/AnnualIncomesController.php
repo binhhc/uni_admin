@@ -45,6 +45,7 @@ class AnnualIncomesController extends AppController {
             'title_for_layout' => '年収計算',
             'page_title' => '年収計算',
         ));
+        $this->set('readonly', '');
         $this->render('detail');
     }
 

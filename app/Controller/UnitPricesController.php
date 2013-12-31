@@ -48,6 +48,7 @@ class UnitPricesController extends AppController {
             'title_for_layout' => '給与計算',
             'page_title' => '給与計算',
         ));
+        $this->set('readonly', '');
         $this->render('detail');
     }
 

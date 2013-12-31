@@ -45,6 +45,7 @@ class SchoolEducationsController extends AppController {
             'title_for_layout' => '教育履歴',
             'page_title' => '教育履歴',
         ));
+        $this->set('readonly', '');
         $this->render('detail');
     }
 

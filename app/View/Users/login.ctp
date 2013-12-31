@@ -8,14 +8,14 @@
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">ログインID</label>
                     <div class="controls">
-                      <?php echo $this->Form->input('username', array('class' => 'input-large input-block-level', 'div' => false, 'label' => false, 'required' => 'required', 'placeholder' => 'メールアドレス')); ?>
+                      <?php echo $this->Form->input('username', array('class' => 'input-large input-block-level', 'div' => false, 'label' => false, 'required' => false, 'placeholder' => 'メールアドレス')); ?>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">パスワード</label>
                     <div class="controls">
-                        <?php echo $this->Form->input('password', array('class' => 'input-large input-block-level','div' => false, 'label' => false, 'required' => 'required', 'placeholder' => 'パスワード', 'type' => 'password')); ?>
+                        <?php echo $this->Form->input('password', array('class' => 'input-large input-block-level','div' => false, 'label' => false, 'required' => false, 'placeholder' => 'パスワード', 'type' => 'password')); ?>
                     </div>
                 </div>
                 <div class="control-group">

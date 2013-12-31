@@ -153,6 +153,12 @@ class UserInfo extends AppModel {
         $arr_user = $this->find('list', array(
             'fields' => array('UserInfo.employee_id', 'UserInfo.employee_name'),
         ));
-        return $arr_user;        
+        $result = array();
+        if (!empty($arr_user)) {
+            foreach ($arr_user as $key => $value) {
+                $result[$key] = $key .' | ' . $value;
+            }
+        }        
+        return $result;        
     }
 }

@@ -50,6 +50,7 @@ class QualificationsController extends AppController {
             'title_for_layout' => '免許資格',
             'page_title' => '免許資格',
         ));
+        $this->set('readonly', '');
         $this->render('detail');        
     }
 
@@ -73,9 +74,8 @@ class QualificationsController extends AppController {
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
-        } else {           
-            $this->request->data = $this->Qualification->findById($id);
-        }
+        }         
+        $this->request->data = $this->Qualification->findById($id, null);       
         $this->Session->write('flag_link_quanlity', 1);
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());

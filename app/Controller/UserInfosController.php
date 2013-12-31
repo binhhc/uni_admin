@@ -44,6 +44,7 @@ class UserInfosController extends AppController {
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
         ));
+        $this->set('readonly', '');
         $this->render('detail');
     }
 

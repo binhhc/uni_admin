@@ -2,7 +2,7 @@
     <div class="container">
         <div class="widget stacked">
             <div class="widget-content">
-                <?php echo $this->Form->create('Quanlification', array('class'=>'form-horizontal')) ?>
+                <?php echo $this->Form->create('Qualification', array('class'=>'form-horizontal')) ?>
                     <h3>免許資格</h3>
                     <hr style="margin-top:0"/>
                     <div class="row-fluid">
@@ -11,7 +11,14 @@
                             <div class="control-group">
                                 <label class="control-label">Employee id</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false, @$readonly)); ?>
+                                    <?php
+                                        if(empty($readonly)){
+                                           echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
+                                        }else{
+                                           echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'text', 'required'=>false, $readonly));
+                                        }
+                                        
+                                    ?>
                                 </div>
                             </div>
 

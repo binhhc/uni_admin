@@ -45,6 +45,7 @@ class WorkExperiencesController extends AppController {
             'title_for_layout' => '職種履歴',
             'page_title' => '職種履歴',
         ));
+        $this->set('readonly', '');
         $this->render('detail');
     }
 

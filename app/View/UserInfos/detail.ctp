@@ -11,14 +11,14 @@
                         <div class="control-group">
                             <label class="control-label">Employee id</label>
                             <div class="controls">
-                                <?php echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'text', @$readonly)); ?>
+                                <?php echo $this->Form->input('employee_id', array('required' => false, 'class'=>'input-block-level','label' => false, 'type' => 'text', @$readonly)); ?>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">Employee name</label>
                             <div class="controls">
-                                <?php echo $this->Form->input('employee_name', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                <?php echo $this->Form->input('employee_name', array('required' => false, 'class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                             </div>
                         </div>
 
@@ -56,11 +56,14 @@
                                 <?php echo $this->Form->input('gender_code', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                             </div>
                         </div>
-
+                        <?php 
+                            $sex = array(0 => 'Male', 1 => 'Female');
+                        ?>
                         <div class="control-group">
                             <label class="control-label">Sex</label>
                             <div class="controls">
-                                <?php echo $this->Form->input('sex', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                <input type="radio" name="data[UserInfo][sex]" id="UserInfoSex0" class="radio" value="0" checked="checked">Male
+                                <input type="radio" name="data[UserInfo][sex]" id="UserInfoSex1" class="radio" value="1">Female                            
                             </div>
                         </div>
 

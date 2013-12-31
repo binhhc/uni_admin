@@ -6,7 +6,13 @@
         <div class="control-group">
             <label for="typeahead" class="control-label">Employee id</label>
             <div class="controls">
-                <?php echo $this->Form->input('employee_id', array('class'=>'span4','label' => false, 'type' => 'select', 'options' => $user_info,@$readonly)); ?>
+                <?php
+                    if(empty($readonly)){
+                        echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
+                    }else{
+                        echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'text', 'required'=>false, $readonly));
+                    }                                        
+                ?>
             </div>
         </div>
 
