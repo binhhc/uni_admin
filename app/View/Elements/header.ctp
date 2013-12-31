@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="."><i class="fa fa-th"> 一元管理</i></a>
+            <a class="brand" href="<?php echo Router::url('/', true).'UserInfos'?>"><i class="fa fa-th"> 一元管理</i></a>
             <ul class="pull-right" style="list-style:none">
                     <li class="dropdown">
                         <a class="btn dropdown-toggle" href="#" data-toggle="dropdown">
