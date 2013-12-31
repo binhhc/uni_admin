@@ -12,9 +12,9 @@
                             <div class="controls">
                                 <?php
                                     if(empty($readonly)){
-                                        echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
+                                        echo $this->Form->input('employee_id', array('class'=>'input-block-level span4','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
                                     }else{
-                                        echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'text', 'required'=>false, $readonly));
+                                        echo $this->Form->input('employee_id', array('class'=>'input-block-level span4','label' => false, 'type' => 'text', 'required'=>false, $readonly));
                                     }
                                         
                                 ?>
