@@ -22,6 +22,13 @@ class UnitPrice extends AppModel {
                     'message' => 'Numbers only'
                 ),
             ),
+            'adjust_salary' => array(
+                 'numeric' => array(
+                    'rule' => 'numeric',
+                    'allowEmpty' => true,
+                    'message' => 'Numbers only'
+                ),
+            ),
             'bonus' => array(
                  'numeric' => array(
                     'rule' => 'numeric',

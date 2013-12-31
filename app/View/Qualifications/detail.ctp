@@ -16,8 +16,7 @@
                                            echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
                                         }else{
                                            echo $this->Form->input('employee_id', array('class'=>'input-block-level','label' => false, 'type' => 'text', 'required'=>false, $readonly));
-                                        }
-                                        
+                                        }                                        
                                     ?>
                                 </div>
                             </div>
@@ -60,7 +59,7 @@
                             <div class="control-group">
                                 <label class="control-label">Acquire date</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('acquire_date', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                    <?php echo $this->Form->input('acquire_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                                 </div>
                             </div>
                         </fieldset>
@@ -69,14 +68,14 @@
                             <div class="control-group">
                                 <label class="control-label">Update date</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('update_date', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                    <?php echo $this->Form->input('update_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Expire date</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('expire_date', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                    <?php echo $this->Form->input('expire_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                                 </div>
                             </div>
 
@@ -108,7 +107,7 @@
                             echo $this->Form->submit('登録', array('class'=>'btn btn-primary', 'div'=>false));
                             echo ' ';
                             echo $this->Html->link('キャンセル', $this->Session->read('save_latest_link_quanlity'), array('class'=>'btn margin-left13') );
-                            ?>       
+                        ?>       
                     </div>          
                 <?php echo $this->Form->end(); ?>
             </div>

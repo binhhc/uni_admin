@@ -26,7 +26,7 @@
                             <div class="control-group">
                                 <label class="control-label">Revise date</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('revise_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                    <?php echo $this->Form->input('revise_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                                 </div>
                             </div>
 
@@ -105,14 +105,7 @@
                                 <div class="controls">
                                     <?php echo $this->Form->input('late_salary_cut', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label">Adjust salary</label>
-                                <div class="controls">
-                                    <?php echo $this->Form->input('adjust_salary', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
-                                </div>
-                            </div>
+                            </div>                            
                         </fieldset>
                         
                         <fieldset class="span6">

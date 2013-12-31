@@ -29,7 +29,7 @@ class UserInfosController extends AppController {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            $data = $this->request->data;
+            $data = $this->request->data;            
             $data['UserInfo']['created'] = date('Y-m-d');
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();

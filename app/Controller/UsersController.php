@@ -11,11 +11,15 @@ class UsersController extends AppController {
     }
 
     public function login() {
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Auth->login()) {
-                $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
-            } else {
-                $this->Session->setFlash('Wrong username or password!', 'error');
+        if ($this->request->is('post') || $this->request->is('put')) {            
+            if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
+                if ($this->Auth->login()) {
+                    $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
+                } else {
+                    $this->Session->setFlash('Wrong username or password!', 'error');
+                }
+            }else{
+                $this->Session->setFlash('Please enter username or password!', 'error');
             }
         }
         $this->layout = 'login';

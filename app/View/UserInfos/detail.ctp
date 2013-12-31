@@ -57,13 +57,12 @@
                             </div>
                         </div>
                         <?php 
-                            $sex = array(0 => 'Male', 1 => 'Female');
+                            $arr_sex = array('男性' => '男性', '女性' => '女性');
                         ?>
                         <div class="control-group">
                             <label class="control-label">Sex</label>
                             <div class="controls">
-                                <input type="radio" name="data[UserInfo][sex]" id="UserInfoSex0" class="radio" value="0" checked="checked">Male
-                                <input type="radio" name="data[UserInfo][sex]" id="UserInfoSex1" class="radio" value="1">Female                            
+                                <?php echo $this->Form->radio('sex', $arr_sex, array('legend' => false, 'class' => 'input-block-level', 'label' => false, 'value' => '男性')) ?>
                             </div>
                         </div>
 
