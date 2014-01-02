@@ -717,10 +717,10 @@ body.login .container{
 
 body.login h1{
     background: url("/img/login/anonymous.png") no-repeat center;
-    background-size: 162px 162px;
-    width: 162px;
-    height: 162px;
-    margin: 80px auto 30px;
+    background-size: 120px 120px;
+    width: 120px;
+    height: 120px;
+    margin: 80px auto 0px;
     text-indent: -999em;
 }
 
