@@ -34,7 +34,7 @@ class WorkExperiencesController extends AppController {
             if ($this->WorkExperience->customValidate()) {              
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect(array('action' => 'index'));
                 } 
             }
@@ -65,7 +65,7 @@ class WorkExperiencesController extends AppController {
             $data['WorkExperience']['modified'] = date('Y-m-d');
             if ($this->WorkExperience->customValidate()) {
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_work'));
                 } 
             }
@@ -92,10 +92,9 @@ class WorkExperiencesController extends AppController {
 
         if (!empty($id)) {
             if (!$this->WorkExperience->deleteAll(array('WorkExperience.id' => $id))) {
-                $this->Session->setFlash(__('Delete error'), 'error');              
+                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
             } else {
-                $this->Session->setFlash(__('Delete successful'), 'success');                
-                
+                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
             }
         } 
         $this->Session->write('flag_link_work', 1);

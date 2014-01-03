@@ -37,7 +37,7 @@ class UnitPricesController extends AppController {
             if ($this->UnitPrice->customValidate()) {
                 $this->UnitPrice->create();
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 }
             }
@@ -68,7 +68,7 @@ class UnitPricesController extends AppController {
             $data['UnitPrice']['modified'] = date('Y-m-d');
             if ($this->UnitPrice->customValidate()) {
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 }
             }
@@ -95,9 +95,9 @@ class UnitPricesController extends AppController {
 
         if (!empty($id)) {
             if (!$this->UnitPrice->deleteAll(array('UnitPrice.id' => $id))) {
-                $this->Session->setFlash(__('Delete error'), 'error');              
+                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
             } else {
-                $this->Session->setFlash(__('Delete successful'), 'success');                
+                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
             }
         } 
         $this->Session->write('flag_link_price', 1);

@@ -34,7 +34,7 @@ class AnnualIncomesController extends AppController {
             if ($this->AnnualIncome->customValidate()) {
                 $this->AnnualIncome->create();
                 if ($this->AnnualIncome->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'));
+                    $this->Session->setFlash(__('COMMON_MSG_001'));
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 }
             } 
@@ -65,7 +65,7 @@ class AnnualIncomesController extends AppController {
             $data['AnnualIncome']['modified'] = date('Y-m-d');
             if ($this->AnnualIncome->customValidate()) {
                 if ($this->AnnualIncome->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 }
             } 
@@ -92,9 +92,9 @@ class AnnualIncomesController extends AppController {
 
         if (!empty($id)) {
             if (!$this->AnnualIncome->deleteAll(array('AnnualIncome.id' => $id))) {
-                $this->Session->setFlash(__('Delete error'), 'error');              
+                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
             } else {
-                $this->Session->setFlash(__('Delete successful'), 'success');                
+                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
             }
         } 
         $this->Session->write('flag_link_annual', 1);

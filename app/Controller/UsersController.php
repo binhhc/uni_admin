@@ -16,10 +16,10 @@ class UsersController extends AppController {
                 if ($this->Auth->login()) {
                     $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
                 } else {
-                    $this->Session->setFlash('Wrong username or password!', 'error');
+                    $this->Session->setFlash('COMMON_MSG_004', 'error');
                 }
             }else{
-                $this->Session->setFlash('Please enter username or password!', 'error');
+                $this->Session->setFlash('COMMON_MSG_005', 'error');
             }
         }
         $this->layout = 'login';
@@ -69,14 +69,14 @@ class UsersController extends AppController {
                     else
                         shell_exec($shell . ' > /dev/null 2>/dev/null &');                        
                     
-                    $this->Session->setFlash(__('Batch is executed'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_006'), 'success');
                     sleep(1);
             } else
-                $this->Session->setFlash('Please input path contain csv file', 'error');
+                $this->Session->setFlash('COMMON_MSG_007', 'error');
         } else
-            $this->Session->setFlash('Please input path', 'error');
+            $this->Session->setFlash('COMMON_MSG_008', 'error');
     } else
-        $this->Session->setFlash(__('Batch is running'), 'error');
+        $this->Session->setFlash(__('COMMON_MSG_009'), 'error');
 
     return $this->redirect($this->referer());
     }    
@@ -106,7 +106,7 @@ class UsersController extends AppController {
 
             if(isset($batchStatus['message'])) $batchStatus['message'] = nl2br($batchStatus['message']);
         }else if(isset($this->request->query['done'])){
-            $this->Session->setFlash(__('The batch is now completed.'), 'info');
+            $this->Session->setFlash(__('COMMON_MSG_010'), 'info');
         }
 
         if($this->request->is('ajax')){

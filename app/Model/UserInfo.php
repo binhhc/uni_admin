@@ -12,11 +12,11 @@ class UserInfo extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                
                 'unique' => array(
                     'rule' => array('checkUniqueId'),
-                    'message' => 'Unique employeeId',
+                    'message' => __('COMMON_MSG_013'),
                     'on' => 'create',
                 ),
             ),
@@ -24,112 +24,112 @@ class UserInfo extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee name not empty!'
+                    'message' => __('COMMON_MSG_014')
                 ),
             ),
             'gender_code' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'office_email' => array(
                 'email' => array(
                     'rule' => 'email',
                     'allowEmpty' => true,
-                    'message' => 'Not format email'
+                    'message' => __('COMMON_MSG_015')
                 ),
             ),
             'employment_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'job_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'position_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'work_location_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'problem_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'recruit_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'recruit_place_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'introduction_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'introduction_related_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_holiday' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'face_auth_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'rating_job_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'rating_grade_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

@@ -12,42 +12,42 @@ class AnnualIncome extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                
             ),
             'yearly_amount' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'income_gross' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'income_net' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'total_cut' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'total_tax' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

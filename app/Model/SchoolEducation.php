@@ -12,42 +12,42 @@ class SchoolEducation extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                
             ),
             'graduate_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'edu_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'newest_edu_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'school_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'diploma_type_cd' => array(
                 'numeric' => array(
                     'required' => false,
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

@@ -28,11 +28,11 @@ class ImportCSVtoDBShell extends AppShell {
             sleep(1);
             $this->importUnitPrice($path, $directory_month);
             sleep(1);
+            $this->importAnnualIncome($path, $directory_month);
+            sleep(1);
             $this->importSchoolEducation($path, $directory_month);
             sleep(1);
-            $this->importWorkExperience($path, $directory_month);
-            sleep(1);
-            $this->importAnnualIncome($path, $directory_month);
+            $this->importWorkExperience($path, $directory_month);  
             sleep(1);
             $this->out('Import '.  implode($this->success, ',').' successfully');
             $this->logme('Done');

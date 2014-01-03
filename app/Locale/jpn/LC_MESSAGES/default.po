@@ -1,0 +1,60 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2013-06-06 11:12+0700\n"
+"PO-Revision-Date: 2013-07-18 11:12+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 1.5.7\n"
+
+msgid "COMMON_MSG_001"
+msgstr "Save successful"
+
+msgid "COMMON_MSG_002"
+msgstr "Delete successful"
+
+msgid "COMMON_MSG_003"
+msgstr "Delete error"
+
+msgid "COMMON_MSG_004"
+msgstr "Wrong username or password"
+
+msgid "COMMON_MSG_005"
+msgstr "Please enter username or password"
+
+msgid "COMMON_MSG_006"
+msgstr "Batch is executed"
+
+msgid "COMMON_MSG_007"
+msgstr "Please input path contain csv file"
+
+msgid "COMMON_MSG_008"
+msgstr "Please input path"
+
+msgid "COMMON_MSG_009"
+msgstr "Batch is running"
+
+msgid "COMMON_MSG_010"
+msgstr "The batch is now completed."
+
+msgid "COMMON_MSG_011"
+msgstr "Employee id not empty"
+
+msgid "COMMON_MSG_012"
+msgstr "Numbers only"
+
+msgid "COMMON_MSG_013"
+msgstr "Unique employeeId"
+
+msgid "COMMON_MSG_014"
+msgstr "Employee name not empty!"
+
+msgid "COMMON_MSG_015"
+msgstr "Not format email"

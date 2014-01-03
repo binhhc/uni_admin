@@ -39,7 +39,7 @@ class QualificationsController extends AppController {
             if ($this->Qualification->customValidate()) {
                 $this->Qualification->create();
                 if ($this->Qualification->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
@@ -70,7 +70,7 @@ class QualificationsController extends AppController {
             $data['Qualification']['modified'] = date('Y-m-d');
             if ($this->Qualification->customValidate()) {
                 if ($this->Qualification->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
@@ -95,9 +95,9 @@ class QualificationsController extends AppController {
 
         if (!empty($id)) {
             if (!$this->Qualification->deleteAll(array('Qualification.id' => $id))) {
-                $this->Session->setFlash(__('Delete error'), 'error');              
+                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
             } else {
-                $this->Session->setFlash(__('Delete successful'), 'success');                
+                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
                 
             }
         } 

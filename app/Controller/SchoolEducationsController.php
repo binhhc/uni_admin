@@ -34,7 +34,7 @@ class SchoolEducationsController extends AppController {
             if ($this->SchoolEducation->customValidate()) {
                 $this->SchoolEducation->create();
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
             }
@@ -65,7 +65,7 @@ class SchoolEducationsController extends AppController {
             $data['SchoolEducation']['modified'] = date('Y-m-d');
             if ($this->SchoolEducation->customValidate()) {
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('Save successful!'), 'success');
+                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
             }               
@@ -91,9 +91,9 @@ class SchoolEducationsController extends AppController {
 
         if (!empty($id)) {
             if (!$this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id))) {
-                $this->Session->setFlash(__('Delete error'), 'error');              
+                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
             } else {
-                $this->Session->setFlash(__('Delete successful'), 'success');                
+                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
             }
         } 
         $this->Session->write('flag_link_school', 1);

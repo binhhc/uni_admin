@@ -12,133 +12,133 @@ class UnitPrice extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                
             ),
             'salary_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'adjust_salary' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'bonus' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'support_allowance' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'leader_allowance' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'meal_allowance' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'address_allowance' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'absent_salary_cut' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'late_salary_cut' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_normal' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_night' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_holiday' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_1' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_2' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_3' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_4' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'overtime_5' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'basic_bonus' => array(
                  'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

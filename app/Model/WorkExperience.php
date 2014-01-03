@@ -12,21 +12,21 @@ class WorkExperience extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                
             ),
             'abroad_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
             'retire_reason_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

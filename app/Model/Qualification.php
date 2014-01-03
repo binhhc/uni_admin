@@ -12,14 +12,14 @@ class Qualification extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',  
                     'allowEmpty' => false,                  
-                    'message' => 'Employee id not empty!'
+                    'message' => __('COMMON_MSG_011')
                 ),                             
             ),
             'license_type_cd' => array(
                  'numeric' => array(
                     'allowEmpty' =>true,
                     'rule' => 'numeric',                    
-                    'message' => 'Numbers only'
+                    'message' => __('COMMON_MSG_012')
                 ),
             ),
         );

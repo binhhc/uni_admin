@@ -1,7 +1,7 @@
 <?php
 
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
-App::uses('KousuUtility', 'Utility');
+App::uses('UniAdminUtility', 'Utility');
 
 class LdapAuthenticate extends BaseAuthenticate {
 
@@ -25,8 +25,8 @@ class LdapAuthenticate extends BaseAuthenticate {
         $username = $request['username'];
         $password = $request['password'];
 
-        if (KousuUtility::isEmail($username))
-            $username = KousuUtility::splitArray('@', $username, 0);
+        if (UniAdminUtility::isEmail($username))
+            $username = UniAdminUtility::splitArray('@', $username, 0);
 
         if ($password == "")
             return false;
