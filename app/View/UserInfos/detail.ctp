@@ -106,14 +106,7 @@
                             <div class="controls">
                                 <?php echo $this->Form->input('zip_code', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                             </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Adjust salary</label>
-                            <div class="controls">
-                                <?php echo $this->Form->input('adjust_salary', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
+                        </div>                       
 
                         <div class="control-group">
                             <label class="control-label">Prefecture</label>

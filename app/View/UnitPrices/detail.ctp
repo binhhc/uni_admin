@@ -73,13 +73,6 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Adjust salary</label>
-                                <div class="controls">
-                                    <?php echo $this->Form->input('adjust_salary', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
                                 <label class="control-label">Meal allowance</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('meal_allowance', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
@@ -114,14 +107,7 @@
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_normal', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label">Adjust salary</label>
-                                <div class="controls">
-                                    <?php echo $this->Form->input('adjust_salary', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
-                                </div>
-                            </div>
+                            </div>                            
 
                             <div class="control-group">
                                 <label class="control-label">Overtime night</label>
