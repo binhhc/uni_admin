@@ -259,6 +259,46 @@ class ImportCSVtoDBShell extends AppShell {
      * @author  Binh Hoang
      * @since 11/2013
      */
+    public function importAnnualIncome($path, $directory_month) {
+        $base = $path . DS . '04_ANNUAL_INCOME.csv';
+        $handle = @fopen($base, 'r');
+        if ($handle) {
+            $annualIncome = file($base);
+            $filename = $directory_month . DS . '04_ANNUAL_INCOME_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
+            $outstream = fopen($filename, 'w');
+            $n = count($annualIncome);
+            for ($i = 0; $i < $n; ++$i) {
+                $line = trim($annualIncome[$i]);
+                if (!empty($line)) {
+                    fputcsv($outstream, explode(',', $line));
+                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+                    if ($i > 0) {
+                        $data['AnnualIncome']['employee_id'] = $db[0];
+                        $data['AnnualIncome']['yearly_amount'] = $db[1];
+                        $data['AnnualIncome']['income_gross'] = $db[2];
+                        $data['AnnualIncome']['income_net'] = $db[3];
+                        $data['AnnualIncome']['total_cut'] = $db[4];
+                        $data['AnnualIncome']['total_tax'] = $db[5];
+                        $data['AnnualIncome']['note'] = $db[6];
+                        $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
+
+                        $this->AnnualIncome->create();
+                        $this->AnnualIncome->save($data);
+                    }
+                }
+            }
+            fclose($outstream);
+            $this->success[] = '04_ANNUAL_INCOME.csv';
+            $this->logme('Import 4.AnnualIncome csv done !!!');
+        } else {
+            $this->logme('Can not open file 04_ANNUAL_INCOME.csv!');
+        }
+    }
+
+    /**
+     * @author  Binh Hoang
+     * @since 11/2013
+     */
     public function importSchoolEducation($path, $directory_month) {
         $base = $path . DS . '05_SCHOOL_EDUCATION.csv';
         $handle = @fopen($base, 'r');
@@ -349,46 +389,6 @@ class ImportCSVtoDBShell extends AppShell {
             $this->logme('Import 6.WorkExperience csv done !!!');
         } else {
             $this->logme('Can not open file 06_WORK_EXPERIENCE.csv!');
-        }
-    }
-
-    /**
-     * @author  Binh Hoang
-     * @since 11/2013
-     */
-    public function importAnnualIncome($path, $directory_month) {
-        $base = $path . DS . '04_ANNUAL_INCOME.csv';
-        $handle = @fopen($base, 'r');
-        if ($handle) {
-            $annualIncome = file($base);
-            $filename = $directory_month . DS . '04_ANNUAL_INCOME_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
-            $outstream = fopen($filename, 'w');
-            $n = count($annualIncome);
-            for ($i = 0; $i < $n; ++$i) {
-                $line = trim($annualIncome[$i]);
-                if (!empty($line)) {
-                    fputcsv($outstream, explode(',', $line));
-                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        $data['AnnualIncome']['employee_id'] = $db[0];
-                        $data['AnnualIncome']['yearly_amount'] = $db[1];
-                        $data['AnnualIncome']['income_gross'] = $db[2];
-                        $data['AnnualIncome']['income_net'] = $db[3];
-                        $data['AnnualIncome']['total_cut'] = $db[4];
-                        $data['AnnualIncome']['total_tax'] = $db[5];
-                        $data['AnnualIncome']['note'] = $db[6];
-                        $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
-
-                        $this->AnnualIncome->create();
-                        $this->AnnualIncome->save($data);
-                    }
-                }
-            }
-            fclose($outstream);
-            $this->success[] = '04_ANNUAL_INCOME.csv';
-            $this->logme('Import 4.AnnualIncome csv done !!!');
-        } else {
-            $this->logme('Can not open file 04_ANNUAL_INCOME.csv!');
         }
     }
 
