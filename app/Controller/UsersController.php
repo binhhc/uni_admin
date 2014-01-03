@@ -54,12 +54,12 @@ class UsersController extends AppController {
             $csv_file_school_education = $real_path . DS . '05_SCHOOL_EDUCATION.csv';
             $csv_file_work_experience = $real_path . DS . '06_WORK_EXPERIENCE.csv';
             // check csv files exist
-            if($this->is_url_exist($csv_file_userinfo) && 
-                $this->is_url_exist($csv_file_qualification) &&
-                $this->is_url_exist($csv_file_unitprice) &&
-                $this->is_url_exist($csv_file_unique_income) &&
-                $this->is_url_exist($csv_file_school_education) &&
-                $this->is_url_exist($csv_file_work_experience)){
+            if($this->User->is_url_exist($csv_file_userinfo) && 
+                $this->User->is_url_exist($csv_file_qualification) &&
+                $this->User->is_url_exist($csv_file_unitprice) &&
+                $this->User->is_url_exist($csv_file_unique_income) &&
+                $this->User->is_url_exist($csv_file_school_education) &&
+                $this->User->is_url_exist($csv_file_work_experience)){
                     $path = substr(APP, 0, strlen(APP) - 1);
                     $cake_path = $path . DS . 'Console' . DS . 'cake.php';
                     $file_shell = 'ImportCSVtoDB';
@@ -79,26 +79,7 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('Batch is running'), 'error');
 
     return $this->redirect($this->referer());
-    }
-
-    /*
-     * Check url exist
-     * @author BinhHoang
-     */
-    function is_url_exist($url){
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        if($code == 200){
-            $status = true;
-        }else{
-            $status = false;
-        }
-        curl_close($ch);
-        return $status;
-    }
+    }    
 
      /**
      * Leverages Vietnam Co., Ltd

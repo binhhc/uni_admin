@@ -2,7 +2,7 @@
 
 class ImportCSVtoDBShell extends AppShell {
 
-    public $uses = array('UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
+    public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
     var $success = array();
     /**
      * @author  Binh Hoang
@@ -13,13 +13,14 @@ class ImportCSVtoDBShell extends AppShell {
         $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
         $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 
-        if (!file_exists($directory_year)) {
+        if (!is_dir($directory_year)) {
             mkdir($directory_year, 0777, true);
         }
-        if (!file_exists($directory_month)) {
-            mkdir($directory_month, 0777, true);            
-        }        
-        if (!empty($path) && file_exists($directory_month)) {
+        if (!is_dir($directory_month)) {
+            mkdir($directory_month, 0777, true);
+        }
+
+        if (!empty($path) && is_dir($directory_month)) {
             $this->logme('Start import');
             $this->importUserInfo($path, $directory_month);
             sleep(1);

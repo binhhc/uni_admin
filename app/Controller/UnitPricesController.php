@@ -98,7 +98,6 @@ class UnitPricesController extends AppController {
                 $this->Session->setFlash(__('Delete error'), 'error');              
             } else {
                 $this->Session->setFlash(__('Delete successful'), 'success');                
-                
             }
         } 
         $this->Session->write('flag_link_price', 1);
