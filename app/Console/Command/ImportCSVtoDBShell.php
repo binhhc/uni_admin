@@ -39,7 +39,7 @@ class ImportCSVtoDBShell extends AppShell {
             sleep(1);
             $this->unlinkBatch();
         } else {
-            $this->logme('Please input path file csv!');
+            $this->logme(__('COMMON_MSG_016'));
         }
     }
 
@@ -128,9 +128,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '01_USERINFO.csv';
-            $this->logme('Import 1.UserInfo csv done !!!');
+            $this->logme(__('COMMON_MSG_017'));
         } else {
-            $this->logme('Can not open file 01_USERINFO.csv!');
+            $this->logme(__('COMMON_MSG_018'));
         }
     }
 
@@ -194,9 +194,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '02_QUALIFICATION.csv';
-            $this->logme('Import 2.Qualification csv done !!!');
+            $this->logme(__('COMMON_MSG_019'));
         } else {
-            $this->logme('Can not open file 02_QUALIFICATION.csv!');
+            $this->logme(__('COMMON_MSG_020'));
         }
     }
 
@@ -249,9 +249,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '03_UNIT_PRICE.csv';
-            $this->logme('Import 3.UnitPrice csv done !!!');
+            $this->logme(__('COMMON_MSG_021'));
         } else {
-            $this->logme('Can not open file 03_UNIT_PRICE.csv!');
+            $this->logme(__('COMMON_MSG_022'));
         }
     }
 
@@ -289,9 +289,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '04_ANNUAL_INCOME.csv';
-            $this->logme('Import 4.AnnualIncome csv done !!!');
+            $this->logme(__('COMMON_MSG_023'));
         } else {
-            $this->logme('Can not open file 04_ANNUAL_INCOME.csv!');
+            $this->logme(__('COMMON_MSG_024'));
         }
     }
 
@@ -338,9 +338,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '05_SCHOOL_EDUCATION.csv';
-            $this->logme('Import 5.SchoolEducation csv done !!!');
+            $this->logme(__('COMMON_MSG_025'));
         } else {
-            $this->logme('Can not open file 05_SCHOOL_EDUCATION.csv!');
+            $this->logme(__('COMMON_MSG_026'));
         }
     }
 
@@ -386,9 +386,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '06_WORK_EXPERIENCE.csv';
-            $this->logme('Import 6.WorkExperience csv done !!!');
+            $this->logme(__('COMMON_MSG_027'));
         } else {
-            $this->logme('Can not open file 06_WORK_EXPERIENCE.csv!');
+            $this->logme(__('COMMON_MSG_028'));
         }
     }
 

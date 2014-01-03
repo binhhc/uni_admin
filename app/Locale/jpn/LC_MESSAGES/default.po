@@ -58,3 +58,42 @@ msgstr "Employee name not empty!"
 
 msgid "COMMON_MSG_015"
 msgstr "Not format email"
+
+msgid "COMMON_MSG_016"
+msgstr "Please input path file csv"
+
+msgid "COMMON_MSG_017"
+msgstr "Import 1.UserInfo csv done"
+
+msgid "COMMON_MSG_018"
+msgstr "Can not open file 01_USERINFO.csv!"
+
+msgid "COMMON_MSG_019"
+msgstr "Import 2.Qualification csv done"
+
+msgid "COMMON_MSG_020"
+msgstr "Can not open file 02_QUALIFICATION.csv!"
+
+msgid "COMMON_MSG_021"
+msgstr "Import 3.UnitPrice csv done"
+
+msgid "COMMON_MSG_022"
+msgstr "Can not open file 03_UNIT_PRICE.csv!"
+
+msgid "COMMON_MSG_023"
+msgstr "Import 4.AnnualIncome csv done"
+
+msgid "COMMON_MSG_024"
+msgstr "Can not open file 04_ANNUAL_INCOME.csv!"
+
+msgid "COMMON_MSG_025"
+msgstr "Import 5.SchoolEducation csv done"
+
+msgid "COMMON_MSG_026"
+msgstr "Can not open file 05_SCHOOL_EDUCATION.csv!"
+
+msgid "COMMON_MSG_027"
+msgstr "Import 6.WorkExperience csv done"
+
+msgid "COMMON_MSG_028"
+msgstr "Can not open file 06_WORK_EXPERIENCE.csv!"
