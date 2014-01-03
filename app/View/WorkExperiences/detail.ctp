@@ -93,14 +93,7 @@
                                     <?php echo $this->Form->input('position', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
-
-                            <div class="control-group">
-                                <label for="typeahead" class="control-label">Employment type code</label>
-                                <div class="controls">
-                                    <?php echo $this->Form->input('employment_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
-                                </div>
-                            </div>
-
+                            
                             <div class="control-group">
                                 <label for="typeahead" class="control-label">Retire reason code</label>
                                 <div class="controls">
@@ -118,7 +111,7 @@
                             <div class="control-group">
                                 <label for="typeahead" class="control-label">Retire content</label>
                                 <div class="controls">
-                                    <?php echo $this->Form->input('retire_content', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
+                                    <?php echo $this->Form->input('retire_content', array('class' => 'input-block-level', 'label' => false, 'type' => 'area', 'cols' => 20, 'rows' => 5)); ?>
                                 </div>
                             </div>
 
