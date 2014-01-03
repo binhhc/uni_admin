@@ -798,3 +798,8 @@ body.login form fieldset{
     -o-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+
+input.datepicker {
+    background: url('../img/calendar.png') no-repeat 97% 50% !important;
+    min-width:110px;
+}

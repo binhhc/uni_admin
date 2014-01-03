@@ -17,8 +17,8 @@ class ImportCSVtoDBShell extends AppShell {
             mkdir($directory_year, 0777, true);
         }
         if (!file_exists($directory_month)) {
-            mkdir($directory_month, 0777, true);
-        }
+            mkdir($directory_month, 0777, true);            
+        }        
         if (!empty($path) && file_exists($directory_month)) {
             $this->logme('Start import');
             $this->importUserInfo($path, $directory_month);
