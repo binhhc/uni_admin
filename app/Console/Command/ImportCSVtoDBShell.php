@@ -20,14 +20,20 @@ class ImportCSVtoDBShell extends AppShell {
         if (!empty($path) && is_dir($directory_month)) {
             $this->logme('Start import');
             $this->importUserInfo($path, $directory_month);
+			sleep(1);
             $this->importQualitification($path, $directory_month);
+			sleep(1);
             $this->importUnitPrice($path, $directory_month);
+			sleep(1);
             $this->importAnnualIncome($path, $directory_month);
+			sleep(1);
             $this->importSchoolEducation($path, $directory_month);
+			sleep(1);
             $this->importWorkExperience($path, $directory_month);  
-            $this->out('Import '.  implode($this->success, ',').' successfully');
+			sleep(1);
+            $this->logme('Import '.  implode($this->success, ',').' successfully');
+			sleep(1);
             $this->logme('Done');
-            sleep(5);
             $this->unlinkBatch();
         } else {
             $this->logme(__('COMMON_MSG_016'));
