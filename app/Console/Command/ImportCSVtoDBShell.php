@@ -153,7 +153,7 @@ class ImportCSVtoDBShell extends AppShell {
         }
         return $user['UserInfo']['id'];
     }
-
+    
     /**
      * @author  Binh Hoang
      * @since 11/2013
@@ -173,22 +173,26 @@ class ImportCSVtoDBShell extends AppShell {
                     $db = explode(',', mb_convert_encoding($line, 'UTF-8', 'SJIS-win'));
                     $db = str_replace('"', '', $db);
                     if ($i > 0) {
-                        $data['Qualification']['employee_id'] = $db[0];
-                        $data['Qualification']['license_type_cd'] = $db[1];
-                        $data['Qualification']['license_type'] = $db[2];
-                        $data['Qualification']['issuing_organization'] = $db[3];
-                        $data['Qualification']['license_name'] = $db[4];
-                        $data['Qualification']['acquire_date'] = $db[5];
-                        $data['Qualification']['update_date'] = $db[6];
-                        $data['Qualification']['expire_date'] = $db[7];
-                        $data['Qualification']['certification_number'] = $db[8];
-                        $data['Qualification']['attachment'] = $db[9];
-                        $data['Qualification']['note'] = $db[10];
-                        $data['Qualification']['allowance'] = $db[11];
-                        $data['Qualification']['created'] = date('Y-m-d H:i:s');
+                        if($this->uniqueEmployeeId($db[0])){
+                            $data['Qualification']['employee_id'] = $db[0];
+                            $data['Qualification']['license_type_cd'] = $db[1];
+                            $data['Qualification']['license_type'] = $db[2];
+                            $data['Qualification']['issuing_organization'] = $db[3];
+                            $data['Qualification']['license_name'] = $db[4];
+                            $data['Qualification']['acquire_date'] = $db[5];
+                            $data['Qualification']['update_date'] = $db[6];
+                            $data['Qualification']['expire_date'] = $db[7];
+                            $data['Qualification']['certification_number'] = $db[8];
+                            $data['Qualification']['attachment'] = $db[9];
+                            $data['Qualification']['note'] = $db[10];
+                            $data['Qualification']['allowance'] = $db[11];
+                            $data['Qualification']['created'] = date('Y-m-d H:i:s');
 
-                        $this->Qualification->create();
-                        $this->Qualification->save($data);
+                            $this->Qualification->create();
+                            $this->Qualification->save($data);
+                        }else{
+                            $this->log('Qualification had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                        }
                     }
                 }
             }
@@ -218,32 +222,37 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        $data['UnitPrice']['employee_id'] = $db[0];
-                        $data['UnitPrice']['revise_date'] = $db[1];
-                        $data['UnitPrice']['salary_type_cd'] = $db[2];
-                        $data['UnitPrice']['salary_type'] = $db[3];
-                        $data['UnitPrice']['note'] = $db[4];
-                        $data['UnitPrice']['bonus'] = $db[5];
-                        $data['UnitPrice']['adjust_salary'] = $db[6];
-                        $data['UnitPrice']['support_allowance'] = $db[7];
-                        $data['UnitPrice']['leader_allowance'] = $db[8];
-                        $data['UnitPrice']['meal_allowance'] = $db[9];
-                        $data['UnitPrice']['address_allowance'] = $db[10];
-                        $data['UnitPrice']['absent_salary_cut'] = $db[11];
-                        $data['UnitPrice']['late_salary_cut'] = $db[12];
-                        $data['UnitPrice']['overtime_normal'] = $db[13];
-                        $data['UnitPrice']['overtime_night'] = $db[14];
-                        $data['UnitPrice']['overtime_holiday'] = $db[15];
-                        $data['UnitPrice']['overtime_1'] = $db[16];
-                        $data['UnitPrice']['overtime_2'] = $db[17];
-                        $data['UnitPrice']['overtime_3'] = $db[18];
-                        $data['UnitPrice']['overtime_4'] = $db[19];
-                        $data['UnitPrice']['overtime_5'] = $db[20];
-                        $data['UnitPrice']['basic_bonus'] = $db[21];
-                        $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
+                        if($this->uniqueEmployeeId($db[0])){
+                            $data['UnitPrice']['employee_id'] = $db[0];
+                            $data['UnitPrice']['revise_date'] = $db[1];
+                            $data['UnitPrice']['salary_type_cd'] = $db[2];
+                            $data['UnitPrice']['salary_type'] = $db[3];
+                            $data['UnitPrice']['note'] = $db[4];
+                            $data['UnitPrice']['bonus'] = $db[5];
+                            $data['UnitPrice']['adjust_salary'] = $db[6];
+                            $data['UnitPrice']['support_allowance'] = $db[7];
+                            $data['UnitPrice']['leader_allowance'] = $db[8];
+                            $data['UnitPrice']['meal_allowance'] = $db[9];
+                            $data['UnitPrice']['address_allowance'] = $db[10];
+                            $data['UnitPrice']['absent_salary_cut'] = $db[11];
+                            $data['UnitPrice']['late_salary_cut'] = $db[12];
+                            $data['UnitPrice']['overtime_normal'] = $db[13];
+                            $data['UnitPrice']['overtime_night'] = $db[14];
+                            $data['UnitPrice']['overtime_holiday'] = $db[15];
+                            $data['UnitPrice']['overtime_1'] = $db[16];
+                            $data['UnitPrice']['overtime_2'] = $db[17];
+                            $data['UnitPrice']['overtime_3'] = $db[18];
+                            $data['UnitPrice']['overtime_4'] = $db[19];
+                            $data['UnitPrice']['overtime_5'] = $db[20];
+                            $data['UnitPrice']['basic_bonus'] = $db[21];
+                            $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
 
-                        $this->UnitPrice->create();
-                        $this->UnitPrice->save($data);
+                            $this->UnitPrice->create();
+                            $this->UnitPrice->save($data);
+                        }else{
+                            $this->log('UnitPrice had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                        }
+                        
                     }
                 }
             }
@@ -273,17 +282,21 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        $data['AnnualIncome']['employee_id'] = $db[0];
-                        $data['AnnualIncome']['yearly_amount'] = $db[1];
-                        $data['AnnualIncome']['income_gross'] = $db[2];
-                        $data['AnnualIncome']['income_net'] = $db[3];
-                        $data['AnnualIncome']['total_cut'] = $db[4];
-                        $data['AnnualIncome']['total_tax'] = $db[5];
-                        $data['AnnualIncome']['note'] = $db[6];
-                        $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
+                        if($this->uniqueEmployeeId($db[0])){
+                            $data['AnnualIncome']['employee_id'] = $db[0];
+                            $data['AnnualIncome']['yearly_amount'] = $db[1];
+                            $data['AnnualIncome']['income_gross'] = $db[2];
+                            $data['AnnualIncome']['income_net'] = $db[3];
+                            $data['AnnualIncome']['total_cut'] = $db[4];
+                            $data['AnnualIncome']['total_tax'] = $db[5];
+                            $data['AnnualIncome']['note'] = $db[6];
+                            $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
 
-                        $this->AnnualIncome->create();
-                        $this->AnnualIncome->save($data);
+                            $this->AnnualIncome->create();
+                            $this->AnnualIncome->save($data);
+                        }else{
+                            $this->log('AnnualIncome had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                        }                        
                     }
                 }
             }
@@ -313,26 +326,30 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        $data['SchoolEducation']['employee_id'] = $db[0];
-                        $data['SchoolEducation']['graduate_year'] = $db[1];
-                        $data['SchoolEducation']['graduate_type_cd'] = $db[2];
-                        $data['SchoolEducation']['graduate_type'] = $db[3];
-                        $data['SchoolEducation']['edu_type_cd'] = $db[4];
-                        $data['SchoolEducation']['edu_type'] = $db[5];
-                        $data['SchoolEducation']['newest_edu_cd'] = $db[6];
-                        $data['SchoolEducation']['newest_edu'] = $db[7];
-                        $data['SchoolEducation']['school_type_cd'] = $db[8];
-                        $data['SchoolEducation']['school_type'] = $db[9];
-                        $data['SchoolEducation']['diploma_type_cd'] = $db[10];
-                        $data['SchoolEducation']['diploma_type'] = $db[11];
-                        $data['SchoolEducation']['school'] = $db[12];
-                        $data['SchoolEducation']['faculty'] = $db[13];
-                        $data['SchoolEducation']['subject'] = $db[14];
-                        $data['SchoolEducation']['major'] = $db[15];
-                        $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
+                        if($this->uniqueEmployeeId($db[0])){
+                            $data['SchoolEducation']['employee_id'] = $db[0];
+                            $data['SchoolEducation']['graduate_year'] = $db[1];
+                            $data['SchoolEducation']['graduate_type_cd'] = $db[2];
+                            $data['SchoolEducation']['graduate_type'] = $db[3];
+                            $data['SchoolEducation']['edu_type_cd'] = $db[4];
+                            $data['SchoolEducation']['edu_type'] = $db[5];
+                            $data['SchoolEducation']['newest_edu_cd'] = $db[6];
+                            $data['SchoolEducation']['newest_edu'] = $db[7];
+                            $data['SchoolEducation']['school_type_cd'] = $db[8];
+                            $data['SchoolEducation']['school_type'] = $db[9];
+                            $data['SchoolEducation']['diploma_type_cd'] = $db[10];
+                            $data['SchoolEducation']['diploma_type'] = $db[11];
+                            $data['SchoolEducation']['school'] = $db[12];
+                            $data['SchoolEducation']['faculty'] = $db[13];
+                            $data['SchoolEducation']['subject'] = $db[14];
+                            $data['SchoolEducation']['major'] = $db[15];
+                            $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
 
-                        $this->SchoolEducation->create();
-                        $this->SchoolEducation->save($data);
+                            $this->SchoolEducation->create();
+                            $this->SchoolEducation->save($data);
+                        }else{
+                            $this->log('SchoolEducation had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                        }                        
                     }
                 }
             }
@@ -362,25 +379,29 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        $data['WorkExperience']['employee_id'] = $db[0];
-                        $data['WorkExperience']['join_date'] = $db[1];
-                        $data['WorkExperience']['leave_date'] = $db[2];
-                        $data['WorkExperience']['work_year'] = $db[3];
-                        $data['WorkExperience']['company'] = $db[4];
-                        $data['WorkExperience']['bussiness_type'] = $db[5];
-                        $data['WorkExperience']['company_zip_code'] = $db[6];
-                        $data['WorkExperience']['company_address'] = $db[7];
-                        $data['WorkExperience']['abroad_type_cd'] = $db[8];
-                        $data['WorkExperience']['abroad_type'] = $db[9];
-                        $data['WorkExperience']['position'] = $db[10];
-                        $data['WorkExperience']['retire_reason_cd'] = $db[11];
-                        $data['WorkExperience']['retire_reason'] = $db[12];
-                        $data['WorkExperience']['retire_content'] = $db[13];
-                        $data['WorkExperience']['note'] = $db[14];
-                        $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
+                        if($this->uniqueEmployeeId($db[0])){
+                            $data['WorkExperience']['employee_id'] = $db[0];
+                            $data['WorkExperience']['join_date'] = $db[1];
+                            $data['WorkExperience']['leave_date'] = $db[2];
+                            $data['WorkExperience']['work_year'] = $db[3];
+                            $data['WorkExperience']['company'] = $db[4];
+                            $data['WorkExperience']['bussiness_type'] = $db[5];
+                            $data['WorkExperience']['company_zip_code'] = $db[6];
+                            $data['WorkExperience']['company_address'] = $db[7];
+                            $data['WorkExperience']['abroad_type_cd'] = $db[8];
+                            $data['WorkExperience']['abroad_type'] = $db[9];
+                            $data['WorkExperience']['position'] = $db[10];
+                            $data['WorkExperience']['retire_reason_cd'] = $db[11];
+                            $data['WorkExperience']['retire_reason'] = $db[12];
+                            $data['WorkExperience']['retire_content'] = $db[13];
+                            $data['WorkExperience']['note'] = $db[14];
+                            $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
 
-                        $this->WorkExperience->create();
-                        $this->WorkExperience->save($data);
+                            $this->WorkExperience->create();
+                            $this->WorkExperience->save($data);
+                        }else{
+                            $this->log('WorkExperience had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                        }                        
                     }
                 }
             }
