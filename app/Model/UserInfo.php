@@ -158,7 +158,8 @@ class UserInfo extends AppModel {
             foreach ($arr_user as $key => $value) {
                 $result[$key] = $key .' | ' . $value;
             }
-        }        
+        } 
+		if(empty($result)) $result[''] = ''; 
         return $result;        
     }
 }
