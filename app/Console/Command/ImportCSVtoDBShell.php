@@ -109,20 +109,19 @@ class ImportCSVtoDBShell extends AppShell {
 						$this->UserInfo->set($data);
 						if ($this->UserInfo->customValidate()) {
 
-                        if (in_array($data['UserInfo']['employee_id'], $input_id)) {
-								$this->log('employee_id: ' . $data['UserInfo']['employee_id'] . ' unique!', 'BATCH_UserInfo_validate');
-                        } else {
-                            $input_id[] = $data['UserInfo']['employee_id'];
-                            $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
-                            if ($id) {                                
-                                $this->UserInfo->id = $id;
-                                $this->UserInfo->save($data);
+                            if (in_array($data['UserInfo']['employee_id'], $input_id)) {
+    							$this->log('employee_id: ' . $data['UserInfo']['employee_id'] . ' unique!', 'BATCH_UserInfo_validate');
                             } else {
-
-                                $this->UserInfo->create();
-                                $this->UserInfo->save($data);
-                            }
-							}
+                                $input_id[] = $data['UserInfo']['employee_id'];
+                                $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
+                                if ($id) {                                
+                                    $this->UserInfo->id = $id;
+                                    $this->UserInfo->save($data);
+                                } else {
+                                    $this->UserInfo->create();
+                                    $this->UserInfo->save($data);
+                                }
+    						}
 						}else{
 							//write log user 
 							$this->write_log_validate($data['UserInfo']['employee_id'], 'UserInfo');
@@ -194,12 +193,12 @@ class ImportCSVtoDBShell extends AppShell {
 							//check Qualification validate 
 							$this->Qualification->set($data);
 							if ($this->Qualification->customValidate()) {
-                            $this->Qualification->create();
-                            $this->Qualification->save($data);
-                        }else{
-								//write log Qualification 
-								$this->write_log_validate($data['Qualification']['employee_id'], 'Qualification');
-							}
+                                $this->Qualification->create();
+                                $this->Qualification->save($data);
+                            }else{
+    							//write log Qualification 
+    							$this->write_log_validate($data['Qualification']['employee_id'], 'Qualification');
+    						}
 						}else{
 							$this->log('Qualification: row '. ($i+1) .' employee_id: ' . $db[0] . ' not exist!', 'BATCH_Qualification_validate');
                         }
@@ -260,8 +259,8 @@ class ImportCSVtoDBShell extends AppShell {
 							//check UnitPrice validate
 							$this->UnitPrice->set($data);
 							if ($this->UnitPrice->customValidate()) {
-                            $this->UnitPrice->create();
-                            $this->UnitPrice->save($data);
+                                $this->UnitPrice->create();
+                                $this->UnitPrice->save($data);
 							}else{
 								//write log UnitPrice 
 								$this->write_log_validate($data['UnitPrice']['employee_id'], 'UnitPrice');
@@ -312,8 +311,8 @@ class ImportCSVtoDBShell extends AppShell {
 							//check validate 
 							$this->AnnualIncome->set($data);
 							if ($this->AnnualIncome->customValidate()) {
-                            $this->AnnualIncome->create();
-                            $this->AnnualIncome->save($data);
+                                $this->AnnualIncome->create();
+                                $this->AnnualIncome->save($data);
 							}else{
 								$this->write_log_validate($data['AnnualIncome']['employee_id'], 'AnnualIncome');
 							}
@@ -369,8 +368,8 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
 							$this->SchoolEducation->set($data);
 							if ($this->SchoolEducation->customValidate()) {
-                            $this->SchoolEducation->create();
-                            $this->SchoolEducation->save($data);
+                                $this->SchoolEducation->create();
+                                $this->SchoolEducation->save($data);
 							}else{
 								$this->write_log_validate($data['SchoolEducation']['employee_id'], 'SchoolEducation');
 							}
@@ -426,8 +425,8 @@ class ImportCSVtoDBShell extends AppShell {
 
 							$this->WorkExperience->set($data);
 							if ($this->WorkExperience->customValidate()) {
-                            $this->WorkExperience->create();
-                            $this->WorkExperience->save($data);
+                                $this->WorkExperience->create();
+                                $this->WorkExperience->save($data);
 							}else{
 								$this->write_log_validate($data['WorkExperience']['employee_id'], 'WorkExperience');
 							}
