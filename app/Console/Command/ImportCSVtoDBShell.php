@@ -13,9 +13,6 @@ class ImportCSVtoDBShell extends AppShell {
         $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
         $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 
-        if (!is_dir($directory_year)) {
-            mkdir($directory_year, 0777, true);
-        }
         if (!is_dir($directory_month)) {
             mkdir($directory_month, 0777, true);
         }
@@ -61,7 +58,7 @@ class ImportCSVtoDBShell extends AppShell {
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
+                    if ($i > 0) {                      
                         $data['UserInfo']['employee_id'] = $db[0];
                         $data['UserInfo']['employee_name'] = $db[1];
                         $data['UserInfo']['employee_name_furigana'] = $db[2];
@@ -191,7 +188,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $this->Qualification->create();
                             $this->Qualification->save($data);
                         }else{
-                            $this->log('Qualification had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                            $this->log('Qualification: row '. ($i+1) .' employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
                         }
                     }
                 }
@@ -250,7 +247,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $this->UnitPrice->create();
                             $this->UnitPrice->save($data);
                         }else{
-                            $this->log('UnitPrice had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                            $this->log('UnitPrice: row '.($i+1).' employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
                         }
                         
                     }
@@ -295,7 +292,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $this->AnnualIncome->create();
                             $this->AnnualIncome->save($data);
                         }else{
-                            $this->log('AnnualIncome had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                            $this->log('AnnualIncome: row ' . ($i+1) . ' employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
                         }                        
                     }
                 }
@@ -348,7 +345,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $this->SchoolEducation->create();
                             $this->SchoolEducation->save($data);
                         }else{
-                            $this->log('SchoolEducation had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                            $this->log('SchoolEducation: row ' . ($i+1) . ' employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
                         }                        
                     }
                 }
@@ -400,7 +397,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $this->WorkExperience->create();
                             $this->WorkExperience->save($data);
                         }else{
-                            $this->log('WorkExperience had employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
+                            $this->log('WorkExperience: row ' . ($i+1) . ' employee_id: ' . $db[0] . ' not exist!', 'EmployeeIDNotExist');
                         }                        
                     }
                 }
