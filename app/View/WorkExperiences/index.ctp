@@ -38,7 +38,7 @@
                                         ?>
                                         <tr class="nowrap">
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $work['WorkExperience']['id']; ?>' ></td>                    
-                                            <td><?php echo $this->Form->postLink($work['WorkExperience']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $work['WorkExperience']['id']))); ?> </td>
+                                            <td><?php echo $this->Form->postLink(h($work['WorkExperience']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($work['WorkExperience']['id'])))); ?> </td>
                                             <td><?php echo h($work['WorkExperience']['join_date']); ?></td>
                                             <td><?php echo h($work['WorkExperience']['leave_date']); ?></td>
                                             <td><?php echo h($work['WorkExperience']['work_year']); ?></td>

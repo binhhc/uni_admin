@@ -35,7 +35,7 @@
                                         ?>
                                         <tr class="nowrap">                             
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $quanlitify['Qualification']['id']; ?>' ></td>
-                                            <td><?php echo $this->Form->postLink($quanlitify['Qualification']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $quanlitify['Qualification']['id']))); ?> </td>
+                                            <td><?php echo $this->Form->postLink(h($quanlitify['Qualification']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($quanlitify['Qualification']['id'])))); ?> </td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['license_type_cd']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['license_type']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['issuing_organization']); ?></td>

@@ -40,7 +40,7 @@
                                         ?>
                                         <tr>
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $school['SchoolEducation']['id']; ?>' ></td>                    
-                                            <td><?php echo $this->Form->postLink($school['SchoolEducation']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $school['SchoolEducation']['id']))); ?> </td>
+                                            <td><?php echo $this->Form->postLink(h($school['SchoolEducation']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($school['SchoolEducation']['id'])))); ?> </td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_type_cd']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_type']); ?></td>

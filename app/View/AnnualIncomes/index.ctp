@@ -31,7 +31,7 @@
                                         ?>
                                         <tr>
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $annual['AnnualIncome']['id']; ?>' ></td>
-                                            <td><?php echo $this->Form->postLink($annual['AnnualIncome']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $annual['AnnualIncome']['id']))); ?> </td>                        
+                                            <td><?php echo $this->Form->postLink(h($annual['AnnualIncome']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($annual['AnnualIncome']['id'])))); ?> </td>                        
                                             <td class=""><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
                                             <td class=""><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
                                             <td class=""><?php echo h($annual['AnnualIncome']['income_net']); ?></td>

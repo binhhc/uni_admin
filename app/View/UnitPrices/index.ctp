@@ -45,7 +45,7 @@
                                         ?>
                                         <tr>                             
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $price['UnitPrice']['id']; ?>' ></td>                    
-                                            <td><?php echo $this->Form->postLink($price['UnitPrice']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $price['UnitPrice']['id']))); ?> </td>
+                                            <td><?php echo $this->Form->postLink(h($price['UnitPrice']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($price['UnitPrice']['id'])))); ?> </td>
                                             <td class=""><?php echo h($price['UnitPrice']['revise_date']); ?></td>
                                             <td class=""><?php echo h($price['UnitPrice']['salary_type_cd']); ?></td>                    
                                             <td class="nowrap"><?php echo h($price['UnitPrice']['salary_type']); ?></td>

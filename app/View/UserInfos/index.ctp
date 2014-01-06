@@ -69,7 +69,7 @@
                                         ?>
                                         <tr class="nowrap">
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $info['UserInfo']['employee_id']; ?>' ></td>                    
-                                            <td><?php echo $this->Form->postLink($info['UserInfo']['employee_id'], array('action' => 'edit'), array('escape' => false, 'data' => array('id' => $info['UserInfo']['id']))); ?> </td>
+                                            <td><?php echo $this->Form->postLink(h($info['UserInfo']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($info['UserInfo']['id'])))); ?> </td>
                                             <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
                                             <td class=""><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
                                             <td class=""><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
