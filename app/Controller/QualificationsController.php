@@ -36,6 +36,7 @@ class QualificationsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['Qualification']['created'] = date('Y-m-d');
+			unset($data['Qualification']['employee_id']);
             if ($this->Qualification->customValidate()) {
                 $this->Qualification->create();
                 if ($this->Qualification->save($data)) {

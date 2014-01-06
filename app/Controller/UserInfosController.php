@@ -52,6 +52,7 @@ class UserInfosController extends AppController {
         if ($this->Session->read('flag_link_info') == 0) {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
+
         if (!empty($this->request->data['id'])) {
             $this->Session->write('info_id', $this->request->data['id']);
         }
@@ -62,6 +63,8 @@ class UserInfosController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['UserInfo']['modified'] = date('Y-m-d');
+			unset($data['UserInfo']['employee_id']);
+
             if ($this->UserInfo->customValidate()) {
                 if ($this->UserInfo->save($data)) {
                     $this->Session->setFlash(__('COMMON_MSG_001'), 'success');

@@ -63,6 +63,7 @@ class SchoolEducationsController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['SchoolEducation']['modified'] = date('Y-m-d');
+			unset($data['SchoolEducation']['employee_id']);
             if ($this->SchoolEducation->customValidate()) {
                 if ($this->SchoolEducation->save($data)) {
                     $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
