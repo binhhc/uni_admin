@@ -10,7 +10,7 @@
                             <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
                                     
                             <div class="control-group">
-                                <label class="control-label">Employee id</label>
+                                <label class="control-label">社員番号</label>
                                 <div class="controls">
                                     <?php
                                         if(empty($readonly)){
@@ -24,77 +24,77 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Revise date</label>
+                                <label class="control-label">改定年月日</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('revise_date', array('class' => 'datepicker input-block-level', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Salary type code</label>
+                                <label class="control-label">給与区分コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('salary_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Salary type</label>
+                                <label class="control-label">給与区分</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('salary_type', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Bonus</label>
+                                <label class="control-label">報酬額</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('bonus', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Adjust salary</label>
+                                <label class="control-label">調整給</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('adjust_salary', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Support allowance</label>
+                                <label class="control-label">扶養手当</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('support_allowance', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Leader allowance</label>
+                                <label class="control-label">リーダー手当て</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('leader_allowance', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Meal allowance</label>
+                                <label class="control-label">食事手当て</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('meal_allowance', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Address allowance</label>
+                                <label class="control-label">ご近所手当</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('address_allowance', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Absent salary cut</label>
+                                <label class="control-label">欠勤控除減額</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('absent_salary_cut', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Late salary cut</label>
+                                <label class="control-label">遅早控除減額</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('late_salary_cut', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
@@ -103,70 +103,70 @@
                         
                         <fieldset class="span6">
                             <div class="control-group">
-                                <label class="control-label">Overtime normal</label>
+                                <label class="control-label">普通残業</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_normal', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>                            
 
                             <div class="control-group">
-                                <label class="control-label">Overtime night</label>
+                                <label class="control-label">深夜残業</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_night', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime holiday</label>
+                                <label class="control-label">休出残業</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_holiday', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime 1</label>
+                                <label class="control-label">残業予備1</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_1', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime 2</label>
+                                <label class="control-label">残業予備2</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_2', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime 3</label>
+                                <label class="control-label">残業予備3</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_3', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime 4</label>
+                                <label class="control-label">残業予備4</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_4', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Overtime 5</label>
+                                <label class="control-label">残業予備5</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('overtime_5', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Basic bonus</label>
+                                <label class="control-label">基本賞与</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('basic_bonus', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">Note</label>
+                                <label class="control-label">備考</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('note', array('class' => 'input-block-level', 'label' => false, 'type' => 'area', 'rows'=> 5, 'cols'=>30)); ?>
                                 </div>

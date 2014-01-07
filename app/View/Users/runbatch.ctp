@@ -5,7 +5,7 @@
                 <div class="widget-content">
                     <?php echo $this->Form->create('Batch'); ?>
                     <fieldset>
-                        <?php pr($batchStatus);exit;echo $this->Form->submit('Run Batch', array('class'=>'btn btn-primary' . ($batchStatus['all']['running'] ? ' btn-inverse active' : ''), 'div'=>false, 'style'=>"margin-left: 15px;")); ?>
+                        <?php echo $this->Form->submit('Run Batch', array('class'=>'btn btn-primary' . ($batchStatus['all']['running'] ? ' btn-inverse active' : ''), 'div'=>false, 'style'=>"margin-left: 15px;")); ?>
                     </fieldset>
                     <?php echo $this->Form->end(); ?>
                     <!-------------Testing here---------------------------------------------------------->

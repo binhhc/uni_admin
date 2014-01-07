@@ -3,14 +3,14 @@
         <div class="widget stacked">
             <div class="widget-content">
                 <?php echo $this->Form->create('SchoolEducation', array('class'=>'form-horizontal')) ?>
-                    <h3>School Educations</h3>
+                    <h3>教育経歴</h3>
                     <hr style="margin-top:0"/>
                     <div class="row-fluid">
                         <fieldset class="span6">                        
                             <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
                                     
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Employee id</label>
+                                <label for="typeahead" class="control-label">社員番号</label>
                                 <div class="controls">
                                     <?php
                                         if(empty($readonly)){
@@ -23,49 +23,49 @@
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Graduate year</label>
+                                <label for="typeahead" class="control-label">入卒年月</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('graduate_year', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Graduate type code</label>
+                                <label for="typeahead" class="control-label">入卒区分コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('graduate_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Graduate type</label>
+                                <label for="typeahead" class="control-label">入卒区分</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('graduate_type', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Education type code</label>
+                                <label for="typeahead" class="control-label">学歴区分コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('edu_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Education type</label>
+                                <label for="typeahead" class="control-label">学歴区分</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('edu_type', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Newest Education code</label>
+                                <label for="typeahead" class="control-label">最終学歴コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('newest_edu_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Newest Education</label>
+                                <label for="typeahead" class="control-label">最終学歴</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('newest_edu', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
@@ -74,56 +74,56 @@
 
                         <fieldset class="span6">
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">School type code</label>
+                                <label for="typeahead" class="control-label">公私区分コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('school_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">School type</label>
+                                <label for="typeahead" class="control-label">公私区分</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('school_type', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Diploma type code</label>
+                                <label for="typeahead" class="control-label">文理区分コード</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('diploma_type_cd', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Diploma type</label>
+                                <label for="typeahead" class="control-label">文理区分</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('diploma_type', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">School</label>
+                                <label for="typeahead" class="control-label">学校名</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('school', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Faculty</label>
+                                <label for="typeahead" class="control-label">学部名</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('faculty', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Subject</label>
+                                <label for="typeahead" class="control-label">学科名</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('subject', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label for="typeahead" class="control-label">Major</label>
+                                <label for="typeahead" class="control-label">専攻名</label>
                                 <div class="controls">
                                     <?php echo $this->Form->input('major', array('class' => 'input-block-level', 'label' => false, 'type' => 'text')); ?>
                                 </div>
