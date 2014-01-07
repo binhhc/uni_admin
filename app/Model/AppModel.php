@@ -31,4 +31,44 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	
+	 /**
+     * Check record exists
+     *
+     * @author Nguyen Hoang
+     * @since 2014/01/07
+     */
+	function beforeSave(){
+		$data = $this->data;
+		
+		$conditions = array();
+		foreach($data as $model => $fields){
+			foreach($fields as $field => $value){
+				
+				if($field=='id'){
+					$conditions[$field." <> "] = $value;
+				}else if($field!='modified' and $field!='created'){
+					$conditions[$field] = $value;
+				}
+			}
+		}
+		$data = $this->find('first',array(
+			'conditions' => $conditions,
+			'recursive' => -1,
+			'fields' => array('id')
+		));
+		
+		if(!empty($data)) {
+			$this->log("[$model] record exists ".print_r($fields,true) , 'batch');
+			App::uses('CakeSession','Model/Datasource'); 
+			CakeSession::write('Message', array( 
+					'flash' => array( 
+						'message' => __('Record exists in database'),
+						'element' => 'default'
+					)
+				)
+			);
+			return false;
+		}
+	}
 }

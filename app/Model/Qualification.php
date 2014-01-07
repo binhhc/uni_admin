@@ -14,7 +14,7 @@ class Qualification extends AppModel {
             'fields' => 'employee_name'
         )
     );
-	
+
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

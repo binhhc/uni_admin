@@ -36,7 +36,7 @@ class QualificationsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['Qualification']['created'] = date('Y-m-d');
-            unset($data['Qualification']['employee_id']);
+            
             if ($this->Qualification->customValidate()) {
                 $this->Qualification->create();
                 if ($this->Qualification->save($data)) {
@@ -69,6 +69,7 @@ class QualificationsController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['Qualification']['modified'] = date('Y-m-d');
+			unset($data['Qualification']['employee_id']);
             if ($this->Qualification->customValidate()) {
                 if ($this->Qualification->save($data)) {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
