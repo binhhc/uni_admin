@@ -12,11 +12,11 @@ class UserInfo extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('COMMON_MSG_011')
+                    'message' => __('UAD_ERR_MSG0006')
                 ),                
                 'unique' => array(
                     'rule' => array('checkUniqueId'),
-                    'message' => __('COMMON_MSG_013'),
+                    'message' => __('UAD_ERR_MSG0007'),
                     'on' => 'create',
                 ),
             ),
@@ -24,129 +24,129 @@ class UserInfo extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('COMMON_MSG_014')
+                    'message' => __('UAD_ERR_MSG0009')
                 ),
             ),
             'gender_code' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'office_email' => array(
                 'email' => array(
                     'rule' => 'email',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_015')
+                    'message' => __('UAD_ERR_MSG0010')
                 ),
             ),
             'employment_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'job_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'position_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'work_location_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'problem_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'recruit_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'recruit_place_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'introduction_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'introduction_related_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'overtime_holiday' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'face_auth_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'rating_job_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'rating_grade_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
-			'company_join_date' => array(
-				'date' => array(
-					'rule' => array('date', 'ymd'),
-					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
-					'allowEmpty' => true
-				),
-			),
-			'birthday' => array(
-				'date' => array(
-					'rule' => array('date', 'ymd'),
-					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
-					'allowEmpty' => true
-				),
-			)
-			
+            'company_join_date' => array(
+                'date' => array(
+                    'rule' => array('date', 'ymd'),
+                    'message' => __('UAD_ERR_MSG0018'),
+                    'allowEmpty' => true
+                ),
+            ),
+            'birthday' => array(
+                'date' => array(
+                    'rule' => array('date', 'ymd'),
+                    'message' => __('UAD_ERR_MSG0018'),
+                    'allowEmpty' => true
+                ),
+            )
+            
         );
         $this->validate = $validate;
         return $this->validates();
@@ -174,7 +174,7 @@ class UserInfo extends AppModel {
                 $result[$key] = $key .' | ' . $value;
             }
         } 
-		if(empty($result)) $result[''] = ''; 
+        if(empty($result)) $result[''] = ''; 
         return $result;        
     }
 }

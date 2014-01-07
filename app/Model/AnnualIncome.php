@@ -6,7 +6,7 @@ class AnnualIncome extends AppModel {
 
     public $useTable = 'annual_income';
 
-	public $belongsTo = array(
+    public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
             'foreignKey' => '',
@@ -20,42 +20,42 @@ class AnnualIncome extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('COMMON_MSG_011')
+                    'message' => __('UAD_ERR_MSG0006')
                 ),                
             ),
             'yearly_amount' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'income_gross' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'income_net' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'total_cut' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'total_tax' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
         );

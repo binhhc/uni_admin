@@ -18,7 +18,8 @@ class ImportCSVtoDBShell extends AppShell {
         }
 
         if (!empty($path) && is_dir($directory_month)) {
-            $this->logme('Start import');
+            $this->logme('バッチ実行開始');
+            sleep(1);
             $this->importUserInfo($path, $directory_month);
             sleep(1);
             $this->importQualitification($path, $directory_month);
@@ -31,12 +32,12 @@ class ImportCSVtoDBShell extends AppShell {
             sleep(1);
             $this->importWorkExperience($path, $directory_month);  
             sleep(1);
-            $this->logme('Import '.  implode($this->success, ',').' successfully');
-            sleep(1);
-            $this->logme('Done');
+            $this->logme('バッチ実行完了');
             $this->unlinkBatch();
         } else {
-            $this->logme(__('COMMON_MSG_016'));
+            $this->logme(__('UAD_ERR_MSG0004'));
+            sleep(5);
+            $this->unlinkBatch();
         }
     }
 
@@ -131,9 +132,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '01_USERINFO.csv';
-            $this->logme(__('COMMON_MSG_017'));
+            $this->logme(__('UAD_COMMON_MSG0005'));
         } else {
-            $this->logme(__('COMMON_MSG_018'));
+            $this->logme(__('UAD_ERR_MSG0011'));
         }
     }
 
@@ -207,9 +208,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '02_QUALIFICATION.csv';
-            $this->logme(__('COMMON_MSG_019'));
+            $this->logme(__('UAD_COMMON_MSG0006'));
         } else {
-            $this->logme(__('COMMON_MSG_020'));
+            $this->logme(__('UAD_ERR_MSG0012'));
         }
     }
 
@@ -274,9 +275,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '03_UNIT_PRICE.csv';
-            $this->logme(__('COMMON_MSG_021'));
+            $this->logme(__('UAD_COMMON_MSG0007'));
         } else {
-            $this->logme(__('COMMON_MSG_022'));
+            $this->logme(__('UAD_ERR_MSG0013'));
         }
     }
 
@@ -324,9 +325,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '04_ANNUAL_INCOME.csv';
-            $this->logme(__('COMMON_MSG_023'));
+            $this->logme(__('UAD_COMMON_MSG0008'));
         } else {
-            $this->logme(__('COMMON_MSG_024'));
+            $this->logme(__('UAD_ERR_MSG0014'));
         }
     }
 
@@ -381,9 +382,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '05_SCHOOL_EDUCATION.csv';
-            $this->logme(__('COMMON_MSG_025'));
+            $this->logme(__('UAD_COMMON_MSG0009'));
         } else {
-            $this->logme(__('COMMON_MSG_026'));
+            $this->logme(__('UAD_ERR_MSG0015'));
         }
     }
 
@@ -438,9 +439,9 @@ class ImportCSVtoDBShell extends AppShell {
             }
             fclose($outstream);
             $this->success[] = '06_WORK_EXPERIENCE.csv';
-            $this->logme(__('COMMON_MSG_027'));
+            $this->logme(__('UAD_COMMON_MSG0010'));
         } else {
-            $this->logme(__('COMMON_MSG_028'));
+            $this->logme(__('UAD_ERR_MSG0016'));
         }
     }
 

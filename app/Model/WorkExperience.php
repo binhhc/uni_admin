@@ -5,8 +5,8 @@ App::uses('AppModel', 'Model');
 class WorkExperience extends AppModel {
 
     public $useTable = 'work_experience';
-	
-	public $belongsTo = array(
+    
+    public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
             'foreignKey' => '',
@@ -14,44 +14,44 @@ class WorkExperience extends AppModel {
             'fields' => 'employee_name'
         )
     );
-	
+    
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('COMMON_MSG_011')
+                    'message' => __('UAD_ERR_MSG0006')
                 ),                
             ),
             'abroad_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
             'retire_reason_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,
-                    'message' => __('COMMON_MSG_012')
+                    'message' => __('UAD_ERR_MSG0007')
                 ),
             ),
-			'join_date' => array(
-				'date' => array(
-					'rule' => array('date', 'ymd'),
-					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
-					'allowEmpty' => true
-				),
-			),
-			'leave_date' => array(
-				'date' => array(
-					'rule' => array('date', 'ymd'),
-					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
-					'allowEmpty' => true
-				),
-			)
+            'join_date' => array(
+                'date' => array(
+                    'rule' => array('date', 'ymd'),
+                    'message' => __('UAD_ERR_MSG0018'),
+                    'allowEmpty' => true
+                ),
+            ),
+            'leave_date' => array(
+                'date' => array(
+                    'rule' => array('date', 'ymd'),
+                    'message' => __('UAD_ERR_MSG0018'),
+                    'allowEmpty' => true
+                ),
+            )
         );
         $this->validate = $validate;
         return $this->validate;
