@@ -61,7 +61,7 @@
                             <tbody>
                                 <?php if (empty($userInfo)) { ?>
                                     <tr>
-                                        <th colspan="7"><?php echo __("Empty data!"); ?></th>
+                                        <td colspan="46"><?php echo __("Empty data!"); ?></td>
                                     </tr>
                                     <?php
                                 } else {
@@ -141,7 +141,7 @@
 <script type="text/javascript">
     $(function() {
         var pinned_columns = 3;
-
+		<?php if (empty($userInfo)) echo "pinned_columns = -1;";?>
         var updateTables = function() {
             var tables = $("table.responsive");
             splitTable(tables, pinned_columns);

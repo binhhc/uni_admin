@@ -12,6 +12,7 @@
                                 <tr class="nowrap center">
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <th>社員番号</th>
+                                    <th>氏名</th>
                                     <th>入社年月日</th>
                                     <th>退社年月日</th>
                                     <th>勤続年数</th>
@@ -30,7 +31,7 @@
                             <tbody>
                                 <?php if (empty($workExp)) { ?>
                                     <tr>
-                                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                                        <td colspan="16"><?php echo __("Empty data!"); ?></td>
                                     </tr>
                                     <?php
                                 } else {
@@ -39,6 +40,7 @@
                                         <tr class="nowrap">
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $work['WorkExperience']['id']; ?>' ></td>                    
                                             <td><?php echo $this->Form->postLink(h($work['WorkExperience']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($work['WorkExperience']['id'])))); ?> </td>
+                                            <td><?php echo h($work['UserInfo']['employee_name']); ?></td>
                                             <td><?php echo h($work['WorkExperience']['join_date']); ?></td>
                                             <td><?php echo h($work['WorkExperience']['leave_date']); ?></td>
                                             <td><?php echo h($work['WorkExperience']['work_year']); ?></td>
@@ -78,8 +80,8 @@
 
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 2;
-
+        var pinned_columns = 3;
+		<?php if (empty($workExp)) echo "pinned_columns = -1;";?>
         var updateTables = function() {
             var tables = $("table.responsive");
             splitTable(tables, pinned_columns);

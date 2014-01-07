@@ -6,6 +6,14 @@ class SchoolEducation extends AppModel {
 
     public $useTable = 'school_education';
 
+	public $belongsTo = array(
+        'UserInfo' => array(
+            'className' => 'UserInfo',
+            'foreignKey' => '',
+            'conditions' => 'UserInfo.employee_id = SchoolEducation.employee_id',
+            'fields' => 'employee_name'
+        )
+    );
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

@@ -6,6 +6,14 @@ class WorkExperience extends AppModel {
 
     public $useTable = 'work_experience';
 
+	public $belongsTo = array(
+        'UserInfo' => array(
+            'className' => 'UserInfo',
+            'foreignKey' => '',
+            'conditions' => 'UserInfo.employee_id = WorkExperience.employee_id',
+            'fields' => 'employee_name'
+        )
+    );
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

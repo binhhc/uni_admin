@@ -12,6 +12,7 @@
                                 <tr class="nowrap center">
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <th>社員番号</th>
+                                    <th>氏名</th>
                                     <th>年分</th>
                                     <th>支払金額</th>
                                     <th>給与所得控除後</th>
@@ -22,8 +23,7 @@
                             <tbody>
                                 <?php if (empty($annualIncome)) { ?>
                                     <tr>
-                                        <td></td>
-                                        <td colspan="6"><?php echo __("Empty data!"); ?></td>
+                                        <td colspan="8"><?php echo __("Empty data!"); ?></td>
                                     </tr>
                                     <?php
                                 } else {
@@ -32,6 +32,7 @@
                                         <tr>
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $annual['AnnualIncome']['id']; ?>' ></td>
                                             <td><?php echo $this->Form->postLink(h($annual['AnnualIncome']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($annual['AnnualIncome']['id'])))); ?> </td>                        
+                                            <td class=""><?php echo h($annual['UserInfo']['employee_name']); ?></td>
                                             <td class=""><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
                                             <td class=""><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
                                             <td class=""><?php echo h($annual['AnnualIncome']['income_net']); ?></td>
@@ -63,8 +64,8 @@
 
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 2;
-
+        var pinned_columns = 3;
+		<?php if (empty($annualIncome)) echo "pinned_columns = -1;";?>
         var updateTables = function() {
             var tables = $("table.responsive");
             splitTable(tables, pinned_columns);

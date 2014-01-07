@@ -12,6 +12,7 @@
                                 <tr class="nowrap">
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <th>社員番号</th>
+                                    <th>氏名</th>
                                     <th>改定年月日</th>
                                     <th>給与区分コード</th>
                                     <th>給与区分</th>   
@@ -37,7 +38,7 @@
                             <tbody>
                                 <?php if (empty($unitPrice)) { ?>
                                     <tr>
-                                        <td colspan="7"><?php echo __("Empty data!"); ?></td>
+                                        <td colspan="23"><?php echo __("Empty data!"); ?></td>
                                     </tr>
                                     <?php
                                 } else {
@@ -46,6 +47,7 @@
                                         <tr>                             
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $price['UnitPrice']['id']; ?>' ></td>                    
                                             <td><?php echo $this->Form->postLink(h($price['UnitPrice']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($price['UnitPrice']['id'])))); ?> </td>
+                                            <td class=""><?php echo h($price['UserInfo']['employee_name']); ?></td>
                                             <td class=""><?php echo h($price['UnitPrice']['revise_date']); ?></td>
                                             <td class=""><?php echo h($price['UnitPrice']['salary_type_cd']); ?></td>                    
                                             <td class="nowrap"><?php echo h($price['UnitPrice']['salary_type']); ?></td>
@@ -92,8 +94,8 @@
 
 <script type="text/javascript">
     $(function() {
-        var pinned_columns = 2;
-
+        var pinned_columns = 3;
+		<?php if (empty($unitPrice)) echo "pinned_columns = -1;";?>
         var updateTables = function() {
             var tables = $("table.responsive");
             splitTable(tables, pinned_columns);

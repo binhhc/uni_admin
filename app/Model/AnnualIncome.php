@@ -6,6 +6,14 @@ class AnnualIncome extends AppModel {
 
     public $useTable = 'annual_income';
 
+	public $belongsTo = array(
+        'UserInfo' => array(
+            'className' => 'UserInfo',
+            'foreignKey' => '',
+            'conditions' => 'UserInfo.employee_id = AnnualIncome.employee_id',
+            'fields' => 'employee_name'
+        )
+    );
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

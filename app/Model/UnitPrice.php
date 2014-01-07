@@ -6,6 +6,14 @@ class UnitPrice extends AppModel {
 
     public $useTable = 'unit_price';
 
+	public $belongsTo = array(
+        'UserInfo' => array(
+            'className' => 'UserInfo',
+            'foreignKey' => '',
+            'conditions' => 'UserInfo.employee_id = UnitPrice.employee_id',
+            'fields' => 'employee_name'
+        )
+    );
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

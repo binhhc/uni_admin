@@ -6,6 +6,14 @@ class Qualification extends AppModel {
 
     public $useTable = 'qualification';
 
+	public $belongsTo = array(
+        'UserInfo' => array(
+            'className' => 'UserInfo',
+            'foreignKey' => '',
+            'conditions' => 'UserInfo.employee_id = Qualification.employee_id',
+            'fields' => 'employee_name'
+        )
+    );
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
