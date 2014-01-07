@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 class UnitPrice extends AppModel {
 
     public $useTable = 'unit_price';
-
+	
 	public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
@@ -14,6 +14,7 @@ class UnitPrice extends AppModel {
             'fields' => 'employee_name'
         )
     );
+	
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
@@ -149,6 +150,13 @@ class UnitPrice extends AppModel {
                     'message' => __('COMMON_MSG_012')
                 ),
             ),
+			'revise_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			)
         );
 
         $this->validate = $validate;

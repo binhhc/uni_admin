@@ -47,7 +47,7 @@
                                             <td class=""><?php echo h($quanlitify['Qualification']['expire_date']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['certification_number']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['attachment']); ?></td>                   
-                                            <td class=""><?php echo h($quanlitify['Qualification']['allowance']); ?></td>             
+                                            <td class=""><?php echo h($quanlitify['Qualification']['note']); ?></td>             
                                         </tr>
 
                                         <?php

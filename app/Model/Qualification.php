@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 class Qualification extends AppModel {
 
     public $useTable = 'qualification';
-
+	
 	public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
@@ -14,6 +14,7 @@ class Qualification extends AppModel {
             'fields' => 'employee_name'
         )
     );
+	
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
@@ -30,6 +31,27 @@ class Qualification extends AppModel {
                     'message' => __('COMMON_MSG_012')
                 ),
             ),
+			'acquire_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			),
+			'update_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			),
+			'expire_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			)
         );
         $this->validate = $validate;
         return $this->validates();

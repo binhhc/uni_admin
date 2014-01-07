@@ -132,6 +132,21 @@ class UserInfo extends AppModel {
                     'message' => __('COMMON_MSG_012')
                 ),
             ),
+			'company_join_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			),
+			'birthday' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			)
+			
         );
         $this->validate = $validate;
         return $this->validates();

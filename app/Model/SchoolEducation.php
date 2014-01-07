@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 class SchoolEducation extends AppModel {
 
     public $useTable = 'school_education';
-
+	
 	public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
@@ -14,6 +14,7 @@ class SchoolEducation extends AppModel {
             'fields' => 'employee_name'
         )
     );
+	
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
@@ -53,7 +54,7 @@ class SchoolEducation extends AppModel {
             ),
             'diploma_type_cd' => array(
                 'numeric' => array(
-                    'required' => false,
+                    'rule' => 'numeric',
                     'allowEmpty' => true,
                     'message' => __('COMMON_MSG_012')
                 ),

@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
 class WorkExperience extends AppModel {
 
     public $useTable = 'work_experience';
-
+	
 	public $belongsTo = array(
         'UserInfo' => array(
             'className' => 'UserInfo',
@@ -14,6 +14,7 @@ class WorkExperience extends AppModel {
             'fields' => 'employee_name'
         )
     );
+	
     public function customValidate() {
         $validate = array(
             'employee_id' => array(
@@ -37,6 +38,20 @@ class WorkExperience extends AppModel {
                     'message' => __('COMMON_MSG_012')
                 ),
             ),
+			'join_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			),
+			'leave_date' => array(
+				'date' => array(
+					'rule' => array('date', 'ymd'),
+					'message' => __('You must provide a deadline in YYYY-MM-DD format.'),
+					'allowEmpty' => true
+				),
+			)
         );
         $this->validate = $validate;
         return $this->validate;
