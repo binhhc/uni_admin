@@ -7,7 +7,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('status')) : null;
-        $this->Auth->allow(array('login', 'logout', 'status', 'runbatch'));
+        $this->Auth->allow(array('login', 'logout', 'status', 'runbatch','logbatch'));
     }
 
     public function login() {
@@ -78,9 +78,25 @@ class UsersController extends AppController {
     } else
         $this->Session->setFlash(__('COMMON_MSG_009'), 'error');
 
-    return $this->redirect($this->referer());
+    return $this->redirect('status');
     }    
 
+	/**
+     * Function logbatch
+     * Show log batch monitor of batch
+     *
+     * @author             Nguyen Hoang
+     * @date created       2014/01/07
+     */
+    function logbatch($clear = null){
+		if(!empty($clear)){
+			file_put_contents(TMP.DS.'logs/batch.log','');
+			return $this->redirect('logbatch');
+		}
+		$logs = @file_get_contents(TMP.DS.'logs/batch.log');
+		$this->set('logs',nl2br($logs));
+		$this->render('logbatch');
+	}
      /**
      * Leverages Vietnam Co., Ltd
      * This will show the page to execute and monitor running batch
