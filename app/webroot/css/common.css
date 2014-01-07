@@ -245,3 +245,8 @@ body {
     color: #b94a48;
     font-size: 40px;
 }
+
+/*========== Index Table==========*/
+.data-empty {
+    color:#b94a48;
+}

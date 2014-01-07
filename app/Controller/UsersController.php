@@ -16,10 +16,10 @@ class UsersController extends AppController {
                 if ($this->Auth->login()) {
                     $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
                 } else {
-                    $this->Session->setFlash('COMMON_MSG_004', 'error');
+                    $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
                 }
             }else{
-                $this->Session->setFlash('COMMON_MSG_005', 'error');
+                $this->Session->setFlash(__('UAD_ERR_MSG0003'), 'error');
             }
         }
         $this->layout = 'login';
@@ -69,19 +69,19 @@ class UsersController extends AppController {
                     else
                         shell_exec($shell . ' > /dev/null 2>/dev/null &');                        
                     
-                    $this->Session->setFlash(__('COMMON_MSG_006'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0003'), 'success');
                     sleep(1);
             } else
-                $this->Session->setFlash('COMMON_MSG_007', 'error');
+                $this->Session->setFlash(__('UAD_ERR_MSG0004'), 'error');
         } else
-            $this->Session->setFlash('COMMON_MSG_008', 'error');
+            $this->Session->setFlash(__('UAD_ERR_MSG0004'), 'error');
     } else
-        $this->Session->setFlash(__('COMMON_MSG_009'), 'error');
+        $this->Session->setFlash(__('UAD_ERR_MSG0005'), 'error');
 
     return $this->redirect('status');
     }    
 
-	/**
+    /**
      * Function logbatch
      * Show log batch monitor of batch
      *
@@ -89,14 +89,17 @@ class UsersController extends AppController {
      * @date created       2014/01/07
      */
     function logbatch($clear = null){
-		if(!empty($clear)){
-			file_put_contents(TMP.DS.'logs/batch.log','');
-			return $this->redirect('logbatch');
-		}
-		$logs = @file_get_contents(TMP.DS.'logs/batch.log');
-		$this->set('logs',nl2br($logs));
-		$this->render('logbatch');
-	}
+        if(!empty($clear)){
+            file_put_contents(TMP.DS.'logs/batch.log','');
+            return $this->redirect('logbatch');
+        }
+        $logs = @file_get_contents(TMP.DS.'logs/batch.log');
+        $this->set(array(
+            'logs' => nl2br($logs),
+            'title_for_layout' => 'バッチ実行'
+        ));
+        $this->render('logbatch');
+    }
      /**
      * Leverages Vietnam Co., Ltd
      * This will show the page to execute and monitor running batch
@@ -122,7 +125,7 @@ class UsersController extends AppController {
 
             if(isset($batchStatus['message'])) $batchStatus['message'] = nl2br($batchStatus['message']);
         }else if(isset($this->request->query['done'])){
-            $this->Session->setFlash(__('COMMON_MSG_010'), 'info');
+            $this->Session->setFlash(__('UAD_COMMON_MSG0004'), 'info');
         }
 
         if($this->request->is('ajax')){

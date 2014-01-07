@@ -34,7 +34,7 @@ class WorkExperiencesController extends AppController {
             if ($this->WorkExperience->customValidate()) {              
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect(array('action' => 'index'));
                 } 
             }
@@ -63,11 +63,11 @@ class WorkExperiencesController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['WorkExperience']['modified'] = date('Y-m-d');
-			unset($data['WorkExperience']['employee_id']);
-			
+            unset($data['WorkExperience']['employee_id']);
+            
             if ($this->WorkExperience->customValidate()) {
                 if ($this->WorkExperience->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_work'));
                 } 
             }
@@ -94,13 +94,12 @@ class WorkExperiencesController extends AppController {
 
         if (!empty($id)) {
             if (!$this->WorkExperience->deleteAll(array('WorkExperience.id' => $id))) {
-                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             } else {
-                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
+                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             }
-        } 
+        }
         $this->Session->write('flag_link_work', 1);
     }
 }
-
 ?>

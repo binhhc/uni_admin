@@ -10,7 +10,9 @@
                         <table class="responsive table table-bordered" cellpadding=5>
                             <thead>
                                 <tr class="nowrap">
+                                    <?php if (!empty($unitPrice)) { ?>
                                     <th><input type='checkbox' id="cb_all"/></th>
+                                    <?php } ?>
                                     <th>社員番号</th>
                                     <th>氏名</th>
                                     <th>改定年月日</th>
@@ -38,7 +40,7 @@
                             <tbody>
                                 <?php if (empty($unitPrice)) { ?>
                                     <tr>
-                                        <td colspan="23"><?php echo __("Empty data!"); ?></td>
+                                        <td colspan="22" class="data-empty">給与精算のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
@@ -79,9 +81,9 @@
                         <?php if ($this->Paginator->numbers()): ?>
                             <div class="pagination">
                                 <ul>
-                                    <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                    <?php echo '<li>' . $this->Paginator->prev('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
                                     <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-                                    <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+                                    <?php echo '<li>' . $this->Paginator->next('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
                                 </ul>
                             </div>
                         <?php endif; ?>

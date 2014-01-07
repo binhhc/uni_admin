@@ -20,19 +20,19 @@ class ImportCSVtoDBShell extends AppShell {
         if (!empty($path) && is_dir($directory_month)) {
             $this->logme('Start import');
             $this->importUserInfo($path, $directory_month);
-			sleep(1);
+            sleep(1);
             $this->importQualitification($path, $directory_month);
-			sleep(1);
+            sleep(1);
             $this->importUnitPrice($path, $directory_month);
-			sleep(1);
+            sleep(1);
             $this->importAnnualIncome($path, $directory_month);
-			sleep(1);
+            sleep(1);
             $this->importSchoolEducation($path, $directory_month);
-			sleep(1);
+            sleep(1);
             $this->importWorkExperience($path, $directory_month);  
-			sleep(1);
+            sleep(1);
             $this->logme('Import '.  implode($this->success, ',').' successfully');
-			sleep(1);
+            sleep(1);
             $this->logme('Done');
             $this->unlinkBatch();
         } else {
@@ -105,12 +105,12 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['rating_grade_cd'] = $db[43];
                         $data['UserInfo']['rating_grade'] = $db[44];
                         $data['UserInfo']['created'] = date('Y-m-d H:i:s');
-						//check validate user before insert/update
-						$this->UserInfo->set($data);
-						if ($this->UserInfo->customValidate()) {
+                        //check validate user before insert/update
+                        $this->UserInfo->set($data);
+                        if ($this->UserInfo->customValidate()) {
 
                             if (in_array($data['UserInfo']['employee_id'], $input_id)) {
-								$this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
+                                $this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
                             } else {
                                 $input_id[] = $data['UserInfo']['employee_id'];
                                 $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
@@ -121,10 +121,10 @@ class ImportCSVtoDBShell extends AppShell {
                                     $this->UserInfo->create();
                                     $this->UserInfo->save($data);
                                 }
-    						}
-						}else{
-							//write log user 
-							$this->write_log_validate($i, 'UserInfo');
+                            }
+                        }else{
+                            //write log user 
+                            $this->write_log_validate($i, 'UserInfo');
                         }
                     }
                 }
@@ -190,17 +190,17 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['Qualification']['note'] = $db[10];
                             $data['Qualification']['allowance'] = $db[11];
                             $data['Qualification']['created'] = date('Y-m-d H:i:s');
-							//check Qualification validate 
-							$this->Qualification->set($data);
-							if ($this->Qualification->customValidate()) {
+                            //check Qualification validate 
+                            $this->Qualification->set($data);
+                            if ($this->Qualification->customValidate()) {
                                 $this->Qualification->create();
                                 $this->Qualification->save($data);
                             }else{
-    							//write log Qualification 
-								$this->write_log_validate($i, 'Qualification');
-    						}
-						}else{
-							$this->log('[Qualification] line '. ($i+1) .' employee_id ' . $db[0] . ' not exist!', 'batch');
+                                //write log Qualification 
+                                $this->write_log_validate($i, 'Qualification');
+                            }
+                        }else{
+                            $this->log('[Qualification] line '. ($i+1) .' employee_id ' . $db[0] . ' not exist!', 'batch');
                         }
                     }
                 }
@@ -256,15 +256,15 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['UnitPrice']['basic_bonus'] = $db[21];
                             $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
 
-							//check UnitPrice validate
-							$this->UnitPrice->set($data);
-							if ($this->UnitPrice->customValidate()) {
+                            //check UnitPrice validate
+                            $this->UnitPrice->set($data);
+                            if ($this->UnitPrice->customValidate()) {
                                 $this->UnitPrice->create();
                                 $this->UnitPrice->save($data);
-							}else{
-								//write log UnitPrice 
-								$this->write_log_validate($i, 'UnitPrice');
-							}
+                            }else{
+                                //write log UnitPrice 
+                                $this->write_log_validate($i, 'UnitPrice');
+                            }
                         }else{
                             $this->log('[UnitPrice] line '.($i+1).' employee_id ' . $db[0] . ' not exist!', 'batch');
                         }
@@ -308,14 +308,14 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['AnnualIncome']['note'] = $db[6];
                             $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
 
-							//check validate 
-							$this->AnnualIncome->set($data);
-							if ($this->AnnualIncome->customValidate()) {
+                            //check validate 
+                            $this->AnnualIncome->set($data);
+                            if ($this->AnnualIncome->customValidate()) {
                                 $this->AnnualIncome->create();
                                 $this->AnnualIncome->save($data);
-							}else{
-								$this->write_log_validate($i, 'AnnualIncome');
-							}
+                            }else{
+                                $this->write_log_validate($i, 'AnnualIncome');
+                            }
                         }else{
                             $this->log('[AnnualIncome] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
                         }                        
@@ -366,13 +366,13 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['SchoolEducation']['subject'] = $db[14];
                             $data['SchoolEducation']['major'] = $db[15];
                             $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
-							$this->SchoolEducation->set($data);
-							if ($this->SchoolEducation->customValidate()) {
+                            $this->SchoolEducation->set($data);
+                            if ($this->SchoolEducation->customValidate()) {
                                 $this->SchoolEducation->create();
                                 $this->SchoolEducation->save($data);
-							}else{
-								$this->write_log_validate($i, 'SchoolEducation');
-							}
+                            }else{
+                                $this->write_log_validate($i, 'SchoolEducation');
+                            }
                         }else{
                             $this->log('[SchoolEducation] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
                         }                        
@@ -423,13 +423,13 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['WorkExperience']['note'] = $db[14];
                             $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
 
-							$this->WorkExperience->set($data);
-							if ($this->WorkExperience->customValidate()) {
+                            $this->WorkExperience->set($data);
+                            if ($this->WorkExperience->customValidate()) {
                                 $this->WorkExperience->create();
                                 $this->WorkExperience->save($data);
-							}else{
-								$this->write_log_validate($i, 'WorkExperience');
-							}
+                            }else{
+                                $this->write_log_validate($i, 'WorkExperience');
+                            }
                         }else{
                             $this->log('[WorkExperience] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
                         }                        
@@ -448,20 +448,20 @@ class ImportCSVtoDBShell extends AppShell {
         unlink(BATCH_LOCK);
         @unlink(BATCH_ENGINE_ALL);
     }
-	/**
+    /**
      * @author  Nguyen Hoang
-	 * Write log validate
+     * Write log validate
      * @since 01/2013
      */
-	public function write_log_validate($line, $model){
-		$line +=1;
-		$error_fields = '';
-		$errors = $this->$model->validationErrors;
-		foreach($errors as $error_key => $error_value){
-			$error_fields .= "$error_key : $error_value[0] ; ";
-		}
-		$this->log("[$model] line $line " . " ". $error_fields, "batch");
-	}
+    public function write_log_validate($line, $model){
+        $line +=1;
+        $error_fields = '';
+        $errors = $this->$model->validationErrors;
+        foreach($errors as $error_key => $error_value){
+            $error_fields .= "$error_key : $error_value[0] ; ";
+        }
+        $this->log("[$model] line $line " . " ". $error_fields, "batch");
+    }
 }
 
 ?>

@@ -37,7 +37,7 @@ class UnitPricesController extends AppController {
             if ($this->UnitPrice->customValidate()) {
                 $this->UnitPrice->create();
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 }
             }
@@ -66,10 +66,10 @@ class UnitPricesController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['UnitPrice']['modified'] = date('Y-m-d');
-			unset($data['UnitPrice']['employee_id']);
+            unset($data['UnitPrice']['employee_id']);
             if ($this->UnitPrice->customValidate()) {
                 if ($this->UnitPrice->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_price'));
                 }
             }
@@ -96,14 +96,12 @@ class UnitPricesController extends AppController {
 
         if (!empty($id)) {
             if (!$this->UnitPrice->deleteAll(array('UnitPrice.id' => $id))) {
-                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             } else {
-                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
+                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             }
         } 
         $this->Session->write('flag_link_price', 1);
     }
-
 }
-
 ?>

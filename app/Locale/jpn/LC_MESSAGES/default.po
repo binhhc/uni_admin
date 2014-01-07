@@ -14,35 +14,32 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Poedit 1.5.7\n"
 
-msgid "COMMON_MSG_001"
-msgstr "Save successful"
+msgid "UAD_COMMON_MSG0001"
+msgstr "登録しました。"
 
-msgid "COMMON_MSG_002"
-msgstr "Delete successful"
+msgid "UAD_COMMON_MSG0002"
+msgstr "削除しました。"
 
-msgid "COMMON_MSG_003"
-msgstr "Delete error"
+msgid "UAD_COMMON_MSG0003"
+msgstr "バッチを実行しました"
 
-msgid "COMMON_MSG_004"
-msgstr "Wrong username or password"
+msgid "UAD_COMMON_MSG0004"
+msgstr "バッチ実行が完了しました。"
 
-msgid "COMMON_MSG_005"
-msgstr "Please enter username or password"
+msgid "UAD_ERR_MSG0001"
+msgstr "削除している上、不明な不具合が発生しましたため、再び削除してください。"
 
-msgid "COMMON_MSG_006"
-msgstr "Batch is executed"
+msgid "UAD_ERR_MSG0002"
+msgstr "無効なメールアドレスまたはパスワード"
 
-msgid "COMMON_MSG_007"
-msgstr "Please input path contain csv file"
+msgid "UAD_ERR_MSG0003"
+msgstr "メールアドレスとパスワードを入力してください。"
 
-msgid "COMMON_MSG_008"
-msgstr "Please input path"
+msgid "UAD_ERR_MSG0004"
+msgstr "CSVファイルパスが見つかれませんでした。"
 
-msgid "COMMON_MSG_009"
-msgstr "Batch is running"
-
-msgid "COMMON_MSG_010"
-msgstr "The batch is now completed."
+msgid "UAD_ERR_MSG0005"
+msgstr "バッチが実行されています。"
 
 msgid "COMMON_MSG_011"
 msgstr "Employee id not empty"

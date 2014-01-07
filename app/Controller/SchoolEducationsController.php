@@ -34,7 +34,7 @@ class SchoolEducationsController extends AppController {
             if ($this->SchoolEducation->customValidate()) {
                 $this->SchoolEducation->create();
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
             }
@@ -63,10 +63,10 @@ class SchoolEducationsController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['SchoolEducation']['modified'] = date('Y-m-d');
-			unset($data['SchoolEducation']['employee_id']);
+            unset($data['SchoolEducation']['employee_id']);
             if ($this->SchoolEducation->customValidate()) {
                 if ($this->SchoolEducation->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
             }               
@@ -92,14 +92,12 @@ class SchoolEducationsController extends AppController {
 
         if (!empty($id)) {
             if (!$this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id))) {
-                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             } else {
-                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
+                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             }
         } 
         $this->Session->write('flag_link_school', 1);
     }
-
 }
-
 ?>

@@ -10,7 +10,9 @@
                         <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
                             <thead>
                                 <tr class="nowrap">
+                                    <?php if (!empty($schoolEdu)) { ?>
                                     <th><input type='checkbox' id="cb_all"/></th>
+                                    <?php } ?>
                                     <th>社員番号</th>
                                     <th>氏名</th>
                                     <th>入卒年月</th>
@@ -33,7 +35,7 @@
                             <tbody>
                                 <?php if (empty($schoolEdu)) { ?>
                                     <tr>
-                                        <td colspan="18"><?php echo __("Empty data!"); ?></td>
+                                        <td colspan="17" class="data-empty">教育履歴のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
@@ -69,9 +71,9 @@
                         <?php if ($this->Paginator->numbers()): ?>
                             <div class="pagination">
                                 <ul>
-                                    <?php echo '<li>' . $this->Paginator->prev(__('<<'), array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                    <?php echo '<li>' . $this->Paginator->prev('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
                                     <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-                                    <?php echo '<li>' . $this->Paginator->next(__('>>'), array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+                                    <?php echo '<li>' . $this->Paginator->next('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
                                 </ul>
                             </div>
                         <?php endif; ?>

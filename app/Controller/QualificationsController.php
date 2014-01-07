@@ -36,11 +36,11 @@ class QualificationsController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['Qualification']['created'] = date('Y-m-d');
-			unset($data['Qualification']['employee_id']);
+            unset($data['Qualification']['employee_id']);
             if ($this->Qualification->customValidate()) {
                 $this->Qualification->create();
                 if ($this->Qualification->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
@@ -71,7 +71,7 @@ class QualificationsController extends AppController {
             $data['Qualification']['modified'] = date('Y-m-d');
             if ($this->Qualification->customValidate()) {
                 if ($this->Qualification->save($data)) {
-                    $this->Session->setFlash(__('COMMON_MSG_001'), 'success');
+                    $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
@@ -96,14 +96,12 @@ class QualificationsController extends AppController {
 
         if (!empty($id)) {
             if (!$this->Qualification->deleteAll(array('Qualification.id' => $id))) {
-                $this->Session->setFlash(__('COMMON_MSG_003'), 'error');              
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             } else {
-                $this->Session->setFlash(__('COMMON_MSG_002'), 'success');                
-                
+                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             }
         } 
         $this->Session->write('flag_link_quanlity', 1);
     }
 }
-
 ?>
