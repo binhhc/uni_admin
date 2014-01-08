@@ -26,6 +26,24 @@ msgstr "バッチを実行しました"
 msgid "UAD_COMMON_MSG0004"
 msgstr "バッチ実行が完了しました。"
 
+msgid "UAD_COMMON_MSG0005"
+msgstr "1. 社員番号のCSVインポートが完了しました。"
+
+msgid "UAD_COMMON_MSG0006"
+msgstr "2. 免許資格のCSVインポートが完了しました。"
+
+msgid "UAD_COMMON_MSG0007"
+msgstr "3. 給与精算のCSVインポートが完了しました。"
+
+msgid "UAD_COMMON_MSG0008"
+msgstr "4. 年収精算のCSVインポートが完了しました。"
+
+msgid "UAD_COMMON_MSG0009"
+msgstr "5. 教育履歴のCSVインポートが完了しました。"
+
+msgid "UAD_COMMON_MSG0010"
+msgstr "6. 職種履歴のCSVインポートが完了しました。"
+
 msgid "UAD_ERR_MSG0001"
 msgstr "削除している上、不明な不具合が発生しましたため、再び削除してください。"
 
@@ -41,56 +59,41 @@ msgstr "CSVファイルパスが見つかれませんでした。"
 msgid "UAD_ERR_MSG0005"
 msgstr "バッチが実行されています。"
 
-msgid "COMMON_MSG_011"
-msgstr "Employee id not empty"
+msgid "UAD_ERR_MSG0006"
+msgstr "社員番号を入力してください。"
 
-msgid "COMMON_MSG_012"
-msgstr "Numbers only"
+msgid "UAD_ERR_MSG0007"
+msgstr "数字で入力してください"
 
-msgid "COMMON_MSG_013"
-msgstr "Unique employeeId"
+msgid "UAD_ERR_MSG0008"
+msgstr "この社員番号はすでに登録しました。"
 
-msgid "COMMON_MSG_014"
-msgstr "Employee name not empty!"
+msgid "UAD_ERR_MSG0009"
+msgstr "社員氏名を入力してください。"
 
-msgid "COMMON_MSG_015"
-msgstr "Not format email"
+msgid "UAD_ERR_MSG0010"
+msgstr "メールの形式ではありません。"
 
-msgid "COMMON_MSG_016"
-msgstr "Please input path file csv"
+msgid "UAD_ERR_MSG0011"
+msgstr "01_USERINFO.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_017"
-msgstr "Import 1.UserInfo csv done"
+msgid "UAD_ERR_MSG0012"
+msgstr "02_QUALIFICATION.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_018"
-msgstr "Can not open file 01_USERINFO.csv!"
+msgid "UAD_ERR_MSG0013"
+msgstr "03_UNIT_PRICE.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_019"
-msgstr "Import 2.Qualification csv done"
+msgid "UAD_ERR_MSG0014"
+msgstr "04_ANNUAL_INCOME.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_020"
-msgstr "Can not open file 02_QUALIFICATION.csv!"
+msgid "UAD_ERR_MSG0015"
+msgstr "05_SCHOOL_EDUCATION.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_021"
-msgstr "Import 3.UnitPrice csv done"
+msgid "UAD_ERR_MSG0016"
+msgstr "06_WORK_EXPERIENCE.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_022"
-msgstr "Can not open file 03_UNIT_PRICE.csv!"
+msgid "UAD_ERR_MSG0017"
+msgstr "06_WORK_EXPERIENCE.csvファイルが見つかれません。"
 
-msgid "COMMON_MSG_023"
-msgstr "Import 4.AnnualIncome csv done"
-
-msgid "COMMON_MSG_024"
-msgstr "Can not open file 04_ANNUAL_INCOME.csv!"
-
-msgid "COMMON_MSG_025"
-msgstr "Import 5.SchoolEducation csv done"
-
-msgid "COMMON_MSG_026"
-msgstr "Can not open file 05_SCHOOL_EDUCATION.csv!"
-
-msgid "COMMON_MSG_027"
-msgstr "Import 6.WorkExperience csv done"
-
-msgid "COMMON_MSG_028"
-msgstr "Can not open file 06_WORK_EXPERIENCE.csv!"
+msgid "UAD_ERR_MSG0018"
+msgstr "日付の形式ではありません。"
