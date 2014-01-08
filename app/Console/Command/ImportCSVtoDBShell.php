@@ -62,7 +62,7 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['employee_id'] = $db[0];
                         $data['UserInfo']['employee_name'] = $db[1];
                         $data['UserInfo']['employee_name_furigana'] = $db[2];
-                        $data['UserInfo']['employee_name_allphabet'] = $db[3];
+                        $data['UserInfo']['employee_name_alphabet'] = $db[3];
                         $data['UserInfo']['office_email'] = $db[4];
                         $data['UserInfo']['company_join_date'] = $db[5];
                         $data['UserInfo']['gender_code'] = $db[6];
