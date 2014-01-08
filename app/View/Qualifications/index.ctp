@@ -60,11 +60,21 @@
                         </table>
                         <?php if ($this->Paginator->numbers()): ?>
                         <div class="pagination">
-                                <ul>
-                                    <?php echo '<li>' . $this->Paginator->prev('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
+                                 <ul>
+									<?php
+									if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
+										echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
+									}
+									?>
+                                    <?php echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
                                     <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-                                    <?php echo '<li>' . $this->Paginator->next('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-                                </ul>
+                                    <?php echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
+									<?php
+									if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
+										echo '<li><span class="next disabled">&gt;&gt;</span></li>';
+									}
+									?>
+								</ul>
                         </div>
                         <?php endif; ?>
                     </div>
