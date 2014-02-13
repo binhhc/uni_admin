@@ -45,7 +45,10 @@
                         </li>                
                         <li class="<?php if(strpos($this->request->url, 'WorkExperiences') !== false){ echo 'active';} ?>">
                             <?php echo $this->Html->link('<i class="fa fa-quote-left"></i> <span>職種履歴</span>', array('controller' => 'WorkExperiences', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>           
+                        </li>
+                        <li class="<?php if(strpos($this->request->url, 'SystemAuths') !== false){ echo 'active';} ?>">
+                            <?php echo $this->Html->link('<i class="fa fa-lock"></i> <span>SystemAuths</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false)); ?>
+                        </li>              
                     </ul>
                 </div>
             </div>

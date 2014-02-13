@@ -97,3 +97,6 @@ msgstr "06_WORK_EXPERIENCE.csvファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0018"
 msgstr "日付の形式ではありません。"
+
+msgid "UAD_ERR_MSG0019"
+msgstr "System name is unique!"
