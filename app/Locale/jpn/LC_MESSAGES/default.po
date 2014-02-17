@@ -100,3 +100,6 @@ msgstr "日付の形式ではありません。"
 
 msgid "UAD_ERR_MSG0019"
 msgstr "System name is unique!"
+
+msgid "UAD_ERR_MSG0020"
+msgstr "System name is not empty!"

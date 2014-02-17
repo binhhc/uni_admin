@@ -814,3 +814,14 @@ input.datepicker {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
+
+.center-table{
+  margin: 0 auto !important;
+  float: none !important;
+  text-align: center;
+}
+
+html{
+    overflow: scroll;
+    overflow-x: auto; 
+}

@@ -14,7 +14,7 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th width="85%">System name</th>
-                                    <th class="center">Access type</th>
+                                    <th>Access type</th>
                                 </tr>
                             </thead>      
                             <tbody>
@@ -29,12 +29,12 @@
                                     <tr>
                                         <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $system['SystemAuth']['id']; ?>' ></td>                    
                                         <td><?php echo $this->Form->postLink(h($system['SystemAuth']['system_name']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])))); ?> </td>
-                                        <td>
+                                        <td class="center-table">
                                             <?php 
                                                 if(!empty($system['SystemAuth']['access_type']))
-                                                    echo $this->Form->input('', array('type'=>'checkbox', 'checked'=>true)); 
+                                                    echo $this->Form->input('', array('type'=>'checkbox', 'checked'=>true, 'onclick'=>'return false;')); 
                                                 else
-                                                    echo $this->Form->input('', array('type'=>'checkbox'));                                                
+                                                    echo $this->Form->input('', array('type'=>'checkbox', 'onclick'=>'return false;'));                                                
                                             ?>
                                         </td>
                                     </tr>

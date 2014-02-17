@@ -48,8 +48,7 @@ class AppController extends Controller {
         'Session',
     );
 
-    public function beforeFilter() {
-        //$this->Auth->allow('display');
+    public function beforeFilter() {      
         //Configure AuthComponent
         $this->Auth->loginAction = array('controller' => 'Users', 'action' => 'login');
         $this->Auth->logoutRedirect = array('controller' => 'Users', 'action' => 'login');

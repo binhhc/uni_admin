@@ -12,7 +12,7 @@ class SystemAuth extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('UAD_ERR_MSG0006')
+                    'message' => __('UAD_ERR_MSG0020')
                 ),
                 'unique' => array(
                     'rule' => array('uniqueName'),
@@ -24,7 +24,7 @@ class SystemAuth extends AppModel {
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
-                    'message' => __('UAD_ERR_MSG0006')
+                    'message' => __('UAD_ERR_MSG0021')
                 ),
             ),                    
         );
