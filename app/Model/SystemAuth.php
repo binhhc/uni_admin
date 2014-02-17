@@ -44,4 +44,18 @@ class SystemAuth extends AppModel {
         }
         return true;
     }
+
+    /**
+     * get active of application
+     * @author BinhHoang
+     **/
+    public function getActive($app){
+        $active = $this->find('first', array(
+            'conditions' => array(
+                'SystemAuth.access_type' => 1,
+                'SystemAuth.system_name' => $app
+            )
+        ));
+        return $active;
+    }
 }

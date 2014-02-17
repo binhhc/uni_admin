@@ -103,3 +103,6 @@ msgstr "System name is unique!"
 
 msgid "UAD_ERR_MSG0020"
 msgstr "System name is not empty!"
+
+msgid "UAD_ERR_MSG0021"
+msgstr "Application is locked by uni_admin"

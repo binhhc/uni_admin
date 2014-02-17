@@ -11,16 +11,24 @@ class UsersController extends AppController {
     }
 
     public function login() {
-        if ($this->request->is('post') || $this->request->is('put')) {            
-            if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
-                if ($this->Auth->login()) {
-                    $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
-                } else {
-                    $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
+        if ($this->request->is('post') || $this->request->is('put')) {
+            App::import('Model', 'SystemAuth');
+            $this->SystemAuth = new SystemAuth();
+            //get access permission
+            $access = $this->SystemAuth->getActive(Configure::read('name_application'));
+            if(!empty($access)){
+                if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
+                    if ($this->Auth->login()) {
+                        $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
+                    } else {
+                        $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
+                    }
+                }else{
+                    $this->Session->setFlash(__('UAD_ERR_MSG0003'), 'error');
                 }
             }else{
-                $this->Session->setFlash(__('UAD_ERR_MSG0003'), 'error');
-            }
+                $this->Session->setFlash(__('UAD_ERR_MSG0021'), 'error');
+            }            
         }
         $this->layout = 'login';
         $this->set(array(

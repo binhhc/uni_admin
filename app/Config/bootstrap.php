@@ -198,3 +198,6 @@ Configure::write('path_csv', 'http://192.168.1.224/csv/');
 
 // Config language
 Configure::write('Config.language', 'jpn');
+
+//Name of application 
+Configure::write('name_application', 'uni_admin');
