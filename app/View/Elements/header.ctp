@@ -33,11 +33,9 @@
                     <?php echo $this->Html->link('<i class="fa fa-arrow-right"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>                    
                 </li>
             </ul>
-          </li>
-          
+          </li>          
         </ul>
       </nav>
-
     </div>
 </div>
 <!-- Header starts -->

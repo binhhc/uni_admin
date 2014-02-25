@@ -1931,3 +1931,252 @@ input.datepicker {
 .alert{
 	margin-bottom: 0px !important;
 }
+
+.brand sup {
+    top: -1.1em;
+    font-weight: normal;
+    font-size: 50%;
+}
+
+.close {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.table td[align=center],
+.table th {
+    text-align: center;
+}
+
+.table th a {
+    color: #444;
+}
+
+.table th a.asc {
+    padding-right: 15px;
+    background: url(../img/sort-asc.png) 100% 50% no-repeat;
+}
+
+.table th a.desc {
+    padding-right: 15px;
+    background: url(../img/sort-desc.png) 100% 50% no-repeat;
+}
+
+/*========== Debugger ==========*/
+
+.debug-area {
+    display: block;
+    overflow: auto;
+    min-height: 70px;
+    max-height: 450px;
+    background-color: #222;
+    font-weight: normal;
+}
+
+.debug-area,
+#debugger {
+    overflow: auto;
+    padding: 10px;
+    background: #222;
+    color: #bbb;
+    font-size: 12px;
+    font-family: Consolas, 'Courier';
+}
+
+.debug-area table,
+#debugger table {
+    width: 100%;
+}
+
+.debug-area table caption,
+#debugger table caption {
+    margin-bottom: 10px;
+    color: #f90;
+    text-align: left;
+}
+
+.debug-area table thead,
+#debugger table thead {
+    color: #eee;
+}
+
+.debug-area table th,
+#debugger table th {
+    background: #555;
+}
+
+.debug-area table td,
+.debug-area table th,
+#debugger table td,
+#debugger table th {
+    border: 1px solid #333;
+    border-collapse: collapse;
+}
+
+/*========== Stack trace ==========*/
+
+.error-container h3 {
+    margin-top: 30px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.cake-stack-trace {
+    text-align: left;
+    font: 13px/150% Consolas, "Courier";
+}
+
+/*========== Widget fix ==========*/
+
+.widget .widget-header label {
+    margin: 11px;
+}
+
+/*========== Photos ===========*/
+
+.gallery-container li {
+    -webkit-transition: opacity 800ms;
+    -o-transition: opacity 800ms;
+    transition: opacity 800ms;
+}
+
+.gallery-container li.inactive {
+    opacity: 0.3;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=30);
+    *zoom: 1;
+    -moz-opacity: 0.3;
+    -khtml-opacity: 0.3;
+}
+
+.delete_holder {
+    position: relative;
+    z-index: 100;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 5px 0 0 0;
+    padding: 0 5px;
+    width: 186px;
+    text-align: left;
+    font-size: small;
+}
+
+.delete_chk {
+    margin: 0 5px 0 0!important;
+}
+
+/*========== Uplaod fix ==========*/
+
+.fileupload-new .input-append .btn-file {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.fileupload .uneditable-input {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/*========== Stats / .stats ==========*/
+
+.stats {
+    display: table;
+    margin-top: .5em;
+    margin-bottom: 1.9em;
+    padding: 0 0 0 10px;
+    width: 100%;
+}
+
+.stats .stat {
+    display: table-cell;
+    width: 40%;
+    color: #999;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.stat-value {
+    display: block;
+    margin-bottom: .55em;
+    color: #444;
+    letter-spacing: -2px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.stat-time {
+    padding-top: 1.5em;
+    text-align: center;
+}
+
+/*========== Shortcuts ==========*/
+
+.shortcuts {
+    text-align: center;
+}
+
+.shortcuts .shortcut {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 5px 1em;
+    padding: 12px 0;
+    width: 110px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #F3F3F3;
+    background-color: #f8f8f8;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#eeeeee));
+    background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee);
+    background-image: -o-linear-gradient(top, #ffffff, #eeeeee);
+    background-image: linear-gradient(to bottom, #ffffff, #eeeeee);
+    background-repeat: repeat-x;
+    vertical-align: top;
+    text-decoration: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffeeeeee', GradientType=0);
+}
+
+.shortcuts .shortcut .shortcut-icon {
+    margin-top: .25em;
+    margin-bottom: .35em;
+    width: 100%;
+    color: #555;
+    font-size: 32px;
+}
+
+.shortcuts .shortcut:hover {
+    background: #E8E8E8;
+    background-color: #f0f0f0;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e1e1e1));
+    background-image: -webkit-linear-gradient(top, #fafafa, #e1e1e1);
+    background-image: -o-linear-gradient(top, #fafafa, #e1e1e1);
+    background-image: linear-gradient(to bottom, #fafafa, #e1e1e1);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe1e1e1', GradientType=0);
+}
+
+.shortcuts .shortcut:hover .shortcut-icon {
+    color: #666;
+}
+
+.shortcuts .shortcut-label {
+    display: block;
+    color: #666;
+    font-weight: 400;
+}
+
+.stat-time .stat-value {
+    color: #b94a48;
+    font-size: 40px;
+}
+
+/*========== Index Table==========*/
+.data-empty {
+    color:#b94a48;
+}
