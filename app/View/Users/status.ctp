@@ -6,10 +6,7 @@
                     <div class="row">
                     <div class="col-md-2">
                         <?php echo $this->element('slidemenu'); ?>
-                    </div>
-
-                    <div class="col-md-10">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <?php if($batchStatus['running']){ ?>
                                 <div class="stats">
                                     <div class="stat">
@@ -20,8 +17,11 @@
                                     </div><!-- /substat -->
                                 </div><!-- /substats -->
                             <?php } ?>
-                        </div>                 
-                        <div class="col-md-7">
+                        </div> 
+                    </div>
+
+                    <div class="col-md-10">                                    
+                        <div class="col-md-12">
                             <?php if($batchStatus['running']): ?>
                                 <div class="stats">
                                     <div class="stat">
