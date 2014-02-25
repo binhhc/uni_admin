@@ -19,6 +19,8 @@ class UsersController extends AppController {
             if(!empty($access)){
                 if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
                     if ($this->Auth->login()) {
+                        $user =  $this->Auth->user();
+                        $this->Session->write('email_user', $user['username']);
                         $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
                     } else {
                         $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');

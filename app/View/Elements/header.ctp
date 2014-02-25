@@ -1,57 +1,96 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="<?php echo Router::url('/', true).'UserInfos'?>"><i class="fa fa-th"> 一元管理</i></a>
-            <ul class="pull-right" style="list-style:none">
-                    <li class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="fa fa-gears"></i>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">                           
-                            <li>
-                                <?php echo $this->Html->link('<i class="fa fa-code"></i> バッチ実行', array('controller' => 'Users', 'action' => 'status'),array('escape' => false)); ?>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="<?php echo $this->Html->url(array('controller' => 'Users', 'action' => 'logout'), true); ?>">
-                                    <i class="fa fa-chain-broken"></i> ログアウト
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+<div class="navbar navbar-fixed-top bs-docs-nav" role="banner">  
+    <div class="conjtainer">
+        <!-- Menu button for smallar screens -->
+        <div class="navbar-header">
+            <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span>Menu</span>
+            </button>
+            <!-- Site name for smallar screens -->
+            <a href="#" class="navbar-brand hidden-lg"> 一元管理</a>
         </div>
+      
+        <!-- Navigation starts -->
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">           
+            <li class="dropdown dropdown-big">
+                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cloud-upload"></i>UNI ADMIN</a> -->
+            </li>
+        </ul>
+       
+        <!-- Links -->
+        <ul class="nav navbar-nav pull-right">
+        <li class="dropdown pull-right">            
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-user"> <?php echo $this->Session->read('email_user');?> </i> <b class="caret"></b>
+            </a>            
+            <!-- Dropdown menu -->
+            <ul class="dropdown-menu">
+                <li>
+                    <?php echo $this->Html->link('<i class="fa fa-play-circle"></i> バッチ実行', array('controller' => 'Users', 'action' => 'status'),array('escape' => false)); ?>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <?php echo $this->Html->link('<i class="fa fa-arrow-right"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>                    
+                </li>
+            </ul>
+          </li>
+          
+        </ul>
+      </nav>
+
     </div>
-    <div class="subnavbar">
-        <div class="subnavbar-inner">
-            <div class="container">
-                <div class="subnav-collapse">
-                    <ul class="mainnav">
-                        <li class="<?php if(strpos($this->request->url, 'UserInfos') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-male"></i> <span>社員情報</span>', array('controller' => 'UserInfos', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>
-                        <li class="<?php if(strpos($this->request->url, 'Qualifications') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-certificate"></i> <span>免許資格</span>', array('controller' => 'Qualifications', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>
-                        <li class="<?php if(strpos($this->request->url, 'UnitPrices') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-jpy"></i> <span>給与精算</span>', array('controller' => 'UnitPrices', 'action' => 'index'), array('escape' => false)); ?>
-                        </li>
-                        <li class="<?php if(strpos($this->request->url, 'AnnualIncomes') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-signal"></i> <span>年収精算</span>', array('controller' => 'AnnualIncomes', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>                
-                        <li class="<?php if(strpos($this->request->url, 'SchoolEducations') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-book"></i> <span>教育履歴</span>', array('controller' => 'SchoolEducations', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>                
-                        <li class="<?php if(strpos($this->request->url, 'WorkExperiences') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-quote-left"></i> <span>職種履歴</span>', array('controller' => 'WorkExperiences', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>
-                        <li class="<?php if(strpos($this->request->url, 'SystemAuths') !== false){ echo 'active';} ?>">
-                            <?php echo $this->Html->link('<i class="fa fa-lock"></i> <span>SystemAuths</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false)); ?>
-                        </li>              
-                    </ul>
+</div>
+<!-- Header starts -->
+<header>
+    <div class="container">
+        <div class="row">
+            <!-- Logo section -->
+            <div class="col-md-4">
+                <!-- Logo. -->
+                <div class="logo">                    
+                    <h1>
+                        <?php echo $this->Html->link('<i class="fa fa-th"></i> 一元管理', array(
+                    'controller'=>'UserInfos', 'action'=>'index'),array('escape' => false)) ?>
+                    </h1>   
                 </div>
+                <!-- Logo ends -->
+            </div>
+
+            <!-- Data section -->
+            <div class="col-md-4">                
+            </div>           
+
+            <!-- Data section -->
+            <div class="col-md-4">
+                <div class="header-data">
+                    <!-- Traffic data -->
+                    <div class="hdata">
+                        <div class="mcol-left">
+                            <!-- Icon with red background -->
+                            <i class="fa fa-bell bgreen"></i>
+                        </div>
+                        <div class="mcol-right">
+                            <!-- Number of visitors -->
+                            <p><?php echo $this->Session->read('users');?><em>users</em></p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!-- Members data -->
+                    <div class="hdata">
+                        <div class="mcol-left">
+                            <!-- Icon with blue background -->
+                            <i class="fa fa-cog bblue"></i> 
+                        </div>
+                        <div class="mcol-right">
+                            <!-- Number of visitors -->
+                            <p><?php echo $this->Session->read('systems');?><em>Systems</em></p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+              </div>
             </div>
         </div>
     </div>
-</div>
+</header>
+

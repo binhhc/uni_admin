@@ -1,13 +1,9 @@
-<div class="main">
-    <div class="container">
-        <div class="widget stacked">
-            <div class="widget-content">
-                <div class="row-fluid">
-                    <div class="span3">
-                        <?php
-                            echo $this->Element("sidemenu", array('controller' => $this->name)); 
-                        ?>
-                    </div>
+<div class="mainbar">
+     <div class="matter">
+        <div class="container"> 
+            <div class="widget">
+                <div class="widget-content">
+                               
                     <div class="span9">
                          <div class="stats">
                                 <div class="stat">

@@ -25,15 +25,9 @@
         </title>
         <?php
         echo $this->Html->meta('icon');
+        echo $this->Html->css(array('jquery-ui','bootstrap', 'font-awesome', 'font-awesome.min', 'style', 'widgets'));
+        echo $this->Html->script(array('jquery', 'bootstrap',  'jquery-ui', 'deleteItemt'));
 
-        echo $this->Html->css('bootstrap.min');
-        echo $this->Html->css(array('layout', 'jquery-ui', 'font-awesome', 'common'));
-       
-        echo $this->Html->script('jquery');
-        echo $this->Html->script('jquery-ui');
-        echo $this->Html->script('bootstrap.min');        
-        echo $this->Html->script('deleteItemt');
-        
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
@@ -41,32 +35,11 @@
         <script>
             $(document).ready(function() {
                 $('#cb_all').click(function() {
-                    if (this.checked == true)
-                        $('.cb_item').attr('checked', 'checked');
-                    else if (this.checked == false)
-                        $('.cb_item').removeAttr('checked');
+                    $('.cb_item').prop('checked', this.checked);
                 });
-                $('.cb_item').each(function() {
-                    $(this).click(function() {
-                        var thischk = this.checked;
-                        var cb_all = $('#cb_all');
-                        if (thischk) {
-                            var flag = true;
-                            $('.cb_item').each(function() {
-                                if (this.checked == false) {
-                                    flag = false;
-                                }
-                            });
-                            if (flag) {
-                                cb_all.attr('checked', 'checked');
-                            } else {
-                                cb_all.removeAttr('checked');
-                            }
-                        } else {
-                            cb_all.removeAttr('checked');
-                        }
-                    });
-                });        
+                $('.cb_item').click(function(){
+                    $('#cb_all').prop('checked', !$('.cb_item:not(:checked)').length);
+                });       
             });
 
             $(function() {
@@ -78,19 +51,18 @@
             });
         </script>
     </head>
-    <body>        
+    <body>
         <?php echo $this->element('header'); ?>
-        
-       
-            <div class="container">
-                <?php echo $this->Session->flash(); ?>                
-                <?php echo $this->fetch('content'); ?>
-            </div>
-        
-            <div class="clear"></div>
-            <div class="footer">
-                <div>&nbsp;</div>
-            </div>
+        <div class="clearfix"></div>
+        <div class="content">
+            <?php 
+                echo $this->Session->flash(); 
+                echo $this->element('sidebar');
+                echo $this->fetch('content');
+            ?>
+        </div>
+        <div class="clearfix"></div>
+        <?php echo $this->element('footer'); ?>
        
         <?php echo $this->element('sql_dump'); ?>
     </body>

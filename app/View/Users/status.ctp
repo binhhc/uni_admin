@@ -1,24 +1,21 @@
-<div class="main">
-    <div class="container">
-        <div class="widget stacked">
-            <div class="widget-content">
-                <div class="row-fluid">
-                    <div class="span3">
-                        <?php
-                            echo $this->Element("sidemenu", array('controller' => $this->name)); 
-                            if($batchStatus['running']){
-                        ?>
-                        <div class="stats">
-                            <div class="stat">
-                                        <p class="stat-time">
-                                            <span class="stat-value" id="process-time"><?php echo $batchStatus['running_time']; ?></span>
-                                            実行合計時間
-                                        </p>
-                            </div><!-- /substat -->
-                        </div><!-- /substats -->
+<div class="mainbar">
+     <div class="matter">
+        <div class="container"> 
+            <div class="widget">
+                <div class="widget-content">                  
+                    <div class="col-md-3">
+                        <?php if($batchStatus['running']){ ?>
+                            <div class="stats">
+                                <div class="stat">
+                                    <p class="stat-time">
+                                        <span class="stat-value" id="process-time"><?php echo $batchStatus['running_time']; ?></span>
+                                        実行合計時間
+                                    </p>
+                                </div><!-- /substat -->
+                            </div><!-- /substats -->
                         <?php } ?>
-                    </div>
-                    <div class="span9">
+                    </div>                 
+                    <div class="col-md-12">
                         <?php if($batchStatus['running']): ?>
                             <div class="stats">
                                 <div class="stat">

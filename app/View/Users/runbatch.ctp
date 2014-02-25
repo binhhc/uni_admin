@@ -1,7 +1,7 @@
-<div class="main">
-    <div class="container">
-        <div class="row-fluid">
-            <div class="widget stacked">
+<div class="mainbar">
+     <div class="matter">
+        <div class="container"> 
+            <div class="widget">
                 <div class="widget-content">
                     <?php echo $this->Form->create('Batch'); ?>
                     <fieldset>

@@ -1,15 +1,16 @@
-<div class="main">
-    <div class="container">
-        <div class="row-fluid">
-            <div class="widget stacked">
+<div class="mainbar">
+     <div class="matter">
+        <div class="container">
+            <?php 
+                echo $this->Html->link('追加', array('controller'=>'SchoolEducations', 'action'=>'add'), array('class'=>'btn btn-primary'));
+                echo ' ';
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("SchoolEducations")')); 
+            ?>
+            <div class="widget">
                 <div class="widget-content">
-                    <div class="span2">
-                        <?php echo $this->Element("sidemenu", array('controller' => $this->name)); ?>
-                    </div>
-                    <div class="span10">
-                        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
+                        <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                             <thead>
-                                <tr class="nowrap">
+                                <tr class="nowrap widget-head">
                                     <?php if (!empty($schoolEdu)) { ?>
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
@@ -69,25 +70,23 @@
                             </tbody>
                         </table>
                         <?php if ($this->Paginator->numbers()): ?>
-                            <div class="pagination">
-                                 <ul>
-									<?php
-									if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
-										echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-									}
-									?>
-                                    <?php echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
-                                    <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
-                                    <?php echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-									<?php
-									if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
-										echo '<li><span class="next disabled">&gt;&gt;</span></li>';
-									}
-									?>
-								</ul>
-                            </div>
-                        <?php endif; ?>
-                    </div>
+                        <div class="widget-foot">
+                            <ul class="pagination">
+                                <?php
+                                if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
+                                    echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
+                                }                               
+                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; 
+                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); 
+                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; 
+                                
+                                if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
+                                    echo '<li><span class="next disabled">&gt;&gt;</span></li>';
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>  
                 </div>
             </div>
         </div>

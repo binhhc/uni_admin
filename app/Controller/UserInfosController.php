@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UserInfosController extends AppController {
 
-    public $uses = array('UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience');
+    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience');
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -17,6 +17,12 @@ class UserInfosController extends AppController {
             'limit' => Configure::read('max_row'),
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
+
+        $users = $this->UserInfo->find('count');
+        $this->Session->write('users', $users);
+        $systems = $this->SystemAuth->find('count');
+        $this->Session->write('systems', $systems);
+        
         $this->set('userInfo', $this->paginate('UserInfo'));
         $this->set(array(
             'title_for_layout' => '社員情報',

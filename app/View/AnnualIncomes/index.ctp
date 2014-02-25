@@ -1,15 +1,16 @@
-<div class="main">
-    <div class="container">
-        <div class="row-fluid">
-            <div class="widget stacked">
+<div class="mainbar">
+     <div class="matter">
+        <div class="container">
+            <?php 
+                echo $this->Html->link('追加', array('controller'=>'AnnualIncomes', 'action'=>'add'), array('class'=>'btn btn-primary'));
+                echo ' ';
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("AnnualIncomes")')); 
+            ?>
+            <div class="widget">
                 <div class="widget-content">
-                    <div class="span2">
-                        <?php echo $this->Element("sidemenu", array('controller' => $this->name)); ?>
-                    </div>
-                    <div class="span10">
-                        <table class="responsive table table-bordered" cellpadding="5" cellspacing="5">
+                        <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                             <thead>
-                                <tr class="nowrap center">
+                                <tr class="nowrap widget-head">
                                     <?php if (!empty($annualIncome)) { ?>
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
