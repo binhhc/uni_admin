@@ -14,6 +14,7 @@ class ImportCSVtoDBShell extends AppShell {
         $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 
         if (!is_dir($directory_month)) {
+            mkdir(WWW_ROOT, 0777, true);
             mkdir($directory_month, 0777, true);
         }
 

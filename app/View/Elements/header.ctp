@@ -30,7 +30,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <?php echo $this->Html->link('<i class="fa fa-arrow-right"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>                    
+                    <?php echo $this->Html->link('<i class="fa fa-external-link"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>                    
                 </li>
             </ul>
           </li>          

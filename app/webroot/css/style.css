@@ -1930,6 +1930,7 @@ input.datepicker {
 }
 .alert{
 	margin-bottom: 0px !important;
+	padding: 10px !important;
 }
 
 .brand sup {
