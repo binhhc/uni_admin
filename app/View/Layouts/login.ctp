@@ -4,13 +4,8 @@
     <head>
         <?php echo $this->Html->charset(); ?>
         <title><?php echo $title_for_layout ?></title>
-
-
         <?php
-        echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('font-awesome.min');
-        echo $this->Html->css('layout');
-
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->Html->script('jquery');
