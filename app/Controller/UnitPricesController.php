@@ -19,8 +19,8 @@ class UnitPricesController extends AppController {
         );
         $this->set('unitPrice', $this->paginate('UnitPrice'));
         $this->set(array(
-            'title_for_layout' => '給与計算',
-            'page_title' => '給与計算',
+            'title_for_layout' => '給与情報',
+            'page_title' => '給与情報',
         ));
     }
 

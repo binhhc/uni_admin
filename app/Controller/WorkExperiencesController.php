@@ -19,8 +19,8 @@ class WorkExperiencesController extends AppController {
         );
         $this->set('workExp', $this->paginate('WorkExperience'));
         $this->set(array(
-            'title_for_layout' => '職種履歴',
-            'page_title' => '職種履歴',
+            'title_for_layout' => '職歴情報',
+            'page_title' => '職歴情報',
         ));
     }
 

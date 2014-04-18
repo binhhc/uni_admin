@@ -19,8 +19,8 @@ class SchoolEducationsController extends AppController {
         );
         $this->set('schoolEdu', $this->paginate('SchoolEducation'));
         $this->set(array(
-            'title_for_layout' => '教育履歴',
-            'page_title' => '教育履歴',
+            'title_for_layout' => '学歴情報',
+            'page_title' => '学歴情報',
         ));
     }
 
