@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">氏名（漢字）</label>
+                            <label class="col-lg-6 control-label">氏名（英字）</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('employee_name_alphabet', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>

@@ -19,8 +19,8 @@ class AnnualIncomesController extends AppController {
         );
         $this->set('annualIncome', $this->paginate('AnnualIncome'));
         $this->set(array(
-            'title_for_layout' => '年収計算',
-            'page_title' => '年収計算',
+            'title_for_layout' => '年収情報',
+            'page_title' => '年収情報',
         ));
     }
 

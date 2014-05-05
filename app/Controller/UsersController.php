@@ -63,6 +63,7 @@ class UsersController extends AppController {
             $csv_file_unique_income = $real_path . DS . '04_ANNUAL_INCOME.csv';
             $csv_file_school_education = $real_path . DS . '05_SCHOOL_EDUCATION.csv';
             $csv_file_work_experience = $real_path . DS . '06_WORK_EXPERIENCE.csv';
+            
             // check csv files exist
             if($this->User->is_url_exist($csv_file_userinfo) && 
                 $this->User->is_url_exist($csv_file_qualification) &&
