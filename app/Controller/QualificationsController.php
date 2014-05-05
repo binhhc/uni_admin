@@ -94,14 +94,17 @@ class QualificationsController extends AppController {
         if ($this->Session->read('flag_link_quanlity') == 0) {
             $this->Session->write('save_latest_link_quanlity', $_SERVER['HTTP_REFERER']);
         }
-
-        if (!empty($id)) {
-            if (!$this->Qualification->deleteAll(array('Qualification.id' => $id))) {
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
-            } else {
+        if (intval($id > 0) || !empty($id)) {
+            $this->Qualification->id = $id;
+            $data['Qualification']['delete_flg'] = DELETE_FLG_ON;
+            $data['Qualification']['beforeSave'] = false;
+            if ($this->Qualification->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+            } else {
+                pr($this->Qualification->validationErrors);
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
-        } 
+        }
         $this->Session->write('flag_link_quanlity', 1);
     }
 }

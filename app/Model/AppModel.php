@@ -39,7 +39,12 @@ class AppModel extends Model {
      * @since 2014/01/07
      */
 	public function beforeSave($options = array()){
+		$key = $this->alias;
 		$data = $this->data;
+		if(isset($data[$key]['beforeSave']) && $data[$key]['beforeSave'] == false) {
+			unset($data[$key]['beforeSave']);
+			return true;
+		}
 
 		$conditions = array();
 		foreach($data as $model => $fields){

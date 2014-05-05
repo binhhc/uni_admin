@@ -18,4 +18,7 @@ define('BATCH_LOCK', TMP . 'batch.lock');
 define('BATCH_ENGINE_GOOGLE', TMP . 'google.lock');
 define('BATCH_ENGINE_YAHOO', TMP . 'yahoo.lock');
 define('BATCH_ENGINE_ALL', TMP . 'all.lock');
+
+define('DELETE_FLG_ON', '1');
+define('DELETE_FLG_OFF', '0');
 ?>

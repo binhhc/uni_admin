@@ -40,5 +40,4 @@
 </div>
 <!-- Header starts -->
 <header>
-
 </header>
