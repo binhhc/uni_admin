@@ -31,20 +31,20 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-	
+
 	 /**
      * Check record exists
      *
      * @author Nguyen Hoang
      * @since 2014/01/07
      */
-	function beforeSave(){
+	public function beforeSave($options = array()){
 		$data = $this->data;
-		
+
 		$conditions = array();
 		foreach($data as $model => $fields){
 			foreach($fields as $field => $value){
-				
+
 				if($field=='id'){
 					$conditions[$field." <> "] = $value;
 				}else if($field!='modified' and $field!='created'){
@@ -57,12 +57,12 @@ class AppModel extends Model {
 			'recursive' => -1,
 			'fields' => array('id')
 		));
-		
+
 		if(!empty($data)) {
 			$this->log("[$model] record exists ".print_r($fields,true) , 'batch');
-			App::uses('CakeSession','Model/Datasource'); 
-			CakeSession::write('Message', array( 
-					'flash' => array( 
+			App::uses('CakeSession','Model/Datasource');
+			CakeSession::write('Message', array(
+					'flash' => array(
 						'message' => __('Record exists in database'),
 						'element' => 'default'
 					)
