@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <?php echo $this->Html->charset(); ?>
         <title><?php echo $title_for_layout ?></title>
@@ -11,10 +10,8 @@
         echo $this->Html->script('jquery');
         echo $this->Html->script('bootstrap.min');
         ?>
-
     </head>
     <body>
         <?php echo $this->fetch('content'); ?>
     </body>
-
 </html>
