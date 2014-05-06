@@ -5,7 +5,7 @@ App::uses('Controller', 'Controller');
 class UnitPricesController extends AppController {
 
     public $uses = array('UnitPrice', 'UserInfo');
-
+    public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
@@ -13,11 +13,15 @@ class UnitPricesController extends AppController {
     public function index() {
         $this->Session->delete('unitPrice_id');
         $this->Session->write('flag_link_price', 0);
-        $this->paginate = array(
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'UnitPrice.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('UnitPrice.employee_id' => 'ASC')
         );
-        $this->set('unitPrice', $this->paginate('UnitPrice'));
+        $this->set('unitPrice', $this->Paginator->paginate('UnitPrice'));
         $this->set(array(
             'title_for_layout' => '給与情報',
             'page_title' => '給与情報',
@@ -94,13 +98,16 @@ class UnitPricesController extends AppController {
             $this->Session->write('save_latest_link_price', $_SERVER['HTTP_REFERER']);
         }
 
-        if (!empty($id)) {
-            if (!$this->UnitPrice->deleteAll(array('UnitPrice.id' => $id))) {
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
-            } else {
+        if (intval($id > 0) || !empty($id)) {
+            $this->UnitPrice->id = $id;
+            $data['UnitPrice']['delete_flg'] = DELETE_FLG_ON;
+            $data['UnitPrice']['beforeSave'] = false;
+            if ($this->UnitPrice->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+            } else {
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
-        } 
+        }
         $this->Session->write('flag_link_price', 1);
     }
 }

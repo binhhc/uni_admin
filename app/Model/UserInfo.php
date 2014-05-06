@@ -13,7 +13,7 @@ class UserInfo extends AppModel {
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
                     'message' => __('UAD_ERR_MSG0006')
-                ),                
+                ),
                 'unique' => array(
                     'rule' => array('checkUniqueId'),
                     'message' => __('UAD_ERR_MSG0007'),
@@ -146,7 +146,7 @@ class UserInfo extends AppModel {
                     'allowEmpty' => true
                 ),
             )
-            
+
         );
         $this->validate = $validate;
         return $this->validates();
@@ -173,8 +173,8 @@ class UserInfo extends AppModel {
             foreach ($arr_user as $key => $value) {
                 $result[$key] = $key .' | ' . $value;
             }
-        } 
-        if(empty($result)) $result[''] = ''; 
-        return $result;        
+        }
+        if(empty($result)) $result[''] = '';
+        return $result;
     }
 }

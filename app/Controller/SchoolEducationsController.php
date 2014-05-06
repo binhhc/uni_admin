@@ -5,19 +5,24 @@ App::uses('Controller', 'Controller');
 class SchoolEducationsController extends AppController {
 
     public $uses = array('SchoolEducation', 'UserInfo');
-
-        public function beforeFilter() {
+    public $components = array('Paginator');
+    public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
     public function index() {
         $this->Session->delete('school_id');
         $this->Session->write('flag_link_school', 0);
-        $this->paginate = array(
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'SchoolEducation.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('SchoolEducation.employee_id' => 'ASC')
         );
-        $this->set('schoolEdu', $this->paginate('SchoolEducation'));
+
+        $this->set('schoolEdu', $this->Paginator->paginate('SchoolEducation'));
         $this->set(array(
             'title_for_layout' => '学歴情報',
             'page_title' => '学歴情報',
@@ -69,8 +74,8 @@ class SchoolEducationsController extends AppController {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_school'));
                 }
-            }               
-        } else {           
+            }
+        } else {
             $this->request->data = $this->SchoolEducation->findById($id);
         }
         $this->Session->write('flag_link_school', 1);
@@ -90,13 +95,16 @@ class SchoolEducationsController extends AppController {
             $this->Session->write('save_latest_link_school', $_SERVER['HTTP_REFERER']);
         }
 
-        if (!empty($id)) {
-            if (!$this->SchoolEducation->deleteAll(array('SchoolEducation.id' => $id))) {
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
-            } else {
+        if (intval($id > 0) || !empty($id)) {
+            $this->SchoolEducation->id = $id;
+            $data['SchoolEducation']['delete_flg'] = DELETE_FLG_ON;
+            $data['SchoolEducation']['beforeSave'] = false;
+            if ($this->SchoolEducation->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+            } else {
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
-        } 
+        }
         $this->Session->write('flag_link_school', 1);
     }
 }

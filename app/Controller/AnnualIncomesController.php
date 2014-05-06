@@ -5,7 +5,7 @@ App::uses('Controller', 'Controller');
 class AnnualIncomesController extends AppController {
 
     public $uses = array('AnnualIncome', 'UserInfo');
-
+    public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
@@ -13,11 +13,16 @@ class AnnualIncomesController extends AppController {
     public function index() {
         $this->Session->delete('annual_id');
         $this->Session->write('flag_link_annual', 0);
-        $this->paginate = array(
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'AnnualIncome.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('AnnualIncome.employee_id' => 'ASC')
         );
-        $this->set('annualIncome', $this->paginate('AnnualIncome'));
+
+        $this->set('annualIncome', $this->Paginator->paginate('AnnualIncome'));
         $this->set(array(
             'title_for_layout' => '年収情報',
             'page_title' => '年収情報',
@@ -37,7 +42,7 @@ class AnnualIncomesController extends AppController {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 }
-            } 
+            }
         }
         $this->Session->write('flag_link_annual', 1);
         $this->set('user_info', $this->UserInfo->listUser());
@@ -69,9 +74,9 @@ class AnnualIncomesController extends AppController {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_annual'));
                 }
-            } 
+            }
         } else {
-           
+
             $this->request->data = $this->AnnualIncome->findById($id);
         }
         $this->Session->write('flag_link_annual', 1);
@@ -91,13 +96,16 @@ class AnnualIncomesController extends AppController {
             $this->Session->write('save_latest_link_annual', $_SERVER['HTTP_REFERER']);
         }
 
-        if (!empty($id)) {
-            if (!$this->AnnualIncome->deleteAll(array('AnnualIncome.id' => $id))) {
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');              
+        if (intval($id > 0) || !empty($id)) {
+            $this->AnnualIncome->id = $id;
+            $data['AnnualIncome']['delete_flg'] = DELETE_FLG_ON;
+            $data['AnnualIncome']['beforeSave'] = false;
+            if ($this->AnnualIncome->save($data)) {
+                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             } else {
-                $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');                
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
-        } 
+        }
         $this->Session->write('flag_link_annual', 1);
     }
 }

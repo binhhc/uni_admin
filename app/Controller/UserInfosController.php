@@ -5,25 +5,24 @@ App::uses('Controller', 'Controller');
 class UserInfosController extends AppController {
 
     public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience');
-
+    public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 
-    public function index() {        
+    public function index() {
         $this->Session->delete('info_id');
         $this->Session->write('flag_link_info', 0);
-        $this->paginate = array(
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'UserInfo.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
 
-        $users = $this->UserInfo->find('count');
-        $this->Session->write('users', $users);
-        $systems = $this->SystemAuth->find('count');
-        $this->Session->write('systems', $systems);
-        
-        $this->set('userInfo', $this->paginate('UserInfo'));
+        $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
         $this->set(array(
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
@@ -35,7 +34,7 @@ class UserInfosController extends AppController {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            $data = $this->request->data;            
+            $data = $this->request->data;
             $data['UserInfo']['created'] = date('Y-m-d');
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();
@@ -76,7 +75,7 @@ class UserInfosController extends AppController {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 }
-            } 
+            }
         } else {
             $quanlitify = $this->UserInfo->findById($id);
             $this->request->data = $quanlitify;
@@ -90,7 +89,7 @@ class UserInfosController extends AppController {
         $this->render('detail');
     }
 
-    public function delete($id = null) {  
+    public function delete($id = null) {
         $this->autoLayout = false;
         $this->autoRender = false;
         if ($this->Session->read('flag_link_info') == 0) {
@@ -98,20 +97,20 @@ class UserInfosController extends AppController {
         }
         $this->UserInfo->begin();
 
-        if (!empty($id)) {
-            if ($this->UserInfo->deleteAll(array('UserInfo.employee_id' => $id))) {
-                if($this->AnnualIncome->deleteAll(array('AnnualIncome.employee_id' => $id)) &&
-                    $this->Qualification->deleteAll(array('Qualification.employee_id' => $id)) &&
-                    $this->SchoolEducation->deleteAll(array('SchoolEducation.employee_id' => $id)) &&
-                    $this->UnitPrice->deleteAll(array('UnitPrice.employee_id' => $id)) &&
-                    $this->WorkExperience->deleteAll(array('WorkExperience.employee_id' => $id))
+        if (intval($id > 0) || !empty($id)) {
+            if ($this->UserInfo->updateAll(array('UserInfo.delete_flg' => DELETE_FLG_OFF), array('UserInfo.employee_id' => $id))) {
+                if($this->AnnualIncome->updateAll(array('AnnualIncome.delete_flg' => DELETE_FLG_OFF),array('AnnualIncome.employee_id' => $id)) &&
+                    $this->Qualification->updateAll(array('Qualification.delete_flg' => DELETE_FLG_OFF),array('Qualification.employee_id' => $id)) &&
+                    $this->SchoolEducation->updateAll(array('SchoolEducation.delete_flg' => DELETE_FLG_OFF),array('SchoolEducation.employee_id' => $id)) &&
+                    $this->UnitPrice->updateAll(array('UnitPrice.delete_flg' => DELETE_FLG_OFF),array('UnitPrice.employee_id' => $id)) &&
+                    $this->WorkExperience->updateAll(array('WorkExperience.delete_flg' => DELETE_FLG_OFF),array('WorkExperience.employee_id' => $id))
                 ){
                     $this->UserInfo->commit();
                     $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
-                }                           
+                }
             } else {
                 $this->UserInfo->rollback();
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');   
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
         }
         $this->Session->write('flag_link_info', 1);

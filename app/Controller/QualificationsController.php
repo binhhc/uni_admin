@@ -5,38 +5,40 @@ App::uses('Controller', 'Controller');
 class QualificationsController extends AppController {
 
     public $uses = array('Qualification', 'UserInfo');
-
+    public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete', 'typeahead')) : null;
     }
 
-    public function index() {        
+    public function index() {
         $this->Session->delete('quanlity_id');
         $this->Session->write('flag_link_quanlity', 0);
 
-        $this->paginate = array(
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'Qualification.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('Qualification.employee_id' => 'ASC')
-        );        
+        );
         try{
-            $this->set('quanlity', $this->paginate('Qualification'));
+            $this->set('quanlity', $this->Paginator->paginate('Qualification'));
         }catch(exception $e){
-            
-        }        
+
+        }
         $this->set(array(
             'title_for_layout' => '免許資格',
             'page_title' => '免許資格',
         ));
     }
 
-    public function add() {        
+    public function add() {
         if ($this->Session->read('flag_link_quanlity') == 0) {
             $this->Session->write('save_latest_link_quanlity', @$_SERVER['HTTP_REFERER']);
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['Qualification']['created'] = date('Y-m-d');
-            
             if ($this->Qualification->customValidate()) {
                 $this->Qualification->create();
                 if ($this->Qualification->save($data)) {
@@ -52,7 +54,7 @@ class QualificationsController extends AppController {
             'page_title' => '免許資格',
         ));
         $this->set('readonly', '');
-        $this->render('detail');        
+        $this->render('detail');
     }
 
     public function edit() {
@@ -76,8 +78,8 @@ class QualificationsController extends AppController {
                     $this->redirect($this->Session->read('save_latest_link_quanlity'));
                 }
             }
-        }         
-        $this->request->data = $this->Qualification->findById($id, null);       
+        }
+        $this->request->data = $this->Qualification->findById($id, null);
         $this->Session->write('flag_link_quanlity', 1);
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());
@@ -94,6 +96,7 @@ class QualificationsController extends AppController {
         if ($this->Session->read('flag_link_quanlity') == 0) {
             $this->Session->write('save_latest_link_quanlity', $_SERVER['HTTP_REFERER']);
         }
+
         if (intval($id > 0) || !empty($id)) {
             $this->Qualification->id = $id;
             $data['Qualification']['delete_flg'] = DELETE_FLG_ON;
@@ -101,7 +104,6 @@ class QualificationsController extends AppController {
             if ($this->Qualification->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
             } else {
-                pr($this->Qualification->validationErrors);
                 $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
         }

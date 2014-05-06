@@ -5,7 +5,7 @@ App::uses('Controller', 'Controller');
 class WorkExperiencesController extends AppController {
 
     public $uses = array('WorkExperience', 'UserInfo');
-
+    public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
@@ -13,11 +13,16 @@ class WorkExperiencesController extends AppController {
     public function index() {
         $this->Session->delete('work_id');
         $this->Session->write('flag_link_work', 0);
-        $this->paginate = array(
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'WorkExperience.delete_flg' => DELETE_FLG_OFF,
+                ),
             'limit' => Configure::read('max_row'),
             'order' => array('WorkExperience.employee_id' => 'ASC')
         );
-        $this->set('workExp', $this->paginate('WorkExperience'));
+
+        $this->set('workExp', $this->Paginator->paginate('WorkExperience'));
         $this->set(array(
             'title_for_layout' => '職歴情報',
             'page_title' => '職歴情報',
@@ -31,12 +36,12 @@ class WorkExperiencesController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
             $data['WorkExperience']['created'] = date('Y-m-d');
-            if ($this->WorkExperience->customValidate()) {              
+            if ($this->WorkExperience->customValidate()) {
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect(array('action' => 'index'));
-                } 
+                }
             }
         }
         $this->Session->write('flag_link_work', 1);
@@ -64,12 +69,12 @@ class WorkExperiencesController extends AppController {
             $data = $this->request->data;
             $data['WorkExperience']['modified'] = date('Y-m-d');
             unset($data['WorkExperience']['employee_id']);
-            
+
             if ($this->WorkExperience->customValidate()) {
                 if ($this->WorkExperience->save($data)) {
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_work'));
-                } 
+                }
             }
         } else {
             $quanlitify = $this->WorkExperience->findById($id);
@@ -92,11 +97,14 @@ class WorkExperiencesController extends AppController {
             $this->Session->write('save_latest_link_work', $_SERVER['HTTP_REFERER']);
         }
 
-        if (!empty($id)) {
-            if (!$this->WorkExperience->deleteAll(array('WorkExperience.id' => $id))) {
-                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
-            } else {
+        if (intval($id > 0) || !empty($id)) {
+            $this->WorkExperience->id = $id;
+            $data['WorkExperience']['delete_flg'] = DELETE_FLG_ON;
+            $data['WorkExperience']['beforeSave'] = false;
+            if ($this->WorkExperience->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+            } else {
+                $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }
         }
         $this->Session->write('flag_link_work', 1);
