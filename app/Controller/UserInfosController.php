@@ -28,7 +28,7 @@ class UserInfosController extends AppController {
         $this->Paginator->settings = array(
             'conditions' => $filter,
             'limit' => Configure::read('max_row'),
-            'paramorder' => array('UserInfo.employee_id' => 'ASC')
+            'order' => array('UserInfo.employee_id' => 'ASC')
         );
 
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
