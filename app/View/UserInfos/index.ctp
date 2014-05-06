@@ -1,11 +1,47 @@
 <div class="mainbar">
      <div class="matter">
         <div class="container">
-            <?php
+            <div style="display: inline-block;"><?php
                 echo $this->Html->link('追加', array('controller'=>'UserInfos', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
                 echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));
-            ?>
+            ?></div>
+            <div style="display: inline-block; float:right;" class="table-responsive">
+            <?php echo $this->Form->create('UserInfo', array('controller'=>'UserInfos', 'action'=>'index', 'type' => 'get', 'class'=>'form-inline search-form'));?>
+                <table class="search-form-table">
+                    <tr>
+                        <td>雇用区分</td>
+                        <td>
+                            <?php
+                            $employment = unserialize(EMPLOYMENT_TYPE);
+                            echo $this->Form->input('employment_type_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false, 'empty' => true, 'selected' => isset($filter['UserInfo.employment_type_cd'])?$filter['UserInfo.employment_type_cd']:''));
+                            ?>
+                        </td>
+
+                        <td>勤務地</td>
+                        <td>
+                            <?php
+                            $work_location = unserialize(WORK_LOCATION);
+                            echo $this->Form->input('work_location_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.work_location_cd'])?$filter['UserInfo.work_location_cd']:''));?>
+                        </td>
+
+                        <td>所属</td>
+                        <td>
+                            <?php
+                            $work_location = unserialize(WORK_LOCATION);
+                            echo $this->Form->input('department_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.department_cd'])?$filter['UserInfo.department_cd']:'')); ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo $this->Form->button('絞り込み検索', array('type' => 'submit', 'class'=>'btn btn-default', 'div'=>false));
+                            echo $this->Form->button('クリア', array('type' => 'button', 'class' => 'btn btn-default', 'onclick' => "window.location.href = '" . Router::url(array('controller' => 'UserInfos', 'action' => 'index'), true) . "';"));
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+            <?php echo $this->Form->end(); ?>
+            </div>
+
             <div class="widget">
                 <div class="widget-content">
                     <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">

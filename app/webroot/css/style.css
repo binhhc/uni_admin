@@ -2181,3 +2181,13 @@ input.datepicker {
 .data-empty {
     color:#b94a48;
 }
+.search-form {
+    padding: 4px;
+    margin-top: -8px;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    background-color: #F9F9F9;
+}
+.search-form-table td {
+    padding-right: 6px;
+}

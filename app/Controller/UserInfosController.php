@@ -14,16 +14,26 @@ class UserInfosController extends AppController {
         $this->Session->delete('info_id');
         $this->Session->write('flag_link_info', 0);
 
+        // filter
+        $filter = array('UserInfo.delete_flg' => DELETE_FLG_OFF);
+        if (!empty($this->request->query['employment_type_cd']) && is_numeric($this->request->query['employment_type_cd'])) {
+            $filter['UserInfo.employment_type_cd'] = $this->request->query['employment_type_cd'];
+        };
+        if(!empty($this->request->query['department_cd']) && is_numeric($this->request->query['department_cd']) ) {
+            $filter['UserInfo.department_cd'] = $this->request->query['department_cd'];
+        };
+        if(!empty($this->request->query['work_location_cd']) && is_numeric($this->request->query['work_location_cd'])) {
+            $filter['UserInfo.work_location_cd'] = $this->request->query['work_location_cd'];
+        };
         $this->Paginator->settings = array(
-            'conditions' => array(
-                'UserInfo.delete_flg' => DELETE_FLG_OFF,
-                ),
+            'conditions' => $filter,
             'limit' => Configure::read('max_row'),
-            'order' => array('UserInfo.employee_id' => 'ASC')
+            'paramorder' => array('UserInfo.employee_id' => 'ASC')
         );
 
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
         $this->set(array(
+            'filter' => $filter,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
         ));
