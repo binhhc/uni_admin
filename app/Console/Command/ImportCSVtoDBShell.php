@@ -68,23 +68,23 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['office_email'] = $db[4];
                         $data['UserInfo']['company_join_date'] = $db[5];
                         $data['UserInfo']['gender_code'] = $db[6];
-                        $data['UserInfo']['sex'] = $db[7];
+                        //$data['UserInfo']['sex'] = $db[7];
                         $data['UserInfo']['birthday'] = $db[8];
-                        $data['UserInfo']['work_year'] = $db[9];
-                        $data['UserInfo']['age'] = $db[10];
+                        // $data['UserInfo']['work_year'] = $db[9];
+                        // $data['UserInfo']['age'] = $db[10];
                         $data['UserInfo']['employment_type_cd'] = $db[11];
-                        $data['UserInfo']['employment_type'] = $db[12];
+                        // $data['UserInfo']['employment_type'] = $db[12];
                         $data['UserInfo']['zip_code'] = $db[13];
                         $data['UserInfo']['prefecture'] = $db[14];
                         $data['UserInfo']['ward'] = $db[15];
                         $data['UserInfo']['address'] = $db[16];
                         $data['UserInfo']['building'] = $db[17];
                         $data['UserInfo']['job_cd'] = $db[18];
-                        $data['UserInfo']['job'] = $db[19];
+                        // $data['UserInfo']['job'] = $db[19];
                         $data['UserInfo']['position_cd'] = $db[20];
-                        $data['UserInfo']['position'] = $db[21];
+                        // $data['UserInfo']['position'] = $db[21];
                         $data['UserInfo']['work_location_cd'] = $db[22];
-                        $data['UserInfo']['work_location'] = $db[23];
+                        // $data['UserInfo']['work_location'] = $db[23];
                         $data['UserInfo']['department_cd'] = $db[24];
                         $data['UserInfo']['department'] = $db[25];
                         $data['UserInfo']['problem_type_cd'] = $db[26];
@@ -192,13 +192,13 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['Qualification']['note'] = $db[10];
                             $data['Qualification']['allowance'] = $db[11];
                             $data['Qualification']['created'] = date('Y-m-d H:i:s');
-                            //check Qualification validate 
+                            //check Qualification validate
                             $this->Qualification->set($data);
                             if ($this->Qualification->customValidate()) {
                                 $this->Qualification->create();
                                 $this->Qualification->save($data);
                             }else{
-                                //write log Qualification 
+                                //write log Qualification
                                 $this->write_log_validate($i, 'Qualification');
                             }
                         }else{
@@ -264,13 +264,13 @@ class ImportCSVtoDBShell extends AppShell {
                                 $this->UnitPrice->create();
                                 $this->UnitPrice->save($data);
                             }else{
-                                //write log UnitPrice 
+                                //write log UnitPrice
                                 $this->write_log_validate($i, 'UnitPrice');
                             }
                         }else{
                             $this->log('[UnitPrice] line '.($i+1).' employee_id ' . $db[0] . ' not exist!', 'batch');
                         }
-                        
+
                     }
                 }
             }
@@ -310,7 +310,7 @@ class ImportCSVtoDBShell extends AppShell {
                             $data['AnnualIncome']['note'] = $db[6];
                             $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
 
-                            //check validate 
+                            //check validate
                             $this->AnnualIncome->set($data);
                             if ($this->AnnualIncome->customValidate()) {
                                 $this->AnnualIncome->create();
@@ -320,7 +320,7 @@ class ImportCSVtoDBShell extends AppShell {
                             }
                         }else{
                             $this->log('[AnnualIncome] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
-                        }                        
+                        }
                     }
                 }
             }
@@ -377,7 +377,7 @@ class ImportCSVtoDBShell extends AppShell {
                             }
                         }else{
                             $this->log('[SchoolEducation] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
-                        }                        
+                        }
                     }
                 }
             }
@@ -434,7 +434,7 @@ class ImportCSVtoDBShell extends AppShell {
                             }
                         }else{
                             $this->log('[WorkExperience] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
-                        }                        
+                        }
                     }
                 }
             }

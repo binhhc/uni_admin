@@ -3,17 +3,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="widget wgreen">                
+                    <div class="widget wgreen">
                     <div class="widget-head">
-                      <div class="pull-left">社員情報</div>                  
+                      <div class="pull-left">社員情報</div>
                       <div class="clearfix"></div>
                     </div>
 
                 <div class="widget-content">
                     <div class="padd">
-                        
+
                 <?php echo $this->Form->create('UserInfo', array('class'=>'form-horizontal'));?>
-               
+
                     <fieldset class = "col-md-6">
                         <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
                         <div class="form-group">
@@ -59,21 +59,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">性別コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('gender_code', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-                        <?php 
-                            $options = array('男性' => ' 男性', '女性' => ' 女性');
-                            $attributes = array(
-                                'legend' => false,                               
-                            );                           
-                        ?>
-                        <div class="form-group">
                             <label class="col-lg-6 control-label">性別</label>
-                            <div class="radio">
-                                <?php echo $this->Form->radio('sex', $options, $attributes)?>
+                            <div class="radio col-lg-6">
+                                <?php
+                                $gender = unserialize(GENDER_CODE);
+                                echo $this->Form->radio('gender_code', $gender, array('legend' => false,)); ?>
                             </div>
                         </div>
 
@@ -85,30 +75,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">勤続年数</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('work_year', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">年齢</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('age', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">雇用区分コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('employment_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
                             <label class="col-lg-6 control-label">雇用区分</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('employment_type', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php
+                                $employment = unserialize(EMPLOYMENT_TYPE);
+                                echo $this->Form->input('employment_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false));?>
                             </div>
                         </div>
 
@@ -117,7 +88,7 @@
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('zip_code', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
-                        </div>                       
+                        </div>
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">都道府県</label>
@@ -148,50 +119,35 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">職種コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('job_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label class="col-lg-6 control-label">職種</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('job', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">役職コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('position_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php
+                                $job = unserialize(JOB_CD);
+                                echo $this->Form->input('job_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $job, 'required' => false)); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">役職</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('position', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        </fieldset>
-
-                        <fieldset class="col-md-6">
-                        
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">勤務地コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('work_location_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php
+                                $position = unserialize(POSITION);
+                                echo $this->Form->input('position_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $position, 'required' => false)); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">勤務地</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('work_location', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php
+                                $work_location = unserialize(WORK_LOCATION);
+                                echo $this->Form->input('work_location_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false)); ?>
                             </div>
                         </div>
+
+                        </fieldset>
+
+                        <fieldset class="col-md-6">
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">所属コード</label>
@@ -338,24 +294,24 @@
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('rating_grade', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
-                        </div>      
+                        </div>
                     </fieldset>
-                </div>                        
+                </div>
 
                 <div class="text-center form-actions">
-                    <?php 
+                    <?php
                         echo $this->Form->submit('登録', array('class'=>'btn btn-primary', 'div'=>false));
-                        echo ' '; 
+                        echo ' ';
                         echo $this->Html->link('キャンセル', $this->Session->read('save_latest_link_info'), array('class'=>'btn btn-default') );
-                        ?>       
-                </div>   
+                        ?>
+                </div>
                 <?php echo $this->Form->end(); ?>
                 </div>
                 </div>
                     <div class="widget-foot">
                         <!-- Footer goes here -->
                     </div>
-              </div>  
+              </div>
 
             </div>
 
@@ -363,5 +319,5 @@
         </div>
     </div>
 </div>
-   
+
 

@@ -1,21 +1,21 @@
 <div class="mainbar">
      <div class="matter">
-        <div class="container">            
-            <?php 
+        <div class="container">
+            <?php
                 echo $this->Html->link('追加', array('controller'=>'UserInfos', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")')); 
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));
             ?>
             <div class="widget">
                 <div class="widget-content">
-                    <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">        
+                    <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                         <thead>
                             <tr class="nowrap widget-head">
                                 <?php if (!empty($userInfo)) { ?>
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
                                 <th >社員番号</th>
-                                <th>氏名</th>              
+                                <th>氏名</th>
                                 <th>氏名（フリガナ）</th>
                                 <th>氏名（英字）</th>
                                 <th>社用e-Mail</th>
@@ -60,7 +60,7 @@
                                 <th>評価等級コード</th>
                                 <th>評価等級</th>
                             </tr>
-                        </thead>      
+                        </thead>
                         <tbody>
                             <?php if (empty($userInfo)) { ?>
                                 <tr>
@@ -71,7 +71,7 @@
                                 foreach ($userInfo as $info):
                                     ?>
                                     <tr class="nowrap">
-                                        <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $info['UserInfo']['employee_id']; ?>' ></td>                    
+                                        <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $info['UserInfo']['employee_id']; ?>' ></td>
                                         <td><?php echo $this->Form->postLink(h($info['UserInfo']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($info['UserInfo']['id'])))); ?> </td>
                                         <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
@@ -79,23 +79,45 @@
                                         <td class=""><?php echo h($info['UserInfo']['office_email']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['company_join_date']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['gender_code']); ?></td>
-                                        <td class="nowrap"><?php echo h($info['UserInfo']['sex']); ?></td>
+                                        <td class="nowrap"><?php
+                                        $gender = unserialize(GENDER_CODE);
+                                        if (array_key_exists($info['UserInfo']['gender_code'], $gender)) {
+                                            echo h($gender[$info['UserInfo']['gender_code']]);
+                                        }?></td>
                                         <td class="nowrap"><?php echo h($info['UserInfo']['birthday']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['work_year']); ?></td>
-                                        <td class="nowrap"><?php echo h($info['UserInfo']['age']); ?></td>
+                                        <td class=""><?php
+                                            echo date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->y . '年 ' . date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->m . 'ヵ月';?></td>
+                                        <td class="nowrap"><?php
+                                            echo date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->y . '歳 ' . date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->m . 'ヵ月';?></td>
                                         <td class=""><?php echo h($info['UserInfo']['employment_type_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['employment_type']); ?></td>
+                                        <td class=""><?php
+                                        $employment = unserialize(EMPLOYMENT_TYPE);
+                                        if (array_key_exists($info['UserInfo']['employment_type_cd'], $employment)) {
+                                            echo h($employment[$info['UserInfo']['employment_type_cd']]);
+                                        }?></td>
                                         <td class=""><?php echo h($info['UserInfo']['zip_code']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['prefecture']); ?></td>
                                         <td class="nowrap"><?php echo h($info['UserInfo']['ward']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['address']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['building']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['job_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['job']); ?></td>
+                                        <td class=""><?php
+                                        $job = unserialize(JOB_CD);
+                                        if (array_key_exists($info['UserInfo']['job_cd'], $job)) {
+                                            echo h($job[$info['UserInfo']['job_cd']]);
+                                        }?></td>
                                         <td class=""><?php echo h($info['UserInfo']['position_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['position']); ?></td>
+                                        <td class=""><?php
+                                        $position = unserialize(POSITION);
+                                        if (array_key_exists($info['UserInfo']['position_cd'], $position)) {
+                                            echo h($position[$info['UserInfo']['position_cd']]);
+                                        }?></td>
                                         <td class=""><?php echo h($info['UserInfo']['work_location_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['work_location']); ?></td>
+                                        <td class=""><?php
+                                        $work_location = unserialize(WORK_LOCATION);
+                                        if (array_key_exists($info['UserInfo']['work_location_cd'], $work_location)) {
+                                            echo h($work_location[$info['UserInfo']['work_location_cd']]);
+                                        }?></td>
                                         <td class=""><?php echo h($info['UserInfo']['department_cd']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['department']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
@@ -116,7 +138,7 @@
                                         <td class=""><?php echo h($info['UserInfo']['rating_job_cd']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['rating_job']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['rating_grade_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['rating_grade']); ?></td>                       
+                                        <td class=""><?php echo h($info['UserInfo']['rating_grade']); ?></td>
                                     </tr>
 
                                     <?php
@@ -131,18 +153,18 @@
 								<?php
 								if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
 									echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-								}								
-                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; 
-                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); 
-                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; 
-								
+								}
+                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>';
+                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => ''));
+                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>';
+
 								if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
 									echo '<li><span class="next disabled">&gt;&gt;</span></li>';
 								}
 								?>
 							</ul>
                         </div>
-                    <?php endif; ?>                
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -223,6 +245,6 @@
             var tables = $("table.responsive");
             unsplitTable(tables);
             splitTable(tables, pinned_columns);
-        });        
+        });
     });
 </script>
