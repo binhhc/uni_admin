@@ -21,4 +21,6 @@ define('BATCH_ENGINE_ALL', TMP . 'all.lock');
 
 define('DELETE_FLG_ON', '1');
 define('DELETE_FLG_OFF', '0');
+define('MAX_EMP_ID', '6');
+
 ?>

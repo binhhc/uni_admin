@@ -61,7 +61,7 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        $data['UserInfo']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        $data['UserInfo']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         $data['UserInfo']['employee_name'] = $db[1];
                         $data['UserInfo']['employee_name_furigana'] = $db[2];
                         $data['UserInfo']['employee_name_alphabet'] = $db[3];
@@ -178,8 +178,8 @@ class ImportCSVtoDBShell extends AppShell {
                     $db = explode(',', mb_convert_encoding($line, 'UTF-8', 'SJIS-win'));
                     $db = str_replace('"', '', $db);
                     if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT))){
-                            $data['Qualification']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
+                            $data['Qualification']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             $data['Qualification']['license_type_cd'] = $db[1];
                             $data['Qualification']['license_type'] = $db[2];
                             $data['Qualification']['issuing_organization'] = $db[3];
@@ -233,8 +233,8 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT))){
-                            $data['UnitPrice']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
+                            $data['UnitPrice']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             $data['UnitPrice']['revise_date'] = $db[1];
                             $data['UnitPrice']['salary_type_cd'] = $db[2];
                             $data['UnitPrice']['salary_type'] = $db[3];
@@ -300,8 +300,8 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT))){
-                            $data['AnnualIncome']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
+                            $data['AnnualIncome']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             $data['AnnualIncome']['yearly_amount'] = $db[1];
                             $data['AnnualIncome']['income_gross'] = $db[2];
                             $data['AnnualIncome']['income_net'] = $db[3];
@@ -350,8 +350,8 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT))){
-                            $data['SchoolEducation']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
+                            $data['SchoolEducation']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             $data['SchoolEducation']['graduate_year'] = $db[1];
                             $data['SchoolEducation']['graduate_type_cd'] = $db[2];
                             $data['SchoolEducation']['graduate_type'] = $db[3];
@@ -407,8 +407,8 @@ class ImportCSVtoDBShell extends AppShell {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
                     if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT))){
-                            $data['WorkExperience']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), 6, 0, STR_PAD_LEFT);
+                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
+                            $data['WorkExperience']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             $data['WorkExperience']['join_date'] = $db[1];
                             $data['WorkExperience']['leave_date'] = $db[2];
                             $data['WorkExperience']['work_year'] = $db[3];
