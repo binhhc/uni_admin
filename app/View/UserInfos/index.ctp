@@ -28,8 +28,7 @@
                         <td>所属</td>
                         <td>
                             <?php
-                            $work_location = unserialize(WORK_LOCATION);
-                            echo $this->Form->input('department_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.department_cd'])?$filter['UserInfo.department_cd']:'')); ?>
+                            echo $this->Form->input('department_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $departments, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.department_cd'])?$filter['UserInfo.department_cd']:'')); ?>
                         </td>
                         <td>
                             <?php
@@ -155,7 +154,7 @@
                                             echo h($work_location[$info['UserInfo']['work_location_cd']]);
                                         }?></td>
                                         <td class=""><?php echo h($info['UserInfo']['department_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['department']); ?></td>
+                                        <td class=""><?php echo h($info['Department']['department_name']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['problem_type']); ?></td>
                                         <td class=""><?php echo h($info['UserInfo']['problem_grade']); ?></td>

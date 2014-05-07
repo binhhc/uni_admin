@@ -45,6 +45,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/06
      */
     public function importUserInfo($path, $directory_month) {
         $base = $path . DS . '01_USERINFO.csv';
@@ -55,58 +56,30 @@ class ImportCSVtoDBShell extends AppShell {
             $outstream = fopen($filename, 'w');
             $n = count($userInfo);
             $input_id = array();
-            for ($i = 0; $i < $n; ++$i) {
+            $columns = array();
+            for ($i = 0; $i < $n; $i++) {
                 $line = trim($userInfo[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        $data['UserInfo']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                        $data['UserInfo']['employee_name'] = $db[1];
-                        $data['UserInfo']['employee_name_furigana'] = $db[2];
-                        $data['UserInfo']['employee_name_alphabet'] = $db[3];
-                        $data['UserInfo']['office_email'] = $db[4];
-                        $data['UserInfo']['company_join_date'] = $db[5];
-                        $data['UserInfo']['gender_code'] = $db[6];
-                        //$data['UserInfo']['sex'] = $db[7];
-                        $data['UserInfo']['birthday'] = $db[8];
-                        // $data['UserInfo']['work_year'] = $db[9];
-                        // $data['UserInfo']['age'] = $db[10];
-                        $data['UserInfo']['employment_type_cd'] = $db[11];
-                        // $data['UserInfo']['employment_type'] = $db[12];
-                        $data['UserInfo']['zip_code'] = $db[13];
-                        $data['UserInfo']['prefecture'] = $db[14];
-                        $data['UserInfo']['ward'] = $db[15];
-                        $data['UserInfo']['address'] = $db[16];
-                        $data['UserInfo']['building'] = $db[17];
-                        $data['UserInfo']['job_cd'] = $db[18];
-                        // $data['UserInfo']['job'] = $db[19];
-                        $data['UserInfo']['position_cd'] = $db[20];
-                        // $data['UserInfo']['position'] = $db[21];
-                        $data['UserInfo']['work_location_cd'] = $db[22];
-                        // $data['UserInfo']['work_location'] = $db[23];
-                        $data['UserInfo']['department_cd'] = $db[24];
-                        $data['UserInfo']['department'] = $db[25];
-                        $data['UserInfo']['problem_type_cd'] = $db[26];
-                        $data['UserInfo']['problem_type'] = $db[27];
-                        $data['UserInfo']['problem_grade'] = $db[28];
-                        $data['UserInfo']['problem_content'] = $db[29];
-                        $data['UserInfo']['recruit_type_cd'] = $db[30];
-                        $data['UserInfo']['recruit_type'] = $db[31];
-                        $data['UserInfo']['recruit_place_cd'] = $db[32];
-                        $data['UserInfo']['recruit_place'] = $db[33];
-                        $data['UserInfo']['introduction_type_cd'] = $db[34];
-                        $data['UserInfo']['introduction_type'] = $db[35];
-                        $data['UserInfo']['introduction_person'] = $db[36];
-                        $data['UserInfo']['introduction_related_cd'] = $db[37];
-                        $data['UserInfo']['introduction_related'] = $db[38];
-                        $data['UserInfo']['face_auth_cd'] = $db[39];
-                        $data['UserInfo']['face_auth'] = $db[40];
-                        $data['UserInfo']['rating_job_cd'] = $db[41];
-                        $data['UserInfo']['rating_job'] = $db[42];
-                        $data['UserInfo']['rating_grade_cd'] = $db[43];
-                        $data['UserInfo']['rating_grade'] = $db[44];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_USER_INFO) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         $data['UserInfo']['created'] = date('Y-m-d H:i:s');
+
+                        foreach ($columns as $key => $value) {
+                            $data['UserInfo'][$key] = $db[$value];
+                        }
+
                         //check validate user before insert/update
                         $this->UserInfo->set($data);
                         if ($this->UserInfo->customValidate()) {
@@ -162,6 +135,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/07
      */
     public function importQualitification($path, $directory_month) {
         $base = $path . DS . '02_QUALIFICATION.csv';
@@ -171,38 +145,44 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '02_QUALIFICATION_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($quanlity);
+            $columns = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($quanlity[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, 'UTF-8', 'SJIS-win'));
                     $db = str_replace('"', '', $db);
-                    if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
-                            $data['Qualification']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['Qualification']['license_type_cd'] = $db[1];
-                            $data['Qualification']['license_type'] = $db[2];
-                            $data['Qualification']['issuing_organization'] = $db[3];
-                            $data['Qualification']['license_name'] = $db[4];
-                            $data['Qualification']['acquire_date'] = $db[5];
-                            $data['Qualification']['update_date'] = $db[6];
-                            $data['Qualification']['expire_date'] = $db[7];
-                            $data['Qualification']['certification_number'] = $db[8];
-                            $data['Qualification']['attachment'] = $db[9];
-                            $data['Qualification']['note'] = $db[10];
-                            $data['Qualification']['allowance'] = $db[11];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_QUALIFICATION) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                        if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
+
                             $data['Qualification']['created'] = date('Y-m-d H:i:s');
+
+                            foreach ($columns as $key => $value) {
+                                $data['Qualification'][$key] = $db[$value];
+                            }
+
                             //check Qualification validate
                             $this->Qualification->set($data);
                             if ($this->Qualification->customValidate()) {
                                 $this->Qualification->create();
                                 $this->Qualification->save($data);
-                            }else{
+                            } else {
                                 //write log Qualification
                                 $this->write_log_validate($i, 'Qualification');
                             }
-                        }else{
-                            $this->log('[Qualification] line '. ($i+1) .' employee_id ' . $db[0] . ' not exist!', 'batch');
+                        } else {
+                            $this->log('[Qualification] line '. ($i+1) .' employee_id ' . $db[$columns['employee_id']] . ' not exist!', 'batch');
                         }
                     }
                 }
@@ -218,6 +198,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/07
      */
     public function importUnitPrice($path, $directory_month) {
         $base = $path . DS . '03_UNIT_PRICE.csv';
@@ -227,50 +208,44 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '03_UNIT_PRICE_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($unitPrice);
+            $columns = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($unitPrice[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
-                            $data['UnitPrice']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['UnitPrice']['revise_date'] = $db[1];
-                            $data['UnitPrice']['salary_type_cd'] = $db[2];
-                            $data['UnitPrice']['salary_type'] = $db[3];
-                            $data['UnitPrice']['note'] = $db[4];
-                            $data['UnitPrice']['bonus'] = $db[5];
-                            $data['UnitPrice']['adjust_salary'] = $db[6];
-                            $data['UnitPrice']['support_allowance'] = $db[7];
-                            $data['UnitPrice']['leader_allowance'] = $db[8];
-                            $data['UnitPrice']['meal_allowance'] = $db[9];
-                            $data['UnitPrice']['address_allowance'] = $db[10];
-                            $data['UnitPrice']['absent_salary_cut'] = $db[11];
-                            $data['UnitPrice']['late_salary_cut'] = $db[12];
-                            $data['UnitPrice']['overtime_normal'] = $db[13];
-                            $data['UnitPrice']['overtime_night'] = $db[14];
-                            $data['UnitPrice']['overtime_holiday'] = $db[15];
-                            $data['UnitPrice']['overtime_1'] = $db[16];
-                            $data['UnitPrice']['overtime_2'] = $db[17];
-                            $data['UnitPrice']['overtime_3'] = $db[18];
-                            $data['UnitPrice']['overtime_4'] = $db[19];
-                            $data['UnitPrice']['overtime_5'] = $db[20];
-                            $data['UnitPrice']['basic_bonus'] = $db[21];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_UNIT_PRICE) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                        if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
+
                             $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
+
+                            foreach ($columns as $key => $value) {
+                                $data['UnitPrice'][$key] = $db[$value];
+                            }
 
                             //check UnitPrice validate
                             $this->UnitPrice->set($data);
                             if ($this->UnitPrice->customValidate()) {
                                 $this->UnitPrice->create();
                                 $this->UnitPrice->save($data);
-                            }else{
+                            } else {
                                 //write log UnitPrice
                                 $this->write_log_validate($i, 'UnitPrice');
                             }
-                        }else{
-                            $this->log('[UnitPrice] line '.($i+1).' employee_id ' . $db[0] . ' not exist!', 'batch');
+                        } else {
+                            $this->log('[UnitPrice] line '.($i+1).' employee_id ' . $db[$columns['employee_id']] . ' not exist!', 'batch');
                         }
-
                     }
                 }
             }
@@ -285,6 +260,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/07
      */
     public function importAnnualIncome($path, $directory_month) {
         $base = $path . DS . '04_ANNUAL_INCOME.csv';
@@ -294,23 +270,33 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '04_ANNUAL_INCOME_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($annualIncome);
+            $columns = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($annualIncome[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
-                            $data['AnnualIncome']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['AnnualIncome']['yearly_amount'] = $db[1];
-                            $data['AnnualIncome']['income_gross'] = $db[2];
-                            $data['AnnualIncome']['income_net'] = $db[3];
-                            $data['AnnualIncome']['total_cut'] = $db[4];
-                            $data['AnnualIncome']['total_tax'] = $db[5];
-                            $data['AnnualIncome']['note'] = $db[6];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_ANNUAL_INCOME) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                        if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
+
                             $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
 
-                            //check validate
+                            foreach ($columns as $key => $value) {
+                                $data['AnnualIncome'][$key] = $db[$value];
+                            }
+
+                            //check validate Annual Income
                             $this->AnnualIncome->set($data);
                             if ($this->AnnualIncome->customValidate()) {
                                 $this->AnnualIncome->create();
@@ -318,8 +304,8 @@ class ImportCSVtoDBShell extends AppShell {
                             }else{
                                 $this->write_log_validate($i, 'AnnualIncome');
                             }
-                        }else{
-                            $this->log('[AnnualIncome] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
+                        } else {
+                            $this->log('[AnnualIncome] line ' . ($i+1) . ' employee_id  ' . $db[$columns['employee_id']] . ' not exist!', 'batch');
                         }
                     }
                 }
@@ -335,6 +321,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/07
      */
     public function importSchoolEducation($path, $directory_month) {
         $base = $path . DS . '05_SCHOOL_EDUCATION.csv';
@@ -344,39 +331,42 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '05_SCHOOL_EDUCATION_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($schoolEdu);
+            $columns = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($schoolEdu[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
-                            $data['SchoolEducation']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['SchoolEducation']['graduate_year'] = $db[1];
-                            $data['SchoolEducation']['graduate_type_cd'] = $db[2];
-                            $data['SchoolEducation']['graduate_type'] = $db[3];
-                            $data['SchoolEducation']['edu_type_cd'] = $db[4];
-                            $data['SchoolEducation']['edu_type'] = $db[5];
-                            $data['SchoolEducation']['newest_edu_cd'] = $db[6];
-                            $data['SchoolEducation']['newest_edu'] = $db[7];
-                            $data['SchoolEducation']['school_type_cd'] = $db[8];
-                            $data['SchoolEducation']['school_type'] = $db[9];
-                            $data['SchoolEducation']['diploma_type_cd'] = $db[10];
-                            $data['SchoolEducation']['diploma_type'] = $db[11];
-                            $data['SchoolEducation']['school'] = $db[12];
-                            $data['SchoolEducation']['faculty'] = $db[13];
-                            $data['SchoolEducation']['subject'] = $db[14];
-                            $data['SchoolEducation']['major'] = $db[15];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_SCHOOL_EDUCATION) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                        if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
+
                             $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
+
+                            foreach ($columns as $key => $value) {
+                                $data['SchoolEducation'][$key] = $db[$value];
+                            }
+
+                            //check validate School Education
                             $this->SchoolEducation->set($data);
                             if ($this->SchoolEducation->customValidate()) {
                                 $this->SchoolEducation->create();
                                 $this->SchoolEducation->save($data);
-                            }else{
+                            } else {
                                 $this->write_log_validate($i, 'SchoolEducation');
                             }
-                        }else{
-                            $this->log('[SchoolEducation] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
+                        } else {
+                            $this->log('[SchoolEducation] line ' . ($i+1) . ' employee_id  ' . $db[$columns['employee_id']] . ' not exist!', 'batch');
                         }
                     }
                 }
@@ -392,6 +382,7 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
+     * @modified Bao Nam - 2014/05/07
      */
     public function importWorkExperience($path, $directory_month) {
         $base = $path . DS . '06_WORK_EXPERIENCE.csv';
@@ -401,30 +392,33 @@ class ImportCSVtoDBShell extends AppShell {
             $filename = $directory_month . DS . '06_WORK_EXPERIENCE_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
             $outstream = fopen($filename, 'w');
             $n = count($workExpert);
+            $columns = array();
             for ($i = 0; $i < $n; ++$i) {
                 $line = trim($workExpert[$i]);
                 if (!empty($line)) {
                     fputcsv($outstream, explode(',', $line));
                     $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
-                    if ($i > 0) {
-                        if($this->uniqueEmployeeId(str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT))){
-                            $data['WorkExperience']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $db[0]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['WorkExperience']['join_date'] = $db[1];
-                            $data['WorkExperience']['leave_date'] = $db[2];
-                            $data['WorkExperience']['work_year'] = $db[3];
-                            $data['WorkExperience']['company'] = $db[4];
-                            $data['WorkExperience']['bussiness_type'] = $db[5];
-                            $data['WorkExperience']['company_zip_code'] = $db[6];
-                            $data['WorkExperience']['company_address'] = $db[7];
-                            $data['WorkExperience']['abroad_type_cd'] = $db[8];
-                            $data['WorkExperience']['abroad_type'] = $db[9];
-                            $data['WorkExperience']['position'] = $db[10];
-                            $data['WorkExperience']['retire_reason_cd'] = $db[11];
-                            $data['WorkExperience']['retire_reason'] = $db[12];
-                            $data['WorkExperience']['retire_content'] = $db[13];
-                            $data['WorkExperience']['note'] = $db[14];
+
+                    //Compare columns in CSV with columns in constants
+                    if ($i==0) {
+                        foreach (unserialize(CSV_WORK_EXPERIENCE) as $key => $value) {
+                            $key_id = array_search($value, $db);
+                            if (is_numeric($key_id)) {
+                                $columns[$key] = $key_id;
+                            }
+                        }
+                    } else {
+                        $data = array();
+                        $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                        if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
+
                             $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
 
+                            foreach ($columns as $key => $value) {
+                                $data['WorkExperience'][$key] = $db[$value];
+                            }
+
+                            //check validate Work Experience
                             $this->WorkExperience->set($data);
                             if ($this->WorkExperience->customValidate()) {
                                 $this->WorkExperience->create();
@@ -433,7 +427,7 @@ class ImportCSVtoDBShell extends AppShell {
                                 $this->write_log_validate($i, 'WorkExperience');
                             }
                         }else{
-                            $this->log('[WorkExperience] line ' . ($i+1) . ' employee_id  ' . $db[0] . ' not exist!', 'batch');
+                            $this->log('[WorkExperience] line ' . ($i+1) . ' employee_id  ' . $db[$columns['employee_id']] . ' not exist!', 'batch');
                         }
                     }
                 }
@@ -451,7 +445,7 @@ class ImportCSVtoDBShell extends AppShell {
         @unlink(BATCH_ENGINE_ALL);
     }
     /**
-     * @author  Nguyen Hoang
+     * @author Nguyen Hoang
      * Write log validate
      * @since 01/2013
      */

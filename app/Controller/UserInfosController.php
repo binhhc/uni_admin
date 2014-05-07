@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UserInfosController extends AppController {
 
-    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience');
+    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'Department');
     public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -19,20 +19,41 @@ class UserInfosController extends AppController {
         if (!empty($this->request->query['employment_type_cd']) && is_numeric($this->request->query['employment_type_cd'])) {
             $filter['UserInfo.employment_type_cd'] = $this->request->query['employment_type_cd'];
         };
-        if(!empty($this->request->query['department_cd']) && is_numeric($this->request->query['department_cd']) ) {
-            $filter['UserInfo.department_cd'] = $this->request->query['department_cd'];
-        };
         if(!empty($this->request->query['work_location_cd']) && is_numeric($this->request->query['work_location_cd'])) {
             $filter['UserInfo.work_location_cd'] = $this->request->query['work_location_cd'];
         };
+        if(!empty($this->request->query['department_cd'])) {
+            $filter['UserInfo.department_cd'] = $this->request->query['department_cd'];
+        };
         $this->Paginator->settings = array(
+            'joins' => array(array(
+                'table' => 'departments',
+                'alias' => 'Department',
+                'type' => 'LEFT',
+                'conditions' => array(
+                    'Department.department_cd = UserInfo.department_cd',
+                    'Department.delete_flg = ' . DELETE_FLG_OFF,
+                )
+            )),
+            'fields' => array(
+                'UserInfo.*', 'Department.department_name',
+            ),
             'conditions' => $filter,
             'limit' => Configure::read('max_row'),
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
+        //departments to filter
+        $departments = $this->Department->find('list', array(
+            'conditions' => array(
+                'Department.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'Department.department_cd', 'Department.department_name',
+            )));
 
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
         $this->set(array(
+            'departments' => $departments,
             'filter' => $filter,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
