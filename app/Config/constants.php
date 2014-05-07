@@ -147,7 +147,7 @@ define('CSV_ANNUAL_INCOME', serialize(array(
     'income_net' => '給与所得控除後',
     'total_cut' => '所得控除合計額',
     'total_tax' => '源泉徴収税額',
-    'note6' => '備考'
+    'note' => '備考'
 )));
 
 define('CSV_SCHOOL_EDUCATION', serialize(array(

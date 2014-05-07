@@ -2191,3 +2191,6 @@ input.datepicker {
 .search-form-table td {
     padding-right: 6px;
 }
+.td-annual {
+    min-width: 150px !important;
+}

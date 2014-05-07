@@ -1,10 +1,10 @@
 <div class="mainbar">
      <div class="matter">
         <div class="container">
-            <?php 
+            <?php
                 echo $this->Html->link('追加', array('controller'=>'Qualifications', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("Qualifications")')); 
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("Qualifications")'));
             ?>
             <div class="widget">
                 <div class="widget-content">
@@ -24,20 +24,21 @@
                                     <th>更新年月日</th>
                                     <th>有効期限</th>
                                     <th>認定番号</th>
-                                    <th>資格添付ファイル</th>       
-                                    <th>備考</th>                                    
+                                    <th>資格添付ファイル</th>
+                                    <th>資格手当</th>
+                                    <th>備考</th>
                                 </tr>
-                            </thead>      
+                            </thead>
                             <tbody>
                                 <?php if (empty($quanlity)) { ?>
                                     <tr class="nowrap">
-                                        <td colspan="12" class ="data-empty">免許資格のデーターがありません。</td>
+                                        <td colspan="13" class ="data-empty">免許資格のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
                                     foreach ($quanlity as $quanlitify):
                                         ?>
-                                        <tr class="nowrap">                             
+                                        <tr class="nowrap">
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $quanlitify['Qualification']['id']; ?>' ></td>
                                             <td><?php echo $this->Form->postLink(h($quanlitify['Qualification']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($quanlitify['Qualification']['id'])))); ?> </td>
                                             <td class=""><?php echo h($quanlitify['UserInfo']['employee_name']); ?></td>
@@ -49,8 +50,9 @@
                                             <td class=""><?php echo h($quanlitify['Qualification']['update_date']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['expire_date']); ?></td>
                                             <td class=""><?php echo h($quanlitify['Qualification']['certification_number']); ?></td>
-                                            <td class=""><?php echo h($quanlitify['Qualification']['attachment']); ?></td>                   
-                                            <td class=""><?php echo h($quanlitify['Qualification']['note']); ?></td>             
+                                            <td class=""><?php echo h($quanlitify['Qualification']['attachment']); ?></td>
+                                            <td class=""><?php echo h($quanlitify['Qualification']['allowance']); ?></td>
+                                            <td class=""><?php echo h($quanlitify['Qualification']['note']); ?></td>
                                         </tr>
 
                                         <?php
@@ -65,18 +67,18 @@
                                 <?php
                                 if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
                                     echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-                                }                               
-                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; 
-                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); 
-                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; 
-                                
+                                }
+                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>';
+                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => ''));
+                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>';
+
                                 if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
                                     echo '<li><span class="next disabled">&gt;&gt;</span></li>';
                                 }
                                 ?>
                             </ul>
                         </div>
-                        <?php endif; ?>  
+                        <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -157,6 +159,6 @@
             var tables = $("table.responsive");
             unsplitTable(tables);
             splitTable(tables, pinned_columns);
-        });        
+        });
     });
 </script>

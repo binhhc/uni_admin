@@ -1,10 +1,10 @@
 <div class="mainbar">
      <div class="matter">
         <div class="container">
-            <?php 
+            <?php
                 echo $this->Html->link('追加', array('controller'=>'AnnualIncomes', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("AnnualIncomes")')); 
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("AnnualIncomes")'));
             ?>
             <div class="widget">
                 <div class="widget-content">
@@ -15,18 +15,19 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th>社員番号</th>
-                                    <th>氏名</th>
-                                    <th>年分</th>
-                                    <th>支払金額</th>
-                                    <th>給与所得控除後</th>
-                                    <th>所得控除合計額</th>
-                                    <th >源泉徴収税額</th>                                    
+                                    <th class="td-annual">氏名</th>
+                                    <th class="td-annual">年分</th>
+                                    <th class="td-annual">支払金額</th>
+                                    <th class="td-annual">給与所得控除後</th>
+                                    <th class="td-annual">所得控除合計額</th>
+                                    <th class="td-annual">源泉徴収税額</th>
+                                    <th class="td-annual">備考</th>
                                 </tr>
-                            </thead>      
+                            </thead>
                             <tbody>
                                 <?php if (empty($annualIncome)) { ?>
                                     <tr>
-                                        <td colspan="7" class="data-empty">年収精算のデーターがありません。</td>
+                                        <td colspan="9" class="data-empty">年収精算のデーターがありません。</td>
                                     </tr>
                                 <?php
                                 } else {
@@ -34,13 +35,14 @@
                                         ?>
                                         <tr>
                                             <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $annual['AnnualIncome']['id']; ?>' ></td>
-                                            <td><?php echo $this->Form->postLink(h($annual['AnnualIncome']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($annual['AnnualIncome']['id'])))); ?> </td>                        
-                                            <td class=""><?php echo h($annual['UserInfo']['employee_name']); ?></td>
-                                            <td class=""><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
-                                            <td class=""><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
-                                            <td class=""><?php echo h($annual['AnnualIncome']['income_net']); ?></td>
-                                            <td class=""><?php echo h($annual['AnnualIncome']['total_cut']); ?></td> 
-                                            <td class=""><?php echo h($annual['AnnualIncome']['total_tax']); ?></td>
+                                            <td><?php echo $this->Form->postLink(h($annual['AnnualIncome']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($annual['AnnualIncome']['id'])))); ?> </td>
+                                            <td class="nowrap td-annual"><?php echo h($annual['UserInfo']['employee_name']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['income_net']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['total_cut']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['total_tax']); ?></td>
+                                            <td class="td-annual"><?php echo h($annual['AnnualIncome']['note']); ?></td>
                                         </tr>
 
                                         <?php
@@ -50,22 +52,22 @@
                             </tbody>
                         </table>
                         <?php if ($this->Paginator->numbers()): ?>
-                            <div class="pagination">
-                                <ul>
-									<?php
-									if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
-										echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-									}
-									?>
+                            <div class="widget-foot">
+                                <ul class="pagination">
+                                    <?php
+                                    if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
+                                        echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
+                                    }
+                                    ?>
                                     <?php echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; ?>
                                     <?php echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); ?>
                                     <?php echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; ?>
-									<?php
-									if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
-										echo '<li><span class="next disabled">&gt;&gt;</span></li>';
-									}
-									?>
-								</ul>
+                                    <?php
+                                    if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
+                                        echo '<li><span class="next disabled">&gt;&gt;</span></li>';
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -78,7 +80,7 @@
 <script type="text/javascript">
     $(function() {
         var pinned_columns = 3;
-		<?php if (empty($annualIncome)) echo "pinned_columns = -1;";?>
+        <?php if (empty($annualIncome)) echo "pinned_columns = -1;";?>
         var updateTables = function() {
             var tables = $("table.responsive");
             splitTable(tables, pinned_columns);
@@ -149,6 +151,6 @@
             var tables = $("table.responsive");
             unsplitTable(tables);
             splitTable(tables, pinned_columns);
-        });        
+        });
     });
 </script>
