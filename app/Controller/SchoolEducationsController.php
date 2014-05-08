@@ -47,8 +47,8 @@ class SchoolEducationsController extends AppController {
         $this->Session->write('flag_link_school', 1);
         $this->set('user_info', $this->UserInfo->listUser());
         $this->set(array(
-            'title_for_layout' => '教育履歴',
-            'page_title' => '教育履歴',
+            'title_for_layout' => '学歴情報',
+            'page_title' => '学歴情報',
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -82,8 +82,8 @@ class SchoolEducationsController extends AppController {
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());
         $this->set(array(
-            'title_for_layout' => '教育履歴',
-            'page_title' => '教育履歴',
+            'title_for_layout' => '学歴情報',
+            'page_title' => '学歴情報',
         ));
         $this->render('detail');
     }

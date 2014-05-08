@@ -24,7 +24,7 @@ class SystemAuthsController extends AppController {
         $this->set('systemAuth', $this->Paginator->paginate('SystemAuth'));
         $this->set(array(
             'title_for_layout' => 'System Auths',
-            'page_title' => '職種履歴',
+            'page_title' => 'System Auths',
         ));
     }
 
@@ -45,7 +45,7 @@ class SystemAuthsController extends AppController {
         $this->Session->write('flag_link_systemAuth', 1);
         $this->set(array(
             'title_for_layout' => 'System Auths',
-            'page_title' => '職種履歴',
+            'page_title' => 'System Auths',
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -81,7 +81,7 @@ class SystemAuthsController extends AppController {
         $this->set('readonly', 'readonly="readonly"');
         $this->set(array(
             'title_for_layout' => 'System Auths',
-            'page_title' => '職種履歴',
+            'page_title' => 'System Auths',
         ));
         $this->render('detail');
     }

@@ -15,7 +15,7 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th>社員番号</th>
-                                    <th class="td-annual">氏名</th>
+                                    <th class="td-annual">職場</th>
                                     <th class="td-annual">年分</th>
                                     <th class="td-annual">支払金額</th>
                                     <th class="td-annual">給与所得控除後</th>
@@ -27,7 +27,7 @@
                             <tbody>
                                 <?php if (empty($annualIncome)) { ?>
                                     <tr>
-                                        <td colspan="9" class="data-empty">年収精算のデーターがありません。</td>
+                                        <td colspan="9" class="data-empty">年収情報のデーターがありません。</td>
                                     </tr>
                                 <?php
                                 } else {

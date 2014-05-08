@@ -1,10 +1,10 @@
 <div class="mainbar">
      <div class="matter">
         <div class="container">
-            <?php 
+            <?php
                 echo $this->Html->link('追加', array('controller'=>'SchoolEducations', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("SchoolEducations")')); 
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("SchoolEducations")'));
             ?>
             <div class="widget">
                 <div class="widget-content">
@@ -15,7 +15,7 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th>社員番号</th>
-                                    <th>氏名</th>
+                                    <th>職場</th>
                                     <th>入卒年月</th>
                                     <th>入卒区分コード</th>
                                     <th>入卒区分</th>
@@ -30,20 +30,20 @@
                                     <th>学校名</th>
                                     <th>学部名</th>
                                     <th>学科名</th>
-                                    <th>専攻名</th>                                    
+                                    <th>専攻名</th>
                                 </tr>
-                            </thead>      
+                            </thead>
                             <tbody>
                                 <?php if (empty($schoolEdu)) { ?>
                                     <tr>
-                                        <td colspan="17" class="data-empty">教育履歴のデーターがありません。</td>
+                                        <td colspan="17" class="data-empty">学歴情報のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
                                     foreach ($schoolEdu as $school):
                                         ?>
                                         <tr>
-                                            <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $school['SchoolEducation']['id']; ?>' ></td>                    
+                                            <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $school['SchoolEducation']['id']; ?>' ></td>
                                             <td><?php echo $this->Form->postLink(h($school['SchoolEducation']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($school['SchoolEducation']['id'])))); ?> </td>
                                             <td><?php echo h($school['UserInfo']['employee_name']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['graduate_year']); ?></td>
@@ -60,7 +60,7 @@
                                             <td class="nowrap"><?php echo h($school['SchoolEducation']['school']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['faculty']); ?></td>
                                             <td><?php echo h($school['SchoolEducation']['subject']); ?></td>
-                                            <td><?php echo h($school['SchoolEducation']['major']); ?></td>                             
+                                            <td><?php echo h($school['SchoolEducation']['major']); ?></td>
                                         </tr>
 
                                         <?php
@@ -75,18 +75,18 @@
                                 <?php
                                 if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
                                     echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-                                }                               
-                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>'; 
-                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => '')); 
-                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>'; 
-                                
+                                }
+                                echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>';
+                                echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => ''));
+                                echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>';
+
                                 if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
                                     echo '<li><span class="next disabled">&gt;&gt;</span></li>';
                                 }
                                 ?>
                             </ul>
                         </div>
-                    <?php endif; ?>  
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -167,6 +167,6 @@
             var tables = $("table.responsive");
             unsplitTable(tables);
             splitTable(tables, pinned_columns);
-        });        
+        });
     });
 </script>

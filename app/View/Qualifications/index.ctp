@@ -15,7 +15,7 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th>社員番号</th>
-                                    <th>氏名</th>
+                                    <th>職場</th>
                                     <th>免許資格区分コード</th>
                                     <th>免許資格区分</th>
                                     <th>発行団体</th>

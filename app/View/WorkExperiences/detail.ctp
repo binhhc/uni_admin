@@ -3,25 +3,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="widget wgreen">                
+                    <div class="widget wgreen">
                     <div class="widget-head">
-                      <div class="pull-left"><h3><b>職種履歴</b></h3></div>                  
+                      <div class="pull-left"><h3><b>職歴情報</b></h3></div>
                       <div class="clearfix"></div>
                     </div>
                 <div class="widget-content">
                     <div class="padd">
-                <?php echo $this->Form->create('WorkExperience', array('class'=>'form-horizontal')) ?> 
-                        <fieldset class="col-md-6">                            
+                <?php echo $this->Form->create('WorkExperience', array('class'=>'form-horizontal')) ?>
+                        <fieldset class="col-md-6">
                             <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
                             <div class="form-group">
                                 <label class="col-lg-6 col-lg-6 control-label">社員番号</label>
                                 <div class="col-lg-6">
                                     <?php
                                         if(empty($readonly)){
-                                            echo $this->Form->input('employee_id', array('class'=>'form-control','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));  
+                                            echo $this->Form->input('employee_id', array('class'=>'form-control','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false));
                                         }else{
                                             echo $this->Form->input('employee_id', array('class'=>'form-control','label' => false, 'type' => 'text', 'required'=>false, $readonly));
-                                        }                                        
+                                        }
                                     ?>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                     <?php echo $this->Form->input('position', array('class' => 'form-control', 'label' => false, 'type' => 'text')); ?>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-lg-6 col-lg-6 control-label">退職の事由コード</label>
                                 <div class="col-lg-6">
@@ -124,18 +124,17 @@
                                 <div class="col-lg-6">
                                     <?php echo $this->Form->input('note', array('class' => 'form-control', 'label' => false, 'type' => 'area', 'cols' => 20, 'rows' => 5)); ?>
                                 </div>
-                            </div>                        
-                        </fieldset>                    
+                            </div>
+                        </fieldset>
                     <div class="form-actions">
-                        <?php 
-                            echo $this->Form->submit('登録', array('class'=>'btn btn-primary', 'div'=>false)); 
+                        <?php
+                            echo $this->Form->submit('登録', array('class'=>'btn btn-primary', 'div'=>false));
                             echo ' ';
                             echo $this->Html->link('キャンセル', $this->Session->read('save_latest_link_work'), array('class'=>'btn btn-default') );
-                        ?>       
-                    </div>        
+                        ?>
+                    </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
     </div>
 </div>
-      

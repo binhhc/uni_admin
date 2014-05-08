@@ -47,8 +47,8 @@ class WorkExperiencesController extends AppController {
         $this->Session->write('flag_link_work', 1);
         $this->set('user_info', $this->UserInfo->listUser());
         $this->set(array(
-            'title_for_layout' => '職種履歴',
-            'page_title' => '職種履歴',
+            'title_for_layout' => '職歴情報',
+            'page_title' => '職歴情報',
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -84,8 +84,8 @@ class WorkExperiencesController extends AppController {
         $this->set('readonly', 'readonly="readonly"');
         $this->set('user_info', $this->UserInfo->listUser());
         $this->set(array(
-            'title_for_layout' => '職種履歴',
-            'page_title' => '職種履歴',
+            'title_for_layout' => '職歴情報',
+            'page_title' => '職歴情報',
         ));
         $this->render('detail');
     }

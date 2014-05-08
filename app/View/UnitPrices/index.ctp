@@ -15,7 +15,7 @@
                                     <th><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
                                     <th>社員番号</th>
-                                    <th>氏名</th>
+                                    <th>職場</th>
                                     <th>改定年月日</th>
                                     <th>給与区分コード</th>
                                     <th>給与区分</th>
@@ -42,7 +42,7 @@
                             <tbody>
                                 <?php if (empty($unitPrice)) { ?>
                                     <tr>
-                                        <td colspan="23" class="data-empty">給与精算のデーターがありません。</td>
+                                        <td colspan="23" class="data-empty">給与情報のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {

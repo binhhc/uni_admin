@@ -50,9 +50,9 @@
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
                                 <th >社員番号</th>
-                                <th>氏名</th>
-                                <th>氏名（フリガナ）</th>
-                                <th>氏名（英字）</th>
+                                <th>職場</th>
+                                <th>職場（フリガナ）</th>
+                                <th>職場（英字）</th>
                                 <th>社用e-Mail</th>
                                 <th>入社年月日</th>
                                 <th>性別コード</th>
