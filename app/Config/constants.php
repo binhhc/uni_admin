@@ -21,6 +21,8 @@ define('BATCH_ENGINE_ALL', TMP . 'all.lock');
 
 define('DELETE_FLG_ON', '1');
 define('DELETE_FLG_OFF', '0');
+define('SYSTEM_AUTH_ACTIVE', '1');
+define('SYSTEM_AUTH_BANNED', '0');
 define('MAX_EMP_ID', '6');
 define('GENDER_CODE', serialize(array(
     '0' => '男性',

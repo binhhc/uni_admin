@@ -43,145 +43,157 @@
 
             <div class="widget">
                 <div class="widget-content">
-                    <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
+                    <table id = "table-left" class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                         <thead>
                             <tr class="nowrap widget-head">
                                 <?php if (!empty($userInfo)) { ?>
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
-                                <th >社員番号</th>
+                                <th>社員番号</th>
                                 <th>職場</th>
-                                <th>職場（フリガナ）</th>
-                                <th>職場（英字）</th>
-                                <th>社用e-Mail</th>
-                                <th>入社年月日</th>
-                                <th>性別コード</th>
-                                <th>性別</th>
-                                <th>生年月日</th>
-                                <th>勤続年数</th>
-                                <th>年齢</th>
-                                <th>雇用区分コード</th>
-                                <th>雇用区分</th>
-                                <th>郵便番号</th>
-                                <th>都道府県</th>
-                                <th>市区町村</th>
-                                <th>番地</th>
-                                <th>マンション／ビル等</th>
-                                <th>職種コード</th>
-                                <th>職種</th>
-                                <th>役職コード</th>
-                                <th>役職</th>
-                                <th>勤務地コード</th>
-                                <th>勤務地</th>
-                                <th>所属コード</th>
-                                <th>所属</th>
-                                <th>障害手帳区分コード</th>
-                                <th>障害手帳区分</th>
-                                <th>障害等級</th>
-                                <th>障害内容</th>
-                                <th>採用区分コード</th>
-                                <th>採用区分</th>
-                                <th>採用地コード</th>
-                                <th>採用地</th>
-                                <th>紹介区分コード</th>
-                                <th>紹介区分</th>
-                                <th>紹介者</th>
-                                <th>紹介者関係コード</th>
-                                <th>紹介者関係</th>
-                                <th>顔ナビ権限コード</th>
-                                <th>顔ナビ権限</th>
-                                <th>評価職種コード</th>
-                                <th>評価職種</th>
-                                <th>評価等級コード</th>
-                                <th>評価等級</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (empty($userInfo)) { ?>
-                                <tr>
-                                    <td colspan="45" class="data-empty" >社員情報のデータがありません。</td>
-                                </tr>
-                                <?php
+                        <?php if (!empty($userInfo)) {
+                            foreach ($userInfo as $info): ?>
+                            <tr class="nowrap">
+                                <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $info['UserInfo']['employee_id']; ?>' ></td>
+                                <td><?php echo $this->Form->postLink(h($info['UserInfo']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($info['UserInfo']['id'])))); ?> </td>
+                                <td><?php echo h($info['UserInfo']['employee_name']); ?></td>
+                            </tr>
+                        <?php endforeach;
                             } else {
-                                foreach ($userInfo as $info):
-                                    ?>
+                                echo '<tr>
+                                        <td colspan = "0" class="data-empty data-empty-scroll-table">社員情報のデータがありません。</td>
+                                    </tr>';
+                            }?>
+                        </tbody>
+                    </table>
+                    <div id="wrap">
+                        <table id="data" class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
+                            <thead>
+                                <tr class="nowrap widget-head">
+                                    <th>職場（フリガナ）</th>
+                                    <th>職場（英字）</th>
+                                    <th>社用e-Mail</th>
+                                    <th>入社年月日</th>
+                                    <th>性別コード</th>
+                                    <th>性別</th>
+                                    <th>生年月日</th>
+                                    <th>勤続年数</th>
+                                    <th>年齢</th>
+                                    <th>雇用区分コード</th>
+                                    <th>雇用区分</th>
+                                    <th>郵便番号</th>
+                                    <th>都道府県</th>
+                                    <th>市区町村</th>
+                                    <th>番地</th>
+                                    <th>マンション／ビル等</th>
+                                    <th>職種コード</th>
+                                    <th>職種</th>
+                                    <th>役職コード</th>
+                                    <th>役職</th>
+                                    <th>勤務地コード</th>
+                                    <th>勤務地</th>
+                                    <th>所属コード</th>
+                                    <th>所属</th>
+                                    <th>障害手帳区分コード</th>
+                                    <th>障害手帳区分</th>
+                                    <th>障害等級</th>
+                                    <th>障害内容</th>
+                                    <th>採用区分コード</th>
+                                    <th>採用区分</th>
+                                    <th>採用地コード</th>
+                                    <th>採用地</th>
+                                    <th>紹介区分コード</th>
+                                    <th>紹介区分</th>
+                                    <th>紹介者</th>
+                                    <th>紹介者関係コード</th>
+                                    <th>紹介者関係</th>
+                                    <th>顔ナビ権限コード</th>
+                                    <th>顔ナビ権限</th>
+                                    <th>評価職種コード</th>
+                                    <th>評価職種</th>
+                                    <th>評価等級コード</th>
+                                    <th>評価等級</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (!empty($userInfo)) {
+                                    foreach ($userInfo as $info): ?>
                                     <tr class="nowrap">
-                                        <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $info['UserInfo']['employee_id']; ?>' ></td>
-                                        <td><?php echo $this->Form->postLink(h($info['UserInfo']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($info['UserInfo']['id'])))); ?> </td>
-                                        <td class=""><?php echo h($info['UserInfo']['employee_name']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['office_email']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['company_join_date']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['gender_code']); ?></td>
-                                        <td class="nowrap"><?php
+                                        <td><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['office_email']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['company_join_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['gender_code']); ?></td>
+                                        <td><?php
                                         $gender = unserialize(GENDER_CODE);
                                         if (array_key_exists($info['UserInfo']['gender_code'], $gender)) {
                                             echo h($gender[$info['UserInfo']['gender_code']]);
                                         }?></td>
-                                        <td class="nowrap"><?php echo h($info['UserInfo']['birthday']); ?></td>
-                                        <td class=""><?php
+                                        <td><?php echo h($info['UserInfo']['birthday']); ?></td>
+                                        <td><?php
                                             echo date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->y . '年 ' . date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->m . 'ヵ月';?></td>
-                                        <td class="nowrap"><?php
+                                        <td><?php
                                             echo date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->y . '歳 ' . date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->m . 'ヵ月';?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['employment_type_cd']); ?></td>
-                                        <td class=""><?php
+                                        <td><?php echo h($info['UserInfo']['employment_type_cd']); ?></td>
+                                        <td><?php
                                         $employment = unserialize(EMPLOYMENT_TYPE);
                                         if (array_key_exists($info['UserInfo']['employment_type_cd'], $employment)) {
                                             echo h($employment[$info['UserInfo']['employment_type_cd']]);
                                         }?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['zip_code']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['prefecture']); ?></td>
-                                        <td class="nowrap"><?php echo h($info['UserInfo']['ward']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['address']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['building']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['job_cd']); ?></td>
-                                        <td class=""><?php
+                                        <td><?php echo h($info['UserInfo']['zip_code']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['prefecture']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['ward']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['address']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['building']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['job_cd']); ?></td>
+                                        <td><?php
                                         $job = unserialize(JOB_CD);
                                         if (array_key_exists($info['UserInfo']['job_cd'], $job)) {
                                             echo h($job[$info['UserInfo']['job_cd']]);
                                         }?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['position_cd']); ?></td>
-                                        <td class=""><?php
+                                        <td><?php echo h($info['UserInfo']['position_cd']); ?></td>
+                                        <td><?php
                                         $position = unserialize(POSITION);
                                         if (array_key_exists($info['UserInfo']['position_cd'], $position)) {
                                             echo h($position[$info['UserInfo']['position_cd']]);
                                         }?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['work_location_cd']); ?></td>
-                                        <td class=""><?php
+                                        <td><?php echo h($info['UserInfo']['work_location_cd']); ?></td>
+                                        <td><?php
                                         $work_location = unserialize(WORK_LOCATION);
                                         if (array_key_exists($info['UserInfo']['work_location_cd'], $work_location)) {
                                             echo h($work_location[$info['UserInfo']['work_location_cd']]);
                                         }?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['department_cd']); ?></td>
-                                        <td class=""><?php echo h($info['Department']['department_name']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['problem_type']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['problem_grade']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['problem_content']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['recruit_type_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['recruit_type']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['recruit_place_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['recruit_place']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['introduction_type_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['introduction_type']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['introduction_person']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['introduction_related_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['introduction_related']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['face_auth_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['face_auth']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['rating_job_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['rating_job']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['rating_grade_cd']); ?></td>
-                                        <td class=""><?php echo h($info['UserInfo']['rating_grade']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['department_cd']); ?></td>
+                                        <td><?php echo h($info['Department']['department_name']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['problem_type']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['problem_grade']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['problem_content']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['recruit_type_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['recruit_type']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['recruit_place_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['recruit_place']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['introduction_type_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['introduction_type']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['introduction_person']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['introduction_related_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['introduction_related']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['face_auth_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['face_auth']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['rating_job_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['rating_job']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['rating_grade_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['rating_grade']); ?></td>
                                     </tr>
-
-                                    <?php
-                                endforeach;
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                        <?php
+                                    endforeach;
+                                } else {echo '<tr><td colspan="0"></td></tr>';} ?>
+                            </tbody>
+                        </table>
+                    </div>
                     <?php if ($this->Paginator->numbers()): ?>
                         <div class="widget-foot">
                             <ul class="pagination">
@@ -207,79 +219,22 @@
 </div>
 
 <script type="text/javascript">
-    $(function() {
-        var pinned_columns = 3;
-		<?php if (empty($userInfo)) echo "pinned_columns = -1;";?>
-        var updateTables = function() {
-            var tables = $("table.responsive");
-            splitTable(tables, pinned_columns);
-        };
-
-        function splitTable(original, pinned_columns) {
-            if (!pinned_columns) pinned_columns = 1;
-
-            original.css('width', original.width());
-            original.wrap("<div class='table-wrapper' />");
-
-            var copy = original.clone().appendTo(original.closest(".table-wrapper"));
-            copy.removeClass("responsive");
-
-            copy.wrap("<div class='scrollable' />");
-            original.wrap("<div class='pinned' />");
-
-            original.find('form').each(function(i,e){
-                var form = $(e);
-                form.data('id', form.attr('name'));
-                form.removeAttr('name');
-            })
-
-            var wrapper = original.closest('.table-wrapper'),
-                scrollable = wrapper.find('.scrollable'),
-                pinned = wrapper.find('.pinned'),
-                pinned_width = 0;
-
-            copy.find('th:visible:lt(' + pinned_columns + ')').each(function(i, e) {
-                pinned_width += $(e).outerWidth();
-            });
-
-            wrapper.css({
-                'position': 'relative',
-                'display': 'block',
-                'clear': 'both',
-                'overflow': 'hidden'
-            });
-
-            scrollable.css({
-                'overflow': 'auto'
-            });
-
-            pinned.css({
-                'position': 'absolute',
-                'display': 'block',
-                'top': 0,
-                'width': pinned_width,
-                'overflow': 'hidden',
-                'background': '#fff'
-            });
+$( window ).on('resize', function() {
+        var rows = document.getElementById('data').getElementsByTagName('tr')
+        var rowsHeight=[];
+        var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
+        var rowsHeightLeft=[];
+        var heightResult = [];
+        for(var i=0;i<rows.length;i++){
+            rowsHeight[i]=rows[i].offsetHeight;
         }
-
-        function unsplitTable(original) {
-            original.closest(".table-wrapper").find(".scrollable").remove();
-            original.unwrap();
-            original.unwrap();
-            original.css('width', null);
-
-            original.find('form').each(function(i,e){
-                var form = $(e);
-                form.attr('name', form.data('id'));
-            })
+        for(var j=0;j<rowsleft.length;j++){
+            rowsHeightLeft[j]=rowsleft[j].offsetHeight;
         }
-
-        $(window).load(updateTables);
-        $(window).bind('resize', function() {
-            var tables = $("table.responsive");
-            unsplitTable(tables);
-            splitTable(tables, pinned_columns);
-        });
-    });
+        for(var x=0;x<rowsHeight.length;x++){
+            heightResult[x] = Math.max(rowsHeight[x], rowsHeightLeft[x]);
+            jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
+            jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
+        }
+}).trigger('resize');
 </script>

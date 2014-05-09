@@ -12,16 +12,17 @@
                             <thead>
                                 <tr class="nowrap widget-head">
                                     <?php if (!empty($systemAuth)) { ?>
-                                    <th><input type='checkbox' id="cb_all"/></th>
+                                    <th class="check_box_all"><input type='checkbox' id="cb_all"/></th>
                                     <?php } ?>
-                                    <th width="85%">System name</th>
+                                    <th>社員番号</th>
+                                    <th>職場</th>
                                     <th>Access type</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (empty($systemAuth)) { ?>
                                     <tr>
-                                        <td colspan="2" class="data-empty">SystemAuthのデーターがありません。</td>
+                                        <td colspan="4" class="data-empty">SystemAuthのデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
@@ -29,16 +30,11 @@
                                 ?>
                                     <tr>
                                         <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $system['SystemAuth']['id']; ?>' ></td>
-                                        <td><?php echo $this->Form->postLink(h($system['SystemAuth']['system_name']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])))); ?> </td>
+                                        <td><?php echo $this->Form->postLink(h($system['SystemAuth']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])))); ?> </td>
+                                        <td><?php echo h($system['UserInfo']['employee_name']); ?></td>
                                         <td class="center-table">
                                             <?php
-                                                if(!empty($system['SystemAuth']['access_type'])){
-                                                    echo '<span class="label label-success">Active</span>';
-                                                    //echo $this->Form->input('', array('type'=>'checkbox', 'checked'=>true, 'onclick'=>'return false;'));
-                                                }else{
-                                                    echo '<span class="label label-danger">Banned</span>';
-                                                    //echo $this->Form->input('', array('type'=>'checkbox', 'onclick'=>'return false;'));
-                                                }
+                                                echo (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE)?'<span class="label label-success">Active</span>':'<span class="label label-danger">Banned</span>';
                                             ?>
                                         </td>
                                     </tr>

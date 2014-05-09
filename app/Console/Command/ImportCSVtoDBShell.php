@@ -2,7 +2,7 @@
 
 class ImportCSVtoDBShell extends AppShell {
 
-    public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome');
+    public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome', 'SystemAuth');
     var $success = array();
     /**
      * @author  Binh Hoang
@@ -82,8 +82,15 @@ class ImportCSVtoDBShell extends AppShell {
 
                         //check validate user before insert/update
                         $this->UserInfo->set($data);
+                        $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
+                            if (empty($system_auth_id)) {
+                                $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
+                                $system_auth_data['SystemAuth']['access_type'] = SYSTEM_AUTH_ACTIVE;
+                                $this->SystemAuth->set($system_auth_data);
+                                $this->SystemAuth->create();
+                                $this->SystemAuth->save($system_auth_data);
+                            }
                         if ($this->UserInfo->customValidate()) {
-
                             if (in_array($data['UserInfo']['employee_id'], $input_id)) {
                                 $this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
                             } else {
@@ -130,6 +137,22 @@ class ImportCSVtoDBShell extends AppShell {
             return false;
         }
         return $user['UserInfo']['id'];
+    }
+
+    public function uniqueSystemAuthId($emp_id) {
+        if (empty($emp_id)) {
+            return false;
+        }
+        $system_au = $this->SystemAuth->find('first', array(
+            'conditions' => array(
+                'SystemAuth.employee_id' => $emp_id,
+            ),
+            'fields' => array('SystemAuth.employee_id')
+        ));
+        if (empty($system_au)) {
+            return false;
+        }
+        return $system_au['SystemAuth']['employee_id'];
     }
 
     /**

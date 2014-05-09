@@ -15,7 +15,11 @@ class UsersController extends AppController {
             App::import('Model', 'SystemAuth');
             $this->SystemAuth = new SystemAuth();
             //get access permission
-            $access = $this->SystemAuth->getActive(Configure::read('name_application'));
+            $username  = '';
+            if(!empty($this->request->data['User']['username'])){
+                $username = $this->request->data['User']['username'];
+            }
+            $access = $this->SystemAuth->getActive(Configure::read('name_application'), $username);
             if(!empty($access)){
                 if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
                     if ($this->Auth->login()) {
@@ -30,7 +34,7 @@ class UsersController extends AppController {
                 }
             }else{
                 $this->Session->setFlash(__('UAD_ERR_MSG0021'), 'error');
-            }            
+            }
         }
         $this->layout = 'login';
         $this->set(array(
@@ -63,9 +67,9 @@ class UsersController extends AppController {
             $csv_file_unique_income = $real_path . DS . '04_ANNUAL_INCOME.csv';
             $csv_file_school_education = $real_path . DS . '05_SCHOOL_EDUCATION.csv';
             $csv_file_work_experience = $real_path . DS . '06_WORK_EXPERIENCE.csv';
-            
+
             // check csv files exist
-            if($this->User->is_url_exist($csv_file_userinfo) && 
+            if($this->User->is_url_exist($csv_file_userinfo) &&
                 $this->User->is_url_exist($csv_file_qualification) &&
                 $this->User->is_url_exist($csv_file_unitprice) &&
                 $this->User->is_url_exist($csv_file_unique_income) &&
@@ -78,8 +82,8 @@ class UsersController extends AppController {
                     if (preg_match('/^win/i', PHP_OS))
                         pclose(popen('start "ImportCSVtoDB" ' . $shell, "r"));
                     else
-                        shell_exec($shell . ' > /dev/null 2>/dev/null &');                        
-                    
+                        shell_exec($shell . ' > /dev/null 2>/dev/null &');
+
                     $this->Session->setFlash(__('UAD_COMMON_MSG0003'), 'success');
                     sleep(1);
             } else
@@ -90,7 +94,7 @@ class UsersController extends AppController {
         $this->Session->setFlash(__('UAD_ERR_MSG0005'), 'error');
 
     return $this->redirect('status');
-    }    
+    }
 
     /**
      * Function logbatch

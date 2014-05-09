@@ -121,20 +121,21 @@ class UserInfosController extends AppController {
     }
 
     public function delete($id = null) {
-        $this->autoLayout = false;
-        $this->autoRender = false;
+        // $this->autoLayout = false;
+        // $this->autoRender = false;
         if ($this->Session->read('flag_link_info') == 0) {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
         $this->UserInfo->begin();
 
         if (intval($id > 0) || !empty($id)) {
-            if ($this->UserInfo->updateAll(array('UserInfo.delete_flg' => DELETE_FLG_OFF), array('UserInfo.employee_id' => $id))) {
-                if($this->AnnualIncome->updateAll(array('AnnualIncome.delete_flg' => DELETE_FLG_OFF),array('AnnualIncome.employee_id' => $id)) &&
-                    $this->Qualification->updateAll(array('Qualification.delete_flg' => DELETE_FLG_OFF),array('Qualification.employee_id' => $id)) &&
-                    $this->SchoolEducation->updateAll(array('SchoolEducation.delete_flg' => DELETE_FLG_OFF),array('SchoolEducation.employee_id' => $id)) &&
-                    $this->UnitPrice->updateAll(array('UnitPrice.delete_flg' => DELETE_FLG_OFF),array('UnitPrice.employee_id' => $id)) &&
-                    $this->WorkExperience->updateAll(array('WorkExperience.delete_flg' => DELETE_FLG_OFF),array('WorkExperience.employee_id' => $id))
+            if ($this->UserInfo->updateAll(array('UserInfo.delete_flg' => DELETE_FLG_ON), array('UserInfo.employee_id' => $id))) {
+                if($this->AnnualIncome->updateAll(array('AnnualIncome.delete_flg' => DELETE_FLG_ON),array('AnnualIncome.employee_id' => $id)) &&
+                    $this->Qualification->updateAll(array('Qualification.delete_flg' => DELETE_FLG_ON),array('Qualification.employee_id' => $id)) &&
+                    $this->SchoolEducation->updateAll(array('SchoolEducation.delete_flg' => DELETE_FLG_ON),array('SchoolEducation.employee_id' => $id)) &&
+                    $this->UnitPrice->updateAll(array('UnitPrice.delete_flg' => DELETE_FLG_ON),array('UnitPrice.employee_id' => $id)) &&
+                    $this->WorkExperience->updateAll(array('WorkExperience.delete_flg' => DELETE_FLG_ON),array('WorkExperience.employee_id' => $id)) &&
+                    $this->SystemAuth->updateAll(array('SystemAuth.delete_flg' => DELETE_FLG_ON),array('SystemAuth.employee_id' => $id))
                 ){
                     $this->UserInfo->commit();
                     $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');

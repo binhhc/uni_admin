@@ -9,7 +9,7 @@ function deleteAll(page){
         return;
     }
 
-    var r = confirm("Do you sure delete this?");
+    var r = confirm("削除してもよろしいですか？");
     if (r == true)
     {
         $.each($("input[name='cbID']:checked"), function() {
@@ -29,6 +29,6 @@ function deleteAll(page){
                 error: function() {
                 }
             });
-        });        
+        });
     }
 }

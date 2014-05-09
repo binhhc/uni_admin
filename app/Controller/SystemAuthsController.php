@@ -65,6 +65,7 @@ class SystemAuthsController extends AppController {
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
             $data['SystemAuth']['modified'] = date('Y-m-d');
+            $data['SystemAuth']['beforeSave'] = false;
             unset($data['SystemAuth']['employee_id']);
 
             if ($this->SystemAuth->customValidate()) {

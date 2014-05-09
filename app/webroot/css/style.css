@@ -2180,6 +2180,7 @@ input.datepicker {
 /*========== Index Table==========*/
 .data-empty {
     color:#b94a48;
+    padding: 8px;
 }
 .search-form {
     padding: 4px;
@@ -2191,6 +2192,22 @@ input.datepicker {
 .search-form-table td {
     padding-right: 6px;
 }
-.td-annual {
-    min-width: 150px !important;
+#table-left {
+    border-collapse: collapse;
+    float: left;
+    width: auto;
+}
+#wrap {
+    border-left: medium none;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.check_box_all {
+    width: 5px;
+}
+.emp-name {
+    padding-top: 5px !important;
+}
+.data-empty-scroll-table {
+    border-right: 0 !important;
 }
