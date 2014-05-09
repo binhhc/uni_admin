@@ -4,7 +4,7 @@
             <?php
                 echo $this->Html->link('追加', array('controller'=>'SystemAuths', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("SystemAuths")'));
+                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));
             ?>
             <div class="widget">
                 <div class="widget-content">
@@ -29,7 +29,7 @@
                                     foreach ($systemAuth as $system):
                                 ?>
                                     <tr>
-                                        <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $system['SystemAuth']['id']; ?>' ></td>
+                                        <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $system['SystemAuth']['employee_id']; ?>' ></td>
                                         <td><?php echo $this->Form->postLink(h($system['SystemAuth']['employee_id']), array('action' => 'edit'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])))); ?> </td>
                                         <td><?php echo h($system['UserInfo']['employee_name']); ?></td>
                                         <td class="center-table">

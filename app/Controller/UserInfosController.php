@@ -121,8 +121,8 @@ class UserInfosController extends AppController {
     }
 
     public function delete($id = null) {
-        // $this->autoLayout = false;
-        // $this->autoRender = false;
+        $this->autoLayout = false;
+        $this->autoRender = false;
         if ($this->Session->read('flag_link_info') == 0) {
             $this->Session->write('save_latest_link_info', $_SERVER['HTTP_REFERER']);
         }
