@@ -26,9 +26,9 @@
                                         <td>
                                             <?php
                                             if (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE) {
-                                                echo $this->Form->postLink('Active', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-success'));
+                                                echo $this->Form->postLink('Active', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
                                             } else {
-                                                echo $this->Form->postLink('Banned', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-danger'));
+                                                echo $this->Form->postLink('Banned', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
                                             }
                                             ?>
                                         </td>

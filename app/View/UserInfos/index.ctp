@@ -8,7 +8,6 @@
                     echo ' ';
                     echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));?>
                     </td>
-                    <td style="width:auto;"></td>
                     <td class="td-search-form-table">
                     <?php echo $this->Form->create('UserInfo', array('controller'=>'UserInfos', 'action'=>'index', 'type' => 'get', 'class'=>'form-inline search-form'));?>
                         <table class="nowrap search-form-table">
@@ -35,8 +34,8 @@
                                 </td>
                                 <td>
                                     <?php
-                                    echo $this->Form->button('絞り込み検索', array('type' => 'submit', 'class'=>'btn btn-default', 'div'=>false));
-                                    echo $this->Form->button('クリア', array('type' => 'button', 'class' => 'btn btn-default', 'onclick' => "window.location.href = '" . Router::url(array('controller' => 'UserInfos', 'action' => 'index'), true) . "';"));
+                                    echo $this->Form->button('絞り込み検索', array('type' => 'submit', 'class'=>'btn btn-xs btn-default', 'div'=>false));
+                                    echo $this->Form->button('クリア', array('type' => 'button', 'class' => 'btn btn-xs btn-default', 'onclick' => "window.location.href = '" . Router::url(array('controller' => 'UserInfos', 'action' => 'index'), true) . "';"));
                                     ?>
                                 </td>
                             </tr>
