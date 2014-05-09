@@ -1,45 +1,50 @@
 <div class="mainbar">
      <div class="matter">
         <div class="container">
-            <div style="display: inline-block;"><?php
-                echo $this->Html->link('追加', array('controller'=>'UserInfos', 'action'=>'add'), array('class'=>'btn btn-primary'));
-                echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));
-            ?></div>
-            <div style="display: inline-block; float:right;" class="table-responsive">
-            <?php echo $this->Form->create('UserInfo', array('controller'=>'UserInfos', 'action'=>'index', 'type' => 'get', 'class'=>'form-inline search-form'));?>
-                <table class="search-form-table">
-                    <tr>
-                        <td>雇用区分</td>
-                        <td>
-                            <?php
-                            $employment = unserialize(EMPLOYMENT_TYPE);
-                            echo $this->Form->input('employment_type_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false, 'empty' => true, 'selected' => isset($filter['UserInfo.employment_type_cd'])?$filter['UserInfo.employment_type_cd']:''));
-                            ?>
-                        </td>
+            <table style="width:100%;">
+                <tr>
+                    <td><?php
+                    echo $this->Html->link('追加', array('controller'=>'UserInfos', 'action'=>'add'), array('class'=>'btn btn-primary'));
+                    echo ' ';
+                    echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));?>
+                    </td>
+                    <td style="width:auto;"></td>
+                    <td class="td-search-form-table">
+                    <?php echo $this->Form->create('UserInfo', array('controller'=>'UserInfos', 'action'=>'index', 'type' => 'get', 'class'=>'form-inline search-form'));?>
+                        <table class="nowrap search-form-table">
+                            <tr>
+                                <td>雇用区分</td>
+                                <td>
+                                    <?php
+                                    $employment = unserialize(EMPLOYMENT_TYPE);
+                                    echo $this->Form->input('employment_type_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false, 'empty' => true, 'selected' => isset($filter['UserInfo.employment_type_cd'])?$filter['UserInfo.employment_type_cd']:''));
+                                    ?>
+                                </td>
 
-                        <td>勤務地</td>
-                        <td>
-                            <?php
-                            $work_location = unserialize(WORK_LOCATION);
-                            echo $this->Form->input('work_location_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.work_location_cd'])?$filter['UserInfo.work_location_cd']:''));?>
-                        </td>
+                                <td>勤務地</td>
+                                <td>
+                                    <?php
+                                    $work_location = unserialize(WORK_LOCATION);
+                                    echo $this->Form->input('work_location_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.work_location_cd'])?$filter['UserInfo.work_location_cd']:''));?>
+                                </td>
 
-                        <td>所属</td>
-                        <td>
-                            <?php
-                            echo $this->Form->input('department_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $departments, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.department_cd'])?$filter['UserInfo.department_cd']:'')); ?>
-                        </td>
-                        <td>
-                            <?php
-                            echo $this->Form->button('絞り込み検索', array('type' => 'submit', 'class'=>'btn btn-default', 'div'=>false));
-                            echo $this->Form->button('クリア', array('type' => 'button', 'class' => 'btn btn-default', 'onclick' => "window.location.href = '" . Router::url(array('controller' => 'UserInfos', 'action' => 'index'), true) . "';"));
-                            ?>
-                        </td>
-                    </tr>
-                </table>
-            <?php echo $this->Form->end(); ?>
-            </div>
+                                <td>所属</td>
+                                <td>
+                                    <?php
+                                    echo $this->Form->input('department_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $departments, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.department_cd'])?$filter['UserInfo.department_cd']:'')); ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    echo $this->Form->button('絞り込み検索', array('type' => 'submit', 'class'=>'btn btn-default', 'div'=>false));
+                                    echo $this->Form->button('クリア', array('type' => 'button', 'class' => 'btn btn-default', 'onclick' => "window.location.href = '" . Router::url(array('controller' => 'UserInfos', 'action' => 'index'), true) . "';"));
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
+                    <?php echo $this->Form->end(); ?>
+                    </td>
+                </tr>
+            </table>
 
             <div class="widget">
                 <div class="widget-content">
@@ -220,21 +225,22 @@
 
 <script type="text/javascript">
 $( window ).on('resize', function() {
-        var rows = document.getElementById('data').getElementsByTagName('tr')
-        var rowsHeight=[];
-        var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
-        var rowsHeightLeft=[];
-        var heightResult = [];
-        for(var i=0;i<rows.length;i++){
-            rowsHeight[i]=rows[i].offsetHeight;
-        }
-        for(var j=0;j<rowsleft.length;j++){
-            rowsHeightLeft[j]=rowsleft[j].offsetHeight;
-        }
-        for(var x=0;x<rowsHeight.length;x++){
-            heightResult[x] = Math.max(rowsHeight[x], rowsHeightLeft[x]);
-            jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
-            jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
-        }
+    jQuery(".td-search-form-table").css('width', jQuery(".search-form-table").width());
+    var rows = document.getElementById('data').getElementsByTagName('tr')
+    var rowsHeight=[];
+    var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
+    var rowsHeightLeft=[];
+    var heightResult = [];
+    for(var i=0;i<rows.length;i++){
+        rowsHeight[i]=rows[i].offsetHeight;
+    }
+    for(var j=0;j<rowsleft.length;j++){
+        rowsHeightLeft[j]=rowsleft[j].offsetHeight;
+    }
+    for(var x=0;x<rowsHeight.length;x++){
+        heightResult[x] = Math.max(rowsHeight[x], rowsHeightLeft[x]);
+        jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
+        jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
+    }
 }).trigger('resize');
 </script>
