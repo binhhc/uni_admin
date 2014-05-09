@@ -19,7 +19,7 @@ class SystemAuthsController extends AppController {
                 'SystemAuth.delete_flg' => DELETE_FLG_OFF,
                 ),
             'limit' => Configure::read('max_row'),
-            'order' => array('SystemAuth.id' => 'ASC')
+            'order' => array('SystemAuth.employee_id' => 'ASC')
         );
         $this->set('systemAuth', $this->Paginator->paginate('SystemAuth'));
         $this->set(array(
