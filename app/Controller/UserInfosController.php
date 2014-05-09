@@ -70,6 +70,11 @@ class UserInfosController extends AppController {
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
+                    $data_system_auth['SystemAuth']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $data['UserInfo']['employee_id']), MAX_EMP_ID, 0, STR_PAD_LEFT);;
+                    $data_system_auth['SystemAuth']['access_type'] = SYSTEM_AUTH_ACTIVE;
+                    $this->SystemAuth->set($data_system_auth);
+                    $this->SystemAuth->create();
+                    $this->SystemAuth->save($data_system_auth);
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 }

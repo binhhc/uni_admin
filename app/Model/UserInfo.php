@@ -155,10 +155,10 @@ class UserInfo extends AppModel {
     public function checkUniqueId($id){
         $arr_id = $this->find('first', array(
             'conditions' => array(
-                'UserInfo.employee_id' => $id
+                'UserInfo.employee_id' => $id,
             )
         ));
-        if(!empty($arr_id)){
+        if(!empty($arr_id) || strlen($id['employee_id'])>6 || !is_numeric($id['employee_id'])){
             return false;
         }
         return true;

@@ -157,13 +157,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">所属</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('department', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label class="col-lg-6 control-label">障害手帳区分コード</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('problem_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
