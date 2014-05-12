@@ -37,7 +37,7 @@ class UnitPricesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
-            $data['UnitPrice']['created'] = date('Y-m-d');
+            // $data['UnitPrice']['created'] = date('Y-m-d');
             if ($this->UnitPrice->customValidate()) {
                 $this->UnitPrice->create();
                 if ($this->UnitPrice->save($data)) {
@@ -69,7 +69,7 @@ class UnitPricesController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['UnitPrice']['modified'] = date('Y-m-d');
+            // $data['UnitPrice']['modified'] = date('Y-m-d');
             unset($data['UnitPrice']['employee_id']);
             if ($this->UnitPrice->customValidate()) {
                 if ($this->UnitPrice->save($data)) {

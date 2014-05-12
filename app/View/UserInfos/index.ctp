@@ -201,19 +201,19 @@
                     <?php if ($this->Paginator->numbers()): ?>
                         <div class="widget-foot">
                             <ul class="pagination">
-								<?php
-								if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
-									echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
-								}
+                                <?php
+                                if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
+                                    echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
+                                }
                                 echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>';
                                 echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => ''));
                                 echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>';
 
-								if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
-									echo '<li><span class="next disabled">&gt;&gt;</span></li>';
-								}
-								?>
-							</ul>
+                                if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
+                                    echo '<li><span class="next disabled">&gt;&gt;</span></li>';
+                                }
+                                ?>
+                            </ul>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -223,23 +223,23 @@
 </div>
 
 <script type="text/javascript">
-$( window ).on('resize', function() {
-    jQuery(".td-search-form-table").css('width', jQuery(".search-form-table").width());
-    var rows = document.getElementById('data').getElementsByTagName('tr')
-    var rowsHeight=[];
-    var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
-    var rowsHeightLeft=[];
-    var heightResult = [];
-    for(var i=0;i<rows.length;i++){
-        rowsHeight[i]=rows[i].offsetHeight;
-    }
-    for(var j=0;j<rowsleft.length;j++){
-        rowsHeightLeft[j]=rowsleft[j].offsetHeight;
-    }
-    for(var x=0;x<rowsHeight.length;x++){
-        heightResult[x] = Math.max(rowsHeight[x], rowsHeightLeft[x]);
-        jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
-        jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
-    }
-}).trigger('resize');
+    $( window ).on('resize', function() {
+        jQuery(".td-search-form-table").css('width', jQuery(".search-form-table").width());
+        var rows = document.getElementById('data').getElementsByTagName('tr')
+        var rowsHeight=[];
+        var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
+        var rowsHeightLeft=[];
+        var heightResult = [];
+        for(var i=0;i<rows.length;i++){
+            rowsHeight[i]=rows[i].offsetHeight;
+        }
+        for(var j=0;j<rowsleft.length;j++){
+            rowsHeightLeft[j]=rowsleft[j].offsetHeight;
+        }
+        for(var x=0;x<rowsHeight.length;x++){
+            heightResult[x] = Math.max(rowsHeight[x], rowsHeightLeft[x]);
+            jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
+            jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
+        }
+    }).trigger('resize');
 </script>

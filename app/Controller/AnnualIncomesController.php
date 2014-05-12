@@ -35,7 +35,7 @@ class AnnualIncomesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
-            $data['AnnualIncome']['created'] = date('Y-m-d');
+            // $data['AnnualIncome']['created'] = date('Y-m-d');
             if ($this->AnnualIncome->customValidate()) {
                 $this->AnnualIncome->create();
                 if ($this->AnnualIncome->save($data)) {
@@ -67,7 +67,7 @@ class AnnualIncomesController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['AnnualIncome']['modified'] = date('Y-m-d');
+            // $data['AnnualIncome']['modified'] = date('Y-m-d');
             unset($data['AnnualIncome']['employee_id']);
             if ($this->AnnualIncome->customValidate()) {
                 if ($this->AnnualIncome->save($data)) {

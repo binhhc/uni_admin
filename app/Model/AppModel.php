@@ -32,48 +32,48 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 
-	 /**
+     /**
      * Check record exists
      *
      * @author Nguyen Hoang
      * @since 2014/01/07
      */
-	public function beforeSave($options = array()){
-		$key = $this->alias;
-		$data = $this->data;
-		if(isset($data[$key]['beforeSave']) && $data[$key]['beforeSave'] == false) {
-			unset($data[$key]['beforeSave']);
-			return true;
-		}
+    public function beforeSave($options = array()){
+        $key = $this->alias;
+        $data = $this->data;
+        if(isset($data[$key]['beforeSave']) && $data[$key]['beforeSave'] == false) {
+            unset($data[$key]['beforeSave']);
+            return true;
+        }
 
-		$conditions = array();
-		foreach($data as $model => $fields){
-			foreach($fields as $field => $value){
+        $conditions = array();
+        foreach($data as $model => $fields){
+            foreach($fields as $field => $value){
 
-				if($field=='id'){
-					$conditions[$field." <> "] = $value;
-				}else if($field!='modified' and $field!='created'){
-					$conditions[$field] = $value;
-				}
-			}
-		}
-		$data = $this->find('first',array(
-			'conditions' => $conditions,
-			'recursive' => -1,
-			'fields' => array('id')
-		));
+                if($field=='id'){
+                    $conditions[$field." <> "] = $value;
+                }else if($field!='modified' and $field!='created'){
+                    $conditions[$field] = $value;
+                }
+            }
+        }
+        $data = $this->find('first',array(
+            'conditions' => $conditions,
+            'recursive' => -1,
+            'fields' => array('id')
+        ));
 
-		if(!empty($data)) {
-			$this->log("[$model] record exists ".print_r($fields,true) , 'batch');
-			App::uses('CakeSession','Model/Datasource');
-			CakeSession::write('Message', array(
-					'flash' => array(
-						'message' => __('Record exists in database'),
-						'element' => 'default'
-					)
-				)
-			);
-			return false;
-		}
-	}
+        if(!empty($data)) {
+            $this->log("[$model] record exists ".print_r($fields,true) , 'batch');
+            App::uses('CakeSession','Model/Datasource');
+            CakeSession::write('Message', array(
+                    'flash' => array(
+                        'message' => __('Record exists in database'),
+                        'element' => 'default'
+                    )
+                )
+            );
+            return false;
+        }
+    }
 }

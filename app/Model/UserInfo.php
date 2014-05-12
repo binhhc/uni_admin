@@ -166,6 +166,9 @@ class UserInfo extends AppModel {
 
     public function listUser(){
         $arr_user = $this->find('list', array(
+            'conditions' => array(
+                'UserInfo.delete_flg' => DELETE_FLG_OFF
+                ),
             'fields' => array('UserInfo.employee_id', 'UserInfo.employee_name'),
         ));
         $result = array();

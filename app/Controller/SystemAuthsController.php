@@ -64,7 +64,7 @@ class SystemAuthsController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['SystemAuth']['modified'] = date('Y-m-d');
+            // $data['SystemAuth']['modified'] = date('Y-m-d');
             $data['SystemAuth']['beforeSave'] = false;
             unset($data['SystemAuth']['employee_id']);
 
@@ -106,9 +106,15 @@ class SystemAuthsController extends AppController {
         $this->Session->write('flag_link_systemAuth', 1);
     }
 
+    /**
+     * update Access
+     * @author Bao Nam
+     * 2014/05/09
+     **/
+
     public function updateAccess() {
-        // $this->autoLayout = false;
-        // $this->autoRender = false;
+        $this->autoLayout = false;
+        $this->autoRender = false;
         if ($this->Session->read('flag_link_systemAuth') == 0) {
             $this->Session->write('save_latest_link_systemAuth', $_SERVER['HTTP_REFERER']);
         }

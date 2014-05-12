@@ -35,7 +35,7 @@ class WorkExperiencesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
-            $data['WorkExperience']['created'] = date('Y-m-d');
+            // $data['WorkExperience']['created'] = date('Y-m-d');
             if ($this->WorkExperience->customValidate()) {
                 $this->WorkExperience->create();
                 if ($this->WorkExperience->save($data)) {
@@ -67,7 +67,7 @@ class WorkExperiencesController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['WorkExperience']['modified'] = date('Y-m-d');
+            // $data['WorkExperience']['modified'] = date('Y-m-d');
             unset($data['WorkExperience']['employee_id']);
 
             if ($this->WorkExperience->customValidate()) {

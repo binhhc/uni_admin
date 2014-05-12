@@ -106,7 +106,7 @@
 </div>
 
 <script type="text/javascript">
-$( window ).on('resize', function() {
+    $( window ).on('resize', function() {
         var rows = document.getElementById('data').getElementsByTagName('tr')
         var rowsHeight=[];
         var rowsleft = document.getElementById('table-left').getElementsByTagName('tr')
@@ -123,5 +123,5 @@ $( window ).on('resize', function() {
             jQuery("#table-left tr:eq("+ x +")").css('height', heightResult[x]);
             jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
         }
-}).trigger('resize');
+    }).trigger('resize');
 </script>
