@@ -42,7 +42,7 @@ msgid "UAD_COMMON_MSG0009"
 msgstr "5. 教育履歴のCSVインポートが完了しました。"
 
 msgid "UAD_COMMON_MSG0010"
-msgstr "6. 職種履歴のCSVインポートが完了しました。"
+msgstr "6. 職歴情報のCSVインポートが完了しました。"
 
 msgid "UAD_ERR_MSG0001"
 msgstr "削除している上、不明な不具合が発生しましたため、再び削除してください。"
