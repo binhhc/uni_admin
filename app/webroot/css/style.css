@@ -1753,13 +1753,13 @@ footer .copy{
     white-space: nowrap;
 }
 .alert-success {
-    background: #CEE3F6 url("../img/success.png") 10px 50% no-repeat;
+    background: #CEE3F6 url("../img/test-pass-icon.png") 10px 50% no-repeat;
     font-weight: bold;
     text-indent: 25px;
 }
 
 .alert-error {
-    background: #CEE3F6 url("../img/error.png") 10px 50% no-repeat;
+    background: #CEE3F6 url("../img/test-fail-icon.png") 10px 50% no-repeat;
     font-weight: bold;
     color: #F78181;
     text-indent: 25px;
