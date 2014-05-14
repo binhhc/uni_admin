@@ -6,7 +6,8 @@
                     <td><?php
                     echo $this->Html->link('追加', array('controller'=>'UserInfos', 'action'=>'add'), array('class'=>'btn btn-primary'));
                     echo ' ';
-                    echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("UserInfos")'));?>
+                    echo '<a class="btn btn-danger" onclick=deleteAll("UserInfos")>削除</a>';
+                    ?>
                     </td>
                     <td class="td-search-form-table">
                     <?php echo $this->Form->create('UserInfo', array('controller'=>'UserInfos', 'action'=>'index', 'type' => 'get', 'class'=>'form-inline search-form'));?>
@@ -54,7 +55,7 @@
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
                                 <th>社員番号</th>
-                                <th>職場</th>
+                                <th>職場氏名</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,8 +78,8 @@
                         <table id="data" class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                             <thead>
                                 <tr class="nowrap widget-head">
-                                    <th>職場（フリガナ）</th>
-                                    <th>職場（英字）</th>
+                                    <th>職場氏名（フリガナ）</th>
+                                    <th>氏名（英字）</th>
                                     <th>社用e-Mail</th>
                                     <th>入社年月日</th>
                                     <th>性別コード</th>

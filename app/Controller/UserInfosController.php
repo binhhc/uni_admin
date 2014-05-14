@@ -144,6 +144,8 @@ class UserInfosController extends AppController {
                 ){
                     $this->UserInfo->commit();
                     $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+                    $this->response->type("json");
+                    echo json_encode(array('success' => 1));
                 }
             } else {
                 $this->UserInfo->rollback();

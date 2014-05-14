@@ -19,12 +19,12 @@ function deleteAll(page){
             var data = "id=" + id;
 
             $.ajax({
-                async: false,
+               // async: false,
                 data: data, // Form variables
                 dataType: "json", // Expected response type
                 url: page +"/delete/" + id, // URL to request
                 success: function(response) {
-                    window.location.reload();
+                    window.location.reload(true);
                 },
                 error: function() {
                 }

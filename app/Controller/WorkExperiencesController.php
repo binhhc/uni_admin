@@ -103,6 +103,8 @@ class WorkExperiencesController extends AppController {
             $data['WorkExperience']['beforeSave'] = false;
             if ($this->WorkExperience->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0002'), 'success');
+                $this->response->type("json");
+                echo json_encode(array('success' => 1));
             } else {
                 $this->Session->setFlash(__('UAD_ERR_MSG0001'), 'error');
             }

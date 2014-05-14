@@ -7,7 +7,7 @@
                             <thead>
                                 <tr class="nowrap widget-head">
                                     <th>社員番号</th>
-                                    <th>職場</th>
+                                    <th width="100%">職場</th>
                                     <th>Access type</th>
                                 </tr>
                             </thead>
@@ -20,10 +20,10 @@
                                 } else {
                                     foreach ($systemAuth as $system):
                                 ?>
-                                    <tr>
+                                    <tr class="nowrap">
                                         <td><?php echo h($system['SystemAuth']['employee_id']); ?> </td>
                                         <td><?php echo h($system['UserInfo']['employee_name']); ?></td>
-                                        <td>
+                                        <td class="center">
                                             <?php
                                             if (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE) {
                                                 echo $this->Form->postLink('Active', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));

@@ -4,7 +4,7 @@
             <?php
                 echo $this->Html->link('追加', array('controller'=>'AnnualIncomes', 'action'=>'add'), array('class'=>'btn btn-primary'));
                 echo ' ';
-                echo $this->Html->link('削除', '', array('class'=>'btn btn-danger', 'onclick'=>'deleteAll("AnnualIncomes")'));
+                echo '<a class="btn btn-danger" onclick=deleteAll("AnnualIncomes")>削除</a>';
             ?>
             <div class="widget">
                 <div class="widget-content">
