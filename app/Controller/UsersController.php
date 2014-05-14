@@ -108,9 +108,9 @@ class UsersController extends AppController {
             file_put_contents(TMP.DS.'logs/batch.log','');
             return $this->redirect('logbatch');
         }
-        $logs = @file_get_contents(TMP.DS.'logs/batch.log');
+        $logbatchs = @file_get_contents(TMP.DS.'logs/batch.log');
         $this->set(array(
-            'logs' => nl2br($logs),
+            'logbatchs' => nl2br($logbatchs),
             'title_for_layout' => 'バッチ実行'
         ));
         $this->render('logbatch');
