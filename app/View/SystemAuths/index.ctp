@@ -7,14 +7,14 @@
                             <thead>
                                 <tr class="nowrap widget-head">
                                     <th>社員番号</th>
-                                    <th width="100%">職場</th>
-                                    <th>Access type</th>
+                                    <th width="100%">職場氏名</th>
+                                    <th>ログイン権限</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (empty($systemAuth)) { ?>
                                     <tr>
-                                        <td colspan="4" class="data-empty">SystemAuthのデーターがありません。</td>
+                                        <td colspan="4" class="data-empty">権限管理のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {
@@ -26,9 +26,9 @@
                                         <td class="center">
                                             <?php
                                             if (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE) {
-                                                echo $this->Form->postLink('Active', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
+                                                echo $this->Form->postLink('有効', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
                                             } else {
-                                                echo $this->Form->postLink('Banned', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
+                                                echo $this->Form->postLink('無効', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
                                             }
                                             ?>
                                         </td>

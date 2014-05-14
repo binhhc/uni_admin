@@ -23,8 +23,8 @@ class SystemAuthsController extends AppController {
         );
         $this->set('systemAuth', $this->Paginator->paginate('SystemAuth'));
         $this->set(array(
-            'title_for_layout' => 'System Auths',
-            'page_title' => 'System Auths',
+            'title_for_layout' => ' 権限管理',
+            'page_title' => ' 権限管理',
         ));
     }
 

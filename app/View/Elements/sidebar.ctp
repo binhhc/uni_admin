@@ -61,7 +61,7 @@
                 if(strpos($this->request->url, 'SystemAuths') !== false){
                     $sysAuth = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-lock"></i> <span>SystemAuths</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false, 'class'=>$sysAuth)); 
+                echo $this->Html->link('<i class="fa fa-lock"></i> <span>権限管理</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false, 'class'=>$sysAuth)); 
             ?>
         </li> 
     </ul>
