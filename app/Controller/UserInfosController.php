@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UserInfosController extends AppController {
 
-    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'MsDepartment');
+    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'MsDepartment', 'MsEmploymentType', 'MsJob', 'MsPosition', 'MsWorkLocation');
     public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -36,7 +36,12 @@ class UserInfosController extends AppController {
                 )
             )),
             'fields' => array(
-                'UserInfo.*', 'MsDepartment.department_name',
+                'UserInfo.*',
+                'MsDepartment.department_name',
+                'MsEmploymentType.employment_name',
+                'MsJob.job_name',
+                'MsPosition.position_name',
+                'MsWorkLocation.work_location_name',
             ),
             'conditions' => $filter,
             'limit' => Configure::read('max_row'),
@@ -51,9 +56,27 @@ class UserInfosController extends AppController {
                 'MsDepartment.department_cd', 'MsDepartment.department_name',
             )));
 
+        $workLocations = $this->MsWorkLocation->find('list', array(
+            'conditions' => array(
+                'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+            )));
+
+        $employmentTypes = $this->MsEmploymentType->find('list', array(
+            'conditions' => array(
+                'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+            )));
+
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
         $this->set(array(
             'departments' => $departments,
+            'work_locations' => $workLocations,
+            'employment_types' => $employmentTypes,
             'filter' => $filter,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
@@ -80,8 +103,51 @@ class UserInfosController extends AppController {
                 }
             }
         }
+        $departments = $this->MsDepartment->find('list', array(
+            'conditions' => array(
+                'MsDepartment.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsDepartment.department_cd', 'MsDepartment.department_name',
+            )));
+
+        $workLocations = $this->MsWorkLocation->find('list', array(
+            'conditions' => array(
+                'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+            )));
+
+        $employmentTypes = $this->MsEmploymentType->find('list', array(
+            'conditions' => array(
+                'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+            )));
+        $jobs = $this->MsJob->find('list', array(
+            'conditions' => array(
+                'MsJob.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsJob.id', 'MsJob.job_name',
+            )));
+        $positions = $this->MsPosition->find('list', array(
+            'conditions' => array(
+                'MsPosition.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsPosition.id', 'MsPosition.position_name',
+            )));
+
         $this->Session->write('flag_link_info', 1);
         $this->set(array(
+            'departments' => $departments,
+            'work_locations' => $workLocations,
+            'employment_types' => $employmentTypes,
+            'jobs' => $jobs,
+            'positions' => $positions,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
         ));
@@ -116,9 +182,53 @@ class UserInfosController extends AppController {
             $quanlitify = $this->UserInfo->findById($id);
             $this->request->data = $quanlitify;
         }
+
+        $departments = $this->MsDepartment->find('list', array(
+            'conditions' => array(
+                'MsDepartment.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsDepartment.department_cd', 'MsDepartment.department_name',
+            )));
+
+        $workLocations = $this->MsWorkLocation->find('list', array(
+            'conditions' => array(
+                'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+            )));
+
+        $employmentTypes = $this->MsEmploymentType->find('list', array(
+            'conditions' => array(
+                'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+            )));
+        $jobs = $this->MsJob->find('list', array(
+            'conditions' => array(
+                'MsJob.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsJob.id', 'MsJob.job_name',
+            )));
+        $positions = $this->MsPosition->find('list', array(
+            'conditions' => array(
+                'MsPosition.delete_flg' => DELETE_FLG_OFF
+                ),
+            'fields' => array(
+                'MsPosition.id', 'MsPosition.position_name',
+            )));
+
         $this->Session->write('flag_link_info', 1);
         $this->set('readonly', 'readonly="readonly"');
         $this->set(array(
+            'departments' => $departments,
+            'work_locations' => $workLocations,
+            'employment_types' => $employmentTypes,
+            'jobs' => $jobs,
+            'positions' => $positions,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
         ));

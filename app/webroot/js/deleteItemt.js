@@ -1,4 +1,4 @@
-function deleteAll(page){
+function deleteAll(page, model){
     var count = 0;
     $.each($("input[name='cbID']:checked"), function() {
         count++;
@@ -8,7 +8,10 @@ function deleteAll(page){
         alert('Please choosen item');
         return;
     }
-
+    var model_delete = '';
+    if (model) {
+        var model_delete = model + '/';
+    }
     var r = confirm("削除してもよろしいですか？");
     if (r == true)
     {
@@ -22,7 +25,7 @@ function deleteAll(page){
                // async: false,
                 data: data, // Form variables
                 dataType: "json", // Expected response type
-                url: page +"/delete/" + id, // URL to request
+                url: page +"/delete/" + model_delete + id, // URL to request
                 success: function(response) {
                     window.location.reload(true);
                 },

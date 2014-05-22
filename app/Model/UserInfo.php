@@ -6,6 +6,42 @@ class UserInfo extends AppModel {
 
     public $useTable = 'user_info';
 
+    /**
+     * belongsTo associations
+     *
+     * @var array
+     */
+    public $belongsTo = array(
+        'MsEmploymentType' => array(
+            'className' => 'MsEmploymentType',
+            'foreignKey' => 'employment_type_cd',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'MsJob' => array(
+            'className' => 'MsJob',
+            'foreignKey' => 'job_cd',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'MsPosition' => array(
+            'className' => 'MsPosition',
+            'foreignKey' => 'position_cd',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ),
+        'MsWorkLocation' => array(
+            'className' => 'MsWorkLocation',
+            'foreignKey' => 'work_location_cd',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
+    );
+
     public function customValidate() {
         $validate = array(
             'employee_id' => array(

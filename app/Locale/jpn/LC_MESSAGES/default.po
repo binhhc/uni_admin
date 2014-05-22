@@ -106,3 +106,21 @@ msgstr "System name is not empty!"
 
 msgid "UAD_ERR_MSG0021"
 msgstr "Application is locked by uni_admin"
+
+msgid "UAD_ERR_MSG0022"
+msgstr "Department code is not empty"
+
+msgid "UAD_ERR_MSG0023"
+msgstr "Department name is not empty"
+
+msgid "UAD_ERR_MSG0024"
+msgstr "Employment name is not empty"
+
+msgid "UAD_ERR_MSG0025"
+msgstr "Job name not is empty"
+
+msgid "UAD_ERR_MSG0026"
+msgstr "Position name not is empty"
+
+msgid "UAD_ERR_MSG0027"
+msgstr "Work location name not is empty"

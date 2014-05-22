@@ -77,9 +77,7 @@
                         <div class="form-group">
                             <label class="col-lg-6 control-label">雇用区分</label>
                             <div class="col-lg-6">
-                                <?php
-                                $employment = unserialize(EMPLOYMENT_TYPE);
-                                echo $this->Form->input('employment_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false));?>
+                                <?php echo $this->Form->input('employment_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $employment_types, 'required'=>false));?>
                             </div>
                         </div>
 
@@ -121,18 +119,14 @@
                         <div class="form-group">
                             <label class="col-lg-6 control-label">職種</label>
                             <div class="col-lg-6">
-                                <?php
-                                $job = unserialize(JOB_CD);
-                                echo $this->Form->input('job_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $job, 'required' => false)); ?>
+                                <?php echo $this->Form->input('job_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $jobs, 'required' => false)); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">役職</label>
                             <div class="col-lg-6">
-                                <?php
-                                $position = unserialize(POSITION);
-                                echo $this->Form->input('position_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $position, 'required' => false)); ?>
+                                <?php echo $this->Form->input('position_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $positions, 'required' => false)); ?>
                             </div>
                         </div>
 
@@ -140,8 +134,7 @@
                             <label class="col-lg-6 control-label">勤務地</label>
                             <div class="col-lg-6">
                                 <?php
-                                $work_location = unserialize(WORK_LOCATION);
-                                echo $this->Form->input('work_location_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false)); ?>
+                                echo $this->Form->input('work_location_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $work_locations, 'required' => false)); ?>
                             </div>
                         </div>
 
@@ -152,7 +145,7 @@
                         <div class="form-group">
                             <label class="col-lg-6 control-label">所属コード</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('department_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php echo $this->Form->input('department_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $departments, 'required' => false)); ?>
                             </div>
                         </div>
 

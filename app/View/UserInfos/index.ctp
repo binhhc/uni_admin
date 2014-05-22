@@ -16,16 +16,14 @@
                                 <td>雇用区分</td>
                                 <td>
                                     <?php
-                                    $employment = unserialize(EMPLOYMENT_TYPE);
-                                    echo $this->Form->input('employment_type_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $employment, 'required'=>false, 'empty' => true, 'selected' => isset($filter['UserInfo.employment_type_cd'])?$filter['UserInfo.employment_type_cd']:''));
+                                    echo $this->Form->input('employment_type_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $employment_types, 'required'=>false, 'empty' => true, 'selected' => isset($filter['UserInfo.employment_type_cd'])?$filter['UserInfo.employment_type_cd']:''));
                                     ?>
                                 </td>
 
                                 <td>勤務地</td>
                                 <td>
                                     <?php
-                                    $work_location = unserialize(WORK_LOCATION);
-                                    echo $this->Form->input('work_location_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_location, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.work_location_cd'])?$filter['UserInfo.work_location_cd']:''));?>
+                                    echo $this->Form->input('work_location_cd', array('class'=>'input-block-level', 'label' => false, 'type' => 'select', 'options' => $work_locations, 'required' => false, 'empty' => true, 'selected' => isset($filter['UserInfo.work_location_cd'])?$filter['UserInfo.work_location_cd']:''));?>
                                 </td>
 
                                 <td>所属</td>
@@ -80,6 +78,8 @@
                                 <tr class="nowrap widget-head">
                                     <th>氏名（フリガナ）</th>
                                     <th>氏名（英字）</th>
+                                    <th>職場氏名</th>
+                                    <th>職場氏名(フリガナ)</th>
                                     <th>社用e-Mail</th>
                                     <th>入社年月日</th>
                                     <th>性別</th>
@@ -123,6 +123,8 @@
                                     <tr class="nowrap">
                                         <td><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
                                         <td><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['work_place_name']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['work_place_name_furigana']); ?></td>
                                         <td><?php echo h($info['UserInfo']['office_email']); ?></td>
                                         <td><?php echo h($info['UserInfo']['company_join_date']); ?></td>
                                         <td><?php
@@ -135,31 +137,15 @@
                                             echo date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->y . '年 ' . date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->m . 'ヵ月';?></td>
                                         <td><?php
                                             echo date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->y . '歳 ' . date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->m . 'ヵ月';?></td>
-                                        <td><?php
-                                        $employment = unserialize(EMPLOYMENT_TYPE);
-                                        if (array_key_exists($info['UserInfo']['employment_type_cd'], $employment)) {
-                                            echo h($employment[$info['UserInfo']['employment_type_cd']]);
-                                        }?></td>
+                                        <td><?php echo h($info['MsEmploymentType']['employment_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['zip_code']); ?></td>
                                         <td><?php echo h($info['UserInfo']['prefecture']); ?></td>
                                         <td><?php echo h($info['UserInfo']['ward']); ?></td>
                                         <td><?php echo h($info['UserInfo']['address']); ?></td>
                                         <td><?php echo h($info['UserInfo']['building']); ?></td>
-                                        <td><?php
-                                        $job = unserialize(JOB_CD);
-                                        if (array_key_exists($info['UserInfo']['job_cd'], $job)) {
-                                            echo h($job[$info['UserInfo']['job_cd']]);
-                                        }?></td>
-                                        <td><?php
-                                        $position = unserialize(POSITION);
-                                        if (array_key_exists($info['UserInfo']['position_cd'], $position)) {
-                                            echo h($position[$info['UserInfo']['position_cd']]);
-                                        }?></td>
-                                        <td><?php
-                                        $work_location = unserialize(WORK_LOCATION);
-                                        if (array_key_exists($info['UserInfo']['work_location_cd'], $work_location)) {
-                                            echo h($work_location[$info['UserInfo']['work_location_cd']]);
-                                        }?></td>
+                                        <td><?php echo h($info['MsJob']['job_name']);?></td>
+                                        <td><?php echo h($info['MsPosition']['position_name']);?></td>
+                                        <td><?php echo h($info['MsWorkLocation']['work_location_name']);?></td>
                                         <td><?php echo h($info['MsDepartment']['department_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type']); ?></td>

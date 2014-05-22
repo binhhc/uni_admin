@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="sidebar">        
+<div class="sidebar">
     <ul id="nav">
         <li>
             <?php
@@ -7,7 +7,7 @@
                 if(strpos($this->request->url, 'UserInfos') !== false){
                     $userInfo = 'open';
                 }
-                echo $this->Html->link('<i class="fa  fa-user-md"></i> <span>社員情報</span>', array('controller' => 'UserInfos', 'action' => 'index'),array('escape' => false, 'class'=> $userInfo)); 
+                echo $this->Html->link('<i class="fa  fa-user-md"></i> <span>社員情報</span>', array('controller' => 'UserInfos', 'action' => 'index'),array('escape' => false, 'class'=> $userInfo));
             ?>
         </li>
         <li>
@@ -16,7 +16,7 @@
                 if(strpos($this->request->url, 'Qualifications') !== false){
                     $qualification = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-inbox"></i> <span>免許資格</span>', array('controller' => 'Qualifications', 'action' => 'index'),array('escape' => false, 'class'=>$qualification)); 
+                echo $this->Html->link('<i class="fa fa-inbox"></i> <span>免許資格</span>', array('controller' => 'Qualifications', 'action' => 'index'),array('escape' => false, 'class'=>$qualification));
             ?>
         </li>
         <li>
@@ -25,7 +25,7 @@
                 if(strpos($this->request->url, 'UnitPrices') !== false){
                     $unitPrice = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-pencil"></i> <span>給与情報</span>', array('controller' => 'UnitPrices', 'action' => 'index'), array('escape' => false, 'class'=>$unitPrice)); 
+                echo $this->Html->link('<i class="fa fa-pencil"></i> <span>給与情報</span>', array('controller' => 'UnitPrices', 'action' => 'index'), array('escape' => false, 'class'=>$unitPrice));
             ?>
         </li>
         <li>
@@ -34,25 +34,25 @@
                 if(strpos($this->request->url, 'AnnualIncomes') !== false){
                     $annual = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-money"></i> <span>年収情報</span>', array('controller' => 'AnnualIncomes', 'action' => 'index'),array('escape' => false, 'class'=>$annual)); 
+                echo $this->Html->link('<i class="fa fa-money"></i> <span>年収情報</span>', array('controller' => 'AnnualIncomes', 'action' => 'index'),array('escape' => false, 'class'=>$annual));
             ?>
-        </li>                
+        </li>
         <li>
             <?php
                 $school = '';
                 if(strpos($this->request->url, 'SchoolEducations') !== false){
                     $school = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-qrcode"></i> <span>学歴情報</span>', array('controller' => 'SchoolEducations', 'action' => 'index'),array('escape' => false, 'class'=>$school)); 
+                echo $this->Html->link('<i class="fa fa-qrcode"></i> <span>学歴情報</span>', array('controller' => 'SchoolEducations', 'action' => 'index'),array('escape' => false, 'class'=>$school));
             ?>
-        </li>                
+        </li>
         <li>
             <?php
                 $work = '';
                 if(strpos($this->request->url, 'WorkExperiences') !== false){
                     $work = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-adjust"></i> <span>職歴情報</span>', array('controller' => 'WorkExperiences', 'action' => 'index'),array('escape' => false, 'class'=>$work)); 
+                echo $this->Html->link('<i class="fa fa-adjust"></i> <span>職歴情報</span>', array('controller' => 'WorkExperiences', 'action' => 'index'),array('escape' => false, 'class'=>$work));
             ?>
         </li>
         <li>
@@ -61,9 +61,19 @@
                 if(strpos($this->request->url, 'SystemAuths') !== false){
                     $sysAuth = 'open';
                 }
-                echo $this->Html->link('<i class="fa fa-lock"></i> <span>権限管理</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false, 'class'=>$sysAuth)); 
+                echo $this->Html->link('<i class="fa fa-lock"></i> <span>権限管理</span>', array('controller' => 'SystemAuths', 'action' => 'index'),array('escape' => false, 'class'=>$sysAuth));
             ?>
-        </li> 
+        </li>
+        <li>
+            <?php
+                $ms = '';
+                if(strpos($this->request->url, 'Masters') !== false){
+                    $ms = 'open';
+                }
+                echo $this->Html->link('<i class="fa fa-table"></i> <span>マスター管理</span>', array('controller' => 'Masters', 'action' => 'index'),array('escape' => false, 'class'=>$ms));
+            ?>
+        </li>
+
     </ul>
 </div>
 <!-- Sidebar ends -->
