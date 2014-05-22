@@ -4,7 +4,7 @@ App::uses('Controller', 'Controller');
 
 class UserInfosController extends AppController {
 
-    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'Department');
+    public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'MsDepartment');
     public $components = array('Paginator');
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
@@ -27,28 +27,28 @@ class UserInfosController extends AppController {
         };
         $this->Paginator->settings = array(
             'joins' => array(array(
-                'table' => 'departments',
-                'alias' => 'Department',
+                'table' => 'ms_departments',
+                'alias' => 'MsDepartment',
                 'type' => 'LEFT',
                 'conditions' => array(
-                    'Department.department_cd = UserInfo.department_cd',
-                    'Department.delete_flg = ' . DELETE_FLG_OFF,
+                    'MsDepartment.department_cd = UserInfo.department_cd',
+                    'MsDepartment.delete_flg = ' . DELETE_FLG_OFF,
                 )
             )),
             'fields' => array(
-                'UserInfo.*', 'Department.department_name',
+                'UserInfo.*', 'MsDepartment.department_name',
             ),
             'conditions' => $filter,
             'limit' => Configure::read('max_row'),
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
         //departments to filter
-        $departments = $this->Department->find('list', array(
+        $departments = $this->MsDepartment->find('list', array(
             'conditions' => array(
-                'Department.delete_flg' => DELETE_FLG_OFF
+                'MsDepartment.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'Department.department_cd', 'Department.department_name',
+                'MsDepartment.department_cd', 'MsDepartment.department_name',
             )));
 
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));

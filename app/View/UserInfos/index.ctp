@@ -160,7 +160,7 @@
                                         if (array_key_exists($info['UserInfo']['work_location_cd'], $work_location)) {
                                             echo h($work_location[$info['UserInfo']['work_location_cd']]);
                                         }?></td>
-                                        <td><?php echo h($info['Department']['department_name']); ?></td>
+                                        <td><?php echo h($info['MsDepartment']['department_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_grade']); ?></td>
