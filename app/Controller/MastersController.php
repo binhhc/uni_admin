@@ -13,8 +13,8 @@ class MastersController extends AppController {
     public function index() {
         $this->Session->write('flag_link_master', 0);
         $this->set(array(
-            'title_for_layout' => ' Masters',
-            'page_title' => ' Masters',
+            'title_for_layout' => ' マスター管理',
+            'page_title' => ' マスター管理',
         ));
     }
 
