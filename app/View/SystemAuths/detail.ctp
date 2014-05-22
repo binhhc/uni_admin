@@ -15,7 +15,7 @@
                                 <div>
                                     <fieldset class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-lg-1">職場</label>
+                                            <label class="col-lg-1">氏名</label>
                                             <div class="col-lg-5">
                                                 <?php echo h($this->data['UserInfo']['employee_name']); ?>
                                             </div>

@@ -67,6 +67,8 @@ define('CSV_USER_INFO', serialize(array(
     'employee_name' => '氏名',
     'employee_name_furigana' => '氏名(フリガナ)',
     'employee_name_alphabet' => '氏名(英字)',
+    'work_place_name' => '職場氏名',
+    'work_place_name_furigana' => '職場氏名(フリガナ)',
     'office_email' => '社用e-Mail１',
     'company_join_date' => '入社年月日',
     'gender_code' => '性別コード',
