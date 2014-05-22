@@ -7,7 +7,7 @@
                             <thead>
                                 <tr class="nowrap widget-head">
                                     <th>社員番号</th>
-                                    <th width="100%">職場氏名</th>
+                                    <th width="100%">氏名</th>
                                     <th>ログイン権限</th>
                                 </tr>
                             </thead>

@@ -15,7 +15,7 @@
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
                                 <th>社員番号</th>
-                                <th>職場氏名</th>
+                                <th>氏名</th>
                             </tr>
                         </thead>
                         <tbody>

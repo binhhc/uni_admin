@@ -55,7 +55,7 @@
                                 <th><input type='checkbox' id="cb_all"/></th>
                                 <?php } ?>
                                 <th>社員番号</th>
-                                <th>職場氏名</th>
+                                <th>氏名</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
                         <table id="data" class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                             <thead>
                                 <tr class="nowrap widget-head">
-                                    <th>職場氏名（フリガナ）</th>
+                                    <th>氏名（フリガナ）</th>
                                     <th>氏名（英字）</th>
                                     <th>社用e-Mail</th>
                                     <th>入社年月日</th>

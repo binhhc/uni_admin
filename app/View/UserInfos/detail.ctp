@@ -24,14 +24,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">職場氏名</label>
+                            <label class="col-lg-6 control-label">氏名</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('employee_name', array('required' => false, 'class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">職場氏名（フリガナ）</label>
+                            <label class="col-lg-6 control-label">氏名（フリガナ）</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('employee_name_furigana', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
