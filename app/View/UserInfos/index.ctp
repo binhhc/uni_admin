@@ -82,25 +82,19 @@
                                     <th>氏名（英字）</th>
                                     <th>社用e-Mail</th>
                                     <th>入社年月日</th>
-                                    <th>性別コード</th>
                                     <th>性別</th>
                                     <th>生年月日</th>
                                     <th>勤続年数</th>
                                     <th>年齢</th>
-                                    <th>雇用区分コード</th>
                                     <th>雇用区分</th>
                                     <th>郵便番号</th>
                                     <th>都道府県</th>
                                     <th>市区町村</th>
                                     <th>番地</th>
                                     <th>マンション／ビル等</th>
-                                    <th>職種コード</th>
                                     <th>職種</th>
-                                    <th>役職コード</th>
                                     <th>役職</th>
-                                    <th>勤務地コード</th>
                                     <th>勤務地</th>
-                                    <th>所属コード</th>
                                     <th>所属</th>
                                     <th>障害手帳区分コード</th>
                                     <th>障害手帳区分</th>
@@ -131,7 +125,6 @@
                                         <td><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
                                         <td><?php echo h($info['UserInfo']['office_email']); ?></td>
                                         <td><?php echo h($info['UserInfo']['company_join_date']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['gender_code']); ?></td>
                                         <td><?php
                                         $gender = unserialize(GENDER_CODE);
                                         if (array_key_exists($info['UserInfo']['gender_code'], $gender)) {
@@ -142,7 +135,6 @@
                                             echo date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->y . '年 ' . date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->m . 'ヵ月';?></td>
                                         <td><?php
                                             echo date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->y . '歳 ' . date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->m . 'ヵ月';?></td>
-                                        <td><?php echo h($info['UserInfo']['employment_type_cd']); ?></td>
                                         <td><?php
                                         $employment = unserialize(EMPLOYMENT_TYPE);
                                         if (array_key_exists($info['UserInfo']['employment_type_cd'], $employment)) {
@@ -153,25 +145,21 @@
                                         <td><?php echo h($info['UserInfo']['ward']); ?></td>
                                         <td><?php echo h($info['UserInfo']['address']); ?></td>
                                         <td><?php echo h($info['UserInfo']['building']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['job_cd']); ?></td>
                                         <td><?php
                                         $job = unserialize(JOB_CD);
                                         if (array_key_exists($info['UserInfo']['job_cd'], $job)) {
                                             echo h($job[$info['UserInfo']['job_cd']]);
                                         }?></td>
-                                        <td><?php echo h($info['UserInfo']['position_cd']); ?></td>
                                         <td><?php
                                         $position = unserialize(POSITION);
                                         if (array_key_exists($info['UserInfo']['position_cd'], $position)) {
                                             echo h($position[$info['UserInfo']['position_cd']]);
                                         }?></td>
-                                        <td><?php echo h($info['UserInfo']['work_location_cd']); ?></td>
                                         <td><?php
                                         $work_location = unserialize(WORK_LOCATION);
                                         if (array_key_exists($info['UserInfo']['work_location_cd'], $work_location)) {
                                             echo h($work_location[$info['UserInfo']['work_location_cd']]);
                                         }?></td>
-                                        <td><?php echo h($info['UserInfo']['department_cd']); ?></td>
                                         <td><?php echo h($info['Department']['department_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['problem_type']); ?></td>
