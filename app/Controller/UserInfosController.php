@@ -16,25 +16,16 @@ class UserInfosController extends AppController {
 
         // filter
         $filter = array('UserInfo.delete_flg' => DELETE_FLG_OFF);
-        if (!empty($this->request->query['employment_type_cd']) && is_numeric($this->request->query['employment_type_cd'])) {
+        if (!empty($this->request->query['employment_type_cd'])) {
             $filter['UserInfo.employment_type_cd'] = $this->request->query['employment_type_cd'];
         };
-        if(!empty($this->request->query['work_location_cd']) && is_numeric($this->request->query['work_location_cd'])) {
+        if(!empty($this->request->query['work_location_cd'])) {
             $filter['UserInfo.work_location_cd'] = $this->request->query['work_location_cd'];
         };
         if(!empty($this->request->query['department_cd'])) {
             $filter['UserInfo.department_cd'] = $this->request->query['department_cd'];
         };
         $this->Paginator->settings = array(
-            'joins' => array(array(
-                'table' => 'ms_departments',
-                'alias' => 'MsDepartment',
-                'type' => 'LEFT',
-                'conditions' => array(
-                    'MsDepartment.department_cd = UserInfo.department_cd',
-                    'MsDepartment.delete_flg = ' . DELETE_FLG_OFF,
-                )
-            )),
             'fields' => array(
                 'UserInfo.*',
                 'MsDepartment.department_name',
@@ -47,7 +38,7 @@ class UserInfosController extends AppController {
             'limit' => Configure::read('max_row'),
             'order' => array('UserInfo.employee_id' => 'ASC')
         );
-        //departments to filter
+        // to filter
         $departments = $this->MsDepartment->find('list', array(
             'conditions' => array(
                 'MsDepartment.delete_flg' => DELETE_FLG_OFF
@@ -61,7 +52,7 @@ class UserInfosController extends AppController {
                 'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+                'MsWorkLocation.work_location_cd', 'MsWorkLocation.work_location_name',
             )));
 
         $employmentTypes = $this->MsEmploymentType->find('list', array(
@@ -69,7 +60,7 @@ class UserInfosController extends AppController {
                 'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+                'MsEmploymentType.employment_cd', 'MsEmploymentType.employment_name',
             )));
 
         $this->set('userInfo', $this->Paginator->paginate('UserInfo'));
@@ -116,7 +107,7 @@ class UserInfosController extends AppController {
                 'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+                'MsWorkLocation.work_location_cd', 'MsWorkLocation.work_location_name',
             )));
 
         $employmentTypes = $this->MsEmploymentType->find('list', array(
@@ -124,21 +115,21 @@ class UserInfosController extends AppController {
                 'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+                'MsEmploymentType.employment_cd', 'MsEmploymentType.employment_name',
             )));
         $jobs = $this->MsJob->find('list', array(
             'conditions' => array(
                 'MsJob.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsJob.id', 'MsJob.job_name',
+                'MsJob.job_cd', 'MsJob.job_name',
             )));
         $positions = $this->MsPosition->find('list', array(
             'conditions' => array(
                 'MsPosition.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsPosition.id', 'MsPosition.position_name',
+                'MsPosition.position_cd', 'MsPosition.position_name',
             )));
 
         $this->Session->write('flag_link_info', 1);
@@ -196,7 +187,7 @@ class UserInfosController extends AppController {
                 'MsWorkLocation.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsWorkLocation.id', 'MsWorkLocation.work_location_name',
+                'MsWorkLocation.work_location_cd', 'MsWorkLocation.work_location_name',
             )));
 
         $employmentTypes = $this->MsEmploymentType->find('list', array(
@@ -204,21 +195,21 @@ class UserInfosController extends AppController {
                 'MsEmploymentType.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsEmploymentType.id', 'MsEmploymentType.employment_name',
+                'MsEmploymentType.employment_cd', 'MsEmploymentType.employment_name',
             )));
         $jobs = $this->MsJob->find('list', array(
             'conditions' => array(
                 'MsJob.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsJob.id', 'MsJob.job_name',
+                'MsJob.job_cd', 'MsJob.job_name',
             )));
         $positions = $this->MsPosition->find('list', array(
             'conditions' => array(
                 'MsPosition.delete_flg' => DELETE_FLG_OFF
                 ),
             'fields' => array(
-                'MsPosition.id', 'MsPosition.position_name',
+                'MsPosition.position_cd', 'MsPosition.position_name',
             )));
 
         $this->Session->write('flag_link_info', 1);

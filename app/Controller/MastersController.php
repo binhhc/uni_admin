@@ -211,6 +211,8 @@ class MastersController extends AppController {
 
         if (intval($id > 0) || !empty($id)) {
             $this->$form_model->id = $id;
+            $modifiedUser = $this->UserInfo->findByOfficeEmail($this->Auth->user(), array("fields" => "UserInfo.id"));
+            $data[$form_model]['modified_user'] = $modifiedUser['UserInfo']['id'];
             $data[$form_model]['delete_flg'] = DELETE_FLG_ON;
             $data[$form_model]['beforeSave'] = false;
             if ($this->$form_model->save($data)) {

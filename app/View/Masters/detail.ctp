@@ -13,14 +13,12 @@
                             <div class="padd">
                                 <fieldset>
                                     <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
-                                    <?php if ($form_model == 'MsDepartment'): ?>
-                                        <div class="form-group">
-                                            <label class="col-lg-6 control-label">所属コード</label>
-                                            <div class="col-lg-6">
-                                            <?php echo $this->Form->input($fields_name . '_cd', array('class'=>'form-control','label' => false, 'type' => 'text', 'required'=>false));?>
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-6 control-label">コード</label>
+                                        <div class="col-lg-6">
+                                        <?php echo $this->Form->input($fields_name . '_cd', array('class'=>'form-control','label' => false, 'type' => 'text', 'required'=>false));?>
                                         </div>
-                                    <?php endif ?>
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-lg-6 control-label">氏名</label>
                                         <div class="col-lg-6">

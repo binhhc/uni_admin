@@ -12,10 +12,11 @@
                         <thead>
                             <tr class="nowrap widget-head"><td colspan="3"><?php echo $title_for_layout;?></td></tr>
                             <tr class="nowrap widget-head">
-                                <?php if (!empty($msDetail)) {
-                                echo '<th style="width:5px;"><input type = "checkbox" id="cb_all"/></th>';
-                                }
-                                echo ($form_model == 'MsDepartment')?'<th>所属コード':'';?>
+                                <?php
+                                if (!empty($msDetail)) {
+                                    echo '<th style="width:5px;"><input type = "checkbox" id="cb_all"/></th>';
+                                } ?>
+                                <th>コード</th>
                                 <th>氏名</th>
                             </tr>
                         </thead>
@@ -24,12 +25,8 @@
                             foreach ($msDetail as $ms): ?>
                             <tr class="nowrap">
                                 <td><input name="cbID" class="cb_item" type='checkbox' value='<?php echo $ms[$form_model]['id']; ?>' ></td>
-                                <?php if ($form_model == 'MsDepartment'): ?>
                                 <td><?php echo $this->Form->postLink(h($ms[$form_model][$fields_name . '_cd']), array('action' => 'edit'), array('escape' => false, 'data' => array('fields_name' => $fields_name,'master_model' => h($form_model), 'id' => h($ms[$form_model]['id'])))); ?> </td>
                                 <td><?php echo h($ms[$form_model][$fields_name . '_name']); ?></td>
-                                <?php else: ?>
-                                <td><?php echo $this->Form->postLink(h($ms[$form_model][$fields_name . '_name']), array('action' => 'edit'), array('escape' => false, 'data' => array('fields_name' => $fields_name,'master_model' => h($form_model), 'id' => h($ms[$form_model]['id'])))); ?> </td>
-                                <?php endif; ?>
                             </tr>
                         <?php endforeach;
                             } else {

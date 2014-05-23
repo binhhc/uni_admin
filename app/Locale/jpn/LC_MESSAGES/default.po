@@ -108,19 +108,46 @@ msgid "UAD_ERR_MSG0021"
 msgstr "Application is locked by uni_admin"
 
 msgid "UAD_ERR_MSG0022"
-msgstr "Department code is not empty"
+msgstr "Department Code is not empty"
 
 msgid "UAD_ERR_MSG0023"
-msgstr "Department name is not empty"
+msgstr "Department Code is exist"
 
 msgid "UAD_ERR_MSG0024"
-msgstr "Employment name is not empty"
+msgstr "Department name is not empty"
 
 msgid "UAD_ERR_MSG0025"
-msgstr "Job name not is empty"
+msgstr "Employment Code is not empty"
 
 msgid "UAD_ERR_MSG0026"
-msgstr "Position name not is empty"
+msgstr "Employment Code is exist"
 
 msgid "UAD_ERR_MSG0027"
-msgstr "Work location name not is empty"
+msgstr "Employment name is not empty"
+
+msgid "UAD_ERR_MSG0028"
+msgstr "Job Code is not empty"
+
+msgid "UAD_ERR_MSG0029"
+msgstr "Job Code is exist"
+
+msgid "UAD_ERR_MSG0030"
+msgstr "Job name is not empty"
+
+msgid "UAD_ERR_MSG0031"
+msgstr "Position Code is not empty"
+
+msgid "UAD_ERR_MSG0032"
+msgstr "Position Code is exist"
+
+msgid "UAD_ERR_MSG0033"
+msgstr "Position name is not empty"
+
+msgid "UAD_ERR_MSG0034"
+msgstr "Work location Code is not empty"
+
+msgid "UAD_ERR_MSG0035"
+msgstr "Work location Code is exist"
+
+msgid "UAD_ERR_MSG0036"
+msgstr "Work location name is not empty"

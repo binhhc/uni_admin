@@ -12,33 +12,35 @@ class UserInfo extends AppModel {
      * @var array
      */
     public $belongsTo = array(
+        'MsDepartment' => array(
+            'className' => 'MsDepartment',
+            'foreignKey' => '',
+            'conditions' => 'MsDepartment.department_cd = UserInfo.department_cd',
+            'fields' => 'department_name',
+        ),
         'MsEmploymentType' => array(
             'className' => 'MsEmploymentType',
-            'foreignKey' => 'employment_type_cd',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
+            'foreignKey' => '',
+            'conditions' => 'MsEmploymentType.employment_cd = UserInfo.employment_type_cd',
+            'fields' => 'employment_name',
         ),
         'MsJob' => array(
             'className' => 'MsJob',
-            'foreignKey' => 'job_cd',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
+            'foreignKey' => '',
+            'conditions' => 'MsJob.job_cd = UserInfo.job_cd',
+            'fields' => 'job_name',
         ),
         'MsPosition' => array(
             'className' => 'MsPosition',
-            'foreignKey' => 'position_cd',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
+            'foreignKey' => '',
+            'conditions' => 'MsPosition.position_cd = UserInfo.position_cd',
+            'fields' => 'position_name',
         ),
         'MsWorkLocation' => array(
             'className' => 'MsWorkLocation',
-            'foreignKey' => 'work_location_cd',
-            'conditions' => '',
-            'fields' => '',
-            'order' => ''
+            'foreignKey' => '',
+            'conditions' => 'MsWorkLocation.work_location_cd = UserInfo.work_location_cd',
+            'fields' => 'work_location_name',
         )
     );
 
@@ -77,34 +79,34 @@ class UserInfo extends AppModel {
                     'message' => __('UAD_ERR_MSG0010')
                 ),
             ),
-            'employment_type_cd' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
-                ),
-            ),
-            'job_cd' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
-                ),
-            ),
-            'position_cd' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
-                ),
-            ),
-            'work_location_cd' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
-                ),
-            ),
+            // 'employment_type_cd' => array(
+            //     'numeric' => array(
+            //         'rule' => 'numeric',
+            //         'allowEmpty' => true,
+            //         'message' => __('UAD_ERR_MSG0007')
+            //     ),
+            // ),
+            // 'job_cd' => array(
+            //     'numeric' => array(
+            //         'rule' => 'numeric',
+            //         'allowEmpty' => true,
+            //         'message' => __('UAD_ERR_MSG0007')
+            //     ),
+            // ),
+            // 'position_cd' => array(
+            //     'numeric' => array(
+            //         'rule' => 'numeric',
+            //         'allowEmpty' => true,
+            //         'message' => __('UAD_ERR_MSG0007')
+            //     ),
+            // ),
+            // 'work_location_cd' => array(
+            //     'numeric' => array(
+            //         'rule' => 'numeric',
+            //         'allowEmpty' => true,
+            //         'message' => __('UAD_ERR_MSG0007')
+            //     ),
+            // ),
             'problem_type_cd' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
