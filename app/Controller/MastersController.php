@@ -32,7 +32,7 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => 'department',
             'form_model' => 'MsDepartment',
-            'title_for_layout' => ' マスター所属',
+            'title_for_layout' => ' 所属',
             'page_title' => ' マスター所属',
         ));
         $this->render('msdetail');
@@ -52,8 +52,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => 'employment',
             'form_model' => 'MsEmploymentType',
-            'title_for_layout' => ' マスター雇用区分',
-            'page_title' => ' マスター雇用区分',
+            'title_for_layout' => '雇用区分',
+            'page_title' => ' 雇用区分マスター',
         ));
         $this->render('msdetail');
     }
@@ -72,8 +72,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => 'job',
             'form_model' => 'MsJob',
-            'title_for_layout' => ' マスター職種',
-            'page_title' => ' マスター職種',
+            'title_for_layout' => ' 職種',
+            'page_title' => ' 職種マスター',
         ));
         $this->render('msdetail');
     }
@@ -92,8 +92,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => 'position',
             'form_model' => 'MsPosition',
-            'title_for_layout' => ' マスター役職',
-            'page_title' => ' マスター役職',
+            'title_for_layout' => ' 役職',
+            'page_title' => ' 役職マスター',
         ));
         $this->render('msdetail');
     }
@@ -114,8 +114,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => 'work_location',
             'form_model' => 'MsWorkLocation',
-            'title_for_layout' => ' マスター勤務地',
-            'page_title' => ' マスター勤務地',
+            'title_for_layout' => ' 勤務地',
+            'page_title' => ' 勤務地マスター',
         ));
         $this->render('msdetail');
     }
@@ -149,8 +149,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => $modelAdd[$form_model],
             'form_model' => $form_model,
-            'title_for_layout' => '追加 ' . $form_model,
-            'page_title' => '追加 ' . $form_model,
+            'title_for_layout' => $form_model.'追加',
+            'page_title' => $form_model.'追加',
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -195,8 +195,8 @@ class MastersController extends AppController {
         $this->set(array(
             'fields_name' => $fieldsName,
             'form_model' => $masterModel,
-            'title_for_layout' => '修正 ' . $masterModel,
-            'page_title' => '修正 ' . $masterModel,
+            'title_for_layout' => $masterModel.'更新',
+            'page_title' => $masterModel.'更新',
         ));
         $this->render('detail');
 

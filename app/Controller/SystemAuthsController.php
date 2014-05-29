@@ -7,7 +7,7 @@ class SystemAuthsController extends AppController {
     public $uses = array('SystemAuth');
     public $components = array('Paginator');
     public function beforeFilter() {
-        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete', 'updateAccess')) : null;
+        $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete', 'updateAccess', 'updateTms', 'updateKousu', 'updateUni')) : null;
     }
 
     public function index() {
@@ -107,7 +107,7 @@ class SystemAuthsController extends AppController {
     }
 
     /**
-     * update Access
+     * update Access Type
      * @author Bao Nam
      * 2014/05/09
      **/
@@ -130,6 +130,108 @@ class SystemAuthsController extends AppController {
         if (intval($id > 0) || !empty($id)) {
             $this->SystemAuth->id = $id;
             $data['SystemAuth']['access_type'] = $update_access;
+            $data['SystemAuth']['beforeSave'] = false;
+            if ($this->SystemAuth->save($data)) {
+                $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
+                $this->redirect($this->Session->read('save_latest_link_systemAuth'));
+            } else {}
+        }
+        $this->Session->write('flag_link_systemAuth', 1);
+    }
+
+
+    /**
+     * update Access TMS
+     * @author Bao Nam
+     * 2014/05/28
+     **/
+
+    public function updateTms() {
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        if ($this->Session->read('flag_link_systemAuth') == 0) {
+            $this->Session->write('save_latest_link_systemAuth', $_SERVER['HTTP_REFERER']);
+        }
+        if (!empty($this->request->data['id'])) {
+            $this->Session->write('sys_id', $this->request->data['id']);
+        }
+        $id = $this->Session->read('sys_id');
+        $userInfo = $this->SystemAuth->find('first', array('conditions' => array('SystemAuth.id' => $id)));
+        $update_access = ($userInfo['SystemAuth']['access_tms'] == AUTH_ACTIVE) ? AUTH_BANNED : AUTH_ACTIVE;
+        if (!$this->SystemAuth->exists($id)) {
+            return $this->redirect(array('action' => 'index'));
+        }
+        if (intval($id > 0) || !empty($id)) {
+            $this->SystemAuth->id = $id;
+            $data['SystemAuth']['access_tms'] = $update_access;
+            $data['SystemAuth']['beforeSave'] = false;
+            if ($this->SystemAuth->save($data)) {
+                $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
+                $this->redirect($this->Session->read('save_latest_link_systemAuth'));
+            } else {}
+        }
+        $this->Session->write('flag_link_systemAuth', 1);
+    }
+
+
+    /**
+     * update Access Kousu
+     * @author Bao Nam
+     * 2014/05/28
+     **/
+
+    public function updateKousu() {
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        if ($this->Session->read('flag_link_systemAuth') == 0) {
+            $this->Session->write('save_latest_link_systemAuth', $_SERVER['HTTP_REFERER']);
+        }
+        if (!empty($this->request->data['id'])) {
+            $this->Session->write('sys_id', $this->request->data['id']);
+        }
+        $id = $this->Session->read('sys_id');
+        $userInfo = $this->SystemAuth->find('first', array('conditions' => array('SystemAuth.id' => $id)));
+        $update_access = ($userInfo['SystemAuth']['access_kousu'] == AUTH_ACTIVE) ? AUTH_BANNED : AUTH_ACTIVE;
+        if (!$this->SystemAuth->exists($id)) {
+            return $this->redirect(array('action' => 'index'));
+        }
+        if (intval($id > 0) || !empty($id)) {
+            $this->SystemAuth->id = $id;
+            $data['SystemAuth']['access_kousu'] = $update_access;
+            $data['SystemAuth']['beforeSave'] = false;
+            if ($this->SystemAuth->save($data)) {
+                $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
+                $this->redirect($this->Session->read('save_latest_link_systemAuth'));
+            } else {}
+        }
+        $this->Session->write('flag_link_systemAuth', 1);
+    }
+
+
+    /**
+     * update Access UniAdmin
+     * @author Bao Nam
+     * 2014/05/28
+     **/
+
+    public function updateUni() {
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        if ($this->Session->read('flag_link_systemAuth') == 0) {
+            $this->Session->write('save_latest_link_systemAuth', $_SERVER['HTTP_REFERER']);
+        }
+        if (!empty($this->request->data['id'])) {
+            $this->Session->write('sys_id', $this->request->data['id']);
+        }
+        $id = $this->Session->read('sys_id');
+        $userInfo = $this->SystemAuth->find('first', array('conditions' => array('SystemAuth.id' => $id)));
+        $update_access = ($userInfo['SystemAuth']['access_uni'] == AUTH_ACTIVE) ? AUTH_BANNED : AUTH_ACTIVE;
+        if (!$this->SystemAuth->exists($id)) {
+            return $this->redirect(array('action' => 'index'));
+        }
+        if (intval($id > 0) || !empty($id)) {
+            $this->SystemAuth->id = $id;
+            $data['SystemAuth']['access_uni'] = $update_access;
             $data['SystemAuth']['beforeSave'] = false;
             if ($this->SystemAuth->save($data)) {
                 $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');

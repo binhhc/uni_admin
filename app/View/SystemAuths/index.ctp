@@ -8,6 +8,9 @@
                                 <tr class="nowrap widget-head">
                                     <th>社員番号</th>
                                     <th width="100%">氏名</th>
+                                    <th>ログインTMS</th>
+                                    <th>ログインKousu</th>
+                                    <th>ログインUni</th>
                                     <th>ログイン権限</th>
                                 </tr>
                             </thead>
@@ -23,6 +26,33 @@
                                     <tr class="nowrap">
                                         <td><?php echo h($system['SystemAuth']['employee_id']); ?> </td>
                                         <td><?php echo h($system['UserInfo']['employee_name']); ?></td>
+                                        <td class="center">
+                                            <?php
+                                            if (($system['SystemAuth']['access_tms'])==AUTH_ACTIVE) {
+                                                echo $this->Form->postLink('有効', array('action'=>'updateTms'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
+                                            } else {
+                                                echo $this->Form->postLink('無効', array('action'=>'updateTms'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="center">
+                                            <?php
+                                            if (($system['SystemAuth']['access_kousu'])==AUTH_ACTIVE) {
+                                                echo $this->Form->postLink('有効', array('action'=>'updateKousu'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
+                                            } else {
+                                                echo $this->Form->postLink('無効', array('action'=>'updateKousu'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="center">
+                                            <?php
+                                            if (($system['SystemAuth']['access_uni'])==SYSTEM_AUTH_ACTIVE) {
+                                                echo $this->Form->postLink('有効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
+                                            } else {
+                                                echo $this->Form->postLink('無効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
+                                            }
+                                            ?>
+                                        </td>
                                         <td class="center">
                                             <?php
                                             if (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE) {

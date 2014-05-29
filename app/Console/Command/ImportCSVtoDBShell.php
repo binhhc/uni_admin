@@ -1,5 +1,7 @@
 <?php
 
+App::import('Vendor', 'SimpleXlsx', array('file' => 'SimpleXlsx/Simplexlsx.php'));
+
 class ImportCSVtoDBShell extends AppShell {
 
     public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome', 'SystemAuth');
@@ -45,24 +47,25 @@ class ImportCSVtoDBShell extends AppShell {
     /**
      * @author  Binh Hoang
      * @since 11/2013
-     * @modified Bao Nam - 2014/05/06
+     * @modified Bao Nam - 2014/05/29
      */
     public function importUserInfo($path, $directory_month) {
-        $base = $path . DS . '01_USERINFO.csv';
-        $handle = @fopen($base, 'r');
-        if ($handle) {
-            $userInfo = file($base);
-            $filename = $directory_month . DS . '01_USERINFO_' . strtotime(date('Y-m-d H:i:s')) . '.csv';
-            $outstream = fopen($filename, 'w');
-            $n = count($userInfo);
-            $input_id = array();
-            $columns = array();
-            for ($i = 0; $i < $n; $i++) {
-                $line = trim($userInfo[$i]);
-                if (!empty($line)) {
-                    fputcsv($outstream, explode(',', $line));
-                    $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+        $base = $path . DS . FILE_USER_INFO;
+        $fileInfo = pathinfo($base);
+        $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
+        if ($fileInfo['extension'] == 'xlsx') {
+            $saveXlsx = @file_put_contents($filename, file_get_contents($base));
+            if ($saveXlsx) {
+                $dataxlsx = new SimpleXLSX($filename);
+                $dbXlsx = $dataxlsx->rows();
+
+                $n = count($dbXlsx);
+                $input_id = array();
+                $columns = array();
+
+                for ($i = 0; $i < $n; $i++) {
+                    $db = array_map('trim', $dbXlsx[$i]);
                     //Compare columns in CSV with columns in constants
                     if ($i==0) {
                         foreach (unserialize(CSV_USER_INFO) as $key => $value) {
@@ -77,9 +80,11 @@ class ImportCSVtoDBShell extends AppShell {
                         $data['UserInfo']['created'] = date('Y-m-d H:i:s');
 
                         foreach ($columns as $key => $value) {
+                            if (in_array($key, array('company_join_date', 'birthday'))) {
+                                $db[$value] = date('Y/m/d', $dataxlsx->unixstamp($db[$value]));
+                            }
                             $data['UserInfo'][$key] = $db[$value];
                         }
-
                         //check validate user before insert/update
                         $this->UserInfo->set($data);
                         $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
@@ -104,18 +109,86 @@ class ImportCSVtoDBShell extends AppShell {
                                     $this->UserInfo->save($data);
                                 }
                             }
-                        }else{
+                        } else {
                             //write log user
                             $this->write_log_validate($i, 'UserInfo');
                         }
                     }
                 }
+                $this->success[] = FILE_USER_INFO;
+                $this->logme(__('UAD_COMMON_MSG0005'));
+            } else {
+                $this->logme(__('UAD_ERR_MSG0011'));
             }
-            fclose($outstream);
-            $this->success[] = '01_USERINFO.csv';
-            $this->logme(__('UAD_COMMON_MSG0005'));
         } else {
-            $this->logme(__('UAD_ERR_MSG0011'));
+            $handle = @fopen($base, 'r');
+            if ($handle) {
+                $userInfo = file($base);
+                $outstream = fopen($filename, 'w');
+                $n = count($userInfo);
+                $input_id = array();
+                $columns = array();
+                for ($i = 0; $i < $n; $i++) {
+                    $line = trim($userInfo[$i]);
+                    if (!empty($line)) {
+                        fputcsv($outstream, explode(',', $line));
+                        $db = explode(',', mb_convert_encoding($line, "UTF-8", "SJIS-win"));
+
+                        //Compare columns in CSV with columns in constants
+                        if ($i==0) {
+                            foreach (unserialize(CSV_USER_INFO) as $key => $value) {
+                                $key_id = array_search($value, $db);
+                                if (is_numeric($key_id)) {
+                                    $columns[$key] = $key_id;
+                                }
+                            }
+
+                        } else {
+                            $data = array();
+                            $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
+                            $data['UserInfo']['created'] = date('Y-m-d H:i:s');
+
+                            foreach ($columns as $key => $value) {
+                                $data['UserInfo'][$key] = $db[$value];
+                            }
+
+                            //check validate user before insert/update
+                            $this->UserInfo->set($data);
+                            $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
+                                if (empty($system_auth_id)) {
+                                    $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
+                                    $system_auth_data['SystemAuth']['access_type'] = SYSTEM_AUTH_ACTIVE;
+                                    $this->SystemAuth->set($system_auth_data);
+                                    $this->SystemAuth->create();
+                                    $this->SystemAuth->save($system_auth_data);
+                                }
+                            if ($this->UserInfo->customValidate()) {
+                                if (in_array($data['UserInfo']['employee_id'], $input_id)) {
+                                    $this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
+                                } else {
+                                    $input_id[] = $data['UserInfo']['employee_id'];
+                                    $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
+                                    if ($id) {
+                                        $this->UserInfo->id = $id;
+                                        $this->UserInfo->save($data);
+                                    } else {
+                                        $this->UserInfo->create();
+                                        $this->UserInfo->save($data);
+                                    }
+                                }
+                            }else{
+                                //write log user
+                                $this->write_log_validate($i, 'UserInfo');
+                            }
+                        }
+                    }
+                }
+                fclose($outstream);
+                $this->success[] = FILE_USER_INFO;
+                $this->logme(__('UAD_COMMON_MSG0005'));
+            } else {
+                $this->logme(__('UAD_ERR_MSG0011'));
+            }
         }
     }
 
@@ -161,7 +234,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importQualitification($path, $directory_month) {
-        $base = $path . DS . '02_QUALIFICATION.csv';
+        $base = $path . DS . FILE_QUALIFICATION;
         $handle = @fopen($base, 'r');
         if ($handle) {
             $quanlity = file($base);
@@ -211,7 +284,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
-            $this->success[] = '02_QUALIFICATION.csv';
+            $this->success[] = FILE_QUALIFICATION;
             $this->logme(__('UAD_COMMON_MSG0006'));
         } else {
             $this->logme(__('UAD_ERR_MSG0012'));
@@ -224,7 +297,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importUnitPrice($path, $directory_month) {
-        $base = $path . DS . '03_UNIT_PRICE.csv';
+        $base = $path . DS . FILE_UNIT_PRICE;
         $handle = @fopen($base, 'r');
         if ($handle) {
             $unitPrice = file($base);
@@ -273,7 +346,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
-            $this->success[] = '03_UNIT_PRICE.csv';
+            $this->success[] = FILE_UNIT_PRICE;
             $this->logme(__('UAD_COMMON_MSG0007'));
         } else {
             $this->logme(__('UAD_ERR_MSG0013'));
@@ -286,7 +359,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importAnnualIncome($path, $directory_month) {
-        $base = $path . DS . '04_ANNUAL_INCOME.csv';
+        $base = $path . DS . FILE_ANNUAL_INCOME;
         $handle = @fopen($base, 'r');
         if ($handle) {
             $annualIncome = file($base);
@@ -334,7 +407,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
-            $this->success[] = '04_ANNUAL_INCOME.csv';
+            $this->success[] = FILE_ANNUAL_INCOME;
             $this->logme(__('UAD_COMMON_MSG0008'));
         } else {
             $this->logme(__('UAD_ERR_MSG0014'));
@@ -347,7 +420,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importSchoolEducation($path, $directory_month) {
-        $base = $path . DS . '05_SCHOOL_EDUCATION.csv';
+        $base = $path . DS . FILE_SCHOOL_EDUCATION;
         $handle = @fopen($base, 'r');
         if ($handle) {
             $schoolEdu = file($base);
@@ -395,7 +468,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
-            $this->success[] = '05_SCHOOL_EDUCATION.csv';
+            $this->success[] = FILE_SCHOOL_EDUCATION;
             $this->logme(__('UAD_COMMON_MSG0009'));
         } else {
             $this->logme(__('UAD_ERR_MSG0015'));
@@ -408,7 +481,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importWorkExperience($path, $directory_month) {
-        $base = $path . DS . '06_WORK_EXPERIENCE.csv';
+        $base = $path . DS . FILE_WORK_EXPERIENCE;
         $handle = @fopen($base, 'r');
         if ($handle) {
             $workExpert = file($base);
@@ -456,7 +529,7 @@ class ImportCSVtoDBShell extends AppShell {
                 }
             }
             fclose($outstream);
-            $this->success[] = '06_WORK_EXPERIENCE.csv';
+            $this->success[] = FILE_WORK_EXPERIENCE;
             $this->logme(__('UAD_COMMON_MSG0010'));
         } else {
             $this->logme(__('UAD_ERR_MSG0016'));
@@ -467,11 +540,13 @@ class ImportCSVtoDBShell extends AppShell {
         unlink(BATCH_LOCK);
         @unlink(BATCH_ENGINE_ALL);
     }
+
     /**
      * @author Nguyen Hoang
      * Write log validate
      * @since 01/2013
      */
+
     public function write_log_validate($line, $model){
         $line +=1;
         $error_fields = '';

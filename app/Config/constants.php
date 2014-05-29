@@ -23,7 +23,20 @@ define('DELETE_FLG_ON', '1');
 define('DELETE_FLG_OFF', '0');
 define('SYSTEM_AUTH_ACTIVE', '1');
 define('SYSTEM_AUTH_BANNED', '0');
+define('AUTH_ACTIVE', '1');
+define('AUTH_BANNED', '0');
 define('MAX_EMP_ID', '6');
+
+/* File to import into database */
+
+define('FILE_USER_INFO', '01_USERINFO_1.xlsx');
+define('FILE_QUALIFICATION', '02_QUALIFICATION.csv');
+define('FILE_UNIT_PRICE', '03_UNIT_PRICE.csv');
+define('FILE_ANNUAL_INCOME', '04_ANNUAL_INCOME.csv');
+define('FILE_SCHOOL_EDUCATION', '05_SCHOOL_EDUCATION.csv');
+define('FILE_WORK_EXPERIENCE', '06_WORK_EXPERIENCE.csv');
+
+
 define('GENDER_CODE', serialize(array(
     '0' => '男性',
     '1' => '女性',
