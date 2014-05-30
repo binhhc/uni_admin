@@ -12,6 +12,7 @@ class ImportCSVtoDBShell extends AppShell {
      */
     public function main() {
         $path = !empty($this->args[0]) ? $this->args[0] : null;
+        $this->log($path, 'batch11111111111');
         $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
         $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 

@@ -10,7 +10,7 @@
                 <div class="widget-content">
                     <table class="responsive table table-striped table-bordered table-hover" cellpadding="5" cellspacing="5">
                         <thead>
-                            <tr class="nowrap widget-head"><td colspan="10"><?php echo $title_for_layout."マスター";?></td></tr>
+                            <tr class="nowrap widget-head"><td colspan="10"><?php echo $title_for_layout. '管理';?></td></tr>
                             <tr class="nowrap widget-head">
                                 <?php
                                 if (!empty($msDetail)) {
@@ -19,10 +19,10 @@
                                 <th>コード</th>
                                 <th><?php echo $title_for_layout."名"?></th>
                                 <?php if ($form_model == 'MsDepartment'): ?>
-                                    <th>Parent Department</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Email</th>
+                                    <th>親部門</th>
+                                    <th>開始日</th>
+                                    <th>終了日</th>
+                                    <th>メール</th>
                                 <?php endif ?>
                             </tr>
                         </thead>
@@ -48,7 +48,24 @@
                             }?>
                         </tbody>
                     </table>
+                    <?php if ($this->Paginator->numbers()): ?>
+                    <div class="widget-foot">
+                        <ul class="pagination">
+                            <?php
+                            if(empty($this->Paginator->options['url']['page']) or $this->Paginator->options['url']['page']<=1){
+                                echo '<li><span class="prev disabled">&lt;&lt;</span></li>';
+                            }
+                            echo '<li>' . $this->Paginator->first('<<', array(), null, array('class' => 'prev disabled')) . '</li>';
+                            echo $this->Paginator->numbers(array('tag' => 'li', 'separator' => ''));
+                            echo '<li>' . $this->Paginator->last('>>', array(), null, array('class' => 'next disabled')) . '</li>';
 
+                            if(!empty($this->Paginator->options['url']['page']) and ($this->Paginator->options['url']['page']>=$this->Paginator->counter(array('format' => '%pages%')))){
+                                echo '<li><span class="next disabled">&gt;&gt;</span></li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
                     <div class="widget-foot"><center>
                     <?php echo $this->Html->link('戻る', array('controller' => 'Masters', 'action' => 'index'), array('class'=>'btn btn-default') ); ?>
                         </center>

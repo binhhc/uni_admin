@@ -27,25 +27,25 @@
                                     </div>
                                     <?php if ($form_model == 'MsDepartment'): ?>
                                     <div class="form-group">
-                                        <label class="col-lg-6 control-label">Parent Department</label>
+                                        <label class="col-lg-6 control-label">親部門</label>
                                         <div class="col-lg-6">
                                         <?php echo $this->Form->input('parent_department_id', array('class'=>'form-control', 'label' => false, 'type' => 'text', 'required'=>false));?>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-6 control-label">Start date</label>
+                                        <label class="col-lg-6 control-label">開始日</label>
                                         <div class="col-lg-2">
                                             <?php echo $this->Form->input('start_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-6 control-label">End date</label>
+                                        <label class="col-lg-6 control-label">終了日</label>
                                         <div class="col-lg-2">
                                             <?php echo $this->Form->input('end_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-6 control-label">Email</label>
+                                        <label class="col-lg-6 control-label">メール</label>
                                         <div class="col-lg-6">
                                         <?php echo $this->Form->input('email', array('class'=>'form-control', 'label' => false, 'type' => 'text', 'required'=>false));?>
                                         </div>

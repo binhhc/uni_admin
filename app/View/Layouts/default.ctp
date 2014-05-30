@@ -20,8 +20,8 @@
 <html>
     <head>
         <?php echo $this->Html->charset(); ?>
-        <title>            
-            <?php echo $title_for_layout; ?>
+        <title>
+            <?php echo (isset($page_title) ? $page_title : $title_for_layout); ?>
         </title>
         <?php
         echo $this->Html->meta('icon');
@@ -39,7 +39,7 @@
                 });
                 $('.cb_item').click(function(){
                     $('#cb_all').prop('checked', !$('.cb_item:not(:checked)').length);
-                });       
+                });
             });
 
             $(function() {
@@ -55,15 +55,15 @@
         <?php echo $this->element('header'); ?>
         <div class="clearfix"></div>
         <div class="content">
-            <?php 
-                echo $this->Session->flash(); 
+            <?php
+                echo $this->Session->flash();
                 echo $this->element('sidebar');
                 echo $this->fetch('content');
             ?>
         </div>
         <div class="clearfix"></div>
         <?php echo $this->element('footer'); ?>
-       
+
         <?php echo $this->element('sql_dump'); ?>
     </body>
 </html>

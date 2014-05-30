@@ -29,11 +29,12 @@ class MastersController extends AppController {
             'order' => array('MsDepartment.id' => 'ASC')
         );
         $this->set('msDetail', $this->Paginator->paginate('MsDepartment'));
+        $this->Session->write('edit_form_name', ' 部門');
         $this->set(array(
             'fields_name' => 'department',
             'form_model' => 'MsDepartment',
-            'title_for_layout' => ' 所属',
-            'page_title' => ' マスター所属',
+            'title_for_layout' => ' 部門',
+            'page_title' => ' 部門管理',
         ));
         $this->render('msdetail');
     }
@@ -49,11 +50,12 @@ class MastersController extends AppController {
             'order' => array('MsEmploymentType.id' => 'ASC')
         );
         $this->set('msDetail', $this->Paginator->paginate('MsEmploymentType'));
+        $this->Session->write('edit_form_name', ' 雇用区分');
         $this->set(array(
             'fields_name' => 'employment',
             'form_model' => 'MsEmploymentType',
             'title_for_layout' => '雇用区分',
-            'page_title' => ' 雇用区分マスター',
+            'page_title' => ' 雇用区分管理',
         ));
         $this->render('msdetail');
     }
@@ -73,7 +75,7 @@ class MastersController extends AppController {
             'fields_name' => 'job',
             'form_model' => 'MsJob',
             'title_for_layout' => ' 職種',
-            'page_title' => ' 職種マスター',
+            'page_title' => ' 職種管理',
         ));
         $this->render('msdetail');
     }
@@ -89,11 +91,12 @@ class MastersController extends AppController {
             'order' => array('MsPosition.id' => 'ASC')
         );
         $this->set('msDetail', $this->Paginator->paginate('MsPosition'));
+        $this->Session->write('edit_form_name', ' 役職');
         $this->set(array(
             'fields_name' => 'position',
             'form_model' => 'MsPosition',
             'title_for_layout' => ' 役職',
-            'page_title' => ' 役職マスター',
+            'page_title' => ' 役職管理',
         ));
         $this->render('msdetail');
     }
@@ -111,11 +114,12 @@ class MastersController extends AppController {
             'order' => array('MsWorkLocation.id' => 'ASC')
         );
         $this->set('msDetail', $this->Paginator->paginate('MsWorkLocation'));
+        $this->Session->write('edit_form_name', ' 勤務地');
         $this->set(array(
             'fields_name' => 'work_location',
             'form_model' => 'MsWorkLocation',
             'title_for_layout' => ' 勤務地',
-            'page_title' => ' 勤務地マスター',
+            'page_title' => ' 勤務地管理',
         ));
         $this->render('msdetail');
     }
@@ -146,11 +150,12 @@ class MastersController extends AppController {
             }
         }
         $this->Session->write('flag_link_master', 1);
+        $editFormName = $this->Session->read("edit_form_name");
         $this->set(array(
             'fields_name' => $modelAdd[$form_model],
             'form_model' => $form_model,
-            'title_for_layout' => $form_model.'追加',
-            'page_title' => $form_model.'追加',
+            'title_for_layout' => $editFormName.'追加',
+            'page_title' => $editFormName.'追加',
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -191,12 +196,13 @@ class MastersController extends AppController {
             $this->request->data = $modelData;
         }
         $this->Session->write('flag_link_master', 1);
+        $editFormName = $this->Session->read("edit_form_name");
         $this->set('readonly', 'readonly="readonly"');
         $this->set(array(
             'fields_name' => $fieldsName,
             'form_model' => $masterModel,
-            'title_for_layout' => $masterModel.'更新',
-            'page_title' => $masterModel.'更新',
+            'title_for_layout' => $editFormName.'更新',
+            'page_title' => $editFormName.'更新',
         ));
         $this->render('detail');
 
