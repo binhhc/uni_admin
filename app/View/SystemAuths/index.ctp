@@ -11,7 +11,6 @@
                                     <th>ログインTMS</th>
                                     <th>ログインKousu</th>
                                     <th>ログインUni</th>
-                                    <th>ログイン権限</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,15 +49,6 @@
                                                 echo $this->Form->postLink('有効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
                                             } else {
                                                 echo $this->Form->postLink('無効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="center">
-                                            <?php
-                                            if (($system['SystemAuth']['access_type'])==SYSTEM_AUTH_ACTIVE) {
-                                                echo $this->Form->postLink('有効', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
-                                            } else {
-                                                echo $this->Form->postLink('無効', array('action'=>'updateAccess'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
                                             }
                                             ?>
                                         </td>

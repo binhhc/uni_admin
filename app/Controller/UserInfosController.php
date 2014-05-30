@@ -85,7 +85,7 @@ class UserInfosController extends AppController {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
                     $data_system_auth['SystemAuth']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $data['UserInfo']['employee_id']), MAX_EMP_ID, 0, STR_PAD_LEFT);;
-                    $data_system_auth['SystemAuth']['access_type'] = SYSTEM_AUTH_ACTIVE;
+                    $data_system_auth['SystemAuth']['access_uni'] = AUTH_ACTIVE;
                     $this->SystemAuth->set($data_system_auth);
                     $this->SystemAuth->create();
                     $this->SystemAuth->save($data_system_auth);

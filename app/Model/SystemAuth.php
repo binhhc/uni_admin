@@ -24,7 +24,7 @@ class SystemAuth extends AppModel {
                     'message' => __('UAD_ERR_MSG0006')
                 ),
             ),
-            'access_type' => array(
+            'access_uni' => array(
                 'notEmpty' => array(
                     'rule' => 'notEmpty',
                     'allowEmpty' => false,
@@ -54,7 +54,7 @@ class SystemAuth extends AppModel {
         if (!empty($userInfo)) {
             $active = $this->find('first', array(
                 'conditions' => array(
-                    'SystemAuth.access_type' => SYSTEM_AUTH_ACTIVE,
+                    'SystemAuth.access_uni' => AUTH_ACTIVE,
                     //$app decentralized system. ex: uni_admin, kousu,...
                     // 'SystemAuth.system_name' => $app,
                     'SystemAuth.employee_id' => $userInfo['UserInfo']['employee_id'],
