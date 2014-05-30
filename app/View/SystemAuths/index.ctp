@@ -45,7 +45,7 @@
                                         </td>
                                         <td class="center">
                                             <?php
-                                            if (($system['SystemAuth']['access_uni'])==SYSTEM_AUTH_ACTIVE) {
+                                            if (($system['SystemAuth']['access_uni'])==AUTH_ACTIVE) {
                                                 echo $this->Form->postLink('有効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-success'));
                                             } else {
                                                 echo $this->Form->postLink('無効', array('action'=>'updateUni'), array('escape' => false, 'data' => array('id' => h($system['SystemAuth']['id'])), 'class'=>'btn btn-xs btn-danger'));
