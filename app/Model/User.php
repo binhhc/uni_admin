@@ -24,5 +24,22 @@ class User extends AppModel {
         curl_close($ch);
         return $status;
     }
+
+    /*
+     * Check url file csv, xlsx
+     * @author Bao Nam
+     * @date 2014/05/30
+     */
+    public function check_file_type($url){
+        $url_xlsx = $url.'.xlsx';
+        $url_csv = $url.'.csv';
+        if ($this->is_url_exist($url_xlsx)) {
+            $real_path = $url_xlsx;
+        } else {
+            $real_path = $url_csv;
+        }
+        return $real_path;
+    }
+
 }
 ?>

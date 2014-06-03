@@ -12,7 +12,6 @@ class ImportCSVtoDBShell extends AppShell {
      */
     public function main() {
         $path = !empty($this->args[0]) ? $this->args[0] : null;
-        $this->log($path, 'batch11111111111');
         $directory_year = WWW_ROOT . 'backupCSV' . DS . date('Y');
         $directory_month = WWW_ROOT . 'backupCSV' . DS . date('Y') . DS . date('m');
 
@@ -51,7 +50,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/29
      */
     public function importUserInfo($path, $directory_month) {
-        $base = $path . DS . FILE_USER_INFO;
+        $base = $this->User->check_file_type($path . DS . FILE_USER_INFO);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
@@ -235,7 +234,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/29
      */
     public function importQualitification($path, $directory_month) {
-        $base = $path . DS . FILE_QUALIFICATION;
+        $base = $this->User->check_file_type($path . DS . FILE_QUALIFICATION);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
@@ -357,7 +356,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/29
      */
     public function importUnitPrice($path, $directory_month) {
-        $base = $path . DS . FILE_UNIT_PRICE;
+        $base = $this->User->check_file_type($path . DS . FILE_UNIT_PRICE);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
@@ -477,7 +476,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/29
      */
     public function importAnnualIncome($path, $directory_month) {
-        $base = $path . DS . FILE_ANNUAL_INCOME;
+        $base = $this->User->check_file_type($path . DS . FILE_ANNUAL_INCOME);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
@@ -592,7 +591,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/29
      */
     public function importSchoolEducation($path, $directory_month) {
-        $base = $path . DS . FILE_SCHOOL_EDUCATION;
+        $base = $this->User->check_file_type($path . DS . FILE_SCHOOL_EDUCATION);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 
@@ -708,7 +707,7 @@ class ImportCSVtoDBShell extends AppShell {
      * @modified Bao Nam - 2014/05/07
      */
     public function importWorkExperience($path, $directory_month) {
-        $base = $path . DS . FILE_WORK_EXPERIENCE;
+        $base = $this->User->check_file_type($path . DS . FILE_WORK_EXPERIENCE);
         $fileInfo = pathinfo($base);
         $filename = $directory_month . DS . $fileInfo['filename'] .'_' . strtotime(date('Y-m-d H:i:s')) . '.' . $fileInfo['extension'];
 

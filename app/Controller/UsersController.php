@@ -7,7 +7,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         $this->Auth->user() ? $this->Auth->allow(array('status')) : null;
-        $this->Auth->allow(array('login', 'logout', 'status', 'runbatch','logbatch'));
+        $this->Auth->allow(array('login', 'logout', 'status', 'runbatch', 'logbatch'));
     }
 
     public function login() {
@@ -61,12 +61,12 @@ class UsersController extends AppController {
 
         $real_path = Configure::read('path_csv');
         if (!empty($real_path)) {
-            $csv_file_userinfo = $real_path . DS . '01_USERINFO.csv';
-            $csv_file_qualification = $real_path . DS . '02_QUALIFICATION.csv';
-            $csv_file_unitprice = $real_path . DS . '03_UNIT_PRICE.csv';
-            $csv_file_unique_income = $real_path . DS . '04_ANNUAL_INCOME.csv';
-            $csv_file_school_education = $real_path . DS . '05_SCHOOL_EDUCATION.csv';
-            $csv_file_work_experience = $real_path . DS . '06_WORK_EXPERIENCE.csv';
+            $csv_file_userinfo = $this->User->check_file_type($real_path . DS . FILE_USER_INFO);
+            $csv_file_qualification = $this->User->check_file_type($real_path . DS . FILE_QUALIFICATION);
+            $csv_file_unitprice = $this->User->check_file_type($real_path . DS . FILE_UNIT_PRICE);
+            $csv_file_unique_income = $this->User->check_file_type($real_path . DS . FILE_ANNUAL_INCOME);
+            $csv_file_school_education = $this->User->check_file_type($real_path . DS . FILE_SCHOOL_EDUCATION);
+            $csv_file_work_experience = $this->User->check_file_type($real_path . DS . FILE_WORK_EXPERIENCE);
 
             // check csv files exist
             if($this->User->is_url_exist($csv_file_userinfo) &&

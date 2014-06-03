@@ -29,8 +29,10 @@ class MastersController extends AppController {
             'order' => array('MsDepartment.id' => 'ASC')
         );
         $this->set('msDetail', $this->Paginator->paginate('MsDepartment'));
+        $departmentName = $this->MsDepartment->find("list", array("fields" => array("id","department_name")));
         $this->Session->write('edit_form_name', ' 部門');
         $this->set(array(
+            'department_name' => $departmentName,
             'fields_name' => 'department',
             'form_model' => 'MsDepartment',
             'title_for_layout' => ' 部門',

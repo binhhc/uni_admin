@@ -8,9 +8,9 @@
                                 <tr class="nowrap widget-head">
                                     <th>社員番号</th>
                                     <th width="100%">氏名</th>
-                                    <th>ログインTMS</th>
-                                    <th>ログインKousu</th>
-                                    <th>ログインUni</th>
+                                    <th>TMS</th>
+                                    <th>PCM</th>
+                                    <th>一元管理</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -34,7 +34,7 @@
                                 <td><?php echo $this->Form->postLink(h($ms[$form_model][$fields_name . '_cd']), array('action' => 'edit'), array('escape' => false, 'data' => array('fields_name' => $fields_name,'master_model' => h($form_model), 'id' => h($ms[$form_model]['id'])))); ?> </td>
                                 <td><?php echo h($ms[$form_model][$fields_name . '_name']); ?></td>
                                 <?php if ($form_model == 'MsDepartment'): ?>
-                                    <td><?php echo h($ms[$form_model]['parent_department_id']); ?></td>
+                                    <td><?php echo (array_key_exists($ms[$form_model]['parent_department_id'],$department_name)) ? h($department_name[$ms[$form_model]['parent_department_id']]) : ''; ?></td>
                                     <td><?php echo $ms[$form_model]['start_date']; ?></td>
                                     <td><?php echo $ms[$form_model]['end_date']; ?></td>
                                     <td><?php echo h($ms[$form_model]['email']); ?></td>
