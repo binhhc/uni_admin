@@ -67,7 +67,7 @@
                         <?php endforeach;
                             } else {
                                 echo '<tr>
-                                        <td colspan = "0" class="data-empty data-empty-scroll-table">社員情報のデータがありません。</td>
+                                        <td colspan = "2" class="data-empty data-empty-scroll-table">社員情報のデータがありません。</td>
                                     </tr>';
                             }?>
                         </tbody>
@@ -169,7 +169,7 @@
                                     </tr>
                                         <?php
                                     endforeach;
-                                } else {echo '<tr><td colspan="0"></td></tr>';} ?>
+                                } else {echo '<tr><td class="empty-row"></td></tr>';} ?>
                             </tbody>
                         </table>
                     </div>
@@ -217,4 +217,5 @@
             jQuery("#data tr:eq("+ x +")").css('height', heightResult[x]);
         }
     }).trigger('resize');
+    $(".empty-row").attr("colspan", $("#data").find(".widget-head").find("th").length);
 </script>

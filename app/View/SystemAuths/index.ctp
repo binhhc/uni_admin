@@ -16,7 +16,7 @@
                             <tbody>
                                 <?php if (empty($systemAuth)) { ?>
                                     <tr>
-                                        <td colspan="4" class="data-empty">権限管理のデーターがありません。</td>
+                                        <td colspan="5" class="data-empty">権限管理のデーターがありません。</td>
                                     </tr>
                                     <?php
                                 } else {

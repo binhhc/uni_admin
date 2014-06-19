@@ -42,7 +42,7 @@ class SystemAuth extends AppModel {
      * @author BinhHoang
      * @modified Bao Nam - 2014/05/09
      **/
-    public function getActive($app, $username){
+    public function getActive($username){
 
         $userInfo = $this->UserInfo->find('first', array(
             'conditions' => array(
@@ -54,10 +54,8 @@ class SystemAuth extends AppModel {
         if (!empty($userInfo)) {
             $active = $this->find('first', array(
                 'conditions' => array(
-                    'SystemAuth.access_uni' => AUTH_ACTIVE,
-                    //$app decentralized system. ex: uni_admin, kousu,...
-                    // 'SystemAuth.system_name' => $app,
                     'SystemAuth.employee_id' => $userInfo['UserInfo']['employee_id'],
+                    'SystemAuth.delete_flg' => DELETE_FLG_OFF
                 )
             ));
         }

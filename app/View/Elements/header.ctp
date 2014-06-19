@@ -18,23 +18,26 @@
         </ul>
 
         <!-- Links -->
+        <?php $nav_email_user = $this->Session->read('email_user');
+        if (!empty($nav_email_user)): ?>
         <ul class="nav navbar-nav pull-right">
-        <li class="dropdown pull-right">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-user"> <?php echo $this->Session->read('email_user');?> </i> <b class="caret"></b>
-            </a>
-            <!-- Dropdown menu -->
-            <ul class="dropdown-menu">
-                <li>
-                    <?php echo $this->Html->link('<i class="fa fa-play-circle"></i> バッチ実行', array('controller' => 'Users', 'action' => 'status'),array('escape' => false)); ?>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <?php echo $this->Html->link('<i class="fa fa-external-link"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>
-                </li>
-            </ul>
-          </li>
+            <li class="dropdown pull-right">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="fa fa-user"> <?php echo $nav_email_user; ?> </i> <b class="caret"></b>
+                </a>
+                <!-- Dropdown menu -->
+                <ul class="dropdown-menu">
+                    <li>
+                        <?php echo $this->Html->link('<i class="fa fa-play-circle"></i> バッチ実行', array('controller' => 'Users', 'action' => 'status'),array('escape' => false)); ?>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <?php echo $this->Html->link('<i class="fa fa-external-link"></i> ログアウト', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false)); ?>
+                    </li>
+                </ul>
+            </li>
         </ul>
+        <?php endif; ?>
       </nav>
     </div>
 </div>

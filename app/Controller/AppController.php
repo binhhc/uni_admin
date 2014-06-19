@@ -43,25 +43,34 @@ class AppController extends Controller {
             ),
             'authorize' => array(
                 'Actions' => array('actionPath' => 'controllers')
+            ),
+            'loginAction' => array(
+                'controller' => 'Users',
+                'action' => 'login'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'Users',
+                'action' => 'login'
+            ),
+            'loginRedirect' => array(
+                'controller' => 'UserInfos',
+                'action' => 'index'
             )
         ),
         'Session',
+        'Cookie'
     );
 
-    public function beforeFilter() {      
-        //Configure AuthComponent
-        $this->Auth->loginAction = array('controller' => 'Users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('controller' => 'Users', 'action' => 'login');
-        $this->Auth->loginRedirect = array('controller' => 'AnnualIncomes', 'action' => 'index');
-        // check if user has permission to access function
-        if ($this->Auth->user()) {   // user has logged in
-            $node = $this->Acl->Aco->node('controllers/' . $this->params['controller'] . '/' . $this->params['action']);
-            if (empty($node)) {
-                throw new NotFoundException();
-            }
-            $chk = $this->Acl->check($this->User, 'controllers/' . $this->params['controller'] . '/' . $this->params['action']);
-            if (!$chk) {
-                throw new ForbiddenException('You are not authorized!!!');
+    public function beforeFilter() {
+        if ($this->Auth->user()) {
+            // user has logged in and has cookie
+            $user = $this->Auth->user();
+            $checkSession = $this->Auth->password($user['username']);
+            $checkCookie = $this->Cookie->read('cookie_auth');
+            if ($checkSession != $checkCookie) {
+                $this->Cookie->delete('cookie_auth');
+                $this->Session->destroy();
+                return $this->redirect($this->Auth->logout());
             }
         }
     }

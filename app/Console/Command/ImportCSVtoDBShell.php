@@ -87,27 +87,31 @@ class ImportCSVtoDBShell extends AppShell {
                         }
                         //check validate user before insert/update
                         $this->UserInfo->set($data);
-                        $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
-                            if (empty($system_auth_id)) {
-                                $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
-                                $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
-                                $this->SystemAuth->set($system_auth_data);
-                                $this->SystemAuth->create();
-                                $this->SystemAuth->save($system_auth_data);
-                            }
-                        if ($this->UserInfo->customValidate()) {
+
+                        if ($this->UserInfo->customValidate(true)) {
                             if (in_array($data['UserInfo']['employee_id'], $input_id)) {
+                                //check file import has duplicate employee_id
                                 $this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
                             } else {
                                 $input_id[] = $data['UserInfo']['employee_id'];
                                 $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
                                 if ($id) {
+                                    //overwrite data
                                     $this->UserInfo->id = $id;
                                     $this->UserInfo->save($data);
                                 } else {
                                     $this->UserInfo->create();
                                     $this->UserInfo->save($data);
                                 }
+                            }
+                            //add record to system auth
+                            $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
+                            if (empty($system_auth_id)) {
+                                $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
+                                $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
+                                $this->SystemAuth->set($system_auth_data);
+                                $this->SystemAuth->create();
+                                $this->SystemAuth->save($system_auth_data);
                             }
                         } else {
                             //write log user
@@ -118,7 +122,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_USER_INFO;
                 $this->logme(__('UAD_COMMON_MSG0005'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0011'));
+                $this->logme(FILE_USER_INFO . '.xlsx' . __('UAD_ERR_MSG0011'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -154,16 +158,10 @@ class ImportCSVtoDBShell extends AppShell {
 
                             //check validate user before insert/update
                             $this->UserInfo->set($data);
-                            $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
-                                if (empty($system_auth_id)) {
-                                    $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
-                                    $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
-                                    $this->SystemAuth->set($system_auth_data);
-                                    $this->SystemAuth->create();
-                                    $this->SystemAuth->save($system_auth_data);
-                                }
-                            if ($this->UserInfo->customValidate()) {
+
+                            if ($this->UserInfo->customValidate(true)) {
                                 if (in_array($data['UserInfo']['employee_id'], $input_id)) {
+                                    //check file import has duplicate employee_id
                                     $this->log('[UserInfo] employee_id ' . $data['UserInfo']['employee_id'] . ' unique !', 'batch');
                                 } else {
                                     $input_id[] = $data['UserInfo']['employee_id'];
@@ -176,6 +174,15 @@ class ImportCSVtoDBShell extends AppShell {
                                         $this->UserInfo->save($data);
                                     }
                                 }
+                                //add record to system auth
+                                $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
+                                if (empty($system_auth_id)) {
+                                    $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
+                                    $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
+                                    $this->SystemAuth->set($system_auth_data);
+                                    $this->SystemAuth->create();
+                                    $this->SystemAuth->save($system_auth_data);
+                                }
                             }else{
                                 //write log user
                                 $this->write_log_validate($i, 'UserInfo');
@@ -187,7 +194,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_USER_INFO;
                 $this->logme(__('UAD_COMMON_MSG0005'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0011'));
+                $this->logme(FILE_USER_INFO . '.csv' . __('UAD_ERR_MSG0011'));
             }
         }
     }
@@ -291,7 +298,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_QUALIFICATION;
                 $this->logme(__('UAD_COMMON_MSG0006'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0012'));
+                $this->logme(FILE_QUALIFICATION . '.xlsx' . __('UAD_ERR_MSG0012'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -345,7 +352,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_QUALIFICATION;
                 $this->logme(__('UAD_COMMON_MSG0006'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0012'));
+                $this->logme(FILE_QUALIFICATION . '.csv' . __('UAD_ERR_MSG0012'));
             }
         }
     }
@@ -412,7 +419,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_UNIT_PRICE;
                 $this->logme(__('UAD_COMMON_MSG0007'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0013'));
+                $this->logme(FILE_UNIT_PRICE . '.xlsx' . __('UAD_ERR_MSG0013'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -465,7 +472,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_UNIT_PRICE;
                 $this->logme(__('UAD_COMMON_MSG0007'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0013'));
+                $this->logme(FILE_UNIT_PRICE . '.csv' . __('UAD_ERR_MSG0013'));
             }
         }
     }
@@ -528,7 +535,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_ANNUAL_INCOME;
                 $this->logme(__('UAD_COMMON_MSG0008'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0014'));
+                $this->logme(FILE_ANNUAL_INCOME . '.xlsx' . __('UAD_ERR_MSG0014'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -580,7 +587,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_ANNUAL_INCOME;
                 $this->logme(__('UAD_COMMON_MSG0008'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0014'));
+                $this->logme(FILE_ANNUAL_INCOME . '.csv' . __('UAD_ERR_MSG0014'));
             }
         }
     }
@@ -644,7 +651,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_SCHOOL_EDUCATION;
                 $this->logme(__('UAD_COMMON_MSG0009'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0015'));
+                $this->logme(FILE_SCHOOL_EDUCATION . '.xlsx' . __('UAD_ERR_MSG0015'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -696,7 +703,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_SCHOOL_EDUCATION;
                 $this->logme(__('UAD_COMMON_MSG0009'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0015'));
+                $this->logme(FILE_SCHOOL_EDUCATION . '.csv' . __('UAD_ERR_MSG0015'));
             }
         }
     }
@@ -763,7 +770,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_WORK_EXPERIENCE;
                 $this->logme(__('UAD_COMMON_MSG0010'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0016'));
+                $this->logme(FILE_WORK_EXPERIENCE . '.xlsx' . __('UAD_ERR_MSG0016'));
             }
         } else {
             $handle = @fopen($base, 'r');
@@ -815,7 +822,7 @@ class ImportCSVtoDBShell extends AppShell {
                 $this->success[] = FILE_WORK_EXPERIENCE;
                 $this->logme(__('UAD_COMMON_MSG0010'));
             } else {
-                $this->logme(__('UAD_ERR_MSG0016'));
+                $this->logme(FILE_WORK_EXPERIENCE . '.csv' . __('UAD_ERR_MSG0016'));
             }
         }
     }

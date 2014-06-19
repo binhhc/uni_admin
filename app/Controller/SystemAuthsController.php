@@ -7,6 +7,7 @@ class SystemAuthsController extends AppController {
     public $uses = array('SystemAuth');
     public $components = array('Paginator');
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete', 'updateAccess', 'updateTms', 'updateKousu', 'updateUni')) : null;
     }
 

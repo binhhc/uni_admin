@@ -7,6 +7,7 @@ class UserInfosController extends AppController {
     public $uses = array('SystemAuth', 'UserInfo', 'AnnualIncome', 'Qualification', 'SchoolEducation', 'UnitPrice', 'WorkExperience', 'MsDepartment', 'MsEmploymentType', 'MsJob', 'MsPosition', 'MsWorkLocation');
     public $components = array('Paginator');
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 

@@ -202,4 +202,10 @@ define('CSV_WORK_EXPERIENCE', serialize(array(
     'note' => '備考'
 )));
 
+define('CHECK_LOGIN_PAGE', 'http://uni.a.srv/Logins/checkLogin');
+define('URL_LOGOUT_PAGE', 'http://uni.a.srv/Logins/logout');
+define('DOMAIN_LOGIN', 'uni.a.srv');
+define('KEY_LOGIN', 'uni');
+define('COOKIE_AUTH', 'cookie_auth');
+
 ?>

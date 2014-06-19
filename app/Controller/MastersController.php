@@ -7,6 +7,7 @@ class MastersController extends AppController {
     public $uses = array('UserInfo', 'MsDepartment', 'MsEmploymentType', 'MsJob', 'MsPosition', 'MsWorkLocation');
     public $components = array('Paginator');
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->user() ? $this->Auth->allow(array('index', 'msDepartment', 'msEmploymentType', 'msWorkLocation', 'msJob', 'msPosition', 'add', 'edit', 'delete')) : null;
     }
 

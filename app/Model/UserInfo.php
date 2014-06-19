@@ -44,7 +44,7 @@ class UserInfo extends AppModel {
         )
     );
 
-    public function customValidate() {
+    public function customValidate($import = false) {
         $validate = array(
             'employee_id' => array(
                 'notEmpty' => array(
@@ -186,6 +186,9 @@ class UserInfo extends AppModel {
             )
 
         );
+        if ($import == true) {
+            unset($validate['employee_id']['unique']);
+        }
         $this->validate = $validate;
         return $this->validates();
     }

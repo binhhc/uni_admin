@@ -2,29 +2,79 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeLogInterface', 'Log');
 App::uses('Controller', 'Controller');
+App::uses('Security', 'Utility');
 
 class UsersController extends AppController {
 
     public function beforeFilter() {
+        $action = ($this->action);
+        if (!in_array($action, array('generateCookie', 'checkLogin'))) {
+            parent::beforeFilter();
+        };
         $this->Auth->user() ? $this->Auth->allow(array('status')) : null;
-        $this->Auth->allow(array('login', 'logout', 'status', 'runbatch', 'logbatch'));
+        $this->Auth->allow(array('login', 'logout', 'runbatch', 'logbatch', 'checkLogin', 'generateCookie'));
     }
 
-    public function login() {
+    public function generateCookie () {
+        $this->Cookie->httpOnly = true;
+        if (isset($this->request->query[COOKIE_AUTH])) {
+            $this->Cookie->write(COOKIE_AUTH, $this->request->query[COOKIE_AUTH], false);
+            $data = array('data' => true);
+        } else {
+            $data = array('data' => false);
+        }
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        $this->response->type("jsonp");
+        $this->response->body($_GET['callback'] . '(' . json_encode($data) . ')');
+    }
+
+    public function checkLogin() {
+        $data = array();
+        $error = '';
         if ($this->request->is('post') || $this->request->is('put')) {
             App::import('Model', 'SystemAuth');
             $this->SystemAuth = new SystemAuth();
-            //get access permission
-            $username  = '';
-            if(!empty($this->request->data['User']['username'])){
-                $username = $this->request->data['User']['username'];
-            }
-            $access = $this->SystemAuth->getActive(Configure::read('name_application'), $username);
+            $access = (!empty($this->request->data['User']['username'])) ? $this->SystemAuth->getActive($this->request->data['User']['username']) : '';
             if(!empty($access)){
                 if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
                     if ($this->Auth->login()) {
-                        $user =  $this->Auth->user();
-                        $this->Session->write('email_user', $user['username']);
+                        $data = $access['SystemAuth'];
+                        $data['employee_name'] = $access['UserInfo']['employee_name'];
+                    } else {
+                        $error = __('UAD_ERR_MSG0002');
+                    }
+                }else{
+                    $error = __('UAD_ERR_MSG0003');
+                }
+            }else{
+                $error = __('UAD_ERR_MSG0021');
+            }
+        }
+        $this->autoLayout = false;
+        $this->autoRender = false;
+        $this->response->type("json");
+        $this->response->body(json_encode(array("data" => $data, "error" => $error)));
+    }
+
+    public function login() {
+        //check domain referer
+        $url = parse_url($this->referer());
+        if (!empty($this->request->data['Logins']['auth_hash']) && ($url['host']) == DOMAIN_LOGIN) {
+            $authLogin = explode(',', Security::cipher(base64_decode($this->request->data['Logins']['auth_hash']), Configure::read('Security.salt')));
+            $this->request->data['User']['username'] = $authLogin[0];
+            $this->request->data['User']['password'] = $authLogin[1];
+            App::import('Model', 'SystemAuth');
+            $this->SystemAuth = new SystemAuth();
+            //get access permission
+
+            $access = $this->SystemAuth->getActive($this->request->data['User']['username']);
+            if(!empty($access)){
+                if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
+                    if ($this->Auth->login()) {
+                        $this->Session->write('email_user', $this->Auth->user('username'));
+                        $this->Cookie->httpOnly = true;
+                        $this->Cookie->write(COOKIE_AUTH, $this->Auth->password($this->Auth->user('username')), false);
                         $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
                     } else {
                         $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
@@ -35,6 +85,12 @@ class UsersController extends AppController {
             }else{
                 $this->Session->setFlash(__('UAD_ERR_MSG0021'), 'error');
             }
+        } else {
+            if ($this->Auth->loggedIn()) {
+                $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
+            } else {
+                $this->redirect(CHECK_LOGIN_PAGE . '/url:'. KEY_LOGIN);
+            }
         }
         $this->layout = 'login';
         $this->set(array(
@@ -43,8 +99,10 @@ class UsersController extends AppController {
     }
 
     public function logout() {
+        $this->Auth->logout();
         $this->Session->destroy();
-        $this->redirect(array('controller' => 'Users', 'action' => 'login'));
+        $this->Cookie->delete(COOKIE_AUTH);
+        return $this->redirect(URL_LOGOUT_PAGE);
     }
 
     /*

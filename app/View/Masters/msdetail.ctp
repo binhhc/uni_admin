@@ -43,7 +43,7 @@
                         <?php endforeach;
                             } else {
                                 echo '<tr>
-                                        <td colspan = "0" class="data-empty data-empty-scroll-table">データがありません。</td>
+                                        <td colspan = "6" class="data-empty data-empty-scroll-table">データがありません。</td>
                                     </tr>';
                             }?>
                         </tbody>

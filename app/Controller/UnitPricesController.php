@@ -7,6 +7,7 @@ class UnitPricesController extends AppController {
     public $uses = array('UnitPrice', 'UserInfo');
     public $components = array('Paginator');
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 

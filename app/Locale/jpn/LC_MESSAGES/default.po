@@ -75,22 +75,22 @@ msgid "UAD_ERR_MSG0010"
 msgstr "メールの形式ではありません。"
 
 msgid "UAD_ERR_MSG0011"
-msgstr "01_USERINFO.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0012"
-msgstr "02_QUALIFICATION.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0013"
-msgstr "03_UNIT_PRICE.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0014"
-msgstr "04_ANNUAL_INCOME.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0015"
-msgstr "05_SCHOOL_EDUCATION.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0016"
-msgstr "06_WORK_EXPERIENCE.csvファイルが見つかれません。"
+msgstr "ファイルが見つかれません。"
 
 msgid "UAD_ERR_MSG0017"
 msgstr "06_WORK_EXPERIENCE.csvファイルが見つかれません。"

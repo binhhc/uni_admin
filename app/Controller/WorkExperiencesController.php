@@ -7,6 +7,7 @@ class WorkExperiencesController extends AppController {
     public $uses = array('WorkExperience', 'UserInfo');
     public $components = array('Paginator');
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->user() ? $this->Auth->allow(array('index', 'add', 'edit', 'delete')) : null;
     }
 

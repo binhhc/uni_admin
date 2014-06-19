@@ -10,7 +10,7 @@ class LdapAuthenticate extends BaseAuthenticate {
      * @modify Binh Hoang
      */
     public function authenticate(CakeRequest $request, CakeResponse $response) {
-        $auth = $this->_ldapAuth($request['data']['User']); 
+        $auth = $this->_ldapAuth($request['data']['User']);
         if ($auth) {
             return array('username' => $request['data']['User']['username']);
         }
@@ -19,7 +19,7 @@ class LdapAuthenticate extends BaseAuthenticate {
 
     /**
      * @author Nguyen Duong Hai Dang - dangndh@leverages.jp
-     * 
+     *
      */
     private function _ldapAuth($request) {
         $username = $request['username'];
