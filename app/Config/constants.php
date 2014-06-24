@@ -202,11 +202,36 @@ define('CSV_WORK_EXPERIENCE', serialize(array(
     'note' => '備考'
 )));
 
+
+define('IDENT_ANNUAL_INCOME', serialize(array(
+    'employee_id',
+    'yearly_amount'
+)));
+
+define('IDENT_QUALIFICATION', serialize(array(
+    'employee_id',
+    'license_type_cd',
+    'license_name'
+)));
+
 define('IDENT_SCHOOL_EDUCATION', serialize(array(
     'employee_id',
     'graduate_year',
     'graduate_type_cd',
     'edu_type_cd'
+)));
+
+define('IDENT_UNIT_PRICE', serialize(array(
+    'employee_id',
+    'revise_date',
+    'salary_type_cd'
+)));
+
+define('IDENT_WORK_EXPERIENCE', serialize(array(
+    'employee_id',
+    'join_date',
+    'leave_date',
+    'company'
 )));
 
 

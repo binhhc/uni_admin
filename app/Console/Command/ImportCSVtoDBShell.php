@@ -282,8 +282,6 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                            $data['Qualification']['created'] = date('Y-m-d H:i:s');
-
                             foreach ($columns as $key => $value) {
                                 if (in_array($key, array('acquire_date', 'update_date', 'expire_date')) && !empty($db[$value])) {
                                     $db[$value] = date('Y/m/d', $dataxlsx->unixstamp($db[$value]));
@@ -294,8 +292,17 @@ class ImportCSVtoDBShell extends AppShell {
                             //check Qualification validate
                             $this->Qualification->set($data);
                             if ($this->Qualification->customValidate()) {
-                                $this->Qualification->create();
-                                $this->Qualification->save($data);
+                                $id = $this->Qualification->checkExist(unserialize(IDENT_QUALIFICATION));
+                                if ($id) {
+                                    //overwrite data
+                                    $data['Qualification']['modified'] = date('Y-m-d H:i:s');
+                                    $this->Qualification->id = $id;
+                                    $this->Qualification->save($data);
+                                } else {
+                                    $data['Qualification']['created'] = date('Y-m-d H:i:s');
+                                    $this->Qualification->create();
+                                    $this->Qualification->save($data);
+                                }
                             } else {
                                 //write log Qualification
                                 $this->write_log_validate($i, 'Qualification');
@@ -346,8 +353,17 @@ class ImportCSVtoDBShell extends AppShell {
                                 //check Qualification validate
                                 $this->Qualification->set($data);
                                 if ($this->Qualification->customValidate()) {
-                                    $this->Qualification->create();
-                                    $this->Qualification->save($data);
+                                    $id = $this->Qualification->checkExist(unserialize(IDENT_QUALIFICATION));
+                                    if ($id) {
+                                        //overwrite data
+                                        $data['Qualification']['modified'] = date('Y-m-d H:i:s');
+                                        $this->Qualification->id = $id;
+                                        $this->Qualification->save($data);
+                                    } else {
+                                        $data['Qualification']['created'] = date('Y-m-d H:i:s');
+                                        $this->Qualification->create();
+                                        $this->Qualification->save($data);
+                                    }
                                 } else {
                                     //write log Qualification
                                     $this->write_log_validate($i, 'Qualification');
@@ -403,8 +419,6 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                            $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
-
                             foreach ($columns as $key => $value) {
                                 if (in_array($key, array('revise_date')) && !empty($db[$value])) {
                                     $db[$value] = date('Y/m/d', $dataxlsx->unixstamp($db[$value]));
@@ -415,8 +429,17 @@ class ImportCSVtoDBShell extends AppShell {
                             //check UnitPrice validate
                             $this->UnitPrice->set($data);
                             if ($this->UnitPrice->customValidate()) {
-                                $this->UnitPrice->create();
-                                $this->UnitPrice->save($data);
+                                $id = $this->UnitPrice->checkExist(unserialize(IDENT_UNIT_PRICE));
+                                if ($id) {
+                                    //overwrite data
+                                    $data['UnitPrice']['modified'] = date('Y-m-d H:i:s');
+                                    $this->UnitPrice->id = $id;
+                                    $this->UnitPrice->save($data);
+                                } else {
+                                    $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
+                                    $this->UnitPrice->create();
+                                    $this->UnitPrice->save($data);
+                                }
                             } else {
                                 //write log UnitPrice
                                 $this->write_log_validate($i, 'UnitPrice');
@@ -457,8 +480,6 @@ class ImportCSVtoDBShell extends AppShell {
                             $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                                $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
-
                                 foreach ($columns as $key => $value) {
                                     $data['UnitPrice'][$key] = $db[$value];
                                 }
@@ -466,8 +487,17 @@ class ImportCSVtoDBShell extends AppShell {
                                 //check UnitPrice validate
                                 $this->UnitPrice->set($data);
                                 if ($this->UnitPrice->customValidate()) {
-                                    $this->UnitPrice->create();
-                                    $this->UnitPrice->save($data);
+                                    $id = $this->UnitPrice->checkExist(unserialize(IDENT_UNIT_PRICE));
+                                    if ($id) {
+                                        //overwrite data
+                                        $data['UnitPrice']['modified'] = date('Y-m-d H:i:s');
+                                        $this->UnitPrice->id = $id;
+                                        $this->UnitPrice->save($data);
+                                    } else {
+                                        $data['UnitPrice']['created'] = date('Y-m-d H:i:s');
+                                        $this->UnitPrice->create();
+                                        $this->UnitPrice->save($data);
+                                    }
                                 } else {
                                     //write log UnitPrice
                                     $this->write_log_validate($i, 'UnitPrice');
@@ -523,8 +553,6 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                            $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
-
                             foreach ($columns as $key => $value) {
                                 $data['AnnualIncome'][$key] = $db[$value];
                             }
@@ -532,8 +560,17 @@ class ImportCSVtoDBShell extends AppShell {
                             //check validate Annual Income
                             $this->AnnualIncome->set($data);
                             if ($this->AnnualIncome->customValidate()) {
-                                $this->AnnualIncome->create();
-                                $this->AnnualIncome->save($data);
+                                $id = $this->AnnualIncome->checkExist(unserialize(IDENT_ANNUAL_INCOME));
+                                if ($id) {
+                                    //overwrite data
+                                    $data['AnnualIncome']['modified'] = date('Y-m-d H:i:s');
+                                    $this->AnnualIncome->id = $id;
+                                    $this->AnnualIncome->save($data);
+                                } else {
+                                    $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
+                                    $this->AnnualIncome->create();
+                                    $this->AnnualIncome->save($data);
+                                }
                             } else {
                                 $this->write_log_validate($i, 'AnnualIncome');
                             }
@@ -573,8 +610,6 @@ class ImportCSVtoDBShell extends AppShell {
                             $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                                $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
-
                                 foreach ($columns as $key => $value) {
                                     $data['AnnualIncome'][$key] = $db[$value];
                                 }
@@ -582,8 +617,17 @@ class ImportCSVtoDBShell extends AppShell {
                                 //check validate Annual Income
                                 $this->AnnualIncome->set($data);
                                 if ($this->AnnualIncome->customValidate()) {
-                                    $this->AnnualIncome->create();
-                                    $this->AnnualIncome->save($data);
+                                    $id = $this->AnnualIncome->checkExist(unserialize(IDENT_ANNUAL_INCOME));
+                                    if ($id) {
+                                        //overwrite data
+                                        $data['AnnualIncome']['modified'] = date('Y-m-d H:i:s');
+                                        $this->AnnualIncome->id = $id;
+                                        $this->AnnualIncome->save($data);
+                                    } else {
+                                        $data['AnnualIncome']['created'] = date('Y-m-d H:i:s');
+                                        $this->AnnualIncome->create();
+                                        $this->AnnualIncome->save($data);
+                                    }
                                 }else{
                                     $this->write_log_validate($i, 'AnnualIncome');
                                 }
@@ -697,8 +741,6 @@ class ImportCSVtoDBShell extends AppShell {
                             $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                                $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
-
                                 foreach ($columns as $key => $value) {
                                     $data['SchoolEducation'][$key] = $db[$value];
                                 }
@@ -706,8 +748,17 @@ class ImportCSVtoDBShell extends AppShell {
                                 //check validate School Education
                                 $this->SchoolEducation->set($data);
                                 if ($this->SchoolEducation->customValidate()) {
-                                    $this->SchoolEducation->create();
-                                    $this->SchoolEducation->save($data);
+                                    $id = $this->SchoolEducation->checkExist(unserialize(IDENT_SCHOOL_EDUCATION));
+                                    if ($id) {
+                                        //overwrite data
+                                        $data['SchoolEducation']['modified'] = date('Y-m-d H:i:s');
+                                        $this->SchoolEducation->id = $id;
+                                        $this->SchoolEducation->save($data);
+                                    } else {
+                                        $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
+                                        $this->SchoolEducation->create();
+                                        $this->SchoolEducation->save($data);
+                                    }
                                 } else {
                                     $this->write_log_validate($i, 'SchoolEducation');
                                 }
@@ -763,8 +814,6 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                            $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
-
                             foreach ($columns as $key => $value) {
                                 if (in_array($key, array('join_date', 'leave_date')) && !empty($db[$value])) {
                                     $db[$value] = date('Y/m/d', $dataxlsx->unixstamp($db[$value]));
@@ -775,8 +824,17 @@ class ImportCSVtoDBShell extends AppShell {
                             //check validate Work Experience
                             $this->WorkExperience->set($data);
                             if ($this->WorkExperience->customValidate()) {
-                                $this->WorkExperience->create();
-                                $this->WorkExperience->save($data);
+                                $id = $this->WorkExperience->checkExist(unserialize(IDENT_WORK_EXPERIENCE));
+                                if ($id) {
+                                    //overwrite data
+                                    $data['WorkExperience']['modified'] = date('Y-m-d H:i:s');
+                                    $this->WorkExperience->id = $id;
+                                    $this->WorkExperience->save($data);
+                                } else {
+                                    $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
+                                    $this->WorkExperience->create();
+                                    $this->WorkExperience->save($data);
+                                }
                             }else{
                                 $this->write_log_validate($i, 'WorkExperience');
                             }
@@ -816,8 +874,6 @@ class ImportCSVtoDBShell extends AppShell {
                             $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                             if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                                $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
-
                                 foreach ($columns as $key => $value) {
                                     $data['WorkExperience'][$key] = $db[$value];
                                 }
@@ -825,8 +881,17 @@ class ImportCSVtoDBShell extends AppShell {
                                 //check validate Work Experience
                                 $this->WorkExperience->set($data);
                                 if ($this->WorkExperience->customValidate()) {
-                                    $this->WorkExperience->create();
-                                    $this->WorkExperience->save($data);
+                                    $id = $this->WorkExperience->checkExist(unserialize(IDENT_WORK_EXPERIENCE));
+                                    if ($id) {
+                                        //overwrite data
+                                        $data['WorkExperience']['modified'] = date('Y-m-d H:i:s');
+                                        $this->WorkExperience->id = $id;
+                                        $this->WorkExperience->save($data);
+                                    } else {
+                                        $data['WorkExperience']['created'] = date('Y-m-d H:i:s');
+                                        $this->WorkExperience->create();
+                                        $this->WorkExperience->save($data);
+                                    }
                                 }else{
                                     $this->write_log_validate($i, 'WorkExperience');
                                 }
