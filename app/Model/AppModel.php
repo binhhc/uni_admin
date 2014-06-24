@@ -52,7 +52,7 @@ class AppModel extends Model {
 
                 if($field=='id'){
                     $conditions[$field." <> "] = $value;
-                }else if($field!='modified' and $field!='created'){
+                }else { //if($field!='modified' and $field!='created')
                     $conditions[$field] = $value;
                 }
             }

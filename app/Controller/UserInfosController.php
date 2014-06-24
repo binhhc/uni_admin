@@ -81,12 +81,13 @@ class UserInfosController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             $data = $this->request->data;
-            $data['UserInfo']['created'] = date('Y-m-d');
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
                     $data_system_auth['SystemAuth']['employee_id'] = str_pad(ereg_replace('[^0-9]', '', $data['UserInfo']['employee_id']), MAX_EMP_ID, 0, STR_PAD_LEFT);;
-                    $data_system_auth['SystemAuth']['access_uni'] = AUTH_ACTIVE;
+                    $data_system_auth['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
+                    $data_system_auth['SystemAuth']['access_tms'] = AUTH_BANNED;
+                    $data_system_auth['SystemAuth']['access_uni'] = AUTH_BANNED;
                     $this->SystemAuth->set($data_system_auth);
                     $this->SystemAuth->create();
                     $this->SystemAuth->save($data_system_auth);
@@ -161,7 +162,7 @@ class UserInfosController extends AppController {
         }
         if (($this->request->is('post') || $this->request->is('put')) && (empty($this->request->data['id']))) {
             $data = $this->request->data;
-            $data['UserInfo']['modified'] = date('Y-m-d');
+
             unset($data['UserInfo']['employee_id']);
 
             if ($this->UserInfo->customValidate()) {

@@ -77,7 +77,6 @@ class ImportCSVtoDBShell extends AppShell {
                     } else {
                         $data = array();
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');
 
                         foreach ($columns as $key => $value) {
                             if (in_array($key, array('company_join_date', 'birthday')) && !empty($db[$value])) {
@@ -97,9 +96,11 @@ class ImportCSVtoDBShell extends AppShell {
                                 $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
                                 if ($id) {
                                     //overwrite data
+                                    $data['UserInfo']['modified'] = date('Y-m-d H:i:s');
                                     $this->UserInfo->id = $id;
                                     $this->UserInfo->save($data);
                                 } else {
+                                    $data['UserInfo']['created'] = date('Y-m-d H:i:s');
                                     $this->UserInfo->create();
                                     $this->UserInfo->save($data);
                                 }
@@ -108,7 +109,11 @@ class ImportCSVtoDBShell extends AppShell {
                             $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
                             if (empty($system_auth_id)) {
                                 $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
-                                $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
+
+                                $system_auth_data['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
+                                $system_auth_data['SystemAuth']['access_tms'] = (in_array($data['UserInfo']['employment_type_cd'], unserialize(SYS_AUTH_TMS_EMP_TYPE)) && !in_array($data['UserInfo']['department_cd'], unserialize(SYS_AUTH_TMS_DEP_EXCEPT))) ? AUTH_ACTIVE : AUTH_BANNED;
+                                $system_auth_data['SystemAuth']['access_uni'] = (in_array($data['UserInfo']['employee_id'], unserialize(SYS_AUTH_UNI_EMP_ID))) ? AUTH_ACTIVE : AUTH_BANNED;
+
                                 $this->SystemAuth->set($system_auth_data);
                                 $this->SystemAuth->create();
                                 $this->SystemAuth->save($system_auth_data);
@@ -150,7 +155,6 @@ class ImportCSVtoDBShell extends AppShell {
                         } else {
                             $data = array();
                             $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
-                            $data['UserInfo']['created'] = date('Y-m-d H:i:s');
 
                             foreach ($columns as $key => $value) {
                                 $data['UserInfo'][$key] = $db[$value];
@@ -167,10 +171,12 @@ class ImportCSVtoDBShell extends AppShell {
                                     $input_id[] = $data['UserInfo']['employee_id'];
                                     $id = $this->uniqueEmployeeId($data['UserInfo']['employee_id']);
                                     if ($id) {
+                                        $data['UserInfo']['modified'] = date('Y-m-d H:i:s');
                                         $this->UserInfo->id = $id;
                                         $this->UserInfo->save($data);
                                     } else {
                                         $this->UserInfo->create();
+                                        $data['UserInfo']['created'] = date('Y-m-d H:i:s');
                                         $this->UserInfo->save($data);
                                     }
                                 }
@@ -178,7 +184,11 @@ class ImportCSVtoDBShell extends AppShell {
                                 $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
                                 if (empty($system_auth_id)) {
                                     $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
-                                    $system_auth_data['SystemAuth']['access_uni'] = AUTH_ACTIVE;
+
+                                    $system_auth_data['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
+                                    $system_auth_data['SystemAuth']['access_tms'] = (in_array($data['UserInfo']['employment_type_cd'], unserialize(SYS_AUTH_TMS_EMP_TYPE)) && !in_array($data['UserInfo']['department_cd'], unserialize(SYS_AUTH_TMS_DEP_EXCEPT))) ? AUTH_ACTIVE : AUTH_BANNED;
+                                    $system_auth_data['SystemAuth']['access_uni'] = (in_array($data['UserInfo']['employee_id'], unserialize(SYS_AUTH_UNI_EMP_ID))) ? AUTH_ACTIVE : AUTH_BANNED;
+
                                     $this->SystemAuth->set($system_auth_data);
                                     $this->SystemAuth->create();
                                     $this->SystemAuth->save($system_auth_data);
