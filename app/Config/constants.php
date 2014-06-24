@@ -234,6 +234,7 @@ define('IDENT_WORK_EXPERIENCE', serialize(array(
     'company'
 )));
 
+define('EMPLOYEE_ADMIN', '999999');
 
 define('SYS_AUTH_TMS_EMP_TYPE', serialize(array('1', '2')));
 define('SYS_AUTH_TMS_DEP_EXCEPT', serialize(array('SI220000')));
@@ -245,5 +246,6 @@ define('URL_LOGOUT_PAGE', 'http://uni.a.srv/Logins/logout');
 define('DOMAIN_LOGIN', 'uni.a.srv');
 define('KEY_LOGIN', 'uni');
 define('COOKIE_AUTH', 'cookie_auth');
+
 
 ?>
