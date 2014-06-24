@@ -56,5 +56,35 @@ class Qualification extends AppModel {
         $this->validate = $validate;
         return $this->validates();
     }
+
+     /**
+     * Check record exists
+     *
+     * @author Bao Nam
+     * @since 2014/06/24
+     */
+    // public function beforeSave($options = array()){
+    //     $key = $this->alias;
+    //     $data = $this->data;
+    //     if(isset($data[$key]['doImport']) && $data[$key]['doImport'] == true) {
+    //         unset($data[$key]['doImport']);
+    //         $id = $this->find('first', array(
+    //             'conditions' => array(
+    //                 'employee_id' => $data[$key]['employee_id'],
+    //                 'license_type_cd' => $data[$key]['license_type_cd'],
+    //                 'license_name' => $data[$key]['license_name'],
+    //                 ),
+    //             'recursive' => -1,
+    //             ));
+    //         if (!empty($id)) {
+    //             $this->log($id, "id");
+    //             return false;
+    //         }
+    //     } else {
+    //         parent::beforeSave();
+    //     }
+    // }
 }
 ?>
+
+

@@ -639,17 +639,25 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
                         if ($this->uniqueEmployeeId($db[$columns['employee_id']])) {
 
-                            $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
-
                             foreach ($columns as $key => $value) {
                                 $data['SchoolEducation'][$key] = $db[$value];
                             }
 
                             //check validate School Education
                             $this->SchoolEducation->set($data);
+
                             if ($this->SchoolEducation->customValidate()) {
-                                $this->SchoolEducation->create();
-                                $this->SchoolEducation->save($data);
+                                $id = $this->SchoolEducation->checkExist(unserialize(IDENT_SCHOOL_EDUCATION));
+                                if ($id) {
+                                    //overwrite data
+                                    $data['SchoolEducation']['modified'] = date('Y-m-d H:i:s');
+                                    $this->SchoolEducation->id = $id;
+                                    $this->SchoolEducation->save($data);
+                                } else {
+                                    $data['SchoolEducation']['created'] = date('Y-m-d H:i:s');
+                                    $this->SchoolEducation->create();
+                                    $this->SchoolEducation->save($data);
+                                }
                             } else {
                                 $this->write_log_validate($i, 'SchoolEducation');
                             }
