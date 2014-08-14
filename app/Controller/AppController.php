@@ -36,11 +36,11 @@ class AppController extends Controller {
     public $components = array(
         'Acl',
         'Auth' => array(
-            'authenticate' => array(
-                'Ldap' => array(
-                    'fields' => array('username' => 'email')
-                )
-            ),
+            // 'authenticate' => array(
+            //     'Form' => array(
+            //         'fields' => array('username' => 'office_email')
+            //     )
+            // ),
             'authorize' => array(
                 'Actions' => array('actionPath' => 'controllers')
             ),
@@ -65,7 +65,7 @@ class AppController extends Controller {
         if ($this->Auth->user()) {
             // user has logged in and has cookie
             $user = $this->Auth->user();
-            $checkSession = $this->Auth->password($user['username']);
+            $checkSession = $this->Auth->password($user['office_email']);
             $checkCookie = $this->Cookie->read('cookie_auth');
             if ($checkSession != $checkCookie) {
                 $this->Cookie->delete('cookie_auth');

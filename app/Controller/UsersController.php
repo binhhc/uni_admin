@@ -37,16 +37,8 @@ class UsersController extends AppController {
             $this->SystemAuth = new SystemAuth();
             $access = (!empty($this->request->data['User']['username'])) ? $this->SystemAuth->getActive($this->request->data['User']['username']) : '';
             if(!empty($access)){
-                if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
-                    if ($this->Auth->login()) {
-                        $data = $access['SystemAuth'];
-                        $data['employee_name'] = $access['UserInfo']['employee_name'];
-                    } else {
-                        $error = __('UAD_ERR_MSG0002');
-                    }
-                }else{
-                    $error = __('UAD_ERR_MSG0003');
-                }
+                $data = $access['SystemAuth'];
+                $data['employee_name'] = $access['UserInfo']['employee_name'];
             }else{
                 $error = __('UAD_ERR_MSG0021');
             }
@@ -58,33 +50,30 @@ class UsersController extends AppController {
     }
 
     public function login() {
+
         //check domain referer
         $url = parse_url($this->referer());
         if (!empty($this->request->data['Logins']['auth_hash']) && ($url['host']) == DOMAIN_LOGIN) {
-            $authLogin = explode(',', Security::cipher(base64_decode($this->request->data['Logins']['auth_hash']), Configure::read('Security.salt')));
-            $this->request->data['User']['username'] = $authLogin[0];
-            $this->request->data['User']['password'] = $authLogin[1];
-            App::import('Model', 'SystemAuth');
-            $this->SystemAuth = new SystemAuth();
+            $authLogin = Security::cipher(base64_decode($this->request->data['Logins']['auth_hash']), Configure::read('Security.salt'));
+            $this->request->data['User']['username'] = $authLogin;
+            App::import('Model', 'UserInfo');
+            $this->UserInfo = new UserInfo();
             //get access permission
 
-            $access = $this->SystemAuth->getActive($this->request->data['User']['username']);
+            $access = $this->UserInfo->findByOfficeEmail($this->request->data['User']['username']);
             if(!empty($access)){
-                if(!empty($this->request->data['User']['username']) && !empty($this->request->data['User']['password'])){
-                    if ($this->Auth->login()) {
-                        $this->Session->write('email_user', $this->Auth->user('username'));
-                        $this->Cookie->httpOnly = true;
-                        $this->Cookie->write(COOKIE_AUTH, $this->Auth->password($this->Auth->user('username')), false);
-                        $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
-                    } else {
-                        $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
-                    }
-                }else{
-                    $this->Session->setFlash(__('UAD_ERR_MSG0003'), 'error');
+                if ($this->Auth->login($access['UserInfo'])) {
+                    $this->Session->write('email_user', $this->Auth->user('office_email'));
+                    $this->Cookie->httpOnly = true;
+                    $this->Cookie->write(COOKIE_AUTH, $this->Auth->password($this->Auth->user('office_email')), false);
+                    $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('UAD_ERR_MSG0002'), 'error');
                 }
             }else{
                 $this->Session->setFlash(__('UAD_ERR_MSG0021'), 'error');
             }
+
         } else {
             if ($this->Auth->loggedIn()) {
                 $this->redirect(array('controller' => 'UserInfos', 'action' => 'index'));

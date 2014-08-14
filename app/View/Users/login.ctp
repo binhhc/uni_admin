@@ -2,7 +2,7 @@
 <script type="text/javascript">
     $('#UserUsername').focus();
 </script>
-<?php 
+<?php
     echo $this->Html->css(array('jquery-ui', 'bootstrap', 'font-awesome', 'style', 'widgets'));
 ?>
 
@@ -15,12 +15,12 @@
             <div class="widget worange">
               <!-- Widget head -->
                 <div class="widget-head">
-                    <i class="icon-lock"></i> ユーザーログイン 
+                    <i class="icon-lock"></i> ユーザーログイン
                 </div>
             <div class="widget-content">
                 <div class="padd">
                     <?php echo $this->Session->flash(); ?>
-                    <!-- Login form -->                    
+                    <!-- Login form -->
                     <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
                         <!-- Email -->
                         <div class="form-group">
@@ -37,19 +37,19 @@
                             </div>
                         </div>
                         <!-- Remember me checkbox and sign in button -->
-                        <div class="form-group">                   
+                        <div class="form-group">
                         </div>
-                            <div class="col-lg-9 col-lg-offset-2">                            
-                                <?php echo $this->Form->button('<i class="fa fa-sign-in"></i> ログイン', array('class' => 'btn btn-large btn-primary'), array('escape' => false,'type' => 'submit'));  ?> 
+                            <div class="col-lg-9 col-lg-offset-2">
+                                <?php echo $this->Form->button('<i class="fa fa-sign-in"></i> ログイン', array('class' => 'btn btn-large btn-primary'), array('escape' => false,'type' => 'submit'));  ?>
                             </div>
                         <br>
                     <?php echo $this->Form->end(); ?>
-                  
+
                 </div>
-                </div>              
-                
-                </div>  
+                </div>
+
+                </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
