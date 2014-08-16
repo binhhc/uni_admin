@@ -17,7 +17,7 @@
                     <fieldset class = "col-md-6">
                         <?php echo $this->Form->input('id', array('label' => false, 'type' => 'hide')); ?>
                         <div class="form-group">
-                            <label class="col-lg-6 col-lg-6 control-label">社員番号</label>
+                            <label class="col-lg-6 control-label">社員番号</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('employee_id', array('required' => false, 'class'=>'form-control','label' => false, 'type' => 'text', @$readonly)); ?>
                             </div>
@@ -38,9 +38,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-lg-6 control-label">氏名（英字）</label>
+                            <label class="col-lg-6 control-label">職場氏名</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('employee_name_alphabet', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                                <?php echo $this->Form->input('work_place_name', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">職場氏名（フリガナ）</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('work_place_name_furigana', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
                         </div>
 
@@ -54,7 +61,49 @@
                         <div class="form-group">
                             <label class="col-lg-6 control-label">入社年月日</label>
                             <div class="col-lg-6">
-                                <?php echo $this->Form->input('company_join_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text', 'readonly' => true)); ?>
+                                <?php echo $this->Form->input('company_join_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">前回入社年月日</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('prev_company_join_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">前回退職年月日</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('prev_company_leave_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">最終出勤日(特記事項１)</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('prev_last_work_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">休職開始年月日</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('leave_start_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">休職終了年月日</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('leave_end_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">退職予定日</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('leave_plan_date', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
                             </div>
                         </div>
 
@@ -81,6 +130,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">前回雇用区分コード</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('prev_employment_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'select', 'options' => $employment_types, 'required'=>false));?>
+                            </div>
+                        </div>
+                        </fieldset>
+
+                        <fieldset class="col-md-6">
                         <div class="form-group">
                             <label class="col-lg-6 control-label">郵便番号</label>
                             <div class="col-lg-6">
@@ -138,10 +196,6 @@
                             </div>
                         </div>
 
-                        </fieldset>
-
-                        <fieldset class="col-md-6">
-
                         <div class="form-group">
                             <label class="col-lg-6 control-label">所属コード</label>
                             <div class="col-lg-6">
@@ -149,96 +203,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">障害手帳区分コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('problem_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">障害手帳区分</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('problem_type', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">障害等級</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('problem_grade', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">障害内容</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('problem_content', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">採用区分コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('recruit_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">採用区分</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('recruit_type', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">採用地コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('recruit_place_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">採用地</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('recruit_place', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">紹介区分コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('introduction_type_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">紹介区分</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('introduction_type', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">紹介者</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('introduction_person', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">紹介者関係コード</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('introduction_related_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-lg-6 control-label">紹介者関係</label>
-                            <div class="col-lg-6">
-                                <?php echo $this->Form->input('introduction_related', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label class="col-lg-6 control-label">顔ナビ権限コード</label>
@@ -279,6 +243,27 @@
                             <label class="col-lg-6 control-label">評価等級</label>
                             <div class="col-lg-6">
                                 <?php echo $this->Form->input('rating_grade', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">TMS権限グループコード</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('TMS_auth_group_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">TMS休日出勤申請可否コード</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('TMS_offday_apply_possible_cd', array('class'=>'form-control', 'label' => false, 'type' => 'text')); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-6 control-label">勤怠承認者(メモ内容)</label>
+                            <div class="col-lg-6">
+                                <?php echo $this->Form->input('TMS_attendance_approver', array('class'=>'form-control','label' => false, 'type' => 'select', 'options' => $user_info,'required'=>false, 'empty' => true));?>
                             </div>
                         </div>
                     </fieldset>

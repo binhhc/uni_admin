@@ -117,7 +117,7 @@ msgid "UAD_ERR_MSG0024"
 msgstr "Department name is not empty"
 
 msgid "UAD_ERR_MSG0025"
-msgstr "Employment Code is not empty"
+msgstr "Employment Code must be number"
 
 msgid "UAD_ERR_MSG0026"
 msgstr "Employment Code is exist"
@@ -151,3 +151,9 @@ msgstr "Work location Code is exist"
 
 msgid "UAD_ERR_MSG0036"
 msgstr "Work location name is not empty"
+
+msgid "UAD_ERR_MSG0037"
+msgstr "Work place name is not empty"
+
+msgid "UAD_ERR_MSG0038"
+msgstr "Employee id is not exist"

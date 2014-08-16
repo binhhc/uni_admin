@@ -79,14 +79,13 @@ class ImportCSVtoDBShell extends AppShell {
                         $db[$columns['employee_id']] = str_pad(ereg_replace('[^0-9]', '', $db[$columns['employee_id']]), MAX_EMP_ID, 0, STR_PAD_LEFT);
 
                         foreach ($columns as $key => $value) {
-                            if (in_array($key, array('company_join_date', 'birthday')) && !empty($db[$value])) {
+                            if (in_array($key, unserialize(CSV_USER_INFO_DATE)) && !empty($db[$value])) {
                                 $db[$value] = date('Y/m/d', $dataxlsx->unixstamp($db[$value]));
                             }
                             $data['UserInfo'][$key] = $db[$value];
                         }
                         //check validate user before insert/update
                         $this->UserInfo->set($data);
-
                         if ($this->UserInfo->customValidate(true)) {
                             if (in_array($data['UserInfo']['employee_id'], $input_id)) {
                                 //check file import has duplicate employee_id

@@ -39,12 +39,6 @@ define('GENDER_CODE', serialize(array(
     '0' => '男性',
     '1' => '女性',
 )));
-define('EMPLOYMENT_TYPE', serialize(array(
-    '1' => '正社員',
-    '2' => 'アルバイト',
-    '3' => '業務委託',
-    '4' => '派遣社員',
-)));
 define('JOB_CD', serialize(array(
     '0' => '',
     '1' => '営業',
@@ -110,6 +104,19 @@ define('CSV_USER_INFO', serialize(array(
     'TMS_attendance_approver' => 'メモ内容',
     'leave_plan_date' => '退職予定日'
 )));
+
+define('CSV_USER_INFO_DATE', serialize(array(
+    'company_join_date',
+    'prev_company_join_date',
+    'prev_company_leave_date',
+    'prev_last_work_date',
+    'leave_start_date',
+    'leave_end_date',
+    'leave_plan_date',
+    'birthday'
+)));
+
+
 
 define('CSV_QUALIFICATION', serialize(array(
     'employee_id' => '社員番号',

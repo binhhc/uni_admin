@@ -162,6 +162,7 @@ class UserInfosController extends AppController {
             'positions' => $positions,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
+            'user_info' => $this->UserInfo->listUser()
         ));
         $this->set('readonly', '');
         $this->render('detail');
@@ -262,6 +263,7 @@ class UserInfosController extends AppController {
             'positions' => $positions,
             'title_for_layout' => '社員情報',
             'page_title' => '社員情報',
+            'user_info' => $this->UserInfo->listUser()
         ));
         $this->render('detail');
     }

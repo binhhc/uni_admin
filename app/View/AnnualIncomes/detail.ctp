@@ -30,10 +30,9 @@
                                 <div class="form-group">
                                     <label class="col-lg-6 col-lg-6 control-label">年分</label>
                                     <div class="col-lg-6">
-                                        <?php echo $this->Form->input('yearly_amount', array('class' => 'form-control', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
+                                        <?php echo $this->Form->input('yearly_amount', array('class' => 'datepicker form-control', 'label' => false, 'type' => 'text')); ?>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-lg-6 col-lg-6 control-label">支払金額</label>
                                     <div class="col-lg-6">
@@ -44,7 +43,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-6 col-lg-6 control-label">給与所得控除後</label>
                                     <div class="col-lg-6">
-                                        <?php echo $this->Form->input('income_net', array('class' => 'form-control', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
+                                        <?php echo $this->Form->input('income_type', array('class' => 'form-control', 'label' => false, 'type' => 'text', 'required'=>false)); ?>
                                             </div>
                                 </div>
                             </fieldset>

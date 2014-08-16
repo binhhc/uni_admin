@@ -24,20 +24,13 @@ class AnnualIncome extends AppModel {
                 ),
             ),
             'yearly_amount' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
+                'date' => array(
+                    'rule' => array('date', 'ymd'),
+                    'message' => __('UAD_ERR_MSG0018'),
+                    'allowEmpty' => true
                 ),
             ),
             'income_gross' => array(
-                'numeric' => array(
-                    'rule' => 'numeric',
-                    'allowEmpty' => true,
-                    'message' => __('UAD_ERR_MSG0007')
-                ),
-            ),
-            'income_net' => array(
                 'numeric' => array(
                     'rule' => 'numeric',
                     'allowEmpty' => true,

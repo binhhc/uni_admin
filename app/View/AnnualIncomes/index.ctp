@@ -52,7 +52,7 @@
                                         <tr>
                                             <td><?php echo h($annual['AnnualIncome']['yearly_amount']); ?></td>
                                             <td><?php echo h($annual['AnnualIncome']['income_gross']); ?></td>
-                                            <td><?php echo h($annual['AnnualIncome']['income_net']); ?></td>
+                                            <td><?php echo h($annual['AnnualIncome']['income_type']); ?></td>
                                             <td><?php echo h($annual['AnnualIncome']['total_cut']); ?></td>
                                             <td><?php echo h($annual['AnnualIncome']['total_tax']); ?></td>
                                             <td><?php echo h($annual['AnnualIncome']['note']); ?></td>

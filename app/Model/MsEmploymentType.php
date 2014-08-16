@@ -9,8 +9,8 @@ class MsEmploymentType extends AppModel {
     public function customValidate() {
         $validate = array(
             'employment_cd' => array(
-                'notEmpty' => array(
-                    'rule' => 'notEmpty',
+                'numeric' => array(
+                    'rule' => 'numeric',
                     'allowEmpty' => false,
                     'message' => __('UAD_ERR_MSG0025')
                 ),
@@ -51,6 +51,13 @@ class MsEmploymentType extends AppModel {
             }
         } else {
         return true;
+        }
+    }
+
+    public function beforeValidate() {
+        $key = $this->alias;
+        if (!empty($this->data[$key]['employment_cd'])) {
+            $this->data[$key]['employment_cd'] = str_pad($this->data[$key]['employment_cd'], 2, 0, STR_PAD_LEFT);
         }
     }
 }

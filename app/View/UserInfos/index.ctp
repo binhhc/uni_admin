@@ -77,15 +77,21 @@
                             <thead>
                                 <tr class="nowrap widget-head">
                                     <th>氏名（フリガナ）</th>
-                                    <th>氏名（英字）</th>
                                     <th>職場氏名</th>
                                     <th>職場氏名(フリガナ)</th>
                                     <th>社用e-Mail</th>
                                     <th>入社年月日</th>
+                                    <th>前回入社年月日</th>
+                                    <th>前回退職年月日</th>
+                                    <th>最終出勤日(特記事項１)</th>
+                                    <th>休職開始年月日</th>
+                                    <th>休職終了年月日</th>
+                                    <th>退職予定日</th>
                                     <th>性別</th>
                                     <th>生年月日</th>
                                     <th>勤続年数</th>
                                     <th>年齢</th>
+                                    <th>前回雇用区分コード</th>
                                     <th>雇用区分</th>
                                     <th>郵便番号</th>
                                     <th>都道府県</th>
@@ -96,25 +102,15 @@
                                     <th>役職</th>
                                     <th>勤務地</th>
                                     <th>所属</th>
-                                    <th>障害手帳区分コード</th>
-                                    <th>障害手帳区分</th>
-                                    <th>障害等級</th>
-                                    <th>障害内容</th>
-                                    <th>採用区分コード</th>
-                                    <th>採用区分</th>
-                                    <th>採用地コード</th>
-                                    <th>採用地</th>
-                                    <th>紹介区分コード</th>
-                                    <th>紹介区分</th>
-                                    <th>紹介者</th>
-                                    <th>紹介者関係コード</th>
-                                    <th>紹介者関係</th>
                                     <th>顔ナビ権限コード</th>
                                     <th>顔ナビ権限</th>
                                     <th>評価職種コード</th>
                                     <th>評価職種</th>
                                     <th>評価等級コード</th>
                                     <th>評価等級</th>
+                                    <th>TMS権限グループコード</th>
+                                    <th>TMS休日出勤申請可否コード</th>
+                                    <th>勤怠承認者(メモ内容)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,11 +118,16 @@
                                     foreach ($userInfo as $info): ?>
                                     <tr class="nowrap">
                                         <td><?php echo h($info['UserInfo']['employee_name_furigana']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['employee_name_alphabet']); ?></td>
                                         <td><?php echo h($info['UserInfo']['work_place_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['work_place_name_furigana']); ?></td>
                                         <td><?php echo h($info['UserInfo']['office_email']); ?></td>
                                         <td><?php echo h($info['UserInfo']['company_join_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['prev_company_join_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['prev_company_leave_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['prev_last_work_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['leave_start_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['leave_end_date']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['leave_plan_date']); ?></td>
                                         <td><?php
                                         $gender = unserialize(GENDER_CODE);
                                         if (array_key_exists($info['UserInfo']['gender_code'], $gender)) {
@@ -137,6 +138,7 @@
                                             echo date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->y . '年 ' . date_diff(date_create($info['UserInfo']['company_join_date']), date_create('today'))->m . 'ヵ月';?></td>
                                         <td><?php
                                             echo date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->y . '歳 ' . date_diff(date_create($info['UserInfo']['birthday']), date_create('today'))->m . 'ヵ月';?></td>
+                                        <td><?php echo h($info['UserInfo']['prev_employment_type_cd']); ?></td>
                                         <td><?php echo h($info['MsEmploymentType']['employment_name']); ?></td>
                                         <td><?php echo h($info['UserInfo']['zip_code']); ?></td>
                                         <td><?php echo h($info['UserInfo']['prefecture']); ?></td>
@@ -147,25 +149,15 @@
                                         <td><?php echo h($info['MsPosition']['position_name']);?></td>
                                         <td><?php echo h($info['MsWorkLocation']['work_location_name']);?></td>
                                         <td><?php echo h($info['MsDepartment']['department_name']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['problem_type_cd']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['problem_type']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['problem_grade']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['problem_content']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['recruit_type_cd']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['recruit_type']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['recruit_place_cd']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['recruit_place']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['introduction_type_cd']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['introduction_type']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['introduction_person']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['introduction_related_cd']); ?></td>
-                                        <td><?php echo h($info['UserInfo']['introduction_related']); ?></td>
                                         <td><?php echo h($info['UserInfo']['face_auth_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['face_auth']); ?></td>
                                         <td><?php echo h($info['UserInfo']['rating_job_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['rating_job']); ?></td>
                                         <td><?php echo h($info['UserInfo']['rating_grade_cd']); ?></td>
                                         <td><?php echo h($info['UserInfo']['rating_grade']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['TMS_auth_group_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['TMS_offday_apply_possible_cd']); ?></td>
+                                        <td><?php echo h($info['UserInfo']['TMS_attendance_approver']); ?></td>
                                     </tr>
                                         <?php
                                     endforeach;
