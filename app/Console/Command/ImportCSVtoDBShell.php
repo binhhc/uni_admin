@@ -4,7 +4,7 @@ App::import('Vendor', 'SimpleXlsx', array('file' => 'SimpleXlsx/Simplexlsx.php')
 
 class ImportCSVtoDBShell extends AppShell {
 
-    public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome', 'SystemAuth', 'HistoryStaffDept', 'MsDepartment');
+    public $uses = array('User', 'UserInfo', 'Qualification', 'UnitPrice', 'SchoolEducation', 'WorkExperience', 'AnnualIncome', 'SystemAuth');
     var $success = array();
     /**
      * @author  Binh Hoang
@@ -165,19 +165,6 @@ class ImportCSVtoDBShell extends AppShell {
                                         $data['UserInfo']['created'] = date('Y-m-d H:i:s');
                                         $this->UserInfo->save($data);
                                     }
-                                }
-                                //add record to system auth
-                                $system_auth_id = $this->uniqueSystemAuthId($data['UserInfo']['employee_id']);
-                                if (empty($system_auth_id)) {
-                                    $system_auth_data['SystemAuth']['employee_id'] = $data['UserInfo']['employee_id'];
-
-                                    $system_auth_data['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
-                                    $system_auth_data['SystemAuth']['access_tms'] = (in_array($data['UserInfo']['employment_type_cd'], unserialize(SYS_AUTH_TMS_EMP_TYPE)) && !in_array($data['UserInfo']['department_cd'], unserialize(SYS_AUTH_TMS_DEP_EXCEPT))) ? AUTH_ACTIVE : AUTH_BANNED;
-                                    $system_auth_data['SystemAuth']['access_uni'] = (in_array($data['UserInfo']['employee_id'], unserialize(SYS_AUTH_UNI_EMP_ID))) ? AUTH_ACTIVE : AUTH_BANNED;
-
-                                    $this->SystemAuth->set($system_auth_data);
-                                    $this->SystemAuth->create();
-                                    $this->SystemAuth->save($system_auth_data);
                                 }
                             }else{
                                 //write log user
