@@ -87,29 +87,6 @@ class UserInfosController extends AppController {
             if ($this->UserInfo->customValidate()) {
                 $this->UserInfo->create();
                 if ($this->UserInfo->save($data)) {
-
-                    // Start Set SystemAuth
-                    $dataUserInfo = $this->UserInfo->findById($this->UserInfo->getLastInsertID());
-
-                    $data_system_auth['SystemAuth']['employee_id'] = $dataUserInfo['UserInfo']['employee_id'];
-
-                    $data_system_auth['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
-                    $data_system_auth['SystemAuth']['access_tms'] = (in_array($dataUserInfo['UserInfo']['employment_type_cd'], unserialize(SYS_AUTH_TMS_EMP_TYPE)) && !in_array($dataUserInfo['UserInfo']['department_cd'], unserialize(SYS_AUTH_TMS_DEP_EXCEPT))) ? AUTH_ACTIVE : AUTH_BANNED;
-                    $data_system_auth['SystemAuth']['access_uni'] = (in_array($dataUserInfo['UserInfo']['employee_id'], unserialize(SYS_AUTH_UNI_EMP_ID))) ? AUTH_ACTIVE : AUTH_BANNED;
-
-                    $systemAuthEmp = $this->SystemAuth->findByEmployeeId($dataUserInfo['UserInfo']['employee_id']);
-
-                    $this->SystemAuth->set($data_system_auth);
-
-                    if (empty($systemAuthEmp)) {
-                        $this->SystemAuth->create();
-                        $this->SystemAuth->save($data_system_auth);
-                    } else {
-                        $this->SystemAuth->id = $systemAuthEmp['SystemAuth']['id'];
-                        $this->SystemAuth->save($data_system_auth);
-                    }
-                    // End Set SystemAuth
-
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 }
@@ -187,25 +164,6 @@ class UserInfosController extends AppController {
 
             if ($this->UserInfo->customValidate()) {
                 if ($this->UserInfo->save($data)) {
-
-                    // Start Set SystemAuth
-                    $data_system_auth['SystemAuth']['employee_id'] = $employeeId;
-
-                    $data_system_auth['SystemAuth']['access_kousu'] = AUTH_ACTIVE;
-                    $data_system_auth['SystemAuth']['access_tms'] = (in_array($data['UserInfo']['employment_type_cd'], unserialize(SYS_AUTH_TMS_EMP_TYPE)) && !in_array($data['UserInfo']['department_cd'], unserialize(SYS_AUTH_TMS_DEP_EXCEPT))) ? AUTH_ACTIVE : AUTH_BANNED;
-                    $data_system_auth['SystemAuth']['access_uni'] = (in_array($employeeId, unserialize(SYS_AUTH_UNI_EMP_ID))) ? AUTH_ACTIVE : AUTH_BANNED;
-
-                    $systemAuthEmp = $this->SystemAuth->findByEmployeeId($employeeId);
-                    $this->SystemAuth->set($data_system_auth);
-                    if (!empty($systemAuthEmp)) {
-                        $this->SystemAuth->id = $systemAuthEmp['SystemAuth']['id'];
-                        $this->SystemAuth->save($data_system_auth);
-                    } else {
-                        $this->SystemAuth->create();
-                        $this->SystemAuth->save($data_system_auth);
-                    }
-                    // End Set SystemAuth
-
                     $this->Session->setFlash(__('UAD_COMMON_MSG0001'), 'success');
                     $this->redirect($this->Session->read('save_latest_link_info'));
                 }

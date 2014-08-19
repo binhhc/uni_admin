@@ -16,13 +16,13 @@ class UserInfo extends AppModel {
             'className' => 'MsDepartment',
             'foreignKey' => '',
             'conditions' => 'MsDepartment.department_cd = UserInfo.department_cd',
-            'fields' => 'department_name',
+            'fields' => array('id', 'department_name'),
         ),
         'MsEmploymentType' => array(
             'className' => 'MsEmploymentType',
             'foreignKey' => '',
             'conditions' => 'MsEmploymentType.employment_cd = UserInfo.employment_type_cd',
-            'fields' => 'employment_name',
+            'fields' => array('id', 'employment_name'),
         ),
         'MsJob' => array(
             'className' => 'MsJob',
@@ -257,7 +257,6 @@ class UserInfo extends AppModel {
         return false;
     }
 
-
     public function listUser(){
         $arr_user = $this->find('list', array(
             'conditions' => array(
@@ -275,8 +274,20 @@ class UserInfo extends AppModel {
         return $result;
     }
 
+    /**
+     * Add Zero before number
+     * @author  Bao Nam
+     * @since 2014-08-18
+     */
+
     public function beforeValidate() {
         $key = $this->alias;
+
+        //employee_id format xxxxxx
+        if (!empty($this->data[$key]['employee_id'])) {
+            $this->data[$key]['employee_id'] = str_pad($this->data[$key]['employee_id'], 6, 0, STR_PAD_LEFT);
+        }
+
         //employment_type_cd format xx
         if (!empty($this->data[$key]['employment_type_cd'])) {
             $this->data[$key]['employment_type_cd'] = str_pad($this->data[$key]['employment_type_cd'], 2, 0, STR_PAD_LEFT);
@@ -331,4 +342,126 @@ class UserInfo extends AppModel {
         }
 
     }
+
+
+    /**
+     * Add Permission for Employees
+     * @author  Bao Nam
+     * @since 2014-08-18
+     */
+
+    public function afterSave($created) {
+        $data = $this->data;
+        if(!empty($data['UserInfo']['employee_id'])) {
+            $employee_id = $data['UserInfo']['employee_id'];
+        } else {
+            $employees = $this->findById($data['UserInfo']['id'], array('fields' => 'employee_id'));
+            $employee_id = $employees['UserInfo']['employee_id'];
+        }
+
+
+        $userInfoData = $this->findByEmployeeId($employee_id);
+
+
+//Save history Staff Department
+        App::uses('MsDepartment', 'Model');
+        App::uses('HistoryStaffDept', 'Model');
+        $department = new MsDepartment();
+        $staffDept = new HistoryStaffDept();
+
+        $staffDeptCurrent = $staffDept->find('first', array(
+            'conditions' => array('employee_id' => $employee_id),
+            'fields' => 'dept_id',
+            'order' => array('id' => 'DESC')
+        ));
+        $staffDeptId = (!empty($staffDeptCurrent['HistoryStaffDept']['dept_id'])) ? $staffDeptCurrent['HistoryStaffDept']['dept_id'] : '';
+        $historyStaffDept = array();
+        if ( (!empty($userInfoData['MsDepartment']['id'])) && ($staffDeptId != $userInfoData['MsDepartment']['id']) ) {
+            $historyStaff['employee_id'] = $employee_id;
+            $historyStaff['dept_id'] = $userInfoData['MsDepartment']['id'];
+            $historyStaff['date_change'] = $userInfoData['UserInfo']['company_join_date'];
+            $staffDept->create();
+            $staffDept->save($historyStaff);
+        }
+
+
+//Save history Staff Type
+        App::uses('MsEmploymentType', 'Model');
+        App::uses('HistoryStaffType', 'Model');
+        $employmentType = new MsEmploymentType();
+        $staffType = new HistoryStaffType();
+        $staffTypeCurrent = $staffType->find('first', array(
+            'conditions' => array('employee_id' => $employee_id),
+            'fields' => 'emp_type_id',
+            'order' => array('id' => 'DESC')
+        ));
+        $staffTypeId = (!empty($staffTypeCurrent['HistoryStaffType']['emp_type_id'])) ? $staffTypeCurrent['HistoryStaffType']['emp_type_id'] : '';
+        $historyStaffType = array();
+        if ( (!empty($userInfoData['MsEmploymentType']['id'])) && ($staffTypeId != $userInfoData['MsEmploymentType']['id']) ) {
+            $historyStaffType['employee_id'] = $employee_id;
+            $historyStaffType['emp_type_id'] = $userInfoData['MsEmploymentType']['id'];
+            $historyStaffType['date_change'] = $userInfoData['UserInfo']['company_join_date'];
+            $staffType->create();
+            $staffType->save($historyStaffType);
+        }
+
+//Set Permission
+        App::uses('SystemAuth', 'Model');
+        $systemAuth = new SystemAuth();
+
+        $checkExist = $systemAuth->findByEmployeeId($employee_id);
+        $department_id = $data['UserInfo']['department_cd'];
+        $employee_type = $data['UserInfo']['employment_type_cd'];
+
+        $access_tms = AUTH_BANNED;
+        $access_kousu = AUTH_BANNED;
+        $access_uni = AUTH_BANNED;
+
+        switch ($employee_type) {
+            case '01':
+                $access_kousu = AUTH_ACTIVE;
+                $access_tms = AUTH_ACTIVE;
+                if(empty($department_id)){
+                    $access_uni = AUTH_ACTIVE;
+                } else {
+                    if($department_id == SYS_AUTH_TMS_DEP_EXCEPT) {
+                        $access_tms = AUTH_BANNED;
+                    }
+                }
+                break;
+            case '02':
+                break;
+            case '03':
+                break;
+            case '04':
+                $access_tms = AUTH_ACTIVE;
+                $access_kousu = AUTH_ACTIVE;
+                break;
+            case '05':
+                $access_tms = AUTH_ACTIVE;
+                $access_kousu = AUTH_ACTIVE;
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        $systemAuthData['employee_id'] = $employee_id;
+        $systemAuthData['access_kousu'] = $access_kousu;
+        $systemAuthData['access_tms'] = $access_tms;
+        $systemAuthData['access_uni'] = $access_uni;
+
+        $systemAuth->set($systemAuthData);
+
+        if (!empty($checkExist)) {
+            $systemAuth->id = $checkExist['SystemAuth']['id'];
+            $systemAuth->save($systemAuthData);
+        } else {
+            $systemAuth->create();
+            $systemAuth->save($systemAuthData);
+
+        }
+        return true;
+    }
+
 }

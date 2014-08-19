@@ -1,4 +1,5 @@
 function deleteAll(page, model){
+    var root_url = document.location.origin;
     var count = 0;
     $.each($("input[name='cbID']:checked"), function() {
         count++;
@@ -25,7 +26,7 @@ function deleteAll(page, model){
                // async: false,
                 data: data, // Form variables
                 dataType: "json", // Expected response type
-                url: page +"/delete/" + model_delete + id, // URL to request
+                url: root_url + '/' + page + '/delete/' + model_delete + id, // URL to request
                 success: function(response) {
                     window.location.reload(true);
                 },

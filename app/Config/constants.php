@@ -240,7 +240,7 @@ define('IDENT_WORK_EXPERIENCE', serialize(array(
 define('EMPLOYEE_ADMIN', '999999');
 
 define('SYS_AUTH_TMS_EMP_TYPE', serialize(array('1', '2')));
-define('SYS_AUTH_TMS_DEP_EXCEPT', serialize(array('SI220000')));
+define('SYS_AUTH_TMS_DEP_EXCEPT', 'SI220000');
 
 define('SYS_AUTH_UNI_EMP_ID', serialize(array('8', '182', '244', '999999')));
 
